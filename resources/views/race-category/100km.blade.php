@@ -1,47 +1,7 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+@extends('layouts.public')
+@section('title', 'TGC 100 KM')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>TGC 100 KM — The Great Cordillera 100</title>
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700,800,900&display=swap" rel="stylesheet" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kufam:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet" />
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-
-<body class="bg-[#0a0a0a] text-white font-sans antialiased">
-
-    {{-- ========================================================
-         NAVIGATION
-    ======================================================== --}}
-    <nav x-data="{ scrolled: false }"
-        x-on:scroll.window="scrolled = window.scrollY > 50"
-        :class="scrolled ? 'bg-black/90 backdrop-blur-sm border-white/10' : 'bg-transparent border-transparent'"
-        class="fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300">
-        <div class="mx-auto px-8" style="max-width:1280px;">
-            <div class="flex items-center justify-between h-16">
-
-                <a href="/" class="flex items-center gap-2">
-                    <img src="/ricon-logo.svg" alt="Ricon">
-                </a>
-
-                <div class="hidden md:flex items-center gap-8">
-                    <a href="/#race-categories" class="text-gray-300 hover:text-white text-sm font-medium transition-colors">Race Categories</a>
-                    <a href="/about" class="text-gray-300 hover:text-white text-sm font-medium transition-colors">About Us</a>
-                </div>
-
-                <a href="{{ route('registration.create') }}" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-bold rounded-lg bg-orange-600 text-white hover:bg-orange-700 focus:outline-hidden disabled:opacity-50 disabled:pointer-events-none">
-                    Register
-                </a>
-            </div>
-        </div>
-    </nav>
-
-
+@section('content')
     {{-- ========================================================
          HERO
     ======================================================== --}}
@@ -167,31 +127,50 @@
     ======================================================== --}}
     <section class="bg-[#0d0d0d] py-24">
         <div class="mx-auto px-8" style="max-width:1280px;">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
-                <div>
-                    <p class="text-orange-500 text-sm font-semibold uppercase tracking-wider mb-3">Requirements</p>
-                    <h2 class="text-3xl font-bold text-white mb-8">Mandatory Gear</h2>
-                    <ul class="space-y-1">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                {{-- Mandatory Gear --}}
+                <div class="bg-[#111111] border border-white/10 rounded-2xl p-6">
+                    <p class="text-orange-500 text-xs font-semibold uppercase tracking-wider mb-3">Requirements</p>
+                    <h2 class="text-xl font-bold text-white mb-5">Mandatory Gear</h2>
+                    <ul class="space-y-2 mb-6">
                         @foreach (['Trail running shoes', 'Hydration pack (minimum 1.5L)', 'Emergency space blanket', 'Headlamp with extra batteries', 'First aid kit', 'Whistle', 'Rain jacket', 'Mobile phone (fully charged)', 'Race bib (provided)'] as $item)
-                        <li class="flex items-center gap-3 text-gray-400">
+                        <li class="flex items-center gap-3 text-sm text-gray-400">
                             <span class="w-1.5 h-1.5 rounded-full bg-orange-500 flex-shrink-0"></span>
                             {{ $item }}
                         </li>
                         @endforeach
                     </ul>
+                    <a href="{{ route('rules') }}#entry"
+                        class="inline-flex items-center gap-1.5 text-sm text-orange-500 hover:text-orange-400 transition-colors font-medium">
+                        View full gear & entry rules
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
                 </div>
-                <div>
-                    <p class="text-orange-500 text-sm font-semibold uppercase tracking-wider mb-3">Qualifications</p>
-                    <h2 class="text-3xl font-bold text-white mb-8">Who Can Join</h2>
-                    <ul class="space-y-1">
-                        @foreach (['Minimum age: 18 years old on race day', 'Completion of at least one 50KM+ race', 'Valid government-issued ID', 'Medical clearance required', 'Liability waiver must be signed'] as $item)
-                        <li class="flex items-center gap-3 text-gray-400">
+
+                {{-- Entry Requirements --}}
+                <div class="bg-[#111111] border border-white/10 rounded-2xl p-6">
+                    <p class="text-orange-500 text-xs font-semibold uppercase tracking-wider mb-3">Qualifications</p>
+                    <h2 class="text-xl font-bold text-white mb-5">Who Can Join</h2>
+                    <ul class="space-y-2 mb-6">
+                        @foreach (['Minimum age: 20 years old on race day', 'Adequate trail running experience required', 'Valid government-issued ID', 'Medical clearance may be required', 'Liability waiver must be signed', 'Full payment of registration fee'] as $item)
+                        <li class="flex items-center gap-3 text-sm text-gray-400">
                             <span class="w-1.5 h-1.5 rounded-full bg-orange-500 flex-shrink-0"></span>
                             {{ $item }}
                         </li>
                         @endforeach
                     </ul>
+                    <a href="{{ route('rules') }}#entry"
+                        class="inline-flex items-center gap-1.5 text-sm text-orange-500 hover:text-orange-400 transition-colors font-medium">
+                        View full entry requirements
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
                 </div>
+
             </div>
         </div>
     </section>
@@ -216,19 +195,5 @@
     {{-- ========================================================
          FOOTER
     ======================================================== --}}
-    <footer class="bg-black border-t border-white/10 py-8">
-        <div class="mx-auto px-8 flex flex-wrap items-center justify-between gap-4" style="max-width:1280px;">
-            <a href="/" class="flex items-center gap-2">
-                <img src="/ricon-logo.svg" alt="Ricon">
-            </a>
-            <div class="flex flex-wrap items-center gap-6 text-sm text-gray-400">
-                <a href="/#race-categories" class="hover:text-white transition-colors">Race Categories</a>
-                <a href="/about" class="hover:text-white transition-colors">About</a>
-            </div>
-            <p class="text-gray-500 text-sm">© 2026 RICON</p>
-        </div>
-    </footer>
-
-</body>
-
-</html>
+    
+@endsection

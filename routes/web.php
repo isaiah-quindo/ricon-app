@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\RaceCategoryController;
 // ----------------------------------------------------------
 
 Route::get('/', fn() => view('welcome'));
+Route::get('/rules', fn() => view('rules'))->name('rules');
 
 Route::prefix('race-category')->name('race-category.')->group(function () {
     Route::get('/100km', fn() => view('race-category.100km'))->name('100km');

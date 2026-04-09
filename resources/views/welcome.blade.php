@@ -1,47 +1,7 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth">
+@extends('layouts.public')
+@section('title', 'The Great Cordillera 100')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>The Great Cordillera 100 — RICON</title>
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700,800,900&display=swap" rel="stylesheet" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kufam:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet" />
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-
-<body class="bg-[#0a0a0a] text-white font-sans antialiased">
-
-    {{-- ========================================================
-         NAVIGATION
-    ======================================================== --}}
-    <nav x-data="{ scrolled: false }"
-        x-on:scroll.window="scrolled = window.scrollY > 50"
-        :class="scrolled ? 'bg-black/90 backdrop-blur-sm border-white/10' : 'bg-transparent border-transparent'"
-        class="fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300">
-        <div class="mx-auto px-8" style="max-width:1280px;">
-            <div class="flex items-center justify-between h-16">
-
-                <a href="/" class="flex items-center gap-2">
-                    <img src="/ricon-logo.svg" alt="Ricon">
-                </a>
-
-                <div class="hidden md:flex items-center gap-8">
-                    <a href="#race-categories" class="text-gray-300 hover:text-white text-sm font-medium transition-colors">Race Categories</a>
-                    <a href="/about" class="text-gray-300 hover:text-white text-sm font-medium transition-colors">About Us</a>
-                </div>
-
-                <a href="{{ route('registration.create') }}" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-bold rounded-lg bg-orange-600 text-primary-foreground hover:bg-orange-700 focus:outline-hidden focus:bg-primary-focus  disabled:opacity-50 disabled:pointer-events-none">
-                    Register
-                </a>
-            </div>
-        </div>
-    </nav>
-
-
+@section('content')
     {{-- ========================================================
          HERO
     ======================================================== --}}
@@ -55,7 +15,7 @@
         <!-- {{-- Dark overlay --}}
         <div class="absolute inset-0 bg-black/55"></div> -->
 
-        <div class="relative z-10 text-center px-8 w-full" style="max-width:1280px; margin:0 auto;">
+        <div class="relative z-10 text-center px-8 w-full" style="max-width:1280px; margin:2rem auto;">
             {{-- Event logo placeholder --}}
             <div class="mx-auto mb-20 w-48 h-32 flex items-center justify-center text-gray-500 text-xs select-none">
                 <img src="/tgc100-logo.png" alt="The Greact Cordillera 100" />
@@ -67,7 +27,7 @@
                 One Global Race.
             </h1>
 
-            <p class="text-gray-300 text-lg max-w-2xl mx-auto mb-8">
+            <p class="text-white text-lg/6 max-w-2xl mx-auto mb-8">
                 A 100KM ultra trail across the rugged beauty of Benguet and the untamed Cordillera mountains,
                 where endurance meets breathtaking landscapes.
             </p>
@@ -121,7 +81,7 @@
                     <img src="/images/100km-bg.png" alt="100km Category" class="absolute inset-0 w-full h-full object-cover" />
                     {{-- Dark gradient overlay --}}
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
-                    <div class="absolute bottom-6 left-6">
+                    <div class="absolute bottom-6 left-4 md:left-6">
                         <p class="text-white font-black text-3xl leading-none">
                             TGC <span class="text-orange-500">100 KM</span>
                         </p>
@@ -157,7 +117,7 @@
                         <img src="/images/60km-bg.png" alt="60km Category" class="absolute inset-0 w-full h-full object-cover" />
                         {{-- Dark gradient overlay --}}
                         <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
-                        <div class="absolute bottom-6 left-6">
+                        <div class="absolute bottom-6 left-4 md:left-6">
                             <p class="text-white font-black text-2xl leading-none">
                                 TGC <span class="text-red-500">60 KM</span>
                             </p>
@@ -225,7 +185,7 @@
                             <img src="/images/10km-bg.png" alt="10km Category" class="absolute inset-0 w-full h-full object-cover" />
                             {{-- Dark gradient overlay --}}
                             <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
-                            <div class="absolute bottom-6 left-6">
+                            <div class="absolute bottom-6 left-4 md:left-6">
                                 <p class="text-white font-black text-2xl leading-none">
                                     TGC <span class="text-cyan-400">10 KM</span>
                                 </p>
@@ -284,22 +244,5 @@
     {{-- ========================================================
          FOOTER
     ======================================================== --}}
-    <footer class="bg-black border-t border-white/10 py-8">
-        <div class="mx-auto px-8 flex flex-wrap items-center justify-between gap-4" style="max-width:1280px;">
-
-            <a href="/" class="flex items-center gap-2">
-                <img src="/ricon-logo.svg" alt="Ricon">
-            </a>
-
-            <div class="flex flex-wrap items-center gap-6 text-sm text-gray-400">
-                <a href="#race-categories" class="hover:text-white transition-colors">Race Categories</a>
-                <a href="/about" class="hover:text-white transition-colors">About</a>
-            </div>
-
-            <p class="text-gray-500 text-sm">© 2026 RICON</p>
-        </div>
-    </footer>
-
-</body>
-
-</html>
+    
+@endsection
