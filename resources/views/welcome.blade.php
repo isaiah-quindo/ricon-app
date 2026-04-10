@@ -21,7 +21,7 @@
             <img src="/tgc100-logo.png" alt="The Greact Cordillera 100" />
         </div>
 
-        <h1 class="text-4xl md:text-4xl lg:text-4xl font-black text-white leading-tight mb-5">
+        <h1 class="text-3xl md:text-4xl lg:text-4xl font-black text-white leading-tight mb-5">
             One Mountain.<br>
             One Hundred Kilometers.<br>
             One Global Race.
