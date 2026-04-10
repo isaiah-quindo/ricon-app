@@ -92,7 +92,7 @@
     @endif
 
     <!-- Page content -->
-    <main class="max-w-[1280px] mx-auto px-6 py-8">
+    <main class="max-w-[1280px] mx-auto px-6 pb-6">
         @yield('content')
     </main>
 

@@ -31,7 +31,12 @@ class RegistrationController extends Controller
                     default   => $q,
                 };
             })
-            ->latest()
+            ->when(true, function ($q) use ($request) {
+                $sortable = ['last_name', 'status', 'bib_number', 'created_at'];
+                $sort = in_array($request->sort, $sortable) ? $request->sort : 'created_at';
+                $dir = $request->direction === 'asc' ? 'asc' : 'desc';
+                return $q->orderBy($sort, $dir);
+            })
             ->paginate(20);
 
         return view('admin.registrations.index', compact('registrations'));
