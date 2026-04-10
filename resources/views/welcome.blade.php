@@ -10,7 +10,7 @@
     <div class="absolute left-0 right-0 bg-gray-800 select-none"
         style="top: -25%; height: 150%; will-change: transform;"
         :style="`transform: translateY(${offset}px)`">
-        <img src="/hero-bg.png" class="w-full h-lvh object-cover" style="margin-top:-64px;" />
+        <img src="/hero-bg.png" class="w-full h-dvh object-cover" style="margin-top:-64px;" />
     </div>
     <!-- {{-- Dark overlay --}}
         <div class="absolute inset-0 bg-black/55"></div> -->
@@ -152,7 +152,7 @@
                         <img src="/images/21km-bg.png" alt="21km Category" class="absolute inset-0 w-full h-full object-cover" />
                         {{-- Dark gradient overlay --}}
                         <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
-                        <div class="absolute bottom-6 left-4">
+                        <div class="absolute bottom-6 left-4 md:left-6">
                             <p class="text-white font-black text-2xl leading-none">
                                 TGC <span class="text-green-400">21 KM</span>
                             </p>

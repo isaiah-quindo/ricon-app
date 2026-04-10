@@ -89,7 +89,7 @@
     </div>
 </section>
 
-<section class="min-h-[95px] bg-[#274B35]" style="background-image: url('/images/pattern-1.svg'); background-repeat: repeat-x; background-size: auto 100%;">
+<section class="min-h-[95px] bg-[#274B35]" style="background-image: url('/images/pattern-1.svg'); background-repeat: repeat-x; background-size: auto 100%; background-position:center center;">
 
 </section>
 
@@ -138,7 +138,7 @@
     </div>
 </section>
 
-<section class="min-h-[95px] bg-[#142A1F]" style="background-image: url('/images/pattern-2.svg'); background-repeat: repeat-x;">
+<section class="min-h-[95px] bg-[#142A1F]" style="background-image: url('/images/pattern-2.svg'); background-repeat: repeat-x; background-position: center center;">
 
 </section>
 
