@@ -10,7 +10,7 @@
     <div class="absolute left-0 right-0 bg-gray-800 select-none"
         style="top: -25%; height: 150%; will-change: transform;"
         :style="`transform: translateY(${offset}px)`">
-        <img src="/hero-bg.png" class="w-auto h-lvh object-cover" />
+        <img src="/hero-bg.png" class="w-100 h-lvh object-cover" />
     </div>
     <!-- {{-- Dark overlay --}}
         <div class="absolute inset-0 bg-black/55"></div> -->
