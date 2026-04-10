@@ -99,12 +99,64 @@
                 </div>
 
                 {{-- Mandatory Gear --}}
-                <div class="bg-[#111111] border border-white/10 rounded-2xl p-6">
-                    <div class="flex items-center gap-3 mb-4">
+                <div class="bg-[#111111] border border-white/10 rounded-2xl p-6 md:col-span-2">
+                    <div class="flex items-center gap-3 mb-2">
                         <div class="w-8 h-8 rounded-full bg-orange-500/10 text-orange-500 font-bold text-sm flex items-center justify-center flex-shrink-0">4</div>
-                        <h3 class="text-white font-semibold">Mandatory Gear Compliance</h3>
+                        <h3 class="text-white font-semibold">Mandatory Gear</h3>
                     </div>
-                    <p class="text-gray-400 text-sm leading-relaxed">All runners must carry the complete mandatory gear list at all times during the race. Random gear checks will be conducted.</p>
+                    <p class="text-gray-400 text-sm mb-6">All runners must carry the complete mandatory gear list at all times during the race. Random gear checks will be conducted.</p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+
+                        {{-- 100 KM --}}
+                        <div class="bg-[#0d0d0d] rounded-xl p-4">
+                            <span class="inline-block text-xs font-bold text-orange-500 bg-orange-500/10 px-2 py-0.5 rounded-full mb-3">100 KM</span>
+                            <ul class="space-y-1.5">
+                                @foreach(['Trail running shoes', 'Hydration pack (min. 1.5L)', 'Emergency space blanket', 'Headlamp + extra batteries', 'First aid kit', 'Whistle', 'Rain jacket', 'Mobile phone (fully charged)', 'Race bib (provided)'] as $item)
+                                <li class="flex items-center gap-2 text-xs text-gray-400">
+                                    <span class="w-1 h-1 rounded-full bg-orange-500 flex-shrink-0"></span>{{ $item }}
+                                </li>
+                                @endforeach
+                            </ul>
+                        </div>
+
+                        {{-- 60 KM --}}
+                        <div class="bg-[#0d0d0d] rounded-xl p-4">
+                            <span class="inline-block text-xs font-bold text-red-400 bg-red-500/10 px-2 py-0.5 rounded-full mb-3">60 KM</span>
+                            <ul class="space-y-1.5">
+                                @foreach(['Trail running shoes', 'Hydration pack (min. 1.5L)', 'Emergency space blanket', 'Headlamp + extra batteries', 'First aid kit', 'Whistle', 'Rain jacket', 'Mobile phone (fully charged)', 'Race bib (provided)'] as $item)
+                                <li class="flex items-center gap-2 text-xs text-gray-400">
+                                    <span class="w-1 h-1 rounded-full bg-red-400 flex-shrink-0"></span>{{ $item }}
+                                </li>
+                                @endforeach
+                            </ul>
+                        </div>
+
+                        {{-- 21 KM --}}
+                        <div class="bg-[#0d0d0d] rounded-xl p-4">
+                            <span class="inline-block text-xs font-bold text-green-400 bg-green-500/10 px-2 py-0.5 rounded-full mb-3">21 KM</span>
+                            <ul class="space-y-1.5">
+                                @foreach(['Trail running shoes', 'Hydration pack (min. 500ml)', 'Headlamp + extra batteries', 'First aid kit', 'Whistle', 'Mobile phone (fully charged)', 'Race bib (provided)'] as $item)
+                                <li class="flex items-center gap-2 text-xs text-gray-400">
+                                    <span class="w-1 h-1 rounded-full bg-green-400 flex-shrink-0"></span>{{ $item }}
+                                </li>
+                                @endforeach
+                            </ul>
+                        </div>
+
+                        {{-- 15 KM --}}
+                        <div class="bg-[#0d0d0d] rounded-xl p-4">
+                            <span class="inline-block text-xs font-bold text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded-full mb-3">15 KM</span>
+                            <ul class="space-y-1.5">
+                                @foreach(['Trail running shoes', 'Hydration (water bottle)', 'First aid kit', 'Whistle', 'Mobile phone (fully charged)', 'Race bib (provided)'] as $item)
+                                <li class="flex items-center gap-2 text-xs text-gray-400">
+                                    <span class="w-1 h-1 rounded-full bg-cyan-400 flex-shrink-0"></span>{{ $item }}
+                                </li>
+                                @endforeach
+                            </ul>
+                        </div>
+
+                    </div>
                 </div>
 
                 {{-- Registration Completion --}}
@@ -125,23 +177,20 @@
                 </div>
 
                 {{-- Cut-off & Right to Decline --}}
-                <div class="bg-[#111111] border border-white/10 rounded-2xl p-6 md:col-span-2">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <div class="flex items-center gap-3 mb-3">
-                                <div class="w-8 h-8 rounded-full bg-orange-500/10 text-orange-500 font-bold text-sm flex items-center justify-center flex-shrink-0">6</div>
-                                <h3 class="text-white font-semibold">Cut-Off Awareness</h3>
-                            </div>
-                            <p class="text-gray-400 text-sm leading-relaxed">Participants must acknowledge and accept all cut-off times and race rules prior to joining. Intermediate cut-off times to be announced.</p>
-                        </div>
-                        <div>
-                            <div class="flex items-center gap-3 mb-3">
-                                <div class="w-8 h-8 rounded-full bg-orange-500/10 text-orange-500 font-bold text-sm flex items-center justify-center flex-shrink-0">7</div>
-                                <h3 class="text-white font-semibold">Right to Decline</h3>
-                            </div>
-                            <p class="text-gray-400 text-sm leading-relaxed">The Organizer reserves the right to decline any application from individuals who fail to meet established safety, health, or behavioral standards.</p>
-                        </div>
+                <div class="bg-[#111111] border border-white/10 rounded-2xl p-6">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-8 h-8 rounded-full bg-orange-500/10 text-orange-500 font-bold text-sm flex items-center justify-center flex-shrink-0">6</div>
+                        <h3 class="text-white font-semibold">Cut-Off Awareness</h3>
                     </div>
+                    <p class="text-gray-400 text-sm leading-relaxed">Participants must acknowledge and accept all cut-off times and race rules prior to joining. Intermediate cut-off times to be announced.</p>
+                </div>
+
+                <div class="bg-[#111111] border border-white/10 rounded-2xl p-6 md:col-span-2">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-8 h-8 rounded-full bg-orange-500/10 text-orange-500 font-bold text-sm flex items-center justify-center flex-shrink-0">7</div>
+                        <h3 class="text-white font-semibold">Right to Decline</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed">The Organizer reserves the right to decline any application from individuals who fail to meet established safety, health, or behavioral standards.</p>
                 </div>
 
             </div>

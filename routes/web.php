@@ -17,7 +17,7 @@ Route::prefix('race-category')->name('race-category.')->group(function () {
     Route::get('/100km', fn() => view('race-category.100km'))->name('100km');
     Route::get('/60km',  fn() => view('race-category.60km'))->name('60km');
     Route::get('/21km',  fn() => view('race-category.21km'))->name('21km');
-    Route::get('/10km',  fn() => view('race-category.10km'))->name('10km');
+    Route::get('/15km',  fn() => view('race-category.15km'))->name('15km');
 });
 
 Route::prefix('register')->name('registration.')->group(function () {
