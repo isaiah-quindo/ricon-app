@@ -13,7 +13,7 @@ class Registration extends Model
         'race_category_id',
         'first_name',
         'last_name',
-        'gender',
+        'sex',
         'mobile_number',
         'email',
         'birthdate',

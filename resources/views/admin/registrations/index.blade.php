@@ -32,18 +32,57 @@
         </select>
     </div>
 
+    <div class="flex-1 min-w-36">
+        <label class="block text-xs font-medium text-gray-500 mb-1.5">Sex</label>
+        <select name="sex"
+                class="w-full rounded-lg border border-gray-200 bg-white text-sm text-gray-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+            <option value="">All</option>
+            <option value="male"   {{ request('sex') === 'male'   ? 'selected' : '' }}>Male</option>
+            <option value="female" {{ request('sex') === 'female' ? 'selected' : '' }}>Female</option>
+        </select>
+    </div>
+
+    <div class="flex-1 min-w-36">
+        <label class="block text-xs font-medium text-gray-500 mb-1.5">Shirt Size</label>
+        <select name="shirt_size"
+                class="w-full rounded-lg border border-gray-200 bg-white text-sm text-gray-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+            <option value="">All Sizes</option>
+            @foreach(['XS', 'S', 'M', 'L', 'XL', 'XXL'] as $size)
+                <option value="{{ $size }}" {{ request('shirt_size') === $size ? 'selected' : '' }}>{{ $size }}</option>
+            @endforeach
+        </select>
+    </div>
+
+    <div class="flex-1 min-w-36">
+        <label class="block text-xs font-medium text-gray-500 mb-1.5">Age Group</label>
+        <select name="age_group"
+                class="w-full rounded-lg border border-gray-200 bg-white text-sm text-gray-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+            <option value="">All Ages</option>
+            <option value="under20" {{ request('age_group') === 'under20' ? 'selected' : '' }}>Under 20</option>
+            <option value="20-29"   {{ request('age_group') === '20-29'   ? 'selected' : '' }}>20 – 29</option>
+            <option value="30-39"   {{ request('age_group') === '30-39'   ? 'selected' : '' }}>30 – 39</option>
+            <option value="40-49"   {{ request('age_group') === '40-49'   ? 'selected' : '' }}>40 – 49</option>
+            <option value="50plus"  {{ request('age_group') === '50plus'  ? 'selected' : '' }}>50+</option>
+        </select>
+    </div>
+
     <div class="flex items-center gap-2">
         <button type="submit"
                 class="px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors">
             Filter
         </button>
-        @if(request('category') || request('status'))
+        @if(request('category') || request('status') || request('shirt_size') || request('age_group') || request('sex'))
         <a href="{{ route('admin.registrations.index') }}"
            class="px-4 py-2 bg-gray-100 text-gray-600 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors">
             Clear
         </a>
         @endif
     </div>
+
+    <a href="{{ route('admin.registrations.export', request()->query()) }}"
+       class="px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-lg hover:bg-green-700 transition-colors">
+        Export CSV
+    </a>
 
     <div class="ml-auto text-sm text-gray-400">
         {{ $registrations->total() }} result{{ $registrations->total() !== 1 ? 's' : '' }}

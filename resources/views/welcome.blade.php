@@ -42,7 +42,7 @@
 {{-- ========================================================
          WELCOME / COUNTDOWN
     ======================================================== --}}
-<section class="bg-[#111111] py-24 text-center">
+<section class="bg-[#0d0d0d] py-24 text-center">
     <div class="mx-auto px-8" style="max-width:1280px;">
         <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
             Welcome to<br>The Great Cordillera 100
@@ -58,6 +58,30 @@
         $daysLeft = max(0, (int) now()->diffInDays(\Carbon\Carbon::parse('2026-11-13'), false));
         @endphp
         <p class="text-6xl md:text-7xl font-black text-white">{{ $daysLeft }} days</p>
+    </div>
+</section>
+
+{{-- ========================================================
+         Video SECTION
+    ======================================================== --}}
+<section id="about" class="bg-[#111111] py-24">
+    <div class="mx-auto px-8" style="max-width:1280px;">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div>
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">A stage for our land and our people</h2>
+                <p class="text-gray-400 mb-8 leading-relaxed">
+                    We didn't just need another race. We needed a stage — to showcase the natural terrain,
+                    the beautiful trails, and the spirit this country has to offer. The Great Cordillera 100
+                    is that stage.
+                </p>
+                <a href="{{ route('registration.create') }}" class="py-3 px-8 inline-flex items-center gap-x-2 text-sm font-bold rounded-lg bg-orange-600 text-primary-foreground hover:bg-orange-700 focus:outline-hidden focus:bg-primary-focus  disabled:opacity-50 disabled:pointer-events-none">
+                    Register
+                </a>
+            </div>
+            <div class="rounded-2xl h-72 flex items-center justify-center text-gray-500 text-sm select-none">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/_vtg_LA6_IU?si=GDfqWwz6x0rGTBJU&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -217,28 +241,7 @@
 </section>
 
 
-{{-- ========================================================
-         CTA SECTION
-    ======================================================== --}}
-<section id="about" class="bg-[#111111] py-24">
-    <div class="mx-auto px-8" style="max-width:1280px;">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            <div>
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Give us a shot</h2>
-                <p class="text-gray-400 mb-8 leading-relaxed">
-                    Join over 4,000+ runners already registered for The Great Cordillera 100.
-                    Don't miss your chance to be part of this legendary race.
-                </p>
-                <a href="{{ route('registration.create') }}" class="py-3 px-8 inline-flex items-center gap-x-2 text-sm font-bold rounded-lg bg-orange-600 text-primary-foreground hover:bg-orange-700 focus:outline-hidden focus:bg-primary-focus  disabled:opacity-50 disabled:pointer-events-none">
-                    Register
-                </a>
-            </div>
-            <div class="bg-gray-700 rounded-2xl h-72 flex items-center justify-center text-gray-500 text-sm select-none">
-                [Image]
-            </div>
-        </div>
-    </div>
-</section>
+
 
 
 {{-- ========================================================

@@ -147,17 +147,16 @@
                         </div>
 
                         <div>
-                            <label for="gender" class="block text-sm font-medium text-gray-700 mb-1.5">
-                                Gender <span class="text-red-500">*</span>
+                            <label for="sex" class="block text-sm font-medium text-gray-700 mb-1.5">
+                                Sex <span class="text-red-500">*</span>
                             </label>
-                            <select id="gender" name="gender" required
-                                class="w-full rounded-lg border {{ $errors->has('gender') ? 'border-red-400' : 'border-gray-200' }} text-sm px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white">
-                                <option value="">Select gender</option>
-                                <option value="male" {{ old('gender') === 'male' ? 'selected' : '' }}>Male</option>
-                                <option value="female" {{ old('gender') === 'female' ? 'selected' : '' }}>Female</option>
-                                <option value="prefer_not_to_say" {{ old('gender') === 'prefer_not_to_say' ? 'selected' : '' }}>Prefer not to say</option>
+                            <select id="sex" name="sex" required
+                                class="w-full rounded-lg border {{ $errors->has('sex') ? 'border-red-400' : 'border-gray-200' }} text-sm px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white">
+                                <option value="">Select sex</option>
+                                <option value="male" {{ old('sex') === 'male' ? 'selected' : '' }}>Male</option>
+                                <option value="female" {{ old('sex') === 'female' ? 'selected' : '' }}>Female</option>
                             </select>
-                            @error('gender')
+                            @error('sex')
                             <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
                             @enderror
                         </div>

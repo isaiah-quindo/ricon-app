@@ -24,7 +24,7 @@ class RegistrationController extends Controller
             'race_category_id'         => 'required|exists:race_categories,id',
             'first_name'               => 'required|string|max:255',
             'last_name'                => 'required|string|max:255',
-            'gender'                   => 'required|in:male,female,prefer_not_to_say',
+            'sex'                      => 'required|in:male,female',
             'mobile_number'            => 'required|string|max:20',
             'email'                    => 'required|email|max:255',
             'birthdate'                => 'required|date|before:today',

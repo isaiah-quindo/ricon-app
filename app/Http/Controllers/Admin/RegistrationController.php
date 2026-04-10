@@ -16,12 +16,88 @@ class RegistrationController extends Controller
     public function index(Request $request)
     {
         $registrations = Registration::with(['raceCategory', 'paymentProof'])
-            ->when($request->category, fn($q) => $q->where('race_category_id', $request->category))
-            ->when($request->status, fn($q) => $q->where('status', $request->status))
+            ->when($request->category,   fn($q) => $q->where('race_category_id', $request->category))
+            ->when($request->status,     fn($q) => $q->where('status', $request->status))
+            ->when($request->shirt_size, fn($q) => $q->where('shirt_size', $request->shirt_size))
+            ->when($request->sex,        fn($q) => $q->where('sex', $request->sex))
+            ->when($request->age_group, function ($q) use ($request) {
+                $now = now();
+                return match ($request->age_group) {
+                    'under20' => $q->where('birthdate', '>', $now->copy()->subYears(20)),
+                    '20-29'   => $q->whereBetween('birthdate', [$now->copy()->subYears(30), $now->copy()->subYears(20)]),
+                    '30-39'   => $q->whereBetween('birthdate', [$now->copy()->subYears(40), $now->copy()->subYears(30)]),
+                    '40-49'   => $q->whereBetween('birthdate', [$now->copy()->subYears(50), $now->copy()->subYears(40)]),
+                    '50plus'  => $q->where('birthdate', '<', $now->copy()->subYears(50)),
+                    default   => $q,
+                };
+            })
             ->latest()
             ->paginate(20);
 
         return view('admin.registrations.index', compact('registrations'));
+    }
+
+    // Export filtered registrations to CSV
+    public function export(Request $request)
+    {
+        $registrations = Registration::with('raceCategory')
+            ->when($request->category,   fn($q) => $q->where('race_category_id', $request->category))
+            ->when($request->status,     fn($q) => $q->where('status', $request->status))
+            ->when($request->shirt_size, fn($q) => $q->where('shirt_size', $request->shirt_size))
+            ->when($request->sex,        fn($q) => $q->where('sex', $request->sex))
+            ->when($request->age_group, function ($q) use ($request) {
+                $now = now();
+                return match ($request->age_group) {
+                    'under20' => $q->where('birthdate', '>', $now->copy()->subYears(20)),
+                    '20-29'   => $q->whereBetween('birthdate', [$now->copy()->subYears(30), $now->copy()->subYears(20)]),
+                    '30-39'   => $q->whereBetween('birthdate', [$now->copy()->subYears(40), $now->copy()->subYears(30)]),
+                    '40-49'   => $q->whereBetween('birthdate', [$now->copy()->subYears(50), $now->copy()->subYears(40)]),
+                    '50plus'  => $q->where('birthdate', '<', $now->copy()->subYears(50)),
+                    default   => $q,
+                };
+            })
+            ->latest()
+            ->get();
+
+        $filename = 'registrations-' . now()->format('Y-m-d') . '.csv';
+
+        return response()->streamDownload(function () use ($registrations) {
+            $handle = fopen('php://output', 'w');
+
+            fputcsv($handle, [
+                'id', 'race_category', 'first_name', 'last_name', 'sex',
+                'email', 'mobile_number', 'birthdate', 'address', 'shirt_size',
+                'emergency_contact_name', 'emergency_contact_number',
+                'bib_number', 'status', 'admin_notes',
+                'waiver_agreed', 'terms_agreed', 'created_at', 'updated_at',
+            ]);
+
+            foreach ($registrations as $reg) {
+                fputcsv($handle, [
+                    $reg->id,
+                    $reg->raceCategory->name ?? '',
+                    $reg->first_name,
+                    $reg->last_name,
+                    $reg->sex,
+                    $reg->email,
+                    $reg->mobile_number,
+                    $reg->birthdate?->format('Y-m-d'),
+                    $reg->address,
+                    $reg->shirt_size,
+                    $reg->emergency_contact_name,
+                    $reg->emergency_contact_number,
+                    $reg->bib_number,
+                    $reg->status,
+                    $reg->admin_notes,
+                    $reg->waiver_agreed ? 'yes' : 'no',
+                    $reg->terms_agreed  ? 'yes' : 'no',
+                    $reg->created_at->toDateTimeString(),
+                    $reg->updated_at->toDateTimeString(),
+                ]);
+            }
+
+            fclose($handle);
+        }, $filename, ['Content-Type' => 'text/csv']);
     }
 
     // View a single registration

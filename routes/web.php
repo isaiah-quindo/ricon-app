@@ -38,6 +38,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     // Registrations
     Route::prefix('registrations')->name('registrations.')->group(function () {
         Route::get('/', [AdminRegistrationController::class, 'index'])->name('index');
+        Route::get('/export', [AdminRegistrationController::class, 'export'])->name('export');
         Route::get('/{registration}', [AdminRegistrationController::class, 'show'])->name('show');
         Route::post('/{registration}/approve', [AdminRegistrationController::class, 'approve'])->name('approve');
         Route::post('/{registration}/reject', [AdminRegistrationController::class, 'reject'])->name('reject');

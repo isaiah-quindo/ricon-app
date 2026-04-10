@@ -46,8 +46,8 @@
                     <p class="text-sm font-medium text-gray-800">{{ $registration->raceCategory?->name ?? '—' }}</p>
                 </div>
                 <div>
-                    <p class="text-xs text-gray-400 mb-0.5">Gender</p>
-                    <p class="text-sm font-medium text-gray-800 capitalize">{{ str_replace('_', ' ', $registration->gender) }}</p>
+                    <p class="text-xs text-gray-400 mb-0.5">Sex</p>
+                    <p class="text-sm font-medium text-gray-800 capitalize">{{ str_replace('_', ' ', $registration->sex) }}</p>
                 </div>
                 <div>
                     <p class="text-xs text-gray-400 mb-0.5">Shirt Size</p>
