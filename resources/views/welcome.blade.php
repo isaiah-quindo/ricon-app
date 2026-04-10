@@ -21,7 +21,7 @@
             <img src="/tgc100-logo.png" alt="The Greact Cordillera 100" />
         </div>
 
-        <h1 class="text-3xl md:text-4xl lg:text-4xl font-black text-white leading-tight mb-5">
+        <h1 class="text-2xl md:text-4xl lg:text-4xl font-black text-white leading-tight mb-5">
             One Mountain.<br>
             One Hundred Kilometers.<br>
             One Global Race.
@@ -70,7 +70,7 @@
             <div>
                 <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">A stage for our land and our people</h2>
                 <p class="text-gray-400 mb-8 leading-relaxed">
-                    We didn't just need another race. We needed a stage — to showcase the natural terrain,
+                    We didn't just need another race. We needed a stage to showcase the natural terrain,
                     the beautiful trails, and the spirit this country has to offer. The Great Cordillera 100
                     is that stage.
                 </p>
