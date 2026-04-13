@@ -358,10 +358,23 @@
                             required
                             class="mt-0.5 w-4 h-4 rounded border-gray-300 text-orange-600 focus:ring-orange-500 flex-shrink-0">
                         <span class="text-sm text-gray-700">
-                            I agree to the <span class="font-semibold text-gray-900">Terms and Conditions</span> of this race, including the race rules, cutoff times, and disqualification policies.
+                            I agree to the <span class="font-semibold text-gray-900">Rules and Conditions</span> of this race, including the race rules, cutoff times, and disqualification policies.
                         </span>
                     </label>
                     @error('terms_agreed')
+                    <p class="text-xs text-red-500">{{ $message }}</p>
+                    @enderror
+
+                    <label class="flex items-start gap-3 cursor-pointer">
+                        <input type="checkbox" name="media_consent_agreed" value="1"
+                            {{ old('media_consent_agreed') ? 'checked' : '' }}
+                            required
+                            class="mt-0.5 w-4 h-4 rounded border-gray-300 text-orange-600 focus:ring-orange-500 flex-shrink-0">
+                        <span class="text-sm text-gray-700">
+                            I grant full permission to use <span class="font-semibold text-gray-900">photographs, videos, and other recordings</span> of me taken during the event. These may be used for advertising, trade, or any commercial purpose in the official publications, social media, and marketing materials produced by the organizers.
+                        </span>
+                    </label>
+                    @error('media_consent_agreed')
                     <p class="text-xs text-red-500">{{ $message }}</p>
                     @enderror
                 </div>

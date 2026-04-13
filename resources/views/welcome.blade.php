@@ -32,8 +32,8 @@
             where endurance meets breathtaking landscapes.
         </p>
 
-        <a href="{{ route('registration.create') }}" class="py-3 px-8 inline-flex items-center gap-x-2 text-sm font-bold rounded-lg bg-orange-600 text-primary-foreground hover:bg-orange-700 focus:outline-hidden focus:bg-primary-focus  disabled:opacity-50 disabled:pointer-events-none">
-            Register
+        <a href="#race-categories" class="py-3 px-8 inline-flex items-center gap-x-2 text-sm font-bold rounded-lg bg-orange-600 text-primary-foreground hover:bg-orange-700 focus:outline-hidden focus:bg-primary-focus  disabled:opacity-50 disabled:pointer-events-none">
+            Choose your Adventure
         </a>
     </div>
 </section>
@@ -48,9 +48,7 @@
             Welcome to<br>The Great Cordillera 100
         </h2>
         <p class="text-gray-400 max-w-xl mx-auto mb-12 leading-relaxed">
-            The Great Cordillera 100, traversing the scenic trails of Benguet and the wild Cordillera
-            mountainscape. We believe this event will attract a significant number of participants from
-            across the country and the international trail-running community.
+            Traverse the scenic trails of benguet and the wild cordillera mountainscape, a journey through living heritage across Luzon's highland spine. Pine-canopied ridgelines, river crossings, and steep scents connect baguio city to the upper municipalities of benguet, demanding both strength and respect.
         </p>
 
         <p class="text-gray-400 text-sm mb-2">Race day in</p>

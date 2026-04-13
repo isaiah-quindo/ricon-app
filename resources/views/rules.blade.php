@@ -29,6 +29,8 @@
             <a href="#dq" class="text-gray-400 hover:text-white transition-colors">Disqualifications</a>
             <a href="#crew" class="text-gray-400 hover:text-white transition-colors">Crew Rules</a>
             <a href="#cancellation" class="text-gray-400 hover:text-white transition-colors">Cancellation Policy</a>
+            <a href="#media" class="text-gray-400 hover:text-white transition-colors">Media Consent</a>
+            <a href="#terms" class="text-gray-400 hover:text-white transition-colors">Terms &amp; Conditions</a>
         </div>
     </div>
 </div>
@@ -384,6 +386,95 @@
                 <p class="text-gray-400 text-sm leading-relaxed mb-4">In the event of a cancellation or shortening of the course, <span class="text-white font-semibold">no registration fees or charitable donations will be refunded, and no deferrals to future events will be offered.</span></p>
                 <p class="text-amber-400 text-xs leading-relaxed">Note: By registering, you acknowledge and accept these terms regarding the potential cancellation of the event.</p>
             </div>
+        </div>
+    </div>
+</section>
+
+{{-- ======================================================== --}}
+{{-- MEDIA CONSENT --}}
+{{-- ======================================================== --}}
+<section id="media" class="bg-[#0d0d0d] py-20">
+    <div class="mx-auto px-8" style="max-width:1280px;">
+        <p class="text-orange-500 text-sm font-semibold uppercase tracking-wider mb-2">Section 7</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-3">Media Consent &amp; Photography Release</h2>
+        <p class="text-gray-400 mb-10 max-w-2xl">By registering for the event, all participants grant the organizers full permission to capture and use media taken during the race.</p>
+
+        <div class="bg-[#111111] border border-white/10 rounded-2xl p-6 md:p-8">
+            <p class="text-gray-300 text-sm leading-relaxed mb-6">
+                I grant full permission to use <span class="text-white font-semibold">photographs, videos, and other recordings</span> of me taken during the event. These may be used for advertising, trade, or any commercial purpose in the official publications, social media, and marketing materials produced by the organizers.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                @foreach(['Official publications', 'Social media', 'Marketing materials'] as $use)
+                <div class="flex items-center gap-3 bg-[#0d0d0d] rounded-xl px-4 py-3">
+                    <span class="w-1.5 h-1.5 rounded-full bg-orange-500 flex-shrink-0"></span>
+                    <p class="text-gray-400 text-sm">{{ $use }}</p>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+</section>
+
+{{-- ======================================================== --}}
+{{-- TERMS & CONDITIONS --}}
+{{-- ======================================================== --}}
+<section id="terms" class="bg-[#111111] py-20">
+    <div class="mx-auto px-8" style="max-width:1280px;">
+        <p class="text-orange-500 text-sm font-semibold uppercase tracking-wider mb-2">Section 8</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-3">Terms &amp; Conditions</h2>
+        <p class="text-gray-400 mb-10 max-w-2xl">By accessing this site or submitting a registration, you agree to the following terms. Please read them carefully.</p>
+
+        <div class="space-y-4">
+
+            @php
+            $terms = [
+                [
+                    'title' => 'Acceptance of Terms',
+                    'text'  => 'By accessing this website or submitting a registration, you acknowledge that you have read, understood, and agree to be bound by all terms, policies, and guidelines published on this site.',
+                ],
+                [
+                    'title' => 'Privacy &amp; Data Use',
+                    'text'  => 'Personal information collected during registration — including your name, birthdate, address, contact details, emergency contacts, and payment proof — is used solely for race administration purposes. All data is handled in accordance with the Data Privacy Act of 2012 (Republic Act No. 10173). Your information will not be shared with third parties except as required for event operations.',
+                ],
+                [
+                    'title' => 'Limitation of Liability',
+                    'text'  => 'The organizers, race officials, volunteers, and all associated parties shall not be held liable for any injury, illness, death, loss, or damage — whether personal, property, or financial — arising from participation in, or travel to and from, the event.',
+                ],
+                [
+                    'title' => 'Indemnification',
+                    'text'  => 'Participants agree to indemnify and hold harmless the organizers and all associated parties from any and all claims, damages, costs, or expenses (including legal fees) resulting from their participation in the event.',
+                ],
+                [
+                    'title' => 'Participant-Initiated Cancellation &amp; Slot Transfer',
+                    'text'  => 'Registration fees are strictly non-refundable in the event of participant-initiated cancellation, regardless of the reason. Slot transfers to another individual are not permitted under any circumstances.',
+                ],
+                [
+                    'title' => 'Intellectual Property',
+                    'text'  => 'All branding, logos, race names, imagery, and content published on this site are the exclusive property of the organizers. Unauthorized reproduction, distribution, or use of any materials is strictly prohibited.',
+                ],
+                [
+                    'title' => 'Changes to Terms',
+                    'text'  => 'The organizers reserve the right to amend these terms and any race policies at any time without prior notice. Updates will be posted on this site and take effect immediately upon publication.',
+                ],
+                [
+                    'title' => 'Governing Law',
+                    'text'  => 'These terms and conditions are governed by the laws of the Republic of the Philippines. Any disputes arising from or in connection with these terms shall be subject to the exclusive jurisdiction of the appropriate courts in Baguio City, Benguet.',
+                ],
+            ];
+            @endphp
+
+            @foreach($terms as $index => $term)
+            <div class="bg-[#0d0d0d] border border-white/10 rounded-2xl p-6">
+                <div class="flex items-start gap-4">
+                    <div class="w-7 h-7 rounded-full bg-orange-500/10 text-orange-500 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">{{ $index + 1 }}</div>
+                    <div>
+                        <h3 class="text-white font-semibold text-sm mb-2">{!! $term['title'] !!}</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">{!! $term['text'] !!}</p>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+
         </div>
     </div>
 </section>
