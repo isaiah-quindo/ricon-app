@@ -11,7 +11,7 @@
         <p class="text-orange-500 text-sm font-semibold mb-2 uppercase tracking-wider">Our Story</p>
         <h1 class="text-4xl md:text-5xl font-black text-white mb-4">About Us</h1>
         <p class="text-gray-400 max-w-xl mx-auto leading-relaxed">
-            Learn about RiCon and the people behind The Great Cordillera 100.
+            Learn about RiCON and the people behind The Great Cordillera 100.
         </p>
     </div>
 </section>
@@ -34,7 +34,7 @@
                 {{-- About RiCon --}}
                 <div>
                     <p class="text-orange-500 text-xs font-semibold uppercase tracking-wider mb-2">Who We Are</p>
-                    <h2 class="text-3xl font-bold text-white mb-4">About RiCon</h2>
+                    <h2 class="text-3xl font-bold text-white mb-4">About RiCON</h2>
                     <div class="space-y-4 text-gray-400 leading-relaxed">
                         <p>
                             RiCON is a race organization focused on producing endurance events across Philippine terrain.
