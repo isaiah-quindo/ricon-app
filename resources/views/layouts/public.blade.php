@@ -12,7 +12,7 @@
     <meta property="og:site_name" content="RICON">
     <meta property="og:title" content="@yield('og_title', 'RICON — The Great Cordillera 100 Ultra Trail')">
     <meta property="og:description" content="@yield('og_description', 'Experience the ultimate mountain challenge at The Great Cordillera 100 Ultra Trail. Choose from 15 KM, 21 KM, 60 KM, or 100 KM distances through the breathtaking Cordillera mountains.')">
-    <meta property="og:image" content="images/facebook-image.png">
+    <meta property="og:image" content="{{ asset('images/facebook-image.png') }}">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700,800,900&display=swap" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
