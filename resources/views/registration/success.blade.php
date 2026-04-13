@@ -5,6 +5,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Registration Submitted — {{ config('app.name', 'Ricon') }} Ultra Trail</title>
+    <!-- Facebook Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:site_name" content="RICON">
+    <meta property="og:title" content="Registration Submitted — The Great Cordillera 100 Ultra Trail">
+    <meta property="og:description" content="Your registration for The Great Cordillera 100 Ultra Trail has been submitted. We will review your payment and confirm your spot soon.">
+    <meta property="og:image" content="{{ asset('images/facebook-image.png') }}">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700,800&display=swap" rel="stylesheet" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])

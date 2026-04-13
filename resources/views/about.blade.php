@@ -1,5 +1,7 @@
 @extends('layouts.public')
 @section('title', 'About Us')
+@section('og_title', 'About RICON — The Great Cordillera 100 Ultra Trail')
+@section('og_description', 'Learn about RICON and The Great Cordillera 100 Ultra Trail — a celebration of endurance, community, and the breathtaking Cordillera mountain landscape.')
 
 @section('content')
 

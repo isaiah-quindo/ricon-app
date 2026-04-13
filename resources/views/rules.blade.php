@@ -1,5 +1,7 @@
 @extends('layouts.public')
 @section('title', 'Rules and Guidelines')
+@section('og_title', 'Rules & Guidelines — The Great Cordillera 100 Ultra Trail')
+@section('og_description', 'Official race rules and guidelines for The Great Cordillera 100 Ultra Trail. All registered participants must review the race rules and conditions before competing.')
 
 @section('content')
 {{-- ======================================================== --}}

@@ -1,5 +1,7 @@
 @extends('layouts.public')
 @section('title', 'TGC 100 KM')
+@section('og_title', 'TGC 100 KM — The Ultimate Cordillera Ultra Trail')
+@section('og_description', 'Conquer 100 kilometers through the Cordillera mountains. The most grueling and rewarding distance at RICON. Do you have what it takes? Register now.')
 
 @section('content')
 {{-- ========================================================

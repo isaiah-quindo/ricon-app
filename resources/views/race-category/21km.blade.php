@@ -1,5 +1,7 @@
 @extends('layouts.public')
 @section('title', 'TGC 21 KM')
+@section('og_title', 'TGC 21 KM — The Great Cordillera Trail Run')
+@section('og_description', 'Race 21 kilometers through the breathtaking Cordillera mountains at RICON. A challenging course for seasoned trail runners. Register and take on the adventure.')
 
 @section('content')
 {{-- ========================================================

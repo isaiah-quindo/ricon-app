@@ -5,6 +5,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Register — The Great Cordillera 100 Ultra Trail</title>
+    <!-- Facebook Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:site_name" content="RICON">
+    <meta property="og:title" content="Register for RICON — The Great Cordillera 100 Ultra Trail">
+    <meta property="og:description" content="Sign up now for The Great Cordillera 100 Ultra Trail. Choose your distance — 15 KM, 21 KM, 60 KM, or 100 KM — and begin your mountain running journey.">
+    <meta property="og:image" content="{{ asset('images/facebook-image.png') }}">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700,800&display=swap" rel="stylesheet" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])

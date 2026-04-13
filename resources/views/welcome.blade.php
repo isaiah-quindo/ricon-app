@@ -1,5 +1,7 @@
 @extends('layouts.public')
 @section('title', 'The Great Cordillera 100')
+@section('og_title', 'RICON — The Great Cordillera 100 Ultra Trail')
+@section('og_description', 'Experience the ultimate mountain challenge. Choose from 15 KM, 21 KM, 60 KM, or 100 KM distances through the breathtaking Cordillera mountains. Register now.')
 
 @section('content')
 {{-- ========================================================
