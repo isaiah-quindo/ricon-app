@@ -23,10 +23,9 @@
             <img src="/tgc100-logo.png" alt="The Greact Cordillera 100" />
         </div>
 
-        <h1 class="text-2xl md:text-4xl lg:text-4xl font-black text-white leading-tight mb-5">
-            One Mountain.<br>
-            One Hundred Kilometers.<br>
-            One Global Race.
+        <h1 class="max-w-[600px] mx-auto text-2xl md:text-4xl lg:text-4xl font-black leading-tight text-white mb-5">
+            The Mountain Will Test You.
+            The Journey Will Change You.
         </h1>
 
         <p class="text-white text-lg/6 max-w-2xl mx-auto mb-8">
@@ -79,7 +78,7 @@
                 </a>
             </div>
             <div class="rounded-2xl h-72 flex items-center justify-center text-gray-500 text-sm select-none">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/_vtg_LA6_IU?si=GDfqWwz6x0rGTBJU&amp;controls=0" title="YouTube video player" frameborder="0" allow="autoplay;" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/RyBZFPklZp8?si=iJHiZaDKyz7VLR3H" title="YouTube video player" frameborder="0" allow="autoplay;" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
         </div>
     </div>

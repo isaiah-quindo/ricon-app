@@ -70,16 +70,19 @@
                     From the moment you register to the moment you finish, we've got you covered; gear, timing, fuel, and a medal to prove you earned it.
                 </p>
                 <ul class="grid grid-cols-2 gap-x-6 gap-y-2 mb-6">
-                    @foreach(['Finisher medal', 'Finisher hoodie', 'Event shirt', 'Event socks', 'Event tote bag', 'Race bib', 'Chip timing', 'Post-race meal', 'Race day insurance', 'Event stickers'] as $item)
+                    @foreach(['Finisher medal', 'Finisher hoodie', 'Event shirt', 'Event socks', 'Event tote bag', 'Race bib', 'Chip timing', 'Post-race meal', 'Race day insurance', 'Event stickers', 'Municipality Fees,', 'Environmental Fees', 'Barangay Fees'] as $item)
                     <li class="flex items-center gap-2 text-sm text-gray-300">
                         <span class="w-1.5 h-1.5 rounded-full bg-green-400 flex-shrink-0"></span>
                         {{ $item }}
                     </li>
                     @endforeach
                 </ul>
+                <a href="#" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-layer-line text-muted-foreground-1 hover:border-green-400 hover:text-green-400 focus:outline-hidden focus:border-green-400 focus:text-green-400  disabled:opacity-50 disabled:pointer-events-none">
+                    View all inclusions
+                </a>
             </div>
-            <div class="bg-gray-700 rounded-2xl h-80 flex items-center justify-center text-gray-500 text-sm select-none">
-                [Race photo]
+            <div class="bg-gray-700 rounded-2xl h-80 flex items-center justify-center text-gray-500 text-sm select-none overflow-hidden">
+                <img src="/images/race-photo.png" alt="Race Photo" class="w-full h-full object-cover" />
             </div>
         </div>
     </div>
