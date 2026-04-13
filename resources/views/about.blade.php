@@ -48,9 +48,6 @@
                     </div>
                 </div>
 
-                {{-- Divider --}}
-                <hr class="border-white/10">
-
                 {{-- About the Founder --}}
                 <div>
                     <p class="text-orange-500 text-xs font-semibold uppercase tracking-wider mb-2">The Person Behind It</p>
