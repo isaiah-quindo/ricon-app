@@ -25,13 +25,7 @@
 
             {{-- LEFT COLUMN — Portrait video placeholder --}}
             <div class="flex justify-center md:justify-center">
-                <div class="w-full max-w-sm aspect-[9/16] bg-[#1a1a1a] rounded-2xl border border-white/10 flex flex-col items-center justify-center gap-3 text-gray-600 select-none">
-                    <svg class="w-14 h-14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9A2.25 2.25 0 004.5 18.75z" />
-                    </svg>
-                    <p class="text-sm">Video Placeholder</p>
-                </div>
+                <iframe width="315" height="560" src="https://www.youtube.com/embed/-fn431n7g1o?si=O9hKHvDzBOFKrdlU&amp;controls=0" title="YouTube video player" frameborder="0" allow="autoplay;" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
 
             {{-- RIGHT COLUMN — About RiCon & Founder --}}
