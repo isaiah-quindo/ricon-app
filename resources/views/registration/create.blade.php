@@ -14,6 +14,7 @@
     <meta property="og:image" content="{{ asset('images/facebook-image.png') }}">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700,800&display=swap" rel="stylesheet" />
+    <style>[x-cloak] { display: none !important; }</style>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -58,7 +59,7 @@
             @endif
 
             {{-- Step 1: Race Category --}}
-            <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+            <div x-show="!reviewing" class="bg-white rounded-xl border border-gray-200 overflow-hidden">
                 <div class="px-6 py-4 border-b border-gray-100 bg-gray-50">
                     <h2 class="text-sm font-semibold text-gray-800 flex items-center gap-2">
                         <span class="w-6 h-6 rounded-full bg-orange-600 text-white text-xs font-bold flex items-center justify-center flex-shrink-0">1</span>
@@ -73,6 +74,7 @@
                         @foreach($categories as $cat)
                         <label class="relative cursor-pointer">
                             <input type="radio" name="race_category_id" value="{{ $cat->id }}"
+                                x-model="race_category_id"
                                 {{ old('race_category_id') === $cat->id ? 'checked' : '' }}
                                 class="sr-only peer" required>
                             <div class="border-2 rounded-xl p-4 transition-all
@@ -119,7 +121,7 @@
             </div>
 
             {{-- Step 2: Personal Information --}}
-            <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+            <div x-show="!reviewing" class="bg-white rounded-xl border border-gray-200 overflow-hidden">
                 <div class="px-6 py-4 border-b border-gray-100 bg-gray-50">
                     <h2 class="text-sm font-semibold text-gray-800 flex items-center gap-2">
                         <span class="w-6 h-6 rounded-full bg-orange-600 text-white text-xs font-bold flex items-center justify-center flex-shrink-0">2</span>
@@ -134,6 +136,7 @@
                                 First Name <span class="text-red-500">*</span>
                             </label>
                             <input type="text" id="first_name" name="first_name"
+                                x-model="first_name"
                                 value="{{ old('first_name') }}" required autocomplete="given-name"
                                 class="w-full rounded-lg border {{ $errors->has('first_name') ? 'border-red-400' : 'border-gray-200' }} text-sm px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent" />
                             @error('first_name')
@@ -146,6 +149,7 @@
                                 Last Name <span class="text-red-500">*</span>
                             </label>
                             <input type="text" id="last_name" name="last_name"
+                                x-model="last_name"
                                 value="{{ old('last_name') }}" required autocomplete="family-name"
                                 class="w-full rounded-lg border {{ $errors->has('last_name') ? 'border-red-400' : 'border-gray-200' }} text-sm px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent" />
                             @error('last_name')
@@ -157,7 +161,7 @@
                             <label for="sex" class="block text-sm font-medium text-gray-700 mb-1.5">
                                 Sex <span class="text-red-500">*</span>
                             </label>
-                            <select id="sex" name="sex" required
+                            <select id="sex" name="sex" x-model="sex" required
                                 class="w-full rounded-lg border {{ $errors->has('sex') ? 'border-red-400' : 'border-gray-200' }} text-sm px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white">
                                 <option value="">Select sex</option>
                                 <option value="male" {{ old('sex') === 'male' ? 'selected' : '' }}>Male</option>
@@ -173,6 +177,7 @@
                                 Birthdate <span class="text-red-500">*</span>
                             </label>
                             <input type="date" id="birthdate" name="birthdate"
+                                x-model="birthdate"
                                 value="{{ old('birthdate') }}" required
                                 class="w-full rounded-lg border {{ $errors->has('birthdate') ? 'border-red-400' : 'border-gray-200' }} text-sm px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent" />
                             @error('birthdate')
@@ -185,6 +190,7 @@
                                 Email Address <span class="text-red-500">*</span>
                             </label>
                             <input type="email" id="email" name="email"
+                                x-model="email"
                                 value="{{ old('email') }}" required autocomplete="email"
                                 class="w-full rounded-lg border {{ $errors->has('email') ? 'border-red-400' : 'border-gray-200' }} text-sm px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent" />
                             @error('email')
@@ -197,6 +203,7 @@
                                 Mobile Number <span class="text-red-500">*</span>
                             </label>
                             <input type="tel" id="mobile_number" name="mobile_number"
+                                x-model="mobile_number"
                                 value="{{ old('mobile_number') }}" required autocomplete="tel"
                                 placeholder="+63 9XX XXX XXXX"
                                 class="w-full rounded-lg border {{ $errors->has('mobile_number') ? 'border-red-400' : 'border-gray-200' }} text-sm px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent" />
@@ -209,7 +216,7 @@
                             <label for="address" class="block text-sm font-medium text-gray-700 mb-1.5">
                                 Home Address <span class="text-red-500">*</span>
                             </label>
-                            <textarea id="address" name="address" rows="2" required autocomplete="street-address"
+                            <textarea id="address" name="address" rows="2" x-model="address" required autocomplete="street-address"
                                 class="w-full rounded-lg border {{ $errors->has('address') ? 'border-red-400' : 'border-gray-200' }} text-sm px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent resize-none">{{ old('address') }}</textarea>
                             @error('address')
                             <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
@@ -224,6 +231,7 @@
                                 @foreach(['XS', 'S', 'M', 'L', 'XL', 'XXL'] as $size)
                                 <label class="cursor-pointer">
                                     <input type="radio" name="shirt_size" value="{{ $size }}"
+                                        x-model="shirt_size"
                                         {{ old('shirt_size') === $size ? 'checked' : '' }}
                                         class="sr-only peer" required>
                                     <span class="inline-flex items-center justify-center w-12 h-10 border-2 rounded-lg text-sm font-semibold transition-all
@@ -244,7 +252,7 @@
             </div>
 
             {{-- Step 3: Emergency Contact --}}
-            <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+            <div x-show="!reviewing" class="bg-white rounded-xl border border-gray-200 overflow-hidden">
                 <div class="px-6 py-4 border-b border-gray-100 bg-gray-50">
                     <h2 class="text-sm font-semibold text-gray-800 flex items-center gap-2">
                         <span class="w-6 h-6 rounded-full bg-orange-600 text-white text-xs font-bold flex items-center justify-center flex-shrink-0">3</span>
@@ -258,6 +266,7 @@
                                 Contact Name <span class="text-red-500">*</span>
                             </label>
                             <input type="text" id="emergency_contact_name" name="emergency_contact_name"
+                                x-model="emergency_contact_name"
                                 value="{{ old('emergency_contact_name') }}" required
                                 class="w-full rounded-lg border {{ $errors->has('emergency_contact_name') ? 'border-red-400' : 'border-gray-200' }} text-sm px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent" />
                             @error('emergency_contact_name')
@@ -269,6 +278,7 @@
                                 Contact Number <span class="text-red-500">*</span>
                             </label>
                             <input type="tel" id="emergency_contact_number" name="emergency_contact_number"
+                                x-model="emergency_contact_number"
                                 value="{{ old('emergency_contact_number') }}" required
                                 placeholder="+63 9XX XXX XXXX"
                                 class="w-full rounded-lg border {{ $errors->has('emergency_contact_number') ? 'border-red-400' : 'border-gray-200' }} text-sm px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent" />
@@ -281,7 +291,7 @@
             </div>
 
             {{-- Step 4: Payment --}}
-            <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+            <div x-show="!reviewing" class="bg-white rounded-xl border border-gray-200 overflow-hidden">
                 <div class="px-6 py-4 border-b border-gray-100 bg-gray-50">
                     <h2 class="text-sm font-semibold text-gray-800 flex items-center gap-2">
                         <span class="w-6 h-6 rounded-full bg-orange-600 text-white text-xs font-bold flex items-center justify-center flex-shrink-0">4</span>
@@ -298,7 +308,7 @@
                         <label for="payment_method" class="block text-sm font-medium text-gray-700 mb-1.5">
                             Payment Method
                         </label>
-                        <select id="payment_method" name="payment_method"
+                        <select id="payment_method" name="payment_method" x-model="payment_method"
                             class="w-full rounded-lg border border-gray-200 text-sm px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white">
                             <option value="">Select method</option>
                             <option value="GCash" {{ old('payment_method') === 'GCash' ? 'selected' : '' }}>GCash</option>
@@ -312,8 +322,7 @@
                         <label for="proof_of_payment" class="block text-sm font-medium text-gray-700 mb-1.5">
                             Proof of Payment <span class="text-red-500">*</span>
                         </label>
-                        <div x-data="{ fileName: '' }"
-                            class="border-2 border-dashed rounded-xl p-6 text-center transition-colors {{ $errors->has('proof_of_payment') ? 'border-red-300 bg-red-50' : 'border-gray-200 hover:border-orange-300' }}">
+                        <div class="border-2 border-dashed rounded-xl p-6 text-center transition-colors {{ $errors->has('proof_of_payment') ? 'border-red-300 bg-red-50' : 'border-gray-200 hover:border-orange-300' }}">
                             <input type="file" id="proof_of_payment" name="proof_of_payment"
                                 accept="image/jpeg,image/png"
                                 required
@@ -338,7 +347,7 @@
             </div>
 
             {{-- Step 5: Agreements --}}
-            <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+            <div x-show="!reviewing" class="bg-white rounded-xl border border-gray-200 overflow-hidden">
                 <div class="px-6 py-4 border-b border-gray-100 bg-gray-50">
                     <h2 class="text-sm font-semibold text-gray-800 flex items-center gap-2">
                         <span class="w-6 h-6 rounded-full bg-orange-600 text-white text-xs font-bold flex items-center justify-center flex-shrink-0">5</span>
@@ -375,11 +384,172 @@
                 </div>
             </div>
 
-            {{-- Submit --}}
-            <div class="flex flex-col items-center gap-3">
-                <button type="submit"
+            {{-- Review Panel --}}
+            <div x-show="reviewing" x-cloak class="space-y-4">
+
+                {{-- Info banner --}}
+                <div class="bg-orange-50 border border-orange-200 rounded-xl p-4">
+                    <p class="text-sm font-semibold text-orange-800">Please review your details before submitting.</p>
+                    <p class="text-xs text-orange-600 mt-0.5">Click "Edit" to go back and make changes.</p>
+                </div>
+
+                {{-- 1. Race Category --}}
+                <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+                    <div class="px-6 py-4 border-b border-gray-100 bg-gray-50">
+                        <h2 class="text-sm font-semibold text-gray-800 flex items-center gap-2">
+                            <span class="w-6 h-6 rounded-full bg-orange-600 text-white text-xs font-bold flex items-center justify-center flex-shrink-0">1</span>
+                            Race Category
+                        </h2>
+                    </div>
+                    <div class="p-6">
+                        <template x-if="selectedCategory">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-base font-bold text-gray-900" x-text="selectedCategory.name"></p>
+                                    <p class="text-sm text-gray-500" x-text="selectedCategory.distance_km + ' km'"></p>
+                                </div>
+                                <p class="text-lg font-bold text-orange-600" x-text="formattedPrice"></p>
+                            </div>
+                        </template>
+                        <template x-if="!selectedCategory">
+                            <p class="text-sm text-gray-400 italic">No category selected</p>
+                        </template>
+                    </div>
+                </div>
+
+                {{-- 2. Personal Information --}}
+                <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+                    <div class="px-6 py-4 border-b border-gray-100 bg-gray-50">
+                        <h2 class="text-sm font-semibold text-gray-800 flex items-center gap-2">
+                            <span class="w-6 h-6 rounded-full bg-orange-600 text-white text-xs font-bold flex items-center justify-center flex-shrink-0">2</span>
+                            Personal Information
+                        </h2>
+                    </div>
+                    <div class="p-6">
+                        <dl class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-sm">
+                            <div>
+                                <dt class="text-xs text-gray-400 mb-0.5">First Name</dt>
+                                <dd class="font-medium text-gray-800" x-text="first_name || '—'"></dd>
+                            </div>
+                            <div>
+                                <dt class="text-xs text-gray-400 mb-0.5">Last Name</dt>
+                                <dd class="font-medium text-gray-800" x-text="last_name || '—'"></dd>
+                            </div>
+                            <div>
+                                <dt class="text-xs text-gray-400 mb-0.5">Sex</dt>
+                                <dd class="font-medium text-gray-800" x-text="formattedSex"></dd>
+                            </div>
+                            <div>
+                                <dt class="text-xs text-gray-400 mb-0.5">Birthdate</dt>
+                                <dd class="font-medium text-gray-800" x-text="formattedBirthdate"></dd>
+                            </div>
+                            <div>
+                                <dt class="text-xs text-gray-400 mb-0.5">Email</dt>
+                                <dd class="font-medium text-gray-800 break-all" x-text="email || '—'"></dd>
+                            </div>
+                            <div>
+                                <dt class="text-xs text-gray-400 mb-0.5">Mobile</dt>
+                                <dd class="font-medium text-gray-800" x-text="mobile_number || '—'"></dd>
+                            </div>
+                            <div>
+                                <dt class="text-xs text-gray-400 mb-0.5">Shirt Size</dt>
+                                <dd class="font-medium text-gray-800" x-text="shirt_size || '—'"></dd>
+                            </div>
+                            <div class="col-span-2 sm:col-span-3">
+                                <dt class="text-xs text-gray-400 mb-0.5">Address</dt>
+                                <dd class="font-medium text-gray-800" x-text="address || '—'"></dd>
+                            </div>
+                        </dl>
+                    </div>
+                </div>
+
+                {{-- 3. Emergency Contact --}}
+                <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+                    <div class="px-6 py-4 border-b border-gray-100 bg-gray-50">
+                        <h2 class="text-sm font-semibold text-gray-800 flex items-center gap-2">
+                            <span class="w-6 h-6 rounded-full bg-orange-600 text-white text-xs font-bold flex items-center justify-center flex-shrink-0">3</span>
+                            Emergency Contact
+                        </h2>
+                    </div>
+                    <div class="p-6">
+                        <dl class="grid grid-cols-2 gap-4 text-sm">
+                            <div>
+                                <dt class="text-xs text-gray-400 mb-0.5">Name</dt>
+                                <dd class="font-medium text-gray-800" x-text="emergency_contact_name || '—'"></dd>
+                            </div>
+                            <div>
+                                <dt class="text-xs text-gray-400 mb-0.5">Number</dt>
+                                <dd class="font-medium text-gray-800" x-text="emergency_contact_number || '—'"></dd>
+                            </div>
+                        </dl>
+                    </div>
+                </div>
+
+                {{-- 4. Payment --}}
+                <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+                    <div class="px-6 py-4 border-b border-gray-100 bg-gray-50">
+                        <h2 class="text-sm font-semibold text-gray-800 flex items-center gap-2">
+                            <span class="w-6 h-6 rounded-full bg-orange-600 text-white text-xs font-bold flex items-center justify-center flex-shrink-0">4</span>
+                            Payment
+                        </h2>
+                    </div>
+                    <div class="p-6">
+                        <dl class="grid grid-cols-2 gap-4 text-sm">
+                            <div>
+                                <dt class="text-xs text-gray-400 mb-0.5">Payment Method</dt>
+                                <dd class="font-medium text-gray-800" x-text="payment_method || '—'"></dd>
+                            </div>
+                            <div>
+                                <dt class="text-xs text-gray-400 mb-0.5">Proof of Payment</dt>
+                                <dd class="font-medium text-gray-800" x-text="fileName || '—'"></dd>
+                            </div>
+                        </dl>
+                    </div>
+                </div>
+
+                {{-- 5. Agreements --}}
+                <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+                    <div class="px-6 py-4 border-b border-gray-100 bg-gray-50">
+                        <h2 class="text-sm font-semibold text-gray-800 flex items-center gap-2">
+                            <span class="w-6 h-6 rounded-full bg-orange-600 text-white text-xs font-bold flex items-center justify-center flex-shrink-0">5</span>
+                            Agreements
+                        </h2>
+                    </div>
+                    <div class="p-6 space-y-2 text-sm text-gray-700">
+                        <div class="flex items-center gap-2">
+                            <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            Liability Waiver agreed
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            Rules and Conditions agreed
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Review actions --}}
+                <div class="flex flex-col sm:flex-row items-center gap-3">
+                    <button type="button" @click="backToForm()"
+                        class="w-full sm:w-auto px-6 py-3 border border-gray-300 text-gray-700 text-sm font-semibold rounded-xl hover:bg-gray-50 active:scale-95 transition-all">
+                        &larr; Edit
+                    </button>
+                    <button type="submit"
+                        class="w-full sm:w-auto px-8 py-3.5 bg-orange-600 text-white text-sm font-semibold rounded-xl hover:bg-orange-700 active:scale-95 transition-all shadow-lg shadow-orange-600/20">
+                        Confirm &amp; Submit
+                    </button>
+                </div>
+
+            </div>
+
+            {{-- Review trigger (shown when filling form) --}}
+            <div x-show="!reviewing" class="flex flex-col items-center gap-3">
+                <button type="button" @click="showReview()"
                     class="w-full sm:w-auto px-8 py-3.5 bg-orange-600 text-white text-sm font-semibold rounded-xl hover:bg-orange-700 active:scale-95 transition-all shadow-lg shadow-orange-600/20">
-                    Submit Registration
+                    Review My Registration
                 </button>
                 <p class="text-xs text-gray-400 text-center max-w-sm">
                     Your registration will be reviewed and approved once payment is verified. You will be notified by email.
@@ -395,7 +565,54 @@
 
     <script>
         function registrationForm() {
-            return {};
+            const categories = {!! json_encode($categories->map(fn($c) => ['id' => $c->id, 'name' => $c->name, 'distance_km' => $c->distance_km, 'price' => $c->price])->values()) !!};
+
+            return {
+                reviewing: false,
+
+                race_category_id: '{{ old('race_category_id', '') }}',
+                first_name: '{{ old('first_name', '') }}',
+                last_name: '{{ old('last_name', '') }}',
+                sex: '{{ old('sex', '') }}',
+                birthdate: '{{ old('birthdate', '') }}',
+                email: '{{ old('email', '') }}',
+                mobile_number: '{{ old('mobile_number', '') }}',
+                address: `{{ old('address', '') }}`,
+                shirt_size: '{{ old('shirt_size', '') }}',
+                emergency_contact_name: '{{ old('emergency_contact_name', '') }}',
+                emergency_contact_number: '{{ old('emergency_contact_number', '') }}',
+                payment_method: '{{ old('payment_method', '') }}',
+                fileName: '',
+
+                get selectedCategory() {
+                    return categories.find(c => c.id === this.race_category_id) || null;
+                },
+
+                get formattedPrice() {
+                    if (!this.selectedCategory) return '—';
+                    return '₱' + Number(this.selectedCategory.price).toLocaleString('en-PH', { minimumFractionDigits: 0 });
+                },
+
+                get formattedSex() {
+                    return this.sex ? this.sex.charAt(0).toUpperCase() + this.sex.slice(1) : '—';
+                },
+
+                get formattedBirthdate() {
+                    if (!this.birthdate) return '—';
+                    const d = new Date(this.birthdate + 'T00:00:00');
+                    return d.toLocaleDateString('en-PH', { year: 'numeric', month: 'long', day: 'numeric' });
+                },
+
+                showReview() {
+                    this.reviewing = true;
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                },
+
+                backToForm() {
+                    this.reviewing = false;
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                },
+            };
         }
     </script>
 
