@@ -14,7 +14,11 @@
     <meta property="og:image" content="{{ asset('images/facebook-image.png') }}">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700,800&display=swap" rel="stylesheet" />
-    <style>[x-cloak] { display: none !important; }</style>
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+    </style>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -100,9 +104,9 @@
                                     </span>
                                     @endif
                                 </div>
-                                @if($cat->description)
+                                <!-- @if($cat->description)
                                 <p class="text-xs text-gray-400 mt-2">{{ $cat->description }}</p>
-                                @endif
+                                @endif -->
                             </div>
                             {{-- Check indicator --}}
                             <div class="absolute top-3 right-3 mt-2 w-5 h-5 rounded-full border-2 border-gray-300 peer-checked:border-orange-600 peer-checked:bg-orange-600 flex items-center justify-center transition-all hidden peer-checked:flex">
@@ -518,13 +522,13 @@
                     <div class="p-6 space-y-2 text-sm text-gray-700">
                         <div class="flex items-center gap-2">
                             <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                             </svg>
                             Liability Waiver agreed
                         </div>
                         <div class="flex items-center gap-2">
                             <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                             </svg>
                             Rules and Conditions agreed
                         </div>
@@ -563,54 +567,64 @@
         The Great Cordillera 100 Ultra Trail &copy; {{ date('Y') }}
     </footer>
 
+    <script type="application/json" id="race-categories-data">
+        {!! json_encode($categories->map(fn($c) => ['id' => $c->id, 'name' => $c->name, 'distance_km' => $c->distance_km, 'price' => $c->price])->values()) !!}
+    </script>
+
     <script>
         function registrationForm() {
-            const categories = {!! json_encode($categories->map(fn($c) => ['id' => $c->id, 'name' => $c->name, 'distance_km' => $c->distance_km, 'price' => $c->price])->values()) !!};
+            const categories = JSON.parse(document.getElementById('race-categories-data').textContent);
 
             return {
                 reviewing: false,
 
-                race_category_id: '{{ old('race_category_id', '') }}',
-                first_name: '{{ old('first_name', '') }}',
-                last_name: '{{ old('last_name', '') }}',
-                sex: '{{ old('sex', '') }}',
-                birthdate: '{{ old('birthdate', '') }}',
-                email: '{{ old('email', '') }}',
-                mobile_number: '{{ old('mobile_number', '') }}',
-                address: `{{ old('address', '') }}`,
-                shirt_size: '{{ old('shirt_size', '') }}',
-                emergency_contact_name: '{{ old('emergency_contact_name', '') }}',
-                emergency_contact_number: '{{ old('emergency_contact_number', '') }}',
-                payment_method: '{{ old('payment_method', '') }}',
-                fileName: '',
+                race_category_id: "{{ old('race_category_id', '') }}",
+                first_name: "{{ old('first_name', '') }}",
+                last_name: "{{ old('last_name', '') }}",
+                sex: "{{ old('sex', '') }}",
+                birthdate: "{{ old('birthdate', '') }}",
+                email: "{{ old('email', '') }}",
+                mobile_number: "{{ old('mobile_number', '') }}",
+                address: "{{ old('address', '') }}",
+                shirt_size: "{{ old('shirt_size', '') }}",
+                emergency_contact_name: "{{ old('emergency_contact_name', '') }}",
+                emergency_contact_number: "{{ old('emergency_contact_number', '') }}",
+                payment_method: "{{ old('payment_method', '') }}",
+                fileName: "",
 
                 get selectedCategory() {
                     return categories.find(c => c.id === this.race_category_id) || null;
                 },
 
                 get formattedPrice() {
-                    if (!this.selectedCategory) return '—';
-                    return '₱' + Number(this.selectedCategory.price).toLocaleString('en-PH', { minimumFractionDigits: 0 });
+                    if (!this.selectedCategory) return "—";
+                    return "₱" + Number(this.selectedCategory.price).toLocaleString("en-PH", {
+                        minimumFractionDigits: 0
+                    });
                 },
 
                 get formattedSex() {
-                    return this.sex ? this.sex.charAt(0).toUpperCase() + this.sex.slice(1) : '—';
+                    return this.sex ? this.sex.charAt(0).toUpperCase() + this.sex.slice(1) : "—";
                 },
 
                 get formattedBirthdate() {
-                    if (!this.birthdate) return '—';
-                    const d = new Date(this.birthdate + 'T00:00:00');
-                    return d.toLocaleDateString('en-PH', { year: 'numeric', month: 'long', day: 'numeric' });
+                    if (!this.birthdate) return "—";
+                    const d = new Date(this.birthdate + "T00:00:00");
+                    return d.toLocaleDateString("en-PH", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric"
+                    });
                 },
 
                 showReview() {
                     this.reviewing = true;
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    window.scrollTo({ top: 0, behavior: "smooth" });
                 },
 
                 backToForm() {
                     this.reviewing = false;
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    window.scrollTo({ top: 0, behavior: "smooth" });
                 },
             };
         }

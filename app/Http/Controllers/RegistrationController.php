@@ -13,7 +13,7 @@ class RegistrationController extends Controller
     // Show the registration form
     public function create()
     {
-        $categories = RaceCategory::where('is_active', true)->get();
+        $categories = RaceCategory::where('is_active', true)->orderByRaw('CAST(distance_km AS INTEGER) DESC')->get();
         return view('registration.create', compact('categories'));
     }
 
