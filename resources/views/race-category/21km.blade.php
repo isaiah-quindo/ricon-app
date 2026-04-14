@@ -57,14 +57,41 @@
     </div>
 </div>
 
+{{-- ========================================================
+         ABOUT THE RACE
+    ======================================================== --}}
+<section class="bg-[#111111] py-24">
+    <div class="mx-auto px-8" style="max-width:1280px;">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div>
+                <p class="text-green-400 text-sm font-semibold uppercase tracking-wider mb-3">About the Race</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">The TGC 21 KM</h2>
+                <p class="text-gray-400 leading-relaxed mb-4">A half-marathon distance that refuses to behave like one. Two significant climbs, one river ford, and a final descent that will ask everything of your quads. Finish this and you will know whether 50 is in your future.
+                </p>
+                <!-- <ul class="mt-4 space-y-2">
+                    @foreach(['1,300 M+ elevation gain', 'Pine forests and scenic ridgelines', 'Aid stations along the route', 'Open to 18 and above'] as $item)
+                    <li class="flex items-center gap-2 text-sm text-gray-300">
+                        <span class="w-1.5 h-1.5 rounded-full bg-green-400 flex-shrink-0"></span>
+                        {{ $item }}
+                    </li>
+                    @endforeach
+                </ul> -->
+            </div>
+            <div class="bg-gray-700 rounded-2xl h-80 flex items-center justify-center text-gray-500 text-sm select-none overflow-hidden">
+                <img src="/images/race-photo.png" alt="Race Photo" class="w-full h-full object-cover" />
+            </div>
+        </div>
+    </div>
+</section>
+
 
 {{-- ========================================================
          Inclusions
     ======================================================== --}}
 <section class="bg-[#0d0d0d] py-24">
     <div class="mx-auto px-8" style="max-width:1280px;">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            <div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-16 items-center">
+            <div class="col-span-1 md:col-span-2">
                 <p class="text-green-400 text-sm font-semibold uppercase tracking-wider mb-3">Inclusions</p>
                 <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">What's included in your registration</h2>
                 <p class="text-gray-400 leading-relaxed mb-6">
@@ -78,12 +105,9 @@
                     </li>
                     @endforeach
                 </ul>
-                <a href="#" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-layer-line text-muted-foreground-1 hover:border-green-400 hover:text-green-400 focus:outline-hidden focus:border-green-400 focus:text-green-400  disabled:opacity-50 disabled:pointer-events-none">
-                    View all inclusions
-                </a>
             </div>
             <div class="bg-gray-700 rounded-2xl h-80 flex items-center justify-center text-gray-500 text-sm select-none overflow-hidden">
-                <img src="/images/race-photo.png" alt="Race Photo" class="w-full h-full object-cover" />
+                <img src="/images/inclusions/21-1.png" alt="Inclusion 1" class="w-full h-full object-cover" />
             </div>
         </div>
     </div>
@@ -99,10 +123,14 @@
 <section class="bg-[#1C3D20] py-24">
     <div class="mx-auto px-8" style="max-width:1280px;">
         <p class="text-green-400 text-sm font-semibold uppercase tracking-wider mb-2">Registration Fee</p>
-        <h2 class="text-3xl font-bold text-white mb-10">Secure your slot</h2>
+        <h2 class="text-3xl font-bold text-white mb-6">Secure your slot</h2>
+        <p class="text-white leading-relaxed mb-6">
+            Lock in your place on the start line before it sells out.
+        </p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            <div class="bg-[#1a1a1a] bg-opacity-50 rounded-xl p-5 border-green-500 border text-center">
+            <div class="relative bg-[#1a1a1a] bg-opacity-50 rounded-xl p-5 border-green-500 border text-center">
+                <p class="absolute top-3 right-3 text-green-400 text-xs">⚠ Limited slots</p>
                 <p class="text-green-400 text-xs font-semibold uppercase tracking-wider mb-1">Super Early Bird</p>
                 <p class="text-white font-bold text-2xl mb-1">₱1,990</p>
                 <p class="text-gray-500 text-sm">April 15 - May 15</p>
@@ -130,6 +158,9 @@
                 <p class="text-gray-500 text-sm">Sep 16 - Sep 30</p>
             </div>
         </div>
+        <p class="text-gray-300 text-xs leading-relaxed mb-6">
+            Registration fees are subject to change without notice.
+        </p>
         <a href="{{ route('registration.create') }}" class="py-3 px-8 inline-flex items-center gap-x-2 text-sm font-bold rounded-lg bg-green-600 text-white hover:bg-green-700 focus:outline-hidden disabled:opacity-50 disabled:pointer-events-none">
             Register Now
         </a>
@@ -211,32 +242,11 @@
 
 
 {{-- ========================================================
-         ABOUT THE RACE
-    ======================================================== --}}
-<!-- <section class="bg-[#111111] py-24">
-    <div class="mx-auto px-8" style="max-width:1280px;">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            <div>
-                <p class="text-green-400 text-sm font-semibold uppercase tracking-wider mb-3">About the Race</p>
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">The TGC 21 KM Experience</h2>
-                <p class="text-gray-400 leading-relaxed mb-4">The TGC 21KM is the perfect entry point into Cordillera trail running — challenging enough to earn, accessible enough for motivated first-timers ready to take on mountain trails.</p>
-                <p class="text-gray-400 leading-relaxed mb-4">You'll wind through pine forests and scenic ridgelines with sweeping views of the Benguet highlands, all within a manageable but rewarding distance.</p>
-                <p class="text-gray-400 leading-relaxed">With 1,800 meters of elevation gain and an 8-hour cutoff, this is your gateway to the Cordillera.</p>
-            </div>
-            <div class="bg-gray-700 rounded-2xl h-80 flex items-center justify-center text-gray-500 text-sm select-none">
-                [Race photo]
-            </div>
-        </div>
-    </div>
-</section> -->
-
-
-{{-- ========================================================
          CTA
     ======================================================== --}}
 <section class="bg-[#0d0d0d] py-24">
     <div class="mx-auto px-8 text-center" style="max-width:1280px;">
-        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Ready to take on 21?</h2>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Ready to take on TGC 21?</h2>
         <p class="text-gray-400 mb-8 max-w-xl mx-auto">
             Secure your slot now. Registration slots are limited.
         </p>

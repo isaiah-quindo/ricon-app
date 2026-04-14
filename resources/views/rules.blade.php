@@ -15,7 +15,7 @@
         <h1 class="text-5xl md:text-6xl font-black text-white leading-tight">
             Rules &amp; Guidelines
         </h1>
-        <p class="text-gray-400 mt-3 text-lg">November 13, 2026 &mdash; Benguet, Cordillera, Philippines</p>
+        <p class="text-gray-400 mt-3 text-lg">November 13, 2026 &mdash; Cordillera Administrative Region, Philippines</p>
     </div>
 </section>
 
@@ -121,7 +121,7 @@
                     <div class="bg-[#0d0d0d] rounded-xl p-4">
                         <span class="inline-block text-xs font-bold text-orange-500 bg-orange-500/10 px-2 py-0.5 rounded-full mb-3">100 KM</span>
                         <ul class="space-y-1.5">
-                            @foreach(['Trail running shoes', 'Hydration pack (1.5 liters)', 'Emergency blanket', 'Headlamp + extra batteries (fully charged)', 'First aid kit', 'Whistle', 'Rain jacket with 10,000mm', 'Mobile phone (fully charged)', 'Race bib (provided)', 'Cash (₱1,000)', 'Ziploc bag for your trash'] as $item)
+                            @foreach(['Trail running shoes', 'Hydration pack (1.5 liters)', 'Emergency blanket', 'Headlamp + extra batteries (fully charged)', 'First aid kit', 'Whistle', 'Rain jacket with 10,000mm', 'Mobile phone (fully charged)', 'Race bib (provided)', 'Cash (₱1,000)', 'Ziploc bag for your trash', 'Trail food — min. 1,000 kcal (250–300 kcal/hr until next aid station; e.g. 2–3 gels, 2–3 energy bars, or equivalent)'] as $item)
                             <li class="flex items-center gap-2 text-xs text-gray-400">
                                 <span class="w-1 h-1 rounded-full bg-orange-500 flex-shrink-0"></span>{{ $item }}
                             </li>
@@ -133,7 +133,7 @@
                     <div class="bg-[#0d0d0d] rounded-xl p-4">
                         <span class="inline-block text-xs font-bold text-red-400 bg-red-500/10 px-2 py-0.5 rounded-full mb-3">60 KM</span>
                         <ul class="space-y-1.5">
-                            @foreach(['Trail running shoes', 'Hydration pack (1.5 liters)', 'Emergency blanket', 'Headlamp + extra batteries (fully charged)', 'First aid kit', 'Whistle', 'Rain jacket with 10,000mm', 'Mobile phone (fully charged)', 'Race bib (provided)', 'Cash (₱1,000)', 'Ziploc bag for your trash'] as $item)
+                            @foreach(['Trail running shoes', 'Hydration pack (1.5 liters)', 'Emergency blanket', 'Headlamp + extra batteries (fully charged)', 'First aid kit', 'Whistle', 'Rain jacket with 10,000mm', 'Mobile phone (fully charged)', 'Race bib (provided)', 'Cash (₱1,000)', 'Ziploc bag for your trash', 'Trail food — min. 1,000 kcal (250–300 kcal/hr until next aid station; e.g. 2–3 gels, 2–3 energy bars, or equivalent)'] as $item)
                             <li class="flex items-center gap-2 text-xs text-gray-400">
                                 <span class="w-1 h-1 rounded-full bg-red-400 flex-shrink-0"></span>{{ $item }}
                             </li>
@@ -304,7 +304,7 @@
                 'Repeated littering offenses.',
                 'Failure to comply with instructions from race officials, marshals, emergency personnel, or volunteers.',
                 'Refusal to undergo gear check at the starting line and failure to present mandatory gear at random points along the course.',
-                'Continuing after cut-off times.',
+                'Continuing after cut-off times.', 'Sabotage of race markers and signage.', 'Intoxicated individuals', 'Smoking before, during, and after the race',
                 ];
                 @endphp
                 @foreach($dqs as $dq)
@@ -423,11 +423,46 @@
 </section>
 
 {{-- ======================================================== --}}
+{{-- TRANSFERS --}}
+{{-- ======================================================== --}}
+<section id="transfers" class="bg-[#0d0d0d] py-20">
+    <div class="mx-auto px-8" style="max-width:1280px;">
+        <p class="text-orange-500 text-sm font-semibold uppercase tracking-wider mb-2">Section 8</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-3">Race Kit Transfers</h2>
+        <p class="text-gray-400 mb-10 max-w-2xl">Policies on race bib transfers and race kit claiming.</p>
+
+        <div class="space-y-6">
+            <div class="bg-[#111111] border border-white/10 rounded-2xl p-6 md:p-8">
+                <h3 class="text-white font-semibold text-lg mb-3">Race Bib Transfers</h3>
+                <p class="text-gray-300 text-sm leading-relaxed">
+                    Race kit transfers will be allowed until <span class="text-white font-semibold">June 15, 2026 only</span>. An admin fee of <span class="text-white font-semibold">&#8369;300</span> will be collected for the transfer of race bib and personalized entitlements. No more race bib transfers after June 15, 2026.
+                </p>
+            </div>
+
+            <div class="bg-[#111111] border border-white/10 rounded-2xl p-6 md:p-8">
+                <h3 class="text-white font-semibold text-lg mb-3">Race Kit Claiming</h3>
+                <p class="text-gray-300 text-sm leading-relaxed">
+                    If a participant is unable to attend the race kit claiming, he/she can authorize someone to claim his/her race kit on his/her behalf. That runner is <span class="text-white font-semibold">not allowed to use a race bib that is not in their name</span> due to safety, race integrity, and race insurance purposes.
+                </p>
+            </div>
+
+            <div class="bg-[#111111] border border-amber-500/20 rounded-2xl p-6">
+                <h3 class="text-white font-semibold mb-3">Unclaimed Race Kits</h3>
+                <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                    Unclaimed race kits shall be considered as <span class="text-white font-semibold">no show</span>. The organizer reserves the right to assume the participant's forfeiture of his/her race slot when the race kit is not claimed during the race kit claiming period.
+                </p>
+                <p class="text-amber-400 text-xs leading-relaxed">Note: There will be no more kit claiming after the program on the race day.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{-- ======================================================== --}}
 {{-- TERMS & CONDITIONS --}}
 {{-- ======================================================== --}}
 <section id="terms" class="bg-[#111111] py-20">
     <div class="mx-auto px-8" style="max-width:1280px;">
-        <p class="text-orange-500 text-sm font-semibold uppercase tracking-wider mb-2">Section 8</p>
+        <p class="text-orange-500 text-sm font-semibold uppercase tracking-wider mb-2">Section 9</p>
         <h2 class="text-3xl md:text-4xl font-bold text-white mb-3">Terms &amp; Conditions</h2>
         <p class="text-gray-400 mb-10 max-w-2xl">By accessing this site or submitting a registration, you agree to the following terms. Please read them carefully.</p>
 
@@ -452,8 +487,8 @@
             'text' => 'Participants agree to indemnify and hold harmless the organizers and all associated parties from any and all claims, damages, costs, or expenses (including legal fees) resulting from their participation in the event.',
             ],
             [
-            'title' => 'Participant-Initiated Cancellation &amp; Slot Transfer',
-            'text' => 'Registration fees are strictly non-refundable in the event of participant-initiated cancellation, regardless of the reason. Slot transfers to another individual are not permitted under any circumstances.',
+            'title' => 'Participant-Initiated Cancellation',
+            'text' => 'Registration fees are strictly non-refundable in the event of participant-initiated cancellation, regardless of the reason.',
             ],
             [
             'title' => 'Intellectual Property',
@@ -491,7 +526,7 @@
 {{-- ======================================================== --}}
 <section class="bg-[#0d0d0d] py-20">
     <div class="mx-auto px-8 text-center" style="max-width:1280px;">
-        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Ready to take on the Cordilleras?</h2>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Ready to take on the TGC 100?</h2>
         <p class="text-gray-400 mb-8 max-w-xl mx-auto">You've read the rules. Now it's time to commit. Secure your slot before they run out.</p>
         <a href="{{ route('registration.create') }}" class="py-3 px-8 inline-flex items-center gap-x-2 text-sm font-bold rounded-lg bg-orange-600 text-white hover:bg-orange-700 transition-colors">
             Register Now

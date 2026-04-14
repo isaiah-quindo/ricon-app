@@ -61,12 +61,39 @@
 
 
 {{-- ========================================================
+         ABOUT THE RACE
+    ======================================================== --}}
+<section class="bg-[#111111] py-24">
+    <div class="mx-auto px-8" style="max-width:1280px;">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div>
+                <p class="text-orange-500 text-sm font-semibold uppercase tracking-wider mb-3">About the Race</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">The TGC 100 KM</h2>
+                <p class="text-gray-400 leading-relaxed mb-4">The Great Cordillera 100 is designed as a point-to-point and loop system routed through the highland barangays of Benguet Province. Courses share common trail sections at specific junctions, allowing all distance categories to experience the defining terrain features of the range, the exposed ridgelines, the pine forests, the community paths that have been walked for generations before we arrived.</p>
+                <!-- <ul class="mt-4 space-y-2">
+                    @foreach(['Five major climbs', 'Night segment (6 PM gunstart)', 'Aid stations every 10–12 km', 'Open to 20 and above'] as $item)
+                    <li class="flex items-center gap-2 text-sm text-gray-300">
+                        <span class="w-1.5 h-1.5 rounded-full bg-orange-500 flex-shrink-0"></span>
+                        {{ $item }}
+                    </li>
+                    @endforeach
+                </ul> -->
+            </div>
+            <div class="bg-gray-700 rounded-2xl h-80 flex items-center justify-center text-gray-500 text-sm select-none overflow-hidden">
+                <img src="/images/race-photo.png" alt="Race Photo" class="w-full h-full object-cover" />
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{{-- ========================================================
          Inclusions
     ======================================================== --}}
 <section class="bg-[#0d0d0d] py-24">
     <div class="mx-auto px-8" style="max-width:1280px;">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            <div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-16 items-center">
+            <div class="col-span-1 md:col-span-2">
                 <p class="text-orange-500 text-sm font-semibold uppercase tracking-wider mb-3">Inclusions</p>
                 <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">What's included in your registration</h2>
                 <p class="text-gray-400 leading-relaxed mb-6">
@@ -81,8 +108,37 @@
                     @endforeach
                 </ul>
             </div>
-            <div class="bg-gray-700 rounded-2xl h-80 flex items-center justify-center text-gray-500 text-sm select-none overflow-hidden">
-                <img src="/images/race-photo.png" alt="Race Photo" class="w-full h-full object-cover" />
+            <div class="relative col-span-1 rounded-2xl h-80 overflow-hidden select-none" x-data="{ active: 0, images: ['/images/inclusions/100-1.png', '/images/inclusions/100-2.png'] }">
+                <template x-for="(img, i) in images" :key="i">
+                    <img :src="img" :alt="'Inclusion ' + (i + 1)"
+                        class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
+                        :class="active === i ? 'opacity-100' : 'opacity-0'" />
+                </template>
+
+                {{-- Prev --}}
+                <button @click="active = (active - 1 + images.length) % images.length"
+                    class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/70 flex items-center justify-center transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+
+                {{-- Next --}}
+                <button @click="active = (active + 1) % images.length"
+                    class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/70 flex items-center justify-center transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+
+                {{-- Dots --}}
+                <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
+                    <template x-for="(img, i) in images" :key="i">
+                        <button @click="active = i"
+                            class="w-1.5 h-1.5 rounded-full transition-colors"
+                            :class="active === i ? 'bg-white' : 'bg-white/40'"></button>
+                    </template>
+                </div>
             </div>
         </div>
     </div>
@@ -161,7 +217,7 @@
                 <p class="text-orange-500 text-xs font-semibold uppercase tracking-wider mb-3">Requirements</p>
                 <h2 class="text-xl font-bold text-white mb-5">Mandatory Gear</h2>
                 <ul class="space-y-2 mb-6">
-                    @foreach (['Trail running shoes', 'Hydration pack (1.5 liters)', 'Emergency blanket', 'Headlamp + extra batteries (fully charged)', 'First aid kit', 'Whistle', 'Rain jacket with 10,000mm', 'Mobile phone (fully charged)', 'Race bib (provided)', 'Cash (₱1,000)', 'Ziploc bag for your trash'] as $item)
+                    @foreach (['Trail running shoes', 'Hydration pack (1.5 liters)', 'Emergency blanket', 'Headlamp + extra batteries (fully charged)', 'First aid kit', 'Whistle', 'Rain jacket with 10,000mm', 'Mobile phone (fully charged)', 'Race bib (provided)', 'Cash (₱1,000)', 'Ziploc bag for your trash', 'Trail food — minimum 1,000 kcal (250–300 kcal/hr until next aid station; e.g. 2–3 gels, 2–3 energy bars, or equivalent)'] as $item)
                     <li class="flex items-center gap-3 text-sm text-gray-400">
                         <span class="w-1.5 h-1.5 rounded-full bg-orange-500 flex-shrink-0"></span>
                         {{ $item }}
