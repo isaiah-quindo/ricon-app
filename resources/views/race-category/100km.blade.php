@@ -41,19 +41,19 @@
             </div>
             <div class="py-8 pr-6 pl-0 md:pl-6">
                 <p class="text-white text-xs uppercase tracking-wider mb-1">Cutoff Time</p>
-                <p class="text-white font-black text-2xl">36 hrs</p>
+                <p class="text-white font-black text-2xl">32 hrs</p>
             </div>
             <div class="py-8 px-6">
                 <p class="text-white text-xs uppercase tracking-wider mb-1">Race Date</p>
                 <p class="text-white font-black text-2xl">Nov 13, 2026</p>
             </div>
             <div class="py-8 pr-6 pl-0 md:pl-6">
-                <p class="text-white text-xs uppercase tracking-wider mb-1">Slots</p>
-                <p class="text-white font-black text-2xl">100</p>
+                <p class="text-white text-xs uppercase tracking-wider mb-1">Gunstart</p>
+                <p class="text-white font-black text-2xl">6 PM</p>
             </div>
             <div class="py-8 px-6">
-                <p class="text-white text-xs uppercase tracking-wider mb-1">Price</p>
-                <p class="text-white font-black text-2xl">₱6,490</p>
+                <p class="text-white text-xs uppercase tracking-wider mb-1">Start & Finish</p>
+                <p class="text-white font-black text-2xl">Baguio City</p>
             </div>
         </div>
     </div>
@@ -73,16 +73,13 @@
                     From the moment you register to the moment you finish, we've got you covered; gear, timing, fuel, and a medal to prove you earned it.
                 </p>
                 <ul class="grid grid-cols-2 gap-x-6 gap-y-2 mb-6">
-                    @foreach(['Finisher medal', 'Finisher hoodie', 'Event shirt', 'Event socks', 'Event tote bag', 'Race bib', 'Chip timing', 'Post-race meal', 'Race day insurance', 'Event stickers', 'Municipality Fees,', 'Environmental Fees', 'Barangay Fees'] as $item)
+                    @foreach(['Race bib', 'Chip timing', 'Finisher medal', 'Finisher hoodie', 'Event shirt', 'Event socks', 'Event tote bag', 'Aid Station Food', 'Post-race meal', 'Race day insurance', 'Event stickers', 'Municipality Fees', 'Environmental Fees', 'Barangay Fees'] as $item)
                     <li class="flex items-center gap-2 text-sm text-gray-300">
                         <span class="w-1.5 h-1.5 rounded-full bg-orange-500 flex-shrink-0"></span>
                         {{ $item }}
                     </li>
                     @endforeach
                 </ul>
-                <a href="#" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-layer-line text-muted-foreground-1 hover:border-orange-500 hover:text-orange-500 focus:outline-hidden focus:border-orange-500 focus:text-orange-500  disabled:opacity-50 disabled:pointer-events-none">
-                    View all inclusions
-                </a>
             </div>
             <div class="bg-gray-700 rounded-2xl h-80 flex items-center justify-center text-gray-500 text-sm select-none overflow-hidden">
                 <img src="/images/race-photo.png" alt="Race Photo" class="w-full h-full object-cover" />
@@ -102,11 +99,15 @@
 <section class="bg-[#483E1C] py-24">
     <div class="mx-auto px-8" style="max-width:1280px;">
         <p class="text-orange-500 text-sm font-semibold uppercase tracking-wider mb-2">Registration Fee</p>
-        <h2 class="text-3xl font-bold text-white mb-10">Secure your slot</h2>
+        <h2 class="text-3xl font-bold text-white mb-6">Secure your slot</h2>
+        <p class="text-white leading-relaxed mb-6">
+            Lock in your place on the start line before it sells out.
+        </p>
 
         {{-- Registration Fee --}}
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            <div class="bg-[#1a1a1a] bg-opacity-50 rounded-xl p-5 border border-orange-500 text-center">
+            <div class="relative bg-[#1a1a1a] bg-opacity-50 rounded-xl p-5 border border-orange-500 text-center">
+                <p class="absolute top-3 right-3 text-orange-400 text-xs">⚠ Limited slots</p>
                 <p class="text-orange-500 text-xs font-semibold uppercase tracking-wider mb-1">Super Early Bird</p>
                 <p class="text-white font-bold text-2xl mb-1">₱6,490</p>
                 <p class="text-gray-500 text-sm">April 15 - May 15</p>
@@ -134,6 +135,9 @@
                 <p class="text-gray-500 text-sm">Sep 16 - Sep 30</p>
             </div>
         </div>
+        <p class="text-gray-300 text-xs leading-relaxed mb-6">
+            Registration fees are subject to change without notice.
+        </p>
         <a href="{{ route('registration.create') }}" class="py-3 px-8 inline-flex items-center gap-x-2 text-sm font-bold rounded-lg bg-orange-600 text-white hover:bg-orange-700 focus:outline-hidden disabled:opacity-50 disabled:pointer-events-none">
             Register Now
         </a>
@@ -150,14 +154,14 @@
     ======================================================== --}}
 <section class="bg-[#0d0d0d] py-24">
     <div class="mx-auto px-8" style="max-width:1280px;">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
             {{-- Mandatory Gear --}}
             <div class="bg-[#111111] border border-white/10 rounded-2xl p-6">
                 <p class="text-orange-500 text-xs font-semibold uppercase tracking-wider mb-3">Requirements</p>
                 <h2 class="text-xl font-bold text-white mb-5">Mandatory Gear</h2>
                 <ul class="space-y-2 mb-6">
-                    @foreach (['Trail running shoes', 'Hydration pack (minimum 1.5L)', 'Emergency space blanket', 'Headlamp with extra batteries', 'First aid kit', 'Whistle', 'Rain jacket', 'Mobile phone (fully charged)', 'Race bib (provided)'] as $item)
+                    @foreach (['Trail running shoes', 'Hydration pack (1.5 liters)', 'Emergency blanket', 'Headlamp + extra batteries (fully charged)', 'First aid kit', 'Whistle', 'Rain jacket with 10,000mm', 'Mobile phone (fully charged)', 'Race bib (provided)', 'Cash (₱1,000)', 'Ziploc bag for your trash'] as $item)
                     <li class="flex items-center gap-3 text-sm text-gray-400">
                         <span class="w-1.5 h-1.5 rounded-full bg-orange-500 flex-shrink-0"></span>
                         {{ $item }}
@@ -172,6 +176,28 @@
                     </svg>
                 </a>
             </div>
+
+            {{-- Recommended Gear --}}
+            <div class="bg-[#111111] border border-white/10 rounded-2xl p-6">
+                <p class="text-orange-500 text-xs font-semibold uppercase tracking-wider mb-3">Recommended</p>
+                <h2 class="text-xl font-bold text-white mb-5">Recommended Gear</h2>
+                <ul class="space-y-2 mb-6">
+                    @foreach (['Utensils (cups, bowls and sporks)', 'Anti-chafing cream (vaseline, petroleum jelly)', 'Trekking Poles', 'Ice Banda', 'Sunscreen', 'Sun glasses', 'Insect Repellent Lotion', 'Cap or sun hat', 'Spare socks', 'Spare top in case of dropout', 'Headlamp + extra batteries', 'Spare batteries', 'Power bank'] as $item)
+                    <li class="flex items-center gap-3 text-sm text-gray-400">
+                        <span class="w-1.5 h-1.5 rounded-full bg-orange-500 flex-shrink-0"></span>
+                        {{ $item }}
+                    </li>
+                    @endforeach
+                </ul>
+                <a href="{{ route('rules') }}#entry"
+                    class="inline-flex items-center gap-1.5 text-sm text-orange-500 hover:text-orange-400 transition-colors font-medium">
+                    View full gear & entry rules
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </a>
+            </div>
+
 
             {{-- Entry Requirements --}}
             <div class="bg-[#111111] border border-white/10 rounded-2xl p-6">
@@ -204,7 +230,7 @@
     ======================================================== --}}
 <section class="bg-[#111111] py-24">
     <div class="mx-auto px-8 text-center" style="max-width:1280px;">
-        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Ready to take on the 100?</h2>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Ready to take on the TGC 100?</h2>
         <p class="text-gray-400 mb-8 max-w-xl mx-auto">
             Secure your slot now. Registration slots are limited.
         </p>

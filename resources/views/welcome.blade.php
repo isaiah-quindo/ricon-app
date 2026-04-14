@@ -1,7 +1,7 @@
 @extends('layouts.public')
 @section('title', 'The Great Cordillera 100')
 @section('og_title', 'RICON — The Great Cordillera 100 Ultra Trail')
-@section('og_description', 'Experience the ultimate mountain challenge. Choose from 15 KM, 21 KM, 60 KM, or 100 KM distances through the breathtaking Cordillera mountains. Register now.')
+@section('og_description', 'Experience the ultimate mountain challenge. Choose from 10 KM, 21 KM, 60 KM, or 100 KM distances through the breathtaking Cordillera mountains. Register now.')
 
 @section('content')
 {{-- ========================================================
@@ -94,7 +94,7 @@
         <p class="text-orange-500 text-sm font-semibold mb-2 uppercase tracking-wider">Race Categories</p>
         <h2 class="text-3xl md:text-4xl font-bold text-white mb-3">Distances to suit every ability</h2>
         <p class="text-gray-400 mb-10 max-w-xl">
-            From 15KM to 100KM, there's a distance for every trail runner ready to take on the Cordillera.
+            From 10KM to 100KM, there's a distance for every trail runner ready to take on the Cordillera.
         </p>
 
         {{-- 100 KM — Featured card --}}
@@ -130,7 +130,7 @@
             </div>
         </div>
 
-        {{-- 60 / 21 / 15 KM --}}
+        {{-- 60 / 21 / 10 KM --}}
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
             {{-- 60 KM --}}
@@ -155,7 +155,7 @@
                         </div>
                         <div>
                             <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Elevation Gain</p>
-                            <p class="text-white font-bold">7290 M+</p>
+                            <p class="text-white font-bold">4200M D+</p>
                         </div>
                     </div>
                     <a href="{{ route('race-category.60km') }}"
@@ -165,7 +165,7 @@
                 </div>
             </div>
 
-            {{-- 21 KM + 15 KM stacked --}}
+            {{-- 21 KM + 10 KM stacked --}}
             <div class="flex flex-col gap-6">
 
                 {{-- 21 KM --}}
@@ -179,7 +179,7 @@
                             <p class="text-white font-black text-2xl leading-none">
                                 TGC <span class="text-green-400">21 KM</span>
                             </p>
-                            <p class="text-gray-300 text-sm mt-0.5">November 14, 2026</p>
+                            <p class="text-gray-300 text-sm mt-0.5">November 15, 2026</p>
                         </div>
                     </div>
                     <div class="p-6 flex-1 flex flex-col justify-between">
@@ -190,7 +190,7 @@
                             </div>
                             <div>
                                 <p class="text-gray-500 text-xs uppercase tracking-wider mb-0.5">Elevation Gain</p>
-                                <p class="text-white font-bold text-sm">7290 M+</p>
+                                <p class="text-white font-bold text-sm">1300M D+</p>
                             </div>
                         </div>
                         <a href="{{ route('race-category.21km') }}"
@@ -201,16 +201,16 @@
                     </div>
                 </div>
 
-                {{-- 15 KM --}}
+                {{-- 10 KM --}}
                 <div class="rounded-xl overflow-hidden bg-[#1a1a1a] flex flex-1">
                     <div class="relative bg-gray-700 w-1/2 flex-shrink-0 flex items-center justify-center text-gray-500 text-xs select-none">
                         {{-- Image --}}
-                        <img src="/images/15km-bg.png" alt="15km Category" class="absolute inset-0 w-full h-full object-cover" />
+                        <img src="/images/10km-bg.png" alt="10km Category" class="absolute inset-0 w-full h-full object-cover" />
                         {{-- Dark gradient overlay --}}
                         <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
                         <div class="absolute bottom-6 left-4 md:left-6">
                             <p class="text-white font-black text-2xl leading-none">
-                                TGC <span class="text-cyan-400">15 KM</span>
+                                TGC <span class="text-cyan-400">10 KM</span>
                             </p>
                             <p class="text-gray-300 text-sm mt-0.5">November 15, 2026</p>
                         </div>
@@ -219,14 +219,14 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
                             <div>
                                 <p class="text-gray-500 text-xs uppercase tracking-wider mb-0.5">Distance</p>
-                                <p class="text-white font-bold text-sm">15 KM</p>
+                                <p class="text-white font-bold text-sm">10 KM</p>
                             </div>
                             <div>
                                 <p class="text-gray-500 text-xs uppercase tracking-wider mb-0.5">Elevation Gain</p>
-                                <p class="text-white font-bold text-sm">7290 M+</p>
+                                <p class="text-white font-bold text-sm">500M D+</p>
                             </div>
                         </div>
-                        <a href="{{ route('race-category.15km') }}"
+                        <a href="{{ route('race-category.10km') }}"
                             class="bg-cyan-500 hover:bg-cyan-600 text-white text-xs font-semibold px-3 py-2 rounded-lg text-center transition-colors block">
                             Race Details
                         </a>

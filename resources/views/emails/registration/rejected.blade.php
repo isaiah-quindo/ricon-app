@@ -107,25 +107,30 @@
             margin: 0 0 16px;
         }
 
-        .detail-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid #e2e8f0;
+        .detail-table {
+            width: 100%;
+            border-collapse: collapse;
             font-size: 14px;
         }
 
-        .detail-row:last-child {
+        .detail-table tr td {
+            padding: 8px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .detail-table tr:last-child td {
             border-bottom: none;
         }
 
         .detail-label {
             color: #718096;
+            width: 50%;
         }
 
         .detail-value {
             color: #1a1a2e;
             font-weight: bold;
+            text-align: right;
         }
 
         .footer {
@@ -167,18 +172,20 @@
 
             <div class="details-card">
                 <h3>Your Submission</h3>
-                <div class="detail-row">
-                    <span class="detail-label">Name</span>
-                    <span class="detail-value">{{ $registration->first_name }} {{ $registration->last_name }}</span>
-                </div>
-                <div class="detail-row">
-                    <span class="detail-label">Race Category</span>
-                    <span class="detail-value">{{ $category->name }}</span>
-                </div>
-                <div class="detail-row">
-                    <span class="detail-label">Submitted On</span>
-                    <span class="detail-value">{{ $registration->created_at->format('F j, Y') }}</span>
-                </div>
+                <table class="detail-table">
+                    <tr>
+                        <td class="detail-label">Name</td>
+                        <td class="detail-value">{{ $registration->first_name }} {{ $registration->last_name }}</td>
+                    </tr>
+                    <tr>
+                        <td class="detail-label">Race Category</td>
+                        <td class="detail-value">{{ $category->name }}</td>
+                    </tr>
+                    <tr>
+                        <td class="detail-label">Submitted On</td>
+                        <td class="detail-value">{{ $registration->created_at->format('F j, Y') }}</td>
+                    </tr>
+                </table>
             </div>
 
             <p class="text">
@@ -188,9 +195,9 @@
             <p class="text">Thank you for your interest and we hope to see you in future events! 🙏</p>
         </div>
 
-        <div class="footer">
+        <div class="footer" style="margin-top:16px;">
             <p>© {{ date('Y') }} The Great Cordillera 100. All rights reserved.</p>
-            <p>Questions? Contact us at <a href="mailto:support@yourevent.com">team@ricon.ph</a></p>
+            <p>Questions? Contact us at <a href="mailto:riconph1@gmail.com">riconph1@gmail.com</a></p>
         </div>
     </div>
 </body>

@@ -65,7 +65,12 @@
                     </li>
                     <li class="flex items-center gap-2 text-sm text-gray-300">
                         <span class="w-1.5 h-1.5 rounded-full bg-orange-500 flex-shrink-0"></span>
-                        16 years old for shorter distances (with parental consent)
+                        16 years old for 21km (16-18 years old with parental consent)
+                    </li>
+                    <li class="flex items-center gap-2 text-sm text-gray-300">
+                        <span class="w-1.5 h-1.5 rounded-full bg-orange-500 flex-shrink-0"></span>
+                        9 years old fo 10km
+                        (9 to 12 years old must be accompanied by their parent/guardian)
                     </li>
                 </ul>
             </div>
@@ -116,7 +121,7 @@
                     <div class="bg-[#0d0d0d] rounded-xl p-4">
                         <span class="inline-block text-xs font-bold text-orange-500 bg-orange-500/10 px-2 py-0.5 rounded-full mb-3">100 KM</span>
                         <ul class="space-y-1.5">
-                            @foreach(['Trail running shoes', 'Hydration pack (min. 1.5L)', 'Emergency space blanket', 'Headlamp + extra batteries', 'First aid kit', 'Whistle', 'Rain jacket', 'Mobile phone (fully charged)', 'Race bib (provided)'] as $item)
+                            @foreach(['Trail running shoes', 'Hydration pack (1.5 liters)', 'Emergency blanket', 'Headlamp + extra batteries (fully charged)', 'First aid kit', 'Whistle', 'Rain jacket with 10,000mm', 'Mobile phone (fully charged)', 'Race bib (provided)', 'Cash (₱1,000)', 'Ziploc bag for your trash'] as $item)
                             <li class="flex items-center gap-2 text-xs text-gray-400">
                                 <span class="w-1 h-1 rounded-full bg-orange-500 flex-shrink-0"></span>{{ $item }}
                             </li>
@@ -128,7 +133,7 @@
                     <div class="bg-[#0d0d0d] rounded-xl p-4">
                         <span class="inline-block text-xs font-bold text-red-400 bg-red-500/10 px-2 py-0.5 rounded-full mb-3">60 KM</span>
                         <ul class="space-y-1.5">
-                            @foreach(['Trail running shoes', 'Hydration pack (min. 1.5L)', 'Emergency space blanket', 'Headlamp + extra batteries', 'First aid kit', 'Whistle', 'Rain jacket', 'Mobile phone (fully charged)', 'Race bib (provided)'] as $item)
+                            @foreach(['Trail running shoes', 'Hydration pack (1.5 liters)', 'Emergency blanket', 'Headlamp + extra batteries (fully charged)', 'First aid kit', 'Whistle', 'Rain jacket with 10,000mm', 'Mobile phone (fully charged)', 'Race bib (provided)', 'Cash (₱1,000)', 'Ziploc bag for your trash'] as $item)
                             <li class="flex items-center gap-2 text-xs text-gray-400">
                                 <span class="w-1 h-1 rounded-full bg-red-400 flex-shrink-0"></span>{{ $item }}
                             </li>
@@ -140,7 +145,7 @@
                     <div class="bg-[#0d0d0d] rounded-xl p-4">
                         <span class="inline-block text-xs font-bold text-green-400 bg-green-500/10 px-2 py-0.5 rounded-full mb-3">21 KM</span>
                         <ul class="space-y-1.5">
-                            @foreach(['Trail running shoes', 'Hydration pack (min. 500ml)', 'Headlamp + extra batteries', 'First aid kit', 'Whistle', 'Mobile phone (fully charged)', 'Race bib (provided)'] as $item)
+                            @foreach(['Trail running shoes', 'Hydration pack (500ml)', 'Emergency blanket', 'Headlamp + extra batteries (fully charged)', 'First aid kit', 'Whistle', 'Windbreaker', 'Mobile phone (fully charged)', 'Race bib (provided)', 'Cash (₱1,000)', 'Ziploc bag for your trash'] as $item)
                             <li class="flex items-center gap-2 text-xs text-gray-400">
                                 <span class="w-1 h-1 rounded-full bg-green-400 flex-shrink-0"></span>{{ $item }}
                             </li>
@@ -148,11 +153,11 @@
                         </ul>
                     </div>
 
-                    {{-- 15 KM --}}
+                    {{-- 10 KM --}}
                     <div class="bg-[#0d0d0d] rounded-xl p-4">
-                        <span class="inline-block text-xs font-bold text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded-full mb-3">15 KM</span>
+                        <span class="inline-block text-xs font-bold text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded-full mb-3">10 KM</span>
                         <ul class="space-y-1.5">
-                            @foreach(['Trail running shoes', 'Hydration (water bottle)', 'First aid kit', 'Whistle', 'Mobile phone (fully charged)', 'Race bib (provided)'] as $item)
+                            @foreach(['Trail running shoes', 'Hydration pack (water bottle)', 'Whistle', 'Mobile phone (fully charged)', 'Race bib (provided)', 'Cash (₱1,000)', 'Ziploc bag for your trash'] as $item)
                             <li class="flex items-center gap-2 text-xs text-gray-400">
                                 <span class="w-1 h-1 rounded-full bg-cyan-400 flex-shrink-0"></span>{{ $item }}
                             </li>
@@ -430,38 +435,38 @@
 
             @php
             $terms = [
-                [
-                    'title' => 'Acceptance of Terms',
-                    'text'  => 'By accessing this website or submitting a registration, you acknowledge that you have read, understood, and agree to be bound by all terms, policies, and guidelines published on this site.',
-                ],
-                [
-                    'title' => 'Privacy &amp; Data Use',
-                    'text'  => 'Personal information collected during registration — including your name, birthdate, address, contact details, emergency contacts, and payment proof — is used solely for race administration purposes. All data is handled in accordance with the Data Privacy Act of 2012 (Republic Act No. 10173). Your information will not be shared with third parties except as required for event operations.',
-                ],
-                [
-                    'title' => 'Limitation of Liability',
-                    'text'  => 'The organizers, race officials, volunteers, and all associated parties shall not be held liable for any injury, illness, death, loss, or damage — whether personal, property, or financial — arising from participation in, or travel to and from, the event.',
-                ],
-                [
-                    'title' => 'Indemnification',
-                    'text'  => 'Participants agree to indemnify and hold harmless the organizers and all associated parties from any and all claims, damages, costs, or expenses (including legal fees) resulting from their participation in the event.',
-                ],
-                [
-                    'title' => 'Participant-Initiated Cancellation &amp; Slot Transfer',
-                    'text'  => 'Registration fees are strictly non-refundable in the event of participant-initiated cancellation, regardless of the reason. Slot transfers to another individual are not permitted under any circumstances.',
-                ],
-                [
-                    'title' => 'Intellectual Property',
-                    'text'  => 'All branding, logos, race names, imagery, and content published on this site are the exclusive property of the organizers. Unauthorized reproduction, distribution, or use of any materials is strictly prohibited.',
-                ],
-                [
-                    'title' => 'Changes to Terms',
-                    'text'  => 'The organizers reserve the right to amend these terms and any race policies at any time without prior notice. Updates will be posted on this site and take effect immediately upon publication.',
-                ],
-                [
-                    'title' => 'Governing Law',
-                    'text'  => 'These terms and conditions are governed by the laws of the Republic of the Philippines. Any disputes arising from or in connection with these terms shall be subject to the exclusive jurisdiction of the appropriate courts in Baguio City, Benguet.',
-                ],
+            [
+            'title' => 'Acceptance of Terms',
+            'text' => 'By accessing this website or submitting a registration, you acknowledge that you have read, understood, and agree to be bound by all terms, policies, and guidelines published on this site.',
+            ],
+            [
+            'title' => 'Privacy &amp; Data Use',
+            'text' => 'Personal information collected during registration — including your name, birthdate, address, contact details, emergency contacts, and payment proof — is used solely for race administration purposes. All data is handled in accordance with the Data Privacy Act of 2012 (Republic Act No. 10173). Your information will not be shared with third parties except as required for event operations.',
+            ],
+            [
+            'title' => 'Limitation of Liability',
+            'text' => 'The organizers, race officials, volunteers, and all associated parties shall not be held liable for any injury, illness, death, loss, or damage — whether personal, property, or financial — arising from participation in, or travel to and from, the event.',
+            ],
+            [
+            'title' => 'Indemnification',
+            'text' => 'Participants agree to indemnify and hold harmless the organizers and all associated parties from any and all claims, damages, costs, or expenses (including legal fees) resulting from their participation in the event.',
+            ],
+            [
+            'title' => 'Participant-Initiated Cancellation &amp; Slot Transfer',
+            'text' => 'Registration fees are strictly non-refundable in the event of participant-initiated cancellation, regardless of the reason. Slot transfers to another individual are not permitted under any circumstances.',
+            ],
+            [
+            'title' => 'Intellectual Property',
+            'text' => 'All branding, logos, race names, imagery, and content published on this site are the exclusive property of the organizers. Unauthorized reproduction, distribution, or use of any materials is strictly prohibited.',
+            ],
+            [
+            'title' => 'Changes to Terms',
+            'text' => 'The organizers reserve the right to amend these terms and any race policies at any time without prior notice. Updates will be posted on this site and take effect immediately upon publication.',
+            ],
+            [
+            'title' => 'Governing Law',
+            'text' => 'These terms and conditions are governed by the laws of the Republic of the Philippines. Any disputes arising from or in connection with these terms shall be subject to the exclusive jurisdiction of the appropriate courts in Baguio City, Benguet.',
+            ],
             ];
             @endphp
 
@@ -486,7 +491,7 @@
 {{-- ======================================================== --}}
 <section class="bg-[#0d0d0d] py-20">
     <div class="mx-auto px-8 text-center" style="max-width:1280px;">
-        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Ready to take on the Cordillera?</h2>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Ready to take on the Cordilleras?</h2>
         <p class="text-gray-400 mb-8 max-w-xl mx-auto">You've read the rules. Now it's time to commit. Secure your slot before they run out.</p>
         <a href="{{ route('registration.create') }}" class="py-3 px-8 inline-flex items-center gap-x-2 text-sm font-bold rounded-lg bg-orange-600 text-white hover:bg-orange-700 transition-colors">
             Register Now

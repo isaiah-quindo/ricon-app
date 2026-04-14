@@ -112,25 +112,30 @@
             margin: 0 0 16px;
         }
 
-        .detail-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid #e2e8f0;
+        .detail-table {
+            width: 100%;
+            border-collapse: collapse;
             font-size: 14px;
         }
 
-        .detail-row:last-child {
+        .detail-table tr td {
+            padding: 8px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .detail-table tr:last-child td {
             border-bottom: none;
         }
 
         .detail-label {
             color: #718096;
+            width: 50%;
         }
 
         .detail-value {
             color: #1a1a2e;
             font-weight: bold;
+            text-align: right;
         }
 
         .cta {
@@ -186,22 +191,24 @@
 
             <div class="details-card">
                 <h3>Registration Details</h3>
-                <div class="detail-row">
-                    <span class="detail-label">Name</span>
-                    <span class="detail-value">{{ $registration->first_name }} {{ $registration->last_name }}</span>
-                </div>
-                <div class="detail-row">
-                    <span class="detail-label">Race Category</span>
-                    <span class="detail-value">{{ $category->name }}</span>
-                </div>
-                <div class="detail-row">
-                    <span class="detail-label">Distance</span>
-                    <span class="detail-value">{{ $category->distance_km }} KM</span>
-                </div>
-                <div class="detail-row">
-                    <span class="detail-label">Shirt Size</span>
-                    <span class="detail-value">{{ $registration->shirt_size }}</span>
-                </div>
+                <table class="detail-table">
+                    <tr>
+                        <td class="detail-label">Name</td>
+                        <td class="detail-value">{{ $registration->first_name }} {{ $registration->last_name }}</td>
+                    </tr>
+                    <tr>
+                        <td class="detail-label">Race Category</td>
+                        <td class="detail-value">{{ $category->name }}</td>
+                    </tr>
+                    <tr>
+                        <td class="detail-label">Distance</td>
+                        <td class="detail-value">{{ $category->distance_km }} KM</td>
+                    </tr>
+                    <tr>
+                        <td class="detail-label">Shirt Size</td>
+                        <td class="detail-value">{{ $registration->shirt_size }}</td>
+                    </tr>
+                </table>
             </div>
 
             <p class="text">
@@ -211,9 +218,9 @@
             <p class="text">See you at the finish line! 🏔️</p>
         </div>
 
-        <div class="footer">
+        <div class="footer" style="margin-top:16px;">
             <p>© {{ date('Y') }} Ricon. All rights reserved.</p>
-            <p>If you have questions, contact us at <a href="mailto:support@yourevent.com">team@ricon.ph</a></p>
+            <p>If you have questions, contact us at <a href="mailto:riconph1@gmail.com>riconph1@gmail.com</a></p>
         </div>
     </div>
 </body>

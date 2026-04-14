@@ -33,8 +33,9 @@
                 <p class="text-white font-black text-2xl">21 KM</p>
             </div>
             <div class="py-8 px-6">
-                <p class="text-white text-xs uppercase tracking-wider mb-1">Elevation Gain</p>
-                <p class="text-white font-black text-2xl">1,800 M+</p>
+                <p class="text-white text-xs uppercase tracking-wider mb-0">Elevation Gain</p>
+                <p class="text-white font-black text-2xl">1300M D+</p>
+                <span class="text-xs">Aprrox</span>
             </div>
             <div class="py-8 pr-6 pl-0 md:pl-6">
                 <p class="text-white text-xs uppercase tracking-wider mb-1">Cutoff Time</p>
@@ -42,15 +43,15 @@
             </div>
             <div class="py-8 px-6">
                 <p class="text-white text-xs uppercase tracking-wider mb-1">Race Date</p>
-                <p class="text-white font-black text-2xl">Nov 14, 2026</p>
+                <p class="text-white font-black text-2xl">Nov 15, 2026</p>
             </div>
             <div class="py-8 pr-6 pl-0 md:pl-6">
-                <p class="text-white text-xs uppercase tracking-wider mb-1">Slots</p>
-                <p class="text-white font-black text-2xl">100</p>
+                <p class="text-white text-xs uppercase tracking-wider mb-1">Gunstart</p>
+                <p class="text-white font-black text-2xl">5 AM</p>
             </div>
             <div class="py-8 px-6">
-                <p class="text-white text-xs uppercase tracking-wider mb-1">Price</p>
-                <p class="text-white font-black text-2xl">₱2,490</p>
+                <p class="text-white text-xs uppercase tracking-wider mb-1">Start & Finish</p>
+                <p class="text-white font-black text-2xl">Baguio City</p>
             </div>
         </div>
     </div>
@@ -70,7 +71,7 @@
                     From the moment you register to the moment you finish, we've got you covered; gear, timing, fuel, and a medal to prove you earned it.
                 </p>
                 <ul class="grid grid-cols-2 gap-x-6 gap-y-2 mb-6">
-                    @foreach(['Finisher medal', 'Finisher hoodie', 'Event shirt', 'Event socks', 'Event tote bag', 'Race bib', 'Chip timing', 'Post-race meal', 'Race day insurance', 'Event stickers', 'Municipality Fees,', 'Environmental Fees', 'Barangay Fees'] as $item)
+                    @foreach(['Race bib', 'Timing Chip', 'Finisher medal', 'Event shirt', 'Event tote bag', 'Post-race meal', 'Race day insurance', 'Event stickers', 'Municipality Fees', 'Environmental Fees', 'Barangay Fees'] as $item)
                     <li class="flex items-center gap-2 text-sm text-gray-300">
                         <span class="w-1.5 h-1.5 rounded-full bg-green-400 flex-shrink-0"></span>
                         {{ $item }}
@@ -103,29 +104,29 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <div class="bg-[#1a1a1a] bg-opacity-50 rounded-xl p-5 border-green-500 border text-center">
                 <p class="text-green-400 text-xs font-semibold uppercase tracking-wider mb-1">Super Early Bird</p>
-                <p class="text-white font-bold text-2xl mb-1">₱2,490</p>
+                <p class="text-white font-bold text-2xl mb-1">₱1,990</p>
                 <p class="text-gray-500 text-sm">April 15 - May 15</p>
             </div>
             <div class="bg-[#1a1a1a] bg-opacity-50 rounded-xl p-5 border border-white/5 text-center">
                 <p class="text-green-400 text-xs font-semibold uppercase tracking-wider mb-1">Early Bird</p>
-                <p class="text-white font-bold text-2xl mb-1">₱2,990</p>
+                <p class="text-white font-bold text-2xl mb-1">₱2,490</p>
                 <p class="text-gray-500 text-sm">April 16 - Jun 15</p>
             </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
             <div class="bg-[#1a1a1a] bg-opacity-50 rounded-xl p-5 border border-white/5 text-center">
                 <p class="text-green-400 text-xs font-semibold uppercase tracking-wider mb-1">Regular</p>
-                <p class="text-white font-bold text-2xl mb-1">₱3,500</p>
+                <p class="text-white font-bold text-2xl mb-1">₱3,000</p>
                 <p class="text-gray-500 text-sm">Jun 16 - Aug 15</p>
             </div>
             <div class="bg-[#1a1a1a] bg-opacity-50 rounded-xl p-5 border border-white/5 text-center">
                 <p class="text-green-400 text-xs font-semibold uppercase tracking-wider mb-1">Late</p>
-                <p class="text-white font-bold text-2xl mb-1">₱4,000</p>
+                <p class="text-white font-bold text-2xl mb-1">₱3,500</p>
                 <p class="text-gray-500 text-sm">Aug 16 - Sep 15</p>
             </div>
             <div class="bg-[#1a1a1a] bg-opacity-50 rounded-xl p-5 border border-white/5 text-center">
                 <p class="text-green-400 text-xs font-semibold uppercase tracking-wider mb-1">Super Late</p>
-                <p class="text-white font-bold text-2xl mb-1">₱4,500</p>
+                <p class="text-white font-bold text-2xl mb-1">₱4,000</p>
                 <p class="text-gray-500 text-sm">Sep 16 - Sep 30</p>
             </div>
         </div>
@@ -144,13 +145,33 @@
     ======================================================== --}}
 <section class="bg-[#0d0d0d] py-24">
     <div class="mx-auto px-8" style="max-width:1280px;">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
             <div class="bg-[#111111] border border-white/10 rounded-2xl p-6">
                 <p class="text-green-400 text-xs font-semibold uppercase tracking-wider mb-3">Requirements</p>
                 <h2 class="text-xl font-bold text-white mb-5">Mandatory Gear</h2>
                 <ul class="space-y-2 mb-6">
-                    @foreach (['Trail running shoes', 'Hydration pack (minimum 500ml)', 'Headlamp with extra batteries', 'First aid kit', 'Whistle', 'Mobile phone (fully charged)', 'Race bib (provided)'] as $item)
+                    @foreach (['Trail running shoes', 'Hydration pack (500ml)', 'Emergency blanket', 'Headlamp + extra batteries (fully charged)', 'First aid kit', 'Whistle', 'Windbreaker', 'Mobile phone (fully charged)', 'Race bib (provided)', 'Cash (₱1,000)', 'Ziploc bag for your trash'] as $item)
+                    <li class="flex items-center gap-3 text-sm text-gray-400">
+                        <span class="w-1.5 h-1.5 rounded-full bg-green-400 flex-shrink-0"></span>
+                        {{ $item }}
+                    </li>
+                    @endforeach
+                </ul>
+                <a href="{{ route('rules') }}#entry" class="inline-flex items-center gap-1.5 text-sm text-green-400 hover:text-green-300 transition-colors font-medium">
+                    View full gear & entry rules
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </a>
+            </div>
+
+            {{-- Recommended Gear --}}
+            <div class="bg-[#111111] border border-white/10 rounded-2xl p-6">
+                <p class="text-green-400 text-xs font-semibold uppercase tracking-wider mb-3">Recommended</p>
+                <h2 class="text-xl font-bold text-white mb-5">Recommended Gear</h2>
+                <ul class="space-y-2 mb-6">
+                    @foreach (['Utensils (cups, bowls and sporks)', 'Anti-chafing cream (vaseline, petroleum jelly)', 'Trekking Poles', 'Ice Banda', 'Sunscreen', 'Sun glasses', 'Insect Repellent Lotion', 'Cap or sun hat', 'Spare socks', 'Spare top in case of dropout', 'Headlamp + extra batteries', 'Spare batteries', 'Power bank'] as $item)
                     <li class="flex items-center gap-3 text-sm text-gray-400">
                         <span class="w-1.5 h-1.5 rounded-full bg-green-400 flex-shrink-0"></span>
                         {{ $item }}
