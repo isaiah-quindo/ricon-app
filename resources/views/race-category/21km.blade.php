@@ -138,7 +138,7 @@
             <div class="bg-[#1a1a1a] bg-opacity-50 rounded-xl p-5 border border-white/5 text-center">
                 <p class="text-green-400 text-xs font-semibold uppercase tracking-wider mb-1">Early Bird</p>
                 <p class="text-white font-bold text-2xl mb-1">₱2,490</p>
-                <p class="text-gray-500 text-sm">April 16 - Jun 15</p>
+                <p class="text-gray-500 text-sm">May 16 - Jun 15</p>
             </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
@@ -182,7 +182,7 @@
                 <p class="text-green-400 text-xs font-semibold uppercase tracking-wider mb-3">Requirements</p>
                 <h2 class="text-xl font-bold text-white mb-5">Mandatory Gear</h2>
                 <ul class="space-y-2 mb-6">
-                    @foreach (['Trail running shoes', 'Hydration pack (500ml)', 'Emergency blanket', 'Headlamp + extra batteries (fully charged)', 'First aid kit', 'Whistle', 'Windbreaker', 'Mobile phone (fully charged)', 'Race bib (provided)', 'Cash (₱1,000)', 'Ziploc bag for your trash'] as $item)
+                    @foreach (['Trail running shoes', 'Hydration pack (500ml)', 'Emergency blanket', 'Headlamp + extra batteries (fully charged)', 'First aid kit', 'Whistle', 'Windbreaker', 'Mobile phone (fully charged)', 'Race bib (provided)', 'Extra cash', 'Ziploc bag for your trash'] as $item)
                     <li class="flex items-center gap-3 text-sm text-gray-400">
                         <span class="w-1.5 h-1.5 rounded-full bg-green-400 flex-shrink-0"></span>
                         {{ $item }}
@@ -202,13 +202,14 @@
                 <p class="text-green-400 text-xs font-semibold uppercase tracking-wider mb-3">Recommended</p>
                 <h2 class="text-xl font-bold text-white mb-5">Recommended Gear</h2>
                 <ul class="space-y-2 mb-6">
-                    @foreach (['Utensils (cups, bowls and sporks)', 'Anti-chafing cream (vaseline, petroleum jelly)', 'Trekking Poles', 'Ice Banda', 'Sunscreen', 'Sun glasses', 'Insect Repellent Lotion', 'Cap or sun hat', 'Spare socks', 'Spare top in case of dropout', 'Headlamp + extra batteries', 'Spare batteries', 'Power bank'] as $item)
+                    @foreach (['*Utensils (cups, bowls and sporks)', 'Anti-chafing cream (vaseline, petroleum jelly)', 'Trekking poles', 'Ice banda', 'Sunscreen', 'Sun glasses', 'Insect repellent lotion', 'Cap or sun hat', 'Spare socks', 'Spare top in case of dropout', 'Headlamp + extra batteries', 'Spare batteries', 'Power bank'] as $item)
                     <li class="flex items-center gap-3 text-sm text-gray-400">
                         <span class="w-1.5 h-1.5 rounded-full bg-green-400 flex-shrink-0"></span>
                         {{ $item }}
                     </li>
                     @endforeach
                 </ul>
+                <p class="text-gray-400 text-xs pb-4">* No disposable utensils will be provided at the aid station. Kindly make sure you have your own utensils to enjoy the different beverage and food items at the aid station.</p>
                 <a href="{{ route('rules') }}#entry" class="inline-flex items-center gap-1.5 text-sm text-green-400 hover:text-green-300 transition-colors font-medium">
                     View full gear & entry rules
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
