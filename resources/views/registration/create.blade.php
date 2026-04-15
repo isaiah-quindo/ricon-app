@@ -191,7 +191,8 @@
 
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-700 mb-1.5">
-                                Email Address <span class="text-red-500">*</span>
+                                Email Address <span class="text-red-500">*</span><br>
+                                <span class="text-xs">Street,</span>
                             </label>
                             <input type="email" id="email" name="email"
                                 x-model="email"
@@ -305,7 +306,33 @@
                 <div class="p-6 space-y-4">
                     <div class="bg-indigo-50 border border-indigo-100 rounded-lg p-4 text-sm text-indigo-800">
                         <p class="font-semibold mb-1">Payment Instructions</p>
-                        <p class="text-indigo-700">Please send your payment via GCash, bank transfer, or any available method. Upload your proof of payment below.</p>
+                        <p class="text-indigo-700">Please send your registration fee to the bank account below, then upload your proof of payment.</p>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        
+
+                        <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 text-sm">
+                            <p class="font-semibold text-gray-800 mb-3">Bank Transfer</p>
+                            <dl class="space-y-2">
+                                <div>
+                                    <dt class="text-gray-500 text-xs">Bank</dt>
+                                    <dd class="font-medium text-gray-800">Bank Transfer Rizal Commercial Banking Corporation (RCBC)</dd>
+                                </div>
+                                <div>
+                                    <dt class="text-gray-500 text-xs">Account Name</dt>
+                                    <dd class="font-medium text-gray-800">RiCON</dd>
+                                </div>
+                                <div>
+                                    <dt class="text-gray-500 text-xs">Account Number</dt>
+                                    <dd class="font-medium text-gray-800 tracking-wider">7-591-41115-4</dd>
+                                </div>
+                            </dl>
+                        </div>
+                        <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 text-sm text-center">
+                            <p class="font-semibold text-gray-800 mb-3">Scan to Pay</p>
+                            <img src="{{ asset('images/qr-code.png') }}" alt="Payment QR Code" class="mx-auto w-full max-w-[160px] object-contain rounded-lg">
+                        </div>
                     </div>
 
                     <div>
@@ -365,7 +392,7 @@
                             required
                             class="mt-0.5 w-4 h-4 rounded border-gray-300 text-orange-600 focus:ring-orange-500 flex-shrink-0">
                         <span class="text-sm text-gray-700">
-                            I agree to the <span class="font-semibold text-gray-900">Liability Waiver</span>. I understand that trail running involves risks and I voluntarily assume all risks associated with participation.
+                            I agree to the <span class="font-semibold text-gray-900"><a href="#" target="_blank" class="text-orange-500">Liability Waiver</a></span>. I understand that trail running involves risks and I voluntarily assume all risks associated with participation.
                         </span>
                     </label>
                     @error('waiver_agreed')
@@ -378,7 +405,7 @@
                             required
                             class="mt-0.5 w-4 h-4 rounded border-gray-300 text-orange-600 focus:ring-orange-500 flex-shrink-0">
                         <span class="text-sm text-gray-700">
-                            I agree to the <span class="font-semibold text-gray-900"><a href="/rules" target="_blank">Rules and Conditions</a></span> of this race, including the race rules, cutoff times, and disqualification policies.
+                            I agree to the <span class="font-semibold text-gray-900"><a href="/rules" target="_blank" class="text-orange-500">Rules and Conditions</a></span> of this race, including the race rules, cutoff times, and disqualification policies.
                         </span>
                     </label>
                     @error('terms_agreed')

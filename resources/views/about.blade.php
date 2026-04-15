@@ -64,7 +64,7 @@
                             <p class="text-orange-500 text-sm mb-3">Founder & Race Director</p>
                             <div class="space-y-3 text-gray-400 leading-relaxed text-sm">
                                 <p>
-                                    I started my running journey in 2012 and co-founded the Don’t Stop Running Community. As an active member of PhilTRA and a member of the Asia Skyrunning Council since 2026, I bring extensive ultrarunning experience to race organization, having completed numerous 100-kilometer and 100-mile races.
+                                    He began his running journey in 2012 and co-founded the Don’t Stop Running Community. A proud member of PhilTRA and the Asia Skyrunning Council since 2026, he represented the Philippines at the World Skyrunning Championships in 2018 and completed the Ultra Trail du Mont Blanc in 2023, among numerous other 100-kilometer and 100-mile finishes that have shaped his deep understanding of ultrarunning and race organization.
                                 </p>
                             </div>
                         </div>

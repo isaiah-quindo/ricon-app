@@ -226,6 +226,7 @@
             ['num' => '7', 'title' => 'Safety First', 'text' => 'Runners must follow instructions from race officials, marshals, and medical teams. Medical personnel have authority to remove a runner if continuing poses a safety risk.'],
             ['num' => '8', 'title' => 'Weather Conditions', 'text' => 'The race will proceed regardless of weather unless conditions are deemed unsafe by the race director and the LGU.'],
             ['num' => '9', 'title' => 'Withdrawal', 'text' => 'Participants who decide to withdraw must report to the nearest checkpoint immediately.'],
+            ['num' => '10', 'title' => 'Starting Line Assembly', 'text' => 'All runners must be on the starting line 30 minutes before gunstart. We will only give a 10-minute grace period after the gunstart for those who arrive late.'],
             ];
             @endphp
             @foreach($rules as $rule)
