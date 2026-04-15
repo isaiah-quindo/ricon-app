@@ -33,9 +33,9 @@
                 <p class="text-white font-black text-2xl">60 KM</p>
             </div>
             <div class="py-8 px-6">
-                <p class="text-white text-xs uppercase tracking-wider mb-1">Elevation Gain</p>
+                <p class="text-white text-xs uppercase tracking-wider mb-1">Est. Elevation Gain</p>
                 <p class="text-white font-black text-2xl">4,200M D+</p>
-                <span class="text-xs">Aprrox</span>
+                
             </div>
             <div class="py-8 pr-6 pl-0 md:pl-6">
                 <p class="text-white text-xs uppercase tracking-wider mb-1">Cutoff Time</p>
@@ -97,7 +97,7 @@
                     From the moment you register to the moment you finish, we've got you covered; gear, timing, fuel, and a medal to prove you earned it.
                 </p>
                 <ul class="grid grid-cols-2 gap-x-6 gap-y-2 mb-6">
-                    @foreach(['Race bib', 'Chip timing', 'Finisher medal', 'Finisher hoodie', 'Event shirt', 'Event tote bag', 'Aid Station', 'Post-race meal', 'Race day insurance', 'Event stickers', 'Municipality Fees', 'Environmental Fees', 'Barangay Fees'] as $item)
+                    @foreach(['Race bib', 'Timing chip', 'Finisher medal', 'Finisher hoodie', 'Event shirt', 'Event tote bag', 'Aid Station', 'Post-race meal', 'Race day insurance', 'Event stickers', 'Municipality Fees', 'Environmental Fees', 'Barangay Fees'] as $item)
                     <li class="flex items-center gap-2 text-sm text-gray-300">
                         <span class="w-1.5 h-1.5 rounded-full bg-red-500 flex-shrink-0"></span>
                         {{ $item }}

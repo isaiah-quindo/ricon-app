@@ -33,9 +33,8 @@
                 <p class="text-white font-black text-2xl">10 KM</p>
             </div>
             <div class="py-8 px-6">
-                <p class="text-white text-xs uppercase tracking-wider mb-0">Elevation Gain</p>
+                <p class="text-white text-xs uppercase tracking-wider mb-0">Est. Elevation Gain</p>
                 <p class="text-white font-black text-2xl">500M D+</p>
-                <span class="text-xs">Aprrox</span>
             </div>
             <div class="py-8 pr-6 pl-0 md:pl-6">
                 <p class="text-white text-xs uppercase tracking-wider mb-1">Cutoff Time</p>
@@ -97,7 +96,7 @@
                     From the moment you register to the moment you finish, we've got you covered; gear, timing, fuel, and a medal to prove you earned it.
                 </p>
                 <ul class="grid grid-cols-2 gap-x-6 gap-y-2 mb-6">
-                    @foreach(['Race bib', 'Chip timing', 'Finisher medal', 'Event shirt', 'Event tote bag', 'Post-race meal', 'Race day insurance', 'Event stickers', 'Municipality Fees,', 'Environmental Fees', 'Barangay Fees'] as $item)
+                    @foreach(['Race bib', 'Timing chip', 'Finisher medal', 'Event shirt', 'Event tote bag', 'Post-race meal', 'Race day insurance', 'Event stickers', 'Municipality Fees,', 'Environmental Fees', 'Barangay Fees'] as $item)
                     <li class="flex items-center gap-2 text-sm text-gray-300">
                         <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 flex-shrink-0"></span>
                         {{ $item }}
@@ -201,7 +200,7 @@
                 <p class="text-cyan-400 text-xs font-semibold uppercase tracking-wider mb-3">Recommended</p>
                 <h2 class="text-xl font-bold text-white mb-5">Recommended Gear</h2>
                 <ul class="space-y-2 mb-6">
-                    @foreach (['Anti-chafing cream (vaseline, petroleum jelly)', 'Trekking poles', 'Ice banda', 'Sunscreen', 'Sun glasses', 'Insect repellent lotion', 'Cap or sun hat', 'Spare socks', 'Spare top in case of dropout', 'Spare batteries', 'Power bank'] as $item)
+                    @foreach (['Anti-chafing cream (vaseline, petroleum jelly)','Trekking poles', 'Sunscreen', 'Insect repellent lotion', 'Cap or sun hat'] as $item)
                     <li class="flex items-center gap-3 text-sm text-gray-400">
                         <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 flex-shrink-0"></span>
                         {{ $item }}
