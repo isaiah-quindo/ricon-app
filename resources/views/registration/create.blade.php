@@ -310,7 +310,7 @@
                         <p class="text-indigo-700">Please send your registration fee to the bank account below, then upload your proof of payment.</p>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-3">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                         
 
                         <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 text-sm">

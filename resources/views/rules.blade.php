@@ -29,6 +29,7 @@
             <a href="#general" class="text-gray-400 hover:text-white transition-colors">General Rules</a>
             <a href="#penalties" class="text-gray-400 hover:text-white transition-colors">Penalties</a>
             <a href="#dq" class="text-gray-400 hover:text-white transition-colors">Disqualifications</a>
+            <a href="#protest" class="text-gray-400 hover:text-white transition-colors">Race Disputes</a>
             <a href="#crew" class="text-gray-400 hover:text-white transition-colors">Crew Rules</a>
             <a href="#cancellation" class="text-gray-400 hover:text-white transition-colors">Cancellation Policy</a>
             <a href="#media" class="text-gray-400 hover:text-white transition-colors">Media Consent</a>
@@ -324,11 +325,81 @@
 </section>
 
 {{-- ======================================================== --}}
+{{-- RACE DISPUTES --}}
+{{-- ======================================================== --}}
+<section id="protest" class="bg-[#0d0d0d] py-20">
+    <div class="mx-auto px-8" style="max-width:1280px;">
+        <p class="text-orange-500 text-sm font-semibold uppercase tracking-wider mb-2">Section 5</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-3">Race Disputes</h2>
+        <p class="text-gray-400 mb-10 max-w-2xl">For race disputes only. Disqualification challenges and ranking challenges due to suspected rule violations by another participant.</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            {{-- How to File --}}
+            <div class="bg-[#111111] border border-white/10 rounded-2xl p-6">
+                <h3 class="text-white font-semibold mb-5">How to File a Dispute</h3>
+                <div class="space-y-4">
+                    @foreach([
+                        'Prepare a written complaint stating the facts and basis of your dispute.',
+                        'Include photo or documentary evidence supporting your claim.',
+                        'Submit the complaint together with the dispute fee of <span class="text-white font-semibold">₱3,000</span>.',
+                        'Disputes must be filed <span class="text-white font-semibold">before the awarding ceremony</span> on event day.',
+                    ] as $i => $step)
+                    <div class="flex items-center gap-3">
+                        <div class="w-7 h-7 rounded-full bg-orange-500/10 text-orange-500 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">{{ $i + 1 }}</div>
+                        <p class="text-gray-400 text-sm leading-relaxed">{!! $step !!}</p>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+
+            {{-- Dispute Fee --}}
+            <div class="bg-[#111111] border border-amber-500/20 rounded-2xl p-6">
+                <h3 class="text-white font-semibold mb-5">Dispute Fee</h3>
+                <p class="text-amber-400 font-black text-4xl mb-1">₱3,000</p>
+                <p class="text-gray-500 text-xs uppercase tracking-wider mb-6">Non-refundable unless upheld</p>
+                <div class="space-y-3">
+                    <div class="flex items-start gap-3 bg-[#0d0d0d] rounded-xl px-4 py-3">
+                        <div class="w-1.5 h-1.5 rounded-full bg-green-500 flex-shrink-0 mt-1.5"></div>
+                        <p class="text-sm text-gray-300">Fee is <span class="text-green-400 font-semibold">refunded</span> if the dispute is upheld.</p>
+                    </div>
+                    <div class="flex items-start gap-3 bg-[#0d0d0d] rounded-xl px-4 py-3">
+                        <div class="w-1.5 h-1.5 rounded-full bg-red-500 flex-shrink-0 mt-1.5"></div>
+                        <p class="text-sm text-gray-300">Fee is <span class="text-red-400 font-semibold">forfeited</span> if the dispute is dismissed.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        {{-- Valid grounds --}}
+        <div class="bg-red-500/10 border border-red-500/20 rounded-2xl p-6 mt-6">
+            <p class="text-red-400 text-sm font-semibold mb-4">Valid Grounds for a Dispute</p>
+            <div class="space-y-3">
+                @foreach([
+                    'Disputing a personal disqualification if you believe you were wrongly disqualified.',
+                    'Reporting a competitor for rule violations that affect race rankings e.g., course-cutting, unauthorized assistance, or other forms of cheating.',
+                    'Other race-integrity disputes as determined by the Race Director.',
+                ] as $item)
+                <div class="flex items-start gap-3">
+                    <div class="w-1.5 h-1.5 rounded-full bg-red-500 flex-shrink-0 mt-2"></div>
+                    <p class="text-sm text-gray-300">{{ $item }}</p>
+                </div>
+                @endforeach
+            </div>
+        </div>
+
+        <p class="text-gray-500 text-sm text-center mt-6 italic">The Race Director's decision on all disputes is final and binding.</p>
+
+    </div>
+</section>
+
+{{-- ======================================================== --}}
 {{-- CREW RULES --}}
 {{-- ======================================================== --}}
 <section id="crew" class="bg-[#0d0d0d] py-20">
     <div class="mx-auto px-8" style="max-width:1280px;">
-        <p class="text-orange-500 text-sm font-semibold uppercase tracking-wider mb-2">Section 5</p>
+        <p class="text-orange-500 text-sm font-semibold uppercase tracking-wider mb-2">Section 6</p>
         <h2 class="text-3xl md:text-4xl font-bold text-white mb-3">Crew Rules</h2>
         <p class="text-gray-400 mb-10 max-w-2xl">All support crews must comply with the rules and directives of The Great Cordillera 100 as outlined in the Participant Guide, RiCON website, official Rules & Guidelines, and all race communications.</p>
 
@@ -364,7 +435,7 @@
 {{-- ======================================================== --}}
 <section id="cancellation" class="bg-[#111111] py-20">
     <div class="mx-auto px-8" style="max-width:1280px;">
-        <p class="text-orange-500 text-sm font-semibold uppercase tracking-wider mb-2">Section 6</p>
+        <p class="text-orange-500 text-sm font-semibold uppercase tracking-wider mb-2">Section 7</p>
         <h2 class="text-3xl md:text-4xl font-bold text-white mb-3">Event Cancellation Policy</h2>
         <p class="text-gray-400 mb-10 max-w-2xl">The Organizers reserve the right to shorten or cancel the event at any time if circumstances arise that threaten the safety of participants or volunteers.</p>
 
@@ -403,7 +474,7 @@
 {{-- ======================================================== --}}
 <section id="media" class="bg-[#0d0d0d] py-20">
     <div class="mx-auto px-8" style="max-width:1280px;">
-        <p class="text-orange-500 text-sm font-semibold uppercase tracking-wider mb-2">Section 7</p>
+        <p class="text-orange-500 text-sm font-semibold uppercase tracking-wider mb-2">Section 8</p>
         <h2 class="text-3xl md:text-4xl font-bold text-white mb-3">Media Consent &amp; Photography Release</h2>
         <p class="text-gray-400 mb-10 max-w-2xl">By registering for the event, all participants grant the organizers full permission to capture and use media taken during the race.</p>
 
@@ -428,7 +499,7 @@
 {{-- ======================================================== --}}
 <section id="transfers" class="bg-[#0d0d0d] py-20">
     <div class="mx-auto px-8" style="max-width:1280px;">
-        <p class="text-orange-500 text-sm font-semibold uppercase tracking-wider mb-2">Section 8</p>
+        <p class="text-orange-500 text-sm font-semibold uppercase tracking-wider mb-2">Section 9</p>
         <h2 class="text-3xl md:text-4xl font-bold text-white mb-3">Race Kit Transfers</h2>
         <p class="text-gray-400 mb-10 max-w-2xl">Policies on race bib transfers and race kit claiming.</p>
 
@@ -463,7 +534,7 @@
 {{-- ======================================================== --}}
 <section id="terms" class="bg-[#111111] py-20">
     <div class="mx-auto px-8" style="max-width:1280px;">
-        <p class="text-orange-500 text-sm font-semibold uppercase tracking-wider mb-2">Section 9</p>
+        <p class="text-orange-500 text-sm font-semibold uppercase tracking-wider mb-2">Section 10</p>
         <h2 class="text-3xl md:text-4xl font-bold text-white mb-3">Terms &amp; Conditions</h2>
         <p class="text-gray-400 mb-10 max-w-2xl">By accessing this site or submitting a registration, you agree to the following terms. Please read them carefully.</p>
 
