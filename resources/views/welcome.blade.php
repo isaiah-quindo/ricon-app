@@ -120,7 +120,7 @@
                     </div>
                     <div>
                         <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Elevation Gain</p>
-                        <p class="text-white font-bold text-xl">7290 M+</p>
+                        <p class="text-white font-bold text-xl">7000M D+</p>
                     </div>
                 </div>
                 <a href="{{ route('race-category.100km') }}"
