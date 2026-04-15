@@ -645,7 +645,7 @@
         <div
             x-show="showWaiver"
             x-cloak
-            class="fixed inset-0 z-50 flex items-center justify-center p-4"
+            class="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4"
             @keydown.escape.window="showWaiver = false"
         >
             {{-- Backdrop --}}
@@ -662,7 +662,7 @@
 
             {{-- Modal Panel --}}
             <div
-                class="relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col"
+                class="relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[80vh] sm:max-h-[90vh] flex flex-col"
                 x-transition:enter="transition ease-out duration-200"
                 x-transition:enter-start="opacity-0 scale-95"
                 x-transition:enter-end="opacity-100 scale-100"
@@ -671,7 +671,7 @@
                 x-transition:leave-end="opacity-0 scale-95"
             >
                 {{-- Header --}}
-                <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100 flex-shrink-0">
+                <div class="flex items-center justify-between px-4 py-3 sm:px-6 sm:py-4 border-b border-gray-100 flex-shrink-0">
                     <div>
                         <h2 class="text-base font-bold text-gray-900">Liability Waiver &amp; Release of Claims</h2>
                         <p class="text-xs text-gray-500 mt-0.5">The Great Cordillera 100 Ultra Trail</p>
@@ -689,7 +689,7 @@
                 </div>
 
                 {{-- Scrollable Content --}}
-                <div class="overflow-y-auto px-6 py-5 space-y-5 text-sm text-gray-700 leading-relaxed flex-1">
+                <div class="overflow-y-auto px-4 py-4 sm:px-6 sm:py-5 space-y-5 text-sm text-gray-700 leading-relaxed flex-1">
 
                     <p>
                         This Liability Waiver and Release of Claims ("<strong>Waiver</strong>") is entered into by the undersigned participant ("<strong>Participant</strong>") in connection with their voluntary participation in <strong>The Great Cordillera 100</strong> ("<strong>the Event</strong>"), organized by RiCON ("<strong>the Organizer</strong>").
@@ -771,7 +771,7 @@
                 </div>
 
                 {{-- Footer --}}
-                <div class="px-6 py-4 border-t border-gray-100 flex-shrink-0 flex items-center justify-end gap-3">
+                <div class="px-4 py-3 sm:px-6 sm:py-4 border-t border-gray-100 flex-shrink-0 flex items-center justify-end gap-3">
                     <button
                         type="button"
                         @click="showWaiver = false"
