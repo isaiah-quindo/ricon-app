@@ -37,7 +37,7 @@
             </div>
             <div class="py-8 px-6">
                 <p class="text-white text-xs uppercase tracking-wider mb-1">Est. Elevation Gain</p>
-                <p class="text-white font-black text-2xl">7,290 M+</p>
+                <p class="text-white font-black text-2xl">7,000M D+</p>
             </div>
             <div class="py-8 pr-6 pl-0 md:pl-6">
                 <p class="text-white text-xs uppercase tracking-wider mb-1">Cutoff Time</p>
