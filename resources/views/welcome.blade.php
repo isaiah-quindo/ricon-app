@@ -49,7 +49,7 @@
             Welcome to<br>The Great Cordillera 100
         </h2>
         <p class="text-gray-400 max-w-xl mx-auto mb-12 leading-relaxed">
-            Traverse the scenic trails of Benguet and the wild Cordillera mountainscape, a journey through living heritage across Luzon's highland spine. Pine-canopied ridgelines, river crossings, and steep scents connect Baguio City to the municipalities of benguet, demanding both strength and respect.
+            Traverse the scenic trails of Benguet and the wild Cordillera mountainscape, a journey through living heritage across Luzon's highland spine. Pine-canopied ridgelines, river crossings, and steep scents connect Baguio City to the municipalities of Benguet, demanding both strength and respect.
         </p>
 
         <p class="text-gray-400 text-sm mb-2">Race day in</p>
