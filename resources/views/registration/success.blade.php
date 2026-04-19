@@ -40,7 +40,7 @@
                 <div class="space-y-3">
                     <div class="flex items-start gap-3">
                         <div class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">1</div>
-                        <p class="text-sm text-gray-700">Our admin team reviews your proof of payment.</p>
+                        <p class="text-sm text-gray-700">Our admin team reviews your proof of payment within 2-3 days.</p>
                     </div>
                     <div class="flex items-start gap-3">
                         <div class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">2</div>
