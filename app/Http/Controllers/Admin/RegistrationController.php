@@ -71,7 +71,7 @@ class RegistrationController extends Controller
 
             fputcsv($handle, [
                 'id', 'race_category', 'first_name', 'last_name', 'sex',
-                'email', 'mobile_number', 'birthdate', 'address', 'shirt_size',
+                'email', 'mobile_number', 'birthdate', 'address', 'nationality', 'affiliation', 'shirt_size',
                 'emergency_contact_name', 'emergency_contact_number',
                 'bib_number', 'status', 'admin_notes',
                 'waiver_agreed', 'terms_agreed', 'created_at', 'updated_at',
@@ -88,6 +88,8 @@ class RegistrationController extends Controller
                     $reg->mobile_number,
                     $reg->birthdate?->format('Y-m-d'),
                     $reg->address,
+                    $reg->nationality,
+                    $reg->affiliation,
                     $reg->shirt_size,
                     $reg->emergency_contact_name,
                     $reg->emergency_contact_number,

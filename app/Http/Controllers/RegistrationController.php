@@ -31,6 +31,8 @@ class RegistrationController extends Controller
             'address'                  => 'required|string|max:500',
             'emergency_contact_name'   => 'required|string|max:255',
             'emergency_contact_number' => 'required|string|max:20',
+            'nationality'              => 'required|string|max:100',
+            'affiliation'              => 'nullable|string|max:255',
             'shirt_size'               => 'required|in:XS,S,M,L,XL,XXL',
             'proof_of_payment'         => 'required|image|mimes:jpg,jpeg,png|max:5120',
             'waiver_agreed'            => 'accepted',

@@ -229,6 +229,51 @@
                             @enderror
                         </div>
 
+                        {{-- Nationality searchable dropdown (PrelineUI hs-select) --}}
+                        <div>
+                            <label for="nationality" class="block text-sm font-medium text-gray-700 mb-1.5">
+                                Nationality <span class="text-red-500">*</span>
+                            </label>
+                            @php $oldNationality = old('nationality', ''); @endphp
+                            <select id="nationality" name="nationality"
+                                data-hs-select='{
+                                  "hasSearch": true,
+                                  "searchPlaceholder": "Search nationality...",
+                                  "placeholder": "Select nationality...",
+                                  "toggleTag": "<button type=\"button\" aria-expanded=\"false\"><span class=\"hs-select-placeholder-active:text-gray-400 text-gray-800 text-sm\" data-title></span></button>",
+                                  "toggleClasses": "relative py-2.5 ps-3.5 pe-9 flex text-nowrap w-full cursor-pointer bg-white border {{ $errors->has("nationality") ? "border-red-400" : "border-gray-200" }} rounded-lg text-start text-sm hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500",
+                                  "dropdownClasses": "mt-1 max-h-60 pb-1 px-1 space-y-0.5 z-30 w-full bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden overflow-y-auto",
+                                  "optionClasses": "hs-selected:bg-orange-50 hs-selected:text-orange-700 py-2 px-3.5 w-full text-sm text-gray-800 cursor-pointer hover:bg-orange-50 hover:text-orange-700 rounded-lg focus:outline-none",
+                                  "searchClasses": "block w-full text-sm bg-white border border-gray-200 rounded-lg text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 py-2 px-3",
+                                  "searchWrapperClasses": "bg-white p-2 sticky top-0 border-b border-gray-100",
+                                  "extraMarkup": "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"shrink-0 size-3.5 text-gray-400\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
+                                }'
+                                class="hidden">
+                                <option value="">Select nationality...</option>
+                                @foreach(['Afghan','Albanian','Algerian','American','Andorran','Angolan','Argentinian','Armenian','Australian','Austrian','Azerbaijani','Bahamian','Bahraini','Bangladeshi','Barbadian','Belarusian','Belgian','Belizean','Beninese','Bhutanese','Bolivian','Bosnian','Botswanan','Brazilian','British','Bruneian','Bulgarian','Burkinabe','Burundian','Cambodian','Cameroonian','Canadian','Cape Verdean','Central African','Chadian','Chilean','Chinese','Colombian','Comorian','Congolese','Costa Rican','Croatian','Cuban','Cypriot','Czech','Danish','Djiboutian','Dominican','Dutch','East Timorese','Ecuadorian','Egyptian','Emirati','Equatorial Guinean','Eritrean','Estonian','Ethiopian','Fijian','Filipino','Finnish','French','Gabonese','Gambian','Georgian','German','Ghanaian','Greek','Grenadian','Guatemalan','Guinean','Guyanese','Haitian','Honduran','Hungarian','Icelandic','Indian','Indonesian','Iranian','Iraqi','Irish','Israeli','Italian','Ivorian','Jamaican','Japanese','Jordanian','Kazakhstani','Kenyan','Kiribati','Kuwaiti','Kyrgyz','Laotian','Latvian','Lebanese','Lesothan','Liberian','Libyan','Liechtensteiner','Lithuanian','Luxembourgish','Macedonian','Malagasy','Malawian','Malaysian','Maldivian','Malian','Maltese','Marshallese','Mauritanian','Mauritian','Mexican','Micronesian','Moldovan','Monacan','Mongolian','Montenegrin','Moroccan','Mozambican','Namibian','Nauruan','Nepalese','New Zealander','Nicaraguan','Nigerian','Nigerien','North Korean','Norwegian','Omani','Pakistani','Palauan','Palestinian','Panamanian','Papua New Guinean','Paraguayan','Peruvian','Polish','Portuguese','Qatari','Romanian','Russian','Rwandan','Salvadoran','Samoan','San Marinese','Sao Tomean','Saudi','Senegalese','Serbian','Seychellois','Sierra Leonean','Singaporean','Slovak','Slovenian','Solomon Islander','Somali','South African','South Korean','South Sudanese','Spanish','Sri Lankan','Sudanese','Surinamese','Swazi','Swedish','Swiss','Syrian','Taiwanese','Tajik','Tanzanian','Thai','Togolese','Tongan','Trinidadian','Tunisian','Turkish','Turkmen','Tuvaluan','Ugandan','Ukrainian','Uruguayan','Uzbek','Vanuatuan','Venezuelan','Vietnamese','Yemeni','Zambian','Zimbabwean'] as $nat)
+                                <option value="{{ $nat }}" {{ $oldNationality === $nat ? 'selected' : '' }}>{{ $nat }}</option>
+                                @endforeach
+                            </select>
+                            @error('nationality')
+                            <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        {{-- Affiliation --}}
+                        <div>
+                            <label for="affiliation" class="block text-sm font-medium text-gray-700 mb-1.5">
+                                Team / Affiliation
+                            </label>
+                            <input type="text" id="affiliation" name="affiliation"
+                                x-model="affiliation"
+                                value="{{ old('affiliation') }}"
+                                placeholder="e.g. Don't Stop Running Club"
+                                class="w-full rounded-lg border {{ $errors->has('affiliation') ? 'border-red-400' : 'border-gray-200' }} text-sm px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent" />
+                            @error('affiliation')
+                            <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
+
                         <div class="sm:col-span-2">
                             <div class="flex items-center justify-between mb-1.5">
                                 <label for="shirt_size" class="block text-sm font-medium text-gray-700">
@@ -540,6 +585,14 @@
                                 <dt class="text-xs text-gray-400 mb-0.5">Shirt Size</dt>
                                 <dd class="font-medium text-gray-800" x-text="shirt_size || '—'"></dd>
                             </div>
+                            <div>
+                                <dt class="text-xs text-gray-400 mb-0.5">Nationality</dt>
+                                <dd class="font-medium text-gray-800" x-text="nationality || '—'"></dd>
+                            </div>
+                            <div>
+                                <dt class="text-xs text-gray-400 mb-0.5">Club / Affiliation</dt>
+                                <dd class="font-medium text-gray-800" x-text="affiliation || '—'"></dd>
+                            </div>
                             <div class="col-span-2 sm:col-span-3">
                                 <dt class="text-xs text-gray-400 mb-0.5">Address</dt>
                                 <dd class="font-medium text-gray-800" x-text="address || '—'"></dd>
@@ -817,6 +870,8 @@
                 email: "{{ old('email', '') }}",
                 mobile_number: "{{ old('mobile_number', '') }}",
                 address: "{{ old('address', '') }}",
+                nationality: "{{ old('nationality', '') }}",
+                affiliation: "{{ old('affiliation', '') }}",
                 shirt_size: "{{ old('shirt_size', '') }}",
                 emergency_contact_name: "{{ old('emergency_contact_name', '') }}",
                 emergency_contact_number: "{{ old('emergency_contact_number', '') }}",
@@ -851,6 +906,8 @@
                 showWaiver: false,
 
                 showReview() {
+                    const natSelect = document.getElementById('nationality');
+                    if (natSelect) this.nationality = natSelect.value;
                     this.reviewing = true;
                     window.scrollTo({ top: 0, behavior: "smooth" });
                 },
@@ -862,6 +919,7 @@
             };
         }
     </script>
+
 
 </body>
 

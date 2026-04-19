@@ -21,6 +21,8 @@ class Registration extends Model
         'emergency_contact_name',
         'emergency_contact_number',
         'shirt_size',
+        'nationality',
+        'affiliation',
         'waiver_agreed',
         'terms_agreed',
         'bib_number',

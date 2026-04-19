@@ -67,9 +67,19 @@
                 </div>
             </div>
 
-            <div class="mt-4 pt-4 border-t border-gray-100">
-                <p class="text-xs text-gray-400 mb-0.5">Address</p>
-                <p class="text-sm font-medium text-gray-800">{{ $registration->address }}</p>
+            <div class="mt-4 pt-4 border-t border-gray-100 grid grid-cols-2 sm:grid-cols-3 gap-4">
+                <div class="col-span-2 sm:col-span-3">
+                    <p class="text-xs text-gray-400 mb-0.5">Address</p>
+                    <p class="text-sm font-medium text-gray-800">{{ $registration->address }}</p>
+                </div>
+                <div>
+                    <p class="text-xs text-gray-400 mb-0.5">Nationality</p>
+                    <p class="text-sm font-medium text-gray-800">{{ $registration->nationality ?: '—' }}</p>
+                </div>
+                <div>
+                    <p class="text-xs text-gray-400 mb-0.5">Club / Affiliation</p>
+                    <p class="text-sm font-medium text-gray-800">{{ $registration->affiliation ?: '—' }}</p>
+                </div>
             </div>
         </div>
 
