@@ -217,18 +217,6 @@
                             @enderror
                         </div>
 
-                        <div class="sm:col-span-2">
-                            <label for="address" class="block text-sm font-medium text-gray-700 mb-1.5">
-                                Home Address <span class="text-red-500">*</span> <br>
-                                <span class="text-xs">House No./Street, Barangay, City/Municipality, Province, Country</span>
-                            </label>
-                            <textarea id="address" name="address" rows="2" x-model="address" required autocomplete="street-address"
-                                class="w-full rounded-lg border {{ $errors->has('address') ? 'border-red-400' : 'border-gray-200' }} text-sm px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent resize-none">{{ old('address') }}</textarea>
-                            @error('address')
-                            <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
-                            @enderror
-                        </div>
-
                         {{-- Nationality searchable dropdown (PrelineUI hs-select) --}}
                         <div>
                             <label for="nationality" class="block text-sm font-medium text-gray-700 mb-1.5">
@@ -275,6 +263,18 @@
                         </div>
 
                         <div class="sm:col-span-2">
+                            <label for="address" class="block text-sm font-medium text-gray-700 mb-1.5">
+                                Home Address <span class="text-red-500">*</span> <br>
+                                <span class="text-xs">House No./Street, Barangay, City/Municipality, Province, Country</span>
+                            </label>
+                            <textarea id="address" name="address" rows="2" x-model="address" required autocomplete="street-address"
+                                class="w-full rounded-lg border {{ $errors->has('address') ? 'border-red-400' : 'border-gray-200' }} text-sm px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent resize-none">{{ old('address') }}</textarea>
+                            @error('address')
+                            <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="sm:col-span-2">
                             <div class="flex items-center justify-between mb-1.5">
                                 <label for="shirt_size" class="block text-sm font-medium text-gray-700">
                                     Shirt Size <span class="text-red-500">*</span>
@@ -304,24 +304,36 @@
                                                 <th class="px-4 py-2 font-semibold text-gray-700">M</th>
                                                 <th class="px-4 py-2 font-semibold text-gray-700">L</th>
                                                 <th class="px-4 py-2 font-semibold text-gray-700">XL</th>
+                                                <th class="px-4 py-2 font-semibold text-gray-700">2XL</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr class="border-b border-gray-100">
-                                                <td class="px-4 py-2 text-left text-gray-500 font-medium border-r border-gray-200">Chest</td>
-                                                <td class="px-4 py-2 text-gray-700">17</td>
-                                                <td class="px-4 py-2 text-gray-700">18</td>
-                                                <td class="px-4 py-2 text-gray-700">19</td>
-                                                <td class="px-4 py-2 text-gray-700">20</td>
-                                                <td class="px-4 py-2 text-gray-700">21</td>
+                                                <td class="px-4 py-2 text-left text-gray-500 font-medium border-r border-gray-200">Shirt Length</td>
+                                                <td class="px-4 py-2 text-gray-700">25</td>
+                                                <td class="px-4 py-2 text-gray-700">26</td>
+                                                <td class="px-4 py-2 text-gray-700">27</td>
+                                                <td class="px-4 py-2 text-gray-700">29</td>
+                                                <td class="px-4 py-2 text-gray-700">30</td>
+                                                <td class="px-4 py-2 text-gray-700">31</td>
                                             </tr>
                                             <tr>
-                                                <td class="px-4 py-2 text-left text-gray-500 font-medium border-r border-gray-200">Length</td>
-                                                <td class="px-4 py-2 text-gray-700">25.5</td>
-                                                <td class="px-4 py-2 text-gray-700">26.5</td>
-                                                <td class="px-4 py-2 text-gray-700">27.5</td>
-                                                <td class="px-4 py-2 text-gray-700">28.5</td>
-                                                <td class="px-4 py-2 text-gray-700">29.5</td>
+                                                <td class="px-4 py-2 text-left text-gray-500 font-medium border-r border-gray-200">Chest Circumference</td>
+                                                <td class="px-4 py-2 text-gray-700">36</td>
+                                                <td class="px-4 py-2 text-gray-700">38</td>
+                                                <td class="px-4 py-2 text-gray-700">40</td>
+                                                <td class="px-4 py-2 text-gray-700">42</td>
+                                                <td class="px-4 py-2 text-gray-700">44</td>
+                                                <td class="px-4 py-2 text-gray-700">46</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="px-4 py-2 text-left text-gray-500 font-medium border-r border-gray-200">Sleeve Length</td>
+                                                <td class="px-4 py-2 text-gray-700">7</td>
+                                                <td class="px-4 py-2 text-gray-700">7.5</td>
+                                                <td class="px-4 py-2 text-gray-700">8</td>
+                                                <td class="px-4 py-2 text-gray-700">8.5</td>
+                                                <td class="px-4 py-2 text-gray-700">9</td>
+                                                <td class="px-4 py-2 text-gray-700">10</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -332,7 +344,7 @@
                             </div>
 
                             <div class="flex flex-wrap gap-2">
-                                @foreach(['XS', 'S', 'M', 'L', 'XL'] as $size)
+                                @foreach(['XS', 'S', 'M', 'L', 'XL', '2XL'] as $size)
                                 <label class="cursor-pointer">
                                     <input type="radio" name="shirt_size" value="{{ $size }}"
                                         x-model="shirt_size"
