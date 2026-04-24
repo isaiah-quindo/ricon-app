@@ -33,6 +33,13 @@
             where endurance meets breathtaking landscapes.
         </p>
 
+        <div class="m-auto max-w-[600px] mb-8 grid grid-cols-1 md:grid-cols-2 gap-4 flex place-items-center">
+            <a href="https://utmb.world/utmb-index" target="_blank">
+                <img src="/images/utmb-index.png" alt="UTMB Index" />
+            </a>
+            <img src="/images/itra-logo-dark.svg" class="w-20" alt="ITRA" />
+        </div>
+
         <a href="#race-categories" class="py-3 px-8 inline-flex items-center gap-x-2 text-sm font-bold rounded-lg bg-orange-600 text-primary-foreground hover:bg-orange-700 focus:outline-hidden focus:bg-primary-focus  disabled:opacity-50 disabled:pointer-events-none">
             Choose your Adventure
         </a>
@@ -107,6 +114,11 @@
                 <div class="absolute bottom-6 left-4 md:left-6">
                     <p class="text-white font-black text-3xl leading-none">
                         TGC <span class="text-orange-500">100 KM</span>
+                        <span class="block p-1 my-2 justify-self-start bg-white/50">
+                            <a href="https://utmb.world/utmb-index" target="_blank">
+                                <img src="images/index-100M.png" class="w-[100px]" alt="UTMB Index 100M"/>
+                            </a>
+                        </span>
                     </p>
                     <p class="text-gray-300 text-sm mt-1">November 13, 2026</p>
                 </div>
@@ -141,8 +153,13 @@
                     {{-- Dark gradient overlay --}}
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
                     <div class="absolute bottom-6 left-4 md:left-6">
-                        <p class="text-white font-black text-2xl leading-none">
+                        <p class="text-white font-black text-3xl leading-none">
                             TGC <span class="text-red-500">60 KM</span>
+                            <span class="block p-1 my-2 justify-self-start bg-white/50">
+                                <a href="https://utmb.world/utmb-index" target="_blank">
+                                    <img src="images/index-100K.png" class="w-[100px] h-[30px]" alt="UTMB Index 100K"/>
+                                </a>
+                            </span>
                         </p>
                         <p class="text-gray-300 text-sm mt-1">November 14, 2026</p>
                     </div>
@@ -175,11 +192,20 @@
                         <img src="/images/21km-bg.png" alt="21km Category" class="absolute inset-0 w-full h-full object-cover" />
                         {{-- Dark gradient overlay --}}
                         <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
-                        <div class="absolute bottom-6 left-4 md:left-6">
-                            <p class="text-white font-black text-2xl leading-none">
-                                TGC <span class="text-green-400">21 KM</span>
-                            </p>
-                            <p class="text-gray-300 text-sm mt-0.5">November 15, 2026</p>
+                        <div class="absolute bottom-6 left-4 md:left-6 grid grid-cols-1 lg:grid-cols-2 gap-2">
+                            <div class="relative">
+                                <p class="text-white font-black text-2xl leading-none">
+                                    TGC <span class="text-green-400">21 KM</span>
+                                </p>
+                                <p class="text-gray-300 text-sm mt-0.5">November 15, 2026</p>
+                            </div>
+                            <div class="relative">
+                                <span class="block p-1 flex align-center justify-self-start bg-white/50">
+                                    <a href="https://utmb.world/utmb-index" target="_blank">
+                                        <img src="images/index-20K.png" class="w-[100px] h-[30px]" alt="UTMB Index 20K"/>
+                                    </a>
+                                </span>
+                            </div>
                         </div>
                     </div>
                     <div class="p-6 flex-1 flex flex-col justify-between">

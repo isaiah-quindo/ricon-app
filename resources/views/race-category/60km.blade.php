@@ -17,6 +17,11 @@
         <h1 class="text-5xl md:text-7xl font-black text-white leading-tight mb-3">
             TGC <span class="text-red-500">60 KM</span>
         </h1>
+        <span class="block p-1 my-2 justify-self-start bg-white/50">
+            <a href="https://utmb.world/utmb-index" target="_blank">
+                <img src="/images/index-100K.png" class="w-[150px]" alt="UTMB Index 100K"/>
+            </a>
+        </span>
         <p class="text-gray-300 text-lg">Province of Benguet</p>
     </div>
 </section>
