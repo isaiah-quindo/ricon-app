@@ -12,7 +12,7 @@
         <img src="/images/60km-hero.png" alt="TGC60KM" class="w-full h-full object-cover" />
     </div>
     <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
-    <div class="relative z-10 w-full mx-auto px-8 pb-16" style="max-width:1280px;">
+    <div class="relative grid grid-cols-1 z-10 w-full mx-auto px-8 pb-16" style="max-width:1280px;">
         <p class="text-red-500 text-sm font-semibold uppercase tracking-wider mb-2">The Great Cordillera 100</p>
         <h1 class="text-5xl md:text-7xl font-black text-white leading-tight mb-3">
             TGC <span class="text-red-500">60 KM</span>

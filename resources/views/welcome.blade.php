@@ -35,7 +35,7 @@
 
         <div class="m-auto max-w-[600px] mb-8 grid grid-cols-1 md:grid-cols-2 gap-4 flex place-items-center">
             <a href="https://utmb.world/utmb-index" target="_blank">
-                <img src="/images/utmb-index.png" alt="UTMB Index" />
+                <img src="/images/utmb-index.png" class="w-[120px]" alt="UTMB Index" />
             </a>
             <img src="/images/itra-logo-dark.svg" class="w-20" alt="ITRA" />
         </div>
@@ -111,15 +111,15 @@
                 <img src="/images/100km-bg.png" alt="100km Category" class="absolute inset-0 w-full h-full object-cover" />
                 {{-- Dark gradient overlay --}}
                 <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
-                <div class="absolute bottom-6 left-4 md:left-6">
+                <div class="absolute grid grid-cols-1 bottom-6 left-4 md:left-6">
                     <p class="text-white font-black text-3xl leading-none">
                         TGC <span class="text-orange-500">100 KM</span>
-                        <span class="block p-1 my-2 justify-self-start bg-white/50">
-                            <a href="https://utmb.world/utmb-index" target="_blank">
-                                <img src="images/index-100M.png" class="w-[100px]" alt="UTMB Index 100M"/>
-                            </a>
-                        </span>
                     </p>
+                    <span class="block p-1 my-2 justify-self-start bg-white/50">
+                        <a href="https://utmb.world/utmb-index" target="_blank">
+                            <img src="images/index-100M.png" class="w-[100px]" alt="UTMB Index 100M"/>
+                        </a>
+                    </span>
                     <p class="text-gray-300 text-sm mt-1">November 13, 2026</p>
                 </div>
             </div>
@@ -152,15 +152,15 @@
                     <img src="/images/60km-bg.png" alt="60km Category" class="absolute inset-0 w-full h-full object-cover" />
                     {{-- Dark gradient overlay --}}
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
-                    <div class="absolute bottom-6 left-4 md:left-6">
+                    <div class="absolute grid grid-cols-1 bottom-6 left-4 md:left-6">
                         <p class="text-white font-black text-3xl leading-none">
                             TGC <span class="text-red-500">60 KM</span>
-                            <span class="block p-1 my-2 justify-self-start bg-white/50">
-                                <a href="https://utmb.world/utmb-index" target="_blank">
-                                    <img src="images/index-100K.png" class="w-[100px] h-[30px]" alt="UTMB Index 100K"/>
-                                </a>
-                            </span>
                         </p>
+                        <span class="block p-1 my-2 justify-self-start bg-white/50">
+                            <a href="https://utmb.world/utmb-index" target="_blank">
+                                <img src="images/index-100K.png" class="w-[100px] h-[30px]" alt="UTMB Index 100K"/>
+                            </a>
+                        </span>
                         <p class="text-gray-300 text-sm mt-1">November 14, 2026</p>
                     </div>
                 </div>
@@ -199,7 +199,7 @@
                                 </p>
                                 <p class="text-gray-300 text-sm mt-0.5">November 15, 2026</p>
                             </div>
-                            <div class="relative">
+                            <div class="relative grid grid-cols-1">
                                 <span class="block p-1 flex align-center justify-self-start bg-white/50">
                                     <a href="https://utmb.world/utmb-index" target="_blank">
                                         <img src="images/index-20K.png" class="w-[100px] h-[30px]" alt="UTMB Index 20K"/>
