@@ -284,7 +284,7 @@
                 @endif
                 <div class="flex justify-between">
                     <span class="text-xs text-indigo-500">Entry Fee</span>
-                    <span class="text-xs font-semibold text-indigo-900">₱{{ number_format($registration->raceCategory->price, 2) }}</span>
+                    <span class="text-xs font-semibold text-indigo-900">₱{{ number_format($registration->price_paid ?? $registration->raceCategory->price, 2) }}</span>
                 </div>
             </div>
         </div>
