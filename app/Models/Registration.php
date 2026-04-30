@@ -28,12 +28,14 @@ class Registration extends Model
         'bib_number',
         'status',
         'admin_notes',
+        'price_paid',
     ];
 
     protected $casts = [
         'birthdate'     => 'date',
         'waiver_agreed' => 'boolean',
         'terms_agreed'  => 'boolean',
+        'price_paid'    => 'decimal:2',
     ];
 
     public function raceCategory()

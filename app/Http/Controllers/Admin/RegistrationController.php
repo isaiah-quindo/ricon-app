@@ -73,7 +73,7 @@ class RegistrationController extends Controller
                 'id', 'race_category', 'first_name', 'last_name', 'sex',
                 'email', 'mobile_number', 'birthdate', 'address', 'nationality', 'affiliation', 'shirt_size',
                 'emergency_contact_name', 'emergency_contact_number',
-                'bib_number', 'status', 'admin_notes',
+                'bib_number', 'price_paid', 'status', 'admin_notes',
                 'waiver_agreed', 'terms_agreed', 'created_at', 'updated_at',
             ]);
 
@@ -94,6 +94,7 @@ class RegistrationController extends Controller
                     $reg->emergency_contact_name,
                     $reg->emergency_contact_number,
                     $reg->bib_number,
+                    $reg->price_paid,
                     $reg->status,
                     $reg->admin_notes,
                     $reg->waiver_agreed ? 'yes' : 'no',

@@ -4,7 +4,7 @@
 @section('content')
 
 {{-- Stats cards --}}
-<div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+<div class="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
 
     <div class="bg-white rounded-xl border border-gray-200 p-5">
         <div class="flex items-center justify-between mb-3">
@@ -58,6 +58,19 @@
         <p class="text-xs text-gray-400 mt-1">Not approved</p>
     </div>
 
+    <div class="bg-white rounded-xl border border-gray-200 p-5">
+        <div class="flex items-center justify-between mb-3">
+            <span class="text-sm font-medium text-gray-500">Revenue</span>
+            <div class="w-9 h-9 bg-emerald-50 rounded-lg flex items-center justify-center">
+                <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+        </div>
+        <p class="text-3xl font-bold text-gray-900">₱{{ number_format($stats['revenue'], 2) }}</p>
+        <p class="text-xs text-gray-400 mt-1">From approved</p>
+    </div>
+
 </div>
 
 {{-- Category breakdown --}}
@@ -76,6 +89,7 @@
                     <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Max Slots</th>
                     <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Registered</th>
                     <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Approved</th>
+                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Revenue</th>
                     <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Fill Rate</th>
                     <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Status</th>
                 </tr>
@@ -95,6 +109,7 @@
                     <td class="px-6 py-4 text-sm text-gray-600">{{ number_format($category->max_slots) }}</td>
                     <td class="px-6 py-4 text-sm text-gray-900 font-medium">{{ number_format($category->registrations_count) }}</td>
                     <td class="px-6 py-4 text-sm text-green-700 font-medium">{{ number_format($category->approved_count) }}</td>
+                    <td class="px-6 py-4 text-sm text-emerald-700 font-medium">₱{{ number_format($category->approved_revenue ?? 0, 2) }}</td>
                     <td class="px-6 py-4">
                         <div class="flex items-center gap-2">
                             <div class="flex-1 bg-gray-100 rounded-full h-1.5 min-w-16">
@@ -118,7 +133,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="7" class="px-6 py-10 text-center text-sm text-gray-400">
+                    <td colspan="8" class="px-6 py-10 text-center text-sm text-gray-400">
                         No race categories found.
                         <a href="{{ route('admin.race-categories.create') }}" class="text-indigo-600 hover:underline ml-1">Create one</a>
                     </td>

@@ -15,12 +15,16 @@ class DashboardController extends Controller
             'pending'   => Registration::where('status', 'payment_submitted')->count(),
             'approved'  => Registration::where('status', 'approved')->count(),
             'rejected'  => Registration::where('status', 'rejected')->count(),
+            'revenue'   => Registration::where('status', 'approved')->sum('price_paid'),
         ];
 
         $byCategory = RaceCategory::withCount([
             'registrations',
             'registrations as approved_count' => fn($q) => $q->where('status', 'approved'),
-        ])->get();
+        ])->withSum(
+            ['registrations as approved_revenue' => fn($q) => $q->where('status', 'approved')],
+            'price_paid'
+        )->get();
 
         return view('admin.dashboard', compact('stats', 'byCategory'));
     }

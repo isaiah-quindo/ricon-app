@@ -39,12 +39,15 @@ class RegistrationController extends Controller
             'terms_agreed'             => 'accepted',
         ]);
 
+        $category = RaceCategory::findOrFail($validated['race_category_id']);
+
         // Create registration
         $registration = Registration::create([
             ...$validated,
             'waiver_agreed' => true,
             'terms_agreed'  => true,
             'status'        => 'payment_submitted',
+            'price_paid'    => $category->price,
         ]);
 
         // Store proof of payment
