@@ -245,6 +245,28 @@
             </div>
         </div>
 
+        {{-- Resend Confirmation Email --}}
+        @if($registration->status === 'approved')
+        <div class="bg-white rounded-xl border border-gray-200 p-5">
+            <h3 class="text-sm font-semibold text-gray-800 mb-3">Resend Confirmation Email</h3>
+            <p class="text-xs text-gray-500 mb-4">
+                Send the approval email again to <span class="font-medium text-gray-700">{{ $registration->email }}</span>.
+                Use this if the participant says they did not receive the original email.
+            </p>
+            <form method="POST" action="{{ route('admin.registrations.resendEmail', $registration) }}">
+                @csrf
+                <button type="submit"
+                    onclick="return confirm('Resend confirmation email to {{ $registration->email }}?')"
+                    class="w-full px-4 py-2.5 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors flex items-center justify-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-2 11H5a2 2 0 01-2-2V7a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2z" />
+                    </svg>
+                    Resend Email
+                </button>
+            </form>
+        </div>
+        @endif
+
         {{-- Race info --}}
         @if($registration->raceCategory)
         <div class="bg-indigo-50 rounded-xl border border-indigo-100 p-5">

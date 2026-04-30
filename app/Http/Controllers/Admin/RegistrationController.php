@@ -150,6 +150,16 @@ class RegistrationController extends Controller
         return back()->with('success', 'Registration rejected.');
     }
 
+    // Resend approval confirmation email for approved registrations
+    public function resendEmail(Registration $registration)
+    {
+        abort_unless($registration->status === 'approved', 403, 'Only approved registrations can have the confirmation email resent.');
+
+        Mail::to($registration->email)->send(new RegistrationApproved($registration));
+
+        return back()->with('success', "Confirmation email resent to {$registration->email}.");
+    }
+
     // Update bib number manually
     public function updateBib(Request $request, Registration $registration)
     {

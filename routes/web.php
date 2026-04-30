@@ -43,6 +43,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
         Route::get('/{registration}', [AdminRegistrationController::class, 'show'])->name('show');
         Route::post('/{registration}/approve', [AdminRegistrationController::class, 'approve'])->name('approve');
         Route::post('/{registration}/reject', [AdminRegistrationController::class, 'reject'])->name('reject');
+        Route::post('/{registration}/resend-email', [AdminRegistrationController::class, 'resendEmail'])->name('resendEmail');
         Route::patch('/{registration}/bib', [AdminRegistrationController::class, 'updateBib'])->name('updateBib');
     });
 
