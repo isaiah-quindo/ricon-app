@@ -4,7 +4,7 @@
 @section('content')
 
 {{-- Stats cards --}}
-<div class="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
 
     <div class="bg-white rounded-xl border border-gray-200 p-5">
         <div class="flex items-center justify-between mb-3">
@@ -58,19 +58,38 @@
         <p class="text-xs text-gray-400 mt-1">Not approved</p>
     </div>
 
-    <div class="bg-white rounded-xl border border-gray-200 p-5">
-        <div class="flex items-center justify-between mb-3">
-            <span class="text-sm font-medium text-gray-500">Revenue</span>
-            <div class="w-9 h-9 bg-emerald-50 rounded-lg flex items-center justify-center">
-                <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-            </div>
-        </div>
-        <p class="text-3xl font-bold text-gray-900">₱{{ number_format($stats['revenue'], 2) }}</p>
-        <p class="text-xs text-gray-400 mt-1">From approved</p>
-    </div>
 
+</div>
+
+{{-- Revenue card --}}
+<div class="bg-white rounded-xl border border-gray-200 p-5 mb-8">
+    <div class="flex items-start justify-between mb-4">
+        <div>
+            <div class="flex items-center gap-2 mb-2">
+                <div class="w-9 h-9 bg-emerald-50 rounded-lg flex items-center justify-center">
+                    <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <h2 class="text-base font-semibold text-gray-800">Revenue</h2>
+            </div>
+            <p class="text-3xl font-bold text-gray-900">₱{{ number_format($stats['revenue'], 2) }}</p>
+            <p class="text-xs text-gray-400 mt-1">Total from approved registrations</p>
+        </div>
+        <div class="inline-flex rounded-lg border border-gray-200 p-0.5 bg-gray-50">
+            <a href="{{ route('admin.dashboard', ['range' => 7]) }}"
+               class="px-3 py-1 text-xs font-medium rounded-md transition-colors {{ $range === 7 ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500 hover:text-gray-700' }}">
+                7 days
+            </a>
+            <a href="{{ route('admin.dashboard', ['range' => 30]) }}"
+               class="px-3 py-1 text-xs font-medium rounded-md transition-colors {{ $range === 30 ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500 hover:text-gray-700' }}">
+                30 days
+            </a>
+        </div>
+    </div>
+    <div class="relative h-64">
+        <canvas id="revenueChart"></canvas>
+    </div>
 </div>
 
 {{-- Category breakdown --}}
@@ -143,5 +162,53 @@
         </table>
     </div>
 </div>
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const ctx = document.getElementById('revenueChart');
+        if (!ctx || !window.Chart) return;
+        new window.Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: @json($revenueSeries->pluck('date')),
+                datasets: [{
+                    label: 'Revenue',
+                    data: @json($revenueSeries->pluck('total')),
+                    borderColor: 'rgb(16, 185, 129)',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.3,
+                    pointRadius: 3,
+                    pointHoverRadius: 5,
+                }],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: (c) => '₱' + Number(c.parsed.y).toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+                        },
+                    },
+                },
+                scales: {
+                    x: {
+                        grid: { display: false },
+                    },
+                    y: {
+                        beginAtZero: true,
+                        grid: { display: false },
+                        ticks: { callback: (v) => '₱' + Number(v).toLocaleString('en-PH') },
+                    },
+                },
+            },
+        });
+    });
+</script>
+@endpush
 
 @endsection

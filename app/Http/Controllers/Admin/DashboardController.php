@@ -5,10 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Registration;
 use App\Models\RaceCategory;
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Carbon\CarbonPeriod;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $stats = [
             'total'     => Registration::count(),
@@ -26,6 +30,31 @@ class DashboardController extends Controller
             'price_paid'
         )->get();
 
-        return view('admin.dashboard', compact('stats', 'byCategory'));
+        $range = in_array((int) $request->query('range'), [7, 30], true)
+            ? (int) $request->query('range')
+            : 7;
+
+        $start = Carbon::today()->subDays($range - 1);
+        $end   = Carbon::today();
+
+        $rows = DB::table('registrations')
+            ->join('payment_proofs', 'payment_proofs.registration_id', '=', 'registrations.id')
+            ->where('registrations.status', 'approved')
+            ->whereNotNull('payment_proofs.verified_at')
+            ->whereBetween('payment_proofs.verified_at', [$start, $end->copy()->endOfDay()])
+            ->selectRaw('DATE(payment_proofs.verified_at) as date, SUM(registrations.price_paid) as total')
+            ->groupBy('date')
+            ->pluck('total', 'date');
+
+        $revenueSeries = collect();
+        foreach (CarbonPeriod::create($start, $end) as $day) {
+            $key = $day->toDateString();
+            $revenueSeries->push([
+                'date'  => $day->format('M j'),
+                'total' => (float) ($rows[$key] ?? 0),
+            ]);
+        }
+
+        return view('admin.dashboard', compact('stats', 'byCategory', 'revenueSeries', 'range'));
     }
 }

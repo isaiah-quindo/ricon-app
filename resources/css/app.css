@@ -7,3 +7,5 @@
         font-family: 'Kufam', sans-serif;
     }
 }
+
+[x-cloak] { display: none !important; }

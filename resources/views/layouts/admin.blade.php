@@ -15,16 +15,16 @@
 <body class="font-sans antialiased bg-gray-50">
 
     <!-- Top navbar -->
-    <header class="bg-gray-900 border-b border-gray-800 mb-6">
-        <div class="max-w-[1280px] mx-auto px-6 h-16 flex items-center justify-between gap-8">
+    <header x-data="{ mobileOpen: false }" class="bg-gray-900 border-b border-gray-800 mb-6">
+        <div class="max-w-[1280px] mx-auto px-6 h-16 flex items-center justify-between gap-4 md:gap-8">
 
             <!-- Logo -->
             <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2 flex-shrink-0">
                 <img src="/ricon-logo.svg" alt="Ricon">
             </a>
 
-            <!-- Nav links -->
-            <nav class="flex items-center gap-1 ml-4">
+            <!-- Desktop nav links -->
+            <nav class="hidden md:flex items-center gap-1 ml-4">
                 <a href="{{ route('admin.dashboard') }}"
                     class="px-3 py-2 rounded-lg text-sm font-medium transition-colors
                           {{ request()->routeIs('admin.dashboard') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
@@ -42,8 +42,8 @@
                 </a>
             </nav>
 
-            <!-- User + logout -->
-            <div class="ml-auto flex items-center gap-3">
+            <!-- Desktop user + logout -->
+            <div class="hidden md:flex ml-auto items-center gap-3">
                 <span class="text-sm text-gray-400">{{ Auth::user()->name }}</span>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
@@ -54,6 +54,49 @@
                 </form>
             </div>
 
+            <!-- Mobile menu toggle -->
+            <button type="button" @click="mobileOpen = !mobileOpen"
+                class="md:hidden ml-auto inline-flex items-center justify-center p-2 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800 transition-colors"
+                :aria-expanded="mobileOpen.toString()" aria-label="Toggle navigation">
+                <svg x-show="!mobileOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+                <svg x-show="mobileOpen" x-cloak class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+
+        </div>
+
+        <!-- Mobile menu -->
+        <div x-show="mobileOpen" x-cloak x-transition class="md:hidden border-t border-gray-800">
+            <nav class="max-w-[1280px] mx-auto px-6 py-3 flex flex-col gap-1">
+                <a href="{{ route('admin.dashboard') }}"
+                    class="px-3 py-2 rounded-lg text-sm font-medium transition-colors
+                          {{ request()->routeIs('admin.dashboard') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
+                    Dashboard
+                </a>
+                <a href="{{ route('admin.registrations.index') }}"
+                    class="px-3 py-2 rounded-lg text-sm font-medium transition-colors
+                          {{ request()->routeIs('admin.registrations.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
+                    Registrations
+                </a>
+                <a href="{{ route('admin.race-categories.index') }}"
+                    class="px-3 py-2 rounded-lg text-sm font-medium transition-colors
+                          {{ request()->routeIs('admin.race-categories.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
+                    Race Categories
+                </a>
+                <div class="mt-2 pt-3 border-t border-gray-800 flex items-center justify-between">
+                    <span class="text-sm text-gray-400">{{ Auth::user()->name }}</span>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit"
+                            class="px-3 py-2 text-sm font-medium text-gray-400 hover:text-white hover:bg-gray-800 rounded-lg transition-colors">
+                            Logout
+                        </button>
+                    </form>
+                </div>
+            </nav>
         </div>
     </header>
 
@@ -95,6 +138,8 @@
     <main class="max-w-[1280px] mx-auto px-6 pb-6">
         @yield('content')
     </main>
+
+    @stack('scripts')
 
 </body>
 
