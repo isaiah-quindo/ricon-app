@@ -47,7 +47,7 @@
         <select name="shirt_size"
             class="w-full rounded-lg border border-gray-200 bg-white text-sm text-gray-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
             <option value="">All Sizes</option>
-            @foreach(['XS', 'S', 'M', 'L', 'XL', 'XXL'] as $size)
+            @foreach(['XS', 'S', 'M', 'L', 'XL', '2XL'] as $size)
             <option value="{{ $size }}" {{ request('shirt_size') === $size ? 'selected' : '' }}>{{ $size }}</option>
             @endforeach
         </select>

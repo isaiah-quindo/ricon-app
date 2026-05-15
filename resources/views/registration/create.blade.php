@@ -40,7 +40,7 @@
     <div class="max-w-2xl mx-auto px-4 py-10">
 
         <form method="POST" action="{{ route('registration.store') }}" enctype="multipart/form-data"
-            x-data="registrationForm()" class="space-y-6">
+            x-data="registrationForm()" @submit="submitting = true" class="space-y-6">
             @csrf
 
             {{-- Validation errors summary --}}
@@ -688,8 +688,13 @@
                         &larr; Edit
                     </button>
                     <button type="submit"
-                        class="w-full sm:w-auto px-8 py-3.5 bg-orange-600 text-white text-sm font-semibold rounded-xl hover:bg-orange-700 active:scale-95 transition-all shadow-lg shadow-orange-600/20">
-                        Confirm &amp; Submit
+                        :disabled="submitting"
+                        class="w-full sm:w-auto px-8 py-3.5 bg-orange-600 text-white text-sm font-semibold rounded-xl hover:bg-orange-700 active:scale-95 transition-all shadow-lg shadow-orange-600/20 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:bg-orange-600 disabled:active:scale-100 inline-flex items-center justify-center gap-2">
+                        <svg x-show="submitting" x-cloak class="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                        </svg>
+                        <span x-text="submitting ? 'Submitting…' : 'Confirm & Submit'">Confirm &amp; Submit</span>
                     </button>
                 </div>
 
@@ -873,6 +878,7 @@
             return {
                 reviewing: false,
                 sizeGuideOpen: false,
+                submitting: false,
 
                 race_category_id: "{{ old('race_category_id', '') }}",
                 first_name: "{{ old('first_name', '') }}",
