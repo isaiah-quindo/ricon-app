@@ -5,7 +5,7 @@
 
 @section('content')
 {{-- ========================================================
-         HERO
+         HERO Section
     ======================================================== --}}
 <section x-data="{ offset: 0 }" @scroll.window="offset = window.scrollY * 0.4" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-0">
     {{-- Background image with parallax --}}
