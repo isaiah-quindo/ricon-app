@@ -29,18 +29,26 @@ class Registration extends Model
         'status',
         'admin_notes',
         'price_paid',
+        'discount_code_id',
+        'discount_amount',
     ];
 
     protected $casts = [
-        'birthdate'     => 'date',
-        'waiver_agreed' => 'boolean',
-        'terms_agreed'  => 'boolean',
-        'price_paid'    => 'decimal:2',
+        'birthdate'       => 'date',
+        'waiver_agreed'   => 'boolean',
+        'terms_agreed'    => 'boolean',
+        'price_paid'      => 'decimal:2',
+        'discount_amount' => 'decimal:2',
     ];
 
     public function raceCategory()
     {
         return $this->belongsTo(RaceCategory::class);
+    }
+
+    public function discountCode()
+    {
+        return $this->belongsTo(DiscountCode::class);
     }
 
     public function paymentProof()

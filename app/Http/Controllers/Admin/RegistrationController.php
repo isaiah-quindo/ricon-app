@@ -45,7 +45,7 @@ class RegistrationController extends Controller
     // Export filtered registrations to CSV
     public function export(Request $request)
     {
-        $registrations = Registration::with('raceCategory')
+        $registrations = Registration::with(['raceCategory', 'discountCode'])
             ->when($request->category,   fn($q) => $q->where('race_category_id', $request->category))
             ->when($request->status,     fn($q) => $q->where('status', $request->status))
             ->when($request->shirt_size, fn($q) => $q->where('shirt_size', $request->shirt_size))
@@ -73,7 +73,7 @@ class RegistrationController extends Controller
                 'id', 'race_category', 'first_name', 'last_name', 'sex',
                 'email', 'mobile_number', 'birthdate', 'address', 'nationality', 'affiliation', 'shirt_size',
                 'emergency_contact_name', 'emergency_contact_number',
-                'bib_number', 'price_paid', 'status', 'admin_notes',
+                'bib_number', 'price_paid', 'discount_code', 'discount_amount', 'status', 'admin_notes',
                 'waiver_agreed', 'terms_agreed', 'created_at', 'updated_at',
             ]);
 
@@ -95,6 +95,8 @@ class RegistrationController extends Controller
                     $reg->emergency_contact_number,
                     $reg->bib_number,
                     $reg->price_paid,
+                    $reg->discountCode?->code ?? '',
+                    $reg->discount_amount,
                     $reg->status,
                     $reg->admin_notes,
                     $reg->waiver_agreed ? 'yes' : 'no',
@@ -111,7 +113,7 @@ class RegistrationController extends Controller
     // View a single registration
     public function show(Registration $registration)
     {
-        $registration->load(['raceCategory', 'paymentProof']);
+        $registration->load(['raceCategory', 'paymentProof', 'discountCode']);
         return view('admin.registrations.show', compact('registration'));
     }
 

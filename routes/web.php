@@ -5,6 +5,7 @@ use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\RegistrationController as AdminRegistrationController;
 use App\Http\Controllers\Admin\RaceCategoryController;
+use App\Http\Controllers\Admin\DiscountCodeController;
 
 // ----------------------------------------------------------
 // Public Routes
@@ -24,6 +25,7 @@ Route::prefix('race-category')->name('race-category.')->group(function () {
 Route::prefix('register')->name('registration.')->group(function () {
     Route::get('/', [RegistrationController::class, 'create'])->name('create');
     Route::post('/', [RegistrationController::class, 'store'])->name('store');
+    Route::post('/validate-discount', [RegistrationController::class, 'validateDiscount'])->name('validateDiscount');
     Route::get('/success', [RegistrationController::class, 'success'])->name('success');
 });
 
@@ -49,6 +51,11 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
 
     // Race Categories
     Route::resource('race-categories', RaceCategoryController::class)->names('race-categories');
+
+    // Discount Codes (no destroy per org policy — retire via is_active toggle)
+    Route::resource('discount-codes', DiscountCodeController::class)
+        ->except(['show', 'destroy'])
+        ->names('discount-codes');
 });
 
 // ----------------------------------------------------------

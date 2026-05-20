@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Register — The Great Cordillera 100 Ultra Trail</title>
     <!-- Facebook Open Graph -->
     <meta property="og:type" content="website">
@@ -40,7 +41,9 @@
     <div class="max-w-2xl mx-auto px-4 py-10">
 
         <form method="POST" action="{{ route('registration.store') }}" enctype="multipart/form-data"
-            x-data="registrationForm()" @submit="submitting = true" class="space-y-6">
+            x-data="registrationForm()"
+        x-init="$watch('race_category_id', () => removeDiscount())"
+        @submit="submitting = true" class="space-y-6">
             @csrf
 
             {{-- Validation errors summary --}}
@@ -50,13 +53,10 @@
                     <svg class="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
                     </svg>
-                    <div>
-                        <p class="text-sm font-semibold text-red-800 mb-1">Please fix the following errors:</p>
-                        <ul class="text-sm text-red-700 space-y-0.5 list-disc list-inside">
-                            @foreach($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
+                    <div class="space-y-0.5">
+                        @foreach($errors->all() as $error)
+                        <p class="text-sm text-red-800">{{ $error }}</p>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -406,6 +406,73 @@
                 </div>
             </div>
 
+            {{-- Discount & Amount Summary (shown once a category is selected) --}}
+            <div x-show="!reviewing && race_category_id" x-cloak class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+                <div class="px-6 py-4 border-b border-gray-100 bg-gray-50">
+                    <h2 class="text-sm font-semibold text-gray-800">Discount & Total</h2>
+                </div>
+                <div class="p-6 space-y-4">
+                    {{-- Discount Code --}}
+                    <div>
+                        <label for="discount_code" class="block text-sm font-medium text-gray-700 mb-1.5">
+                            Discount Code <span class="text-gray-400 text-xs font-normal">(optional)</span>
+                        </label>
+                        <div class="flex gap-2">
+                            <input type="text" id="discount_code" name="discount_code"
+                                x-model="discount_code"
+                                :readonly="appliedDiscount !== null"
+                                style="text-transform:uppercase"
+                                placeholder="Enter code"
+                                class="flex-1 rounded-lg border {{ $errors->has('discount_code') ? 'border-red-400' : 'border-gray-200' }} text-sm px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent read-only:bg-gray-50 read-only:text-gray-500 font-mono" />
+                            <button type="button"
+                                x-show="appliedDiscount === null"
+                                @click="applyDiscount()"
+                                :disabled="discountChecking || !race_category_id || !discount_code"
+                                class="px-4 py-2.5 bg-gray-900 text-white text-sm font-medium rounded-lg hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+                                <span x-show="!discountChecking">Apply</span>
+                                <span x-show="discountChecking" x-cloak>Checking…</span>
+                            </button>
+                            <button type="button"
+                                x-show="appliedDiscount !== null"
+                                x-cloak
+                                @click="removeDiscount()"
+                                class="px-4 py-2.5 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors">
+                                Remove
+                            </button>
+                        </div>
+                        <p x-show="discountError" x-cloak x-text="discountError" class="text-xs text-red-500 mt-1"></p>
+                        <p x-show="appliedDiscount !== null" x-cloak class="text-xs text-green-600 mt-1 flex items-center gap-1">
+                            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            <span>Code applied — <span x-text="appliedDiscount?.percentage"></span>% off</span>
+                        </p>
+                        @error('discount_code')
+                        <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    {{-- Amount Summary --}}
+                    <div class="bg-orange-50 border border-orange-100 rounded-lg p-4">
+                        <p class="text-xs font-semibold text-gray-600 uppercase tracking-wider mb-3">Amount Summary</p>
+                        <dl class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <dt class="text-gray-600">Base Price</dt>
+                                <dd class="font-medium text-gray-900" x-text="formatPHP(basePrice)"></dd>
+                            </div>
+                            <div x-show="appliedDiscount !== null" x-cloak class="flex justify-between">
+                                <dt class="text-gray-600">Discount (<span x-text="appliedDiscount?.percentage"></span>%)</dt>
+                                <dd class="font-medium text-green-600">−<span x-text="formatPHP(appliedDiscount?.discount_amount || 0)"></span></dd>
+                            </div>
+                            <div class="border-t border-orange-200 pt-2 flex justify-between items-baseline">
+                                <dt class="font-semibold text-gray-900">Total Due</dt>
+                                <dd class="font-bold text-lg text-orange-600" x-text="formatPHP(totalDue)"></dd>
+                            </div>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+
             {{-- Step 4: Payment --}}
             <div x-show="!reviewing" class="bg-white rounded-xl border border-gray-200 overflow-hidden">
                 <div class="px-6 py-4 border-b border-gray-100 bg-gray-50">
@@ -643,7 +710,7 @@
                             Payment
                         </h2>
                     </div>
-                    <div class="p-6">
+                    <div class="p-6 space-y-4">
                         <dl class="grid grid-cols-2 gap-4 text-sm">
                             <div>
                                 <dt class="text-xs text-gray-400 mb-0.5">Payment Method</dt>
@@ -654,6 +721,24 @@
                                 <dd class="font-medium text-gray-800" x-text="fileName || '—'"></dd>
                             </div>
                         </dl>
+
+                        {{-- Amount summary in review --}}
+                        <div class="border-t border-gray-100 pt-4">
+                            <dl class="space-y-1.5 text-sm">
+                                <div class="flex justify-between">
+                                    <dt class="text-gray-500">Base Price</dt>
+                                    <dd class="font-medium text-gray-800" x-text="formatPHP(basePrice)"></dd>
+                                </div>
+                                <div x-show="appliedDiscount !== null" x-cloak class="flex justify-between">
+                                    <dt class="text-gray-500">Discount Code (<span class="font-mono" x-text="appliedDiscount?.code"></span>)</dt>
+                                    <dd class="font-medium text-green-600">−<span x-text="formatPHP(appliedDiscount?.discount_amount || 0)"></span></dd>
+                                </div>
+                                <div class="flex justify-between items-baseline pt-1.5 border-t border-gray-100">
+                                    <dt class="font-semibold text-gray-900">Total to Pay</dt>
+                                    <dd class="font-bold text-orange-600" x-text="formatPHP(totalDue)"></dd>
+                                </div>
+                            </dl>
+                        </div>
                     </div>
                 </div>
 
@@ -896,8 +981,67 @@
                 payment_method: "{{ old('payment_method', '') }}",
                 fileName: "",
 
+                discount_code: "{{ old('discount_code', '') }}",
+                appliedDiscount: null,
+                discountError: "",
+                discountChecking: false,
+
                 get selectedCategory() {
                     return categories.find(c => c.id === this.race_category_id) || null;
+                },
+
+                get basePrice() {
+                    return this.selectedCategory ? Number(this.selectedCategory.price) : 0;
+                },
+
+                get totalDue() {
+                    return this.appliedDiscount ? Number(this.appliedDiscount.total) : this.basePrice;
+                },
+
+                formatPHP(value) {
+                    return "₱" + Number(value || 0).toLocaleString("en-PH", {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    });
+                },
+
+                async applyDiscount() {
+                    this.discountError = "";
+                    if (!this.race_category_id) { this.discountError = "Select a race category first."; return; }
+                    if (!this.discount_code)    { this.discountError = "Enter a code."; return; }
+                    this.discountChecking = true;
+                    try {
+                        const res = await fetch("{{ route('registration.validateDiscount') }}", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "Accept": "application/json",
+                                "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content,
+                            },
+                            body: JSON.stringify({
+                                code: this.discount_code,
+                                race_category_id: this.race_category_id,
+                                email: this.email,
+                            }),
+                        });
+                        const json = await res.json();
+                        if (!json.valid) {
+                            this.appliedDiscount = null;
+                            this.discountError = json.message || "Code is not valid.";
+                            return;
+                        }
+                        this.appliedDiscount = json;
+                    } catch (e) {
+                        this.discountError = "Could not validate code. Please try again.";
+                    } finally {
+                        this.discountChecking = false;
+                    }
+                },
+
+                removeDiscount() {
+                    this.appliedDiscount = null;
+                    this.discount_code = "";
+                    this.discountError = "";
                 },
 
                 get formattedPrice() {

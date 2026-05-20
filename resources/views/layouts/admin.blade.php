@@ -40,6 +40,11 @@
                           {{ request()->routeIs('admin.race-categories.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
                     Race Categories
                 </a>
+                <a href="{{ route('admin.discount-codes.index') }}"
+                    class="px-3 py-2 rounded-lg text-sm font-medium transition-colors
+                          {{ request()->routeIs('admin.discount-codes.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
+                    Discount Codes
+                </a>
             </nav>
 
             <!-- Desktop user + logout -->
@@ -85,6 +90,11 @@
                     class="px-3 py-2 rounded-lg text-sm font-medium transition-colors
                           {{ request()->routeIs('admin.race-categories.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
                     Race Categories
+                </a>
+                <a href="{{ route('admin.discount-codes.index') }}"
+                    class="px-3 py-2 rounded-lg text-sm font-medium transition-colors
+                          {{ request()->routeIs('admin.discount-codes.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
+                    Discount Codes
                 </a>
                 <div class="mt-2 pt-3 border-t border-gray-800 flex items-center justify-between">
                     <span class="text-sm text-gray-400">{{ Auth::user()->name }}</span>

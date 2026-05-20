@@ -1,0 +1,126 @@
+================================================================================
+Prod Supabase migration — Discount Codes feature
+Date prepared: 2026-05-20
+Source Laravel migrations:
+  - database/migrations/2026_05_20_223149_create_discount_codes_table.php
+  - database/migrations/2026_05_20_223150_add_discount_fields_to_registrations_table.php
+================================================================================
+
+HOW TO USE
+----------
+1. In Supabase Dashboard → Database → Backups, click "Backup now" on the prod
+   project and wait for it to finish.
+2. Open Supabase Studio → SQL Editor → New query.
+3. Paste the MIGRATION BLOCK below → Run.
+4. Paste the VERIFICATION BLOCK below → Run → confirm expected results.
+5. Deploy the updated app code so the new columns are used.
+
+If anything fails, the BEGIN/COMMIT wrapper rolls the entire change back — you
+will not end up half-applied.
+
+
+================================================================================
+MIGRATION BLOCK — paste and run
+================================================================================
+
+BEGIN;
+
+-- 1. Create the discount_codes table
+CREATE TABLE "discount_codes" (
+    "id"                  uuid          NOT NULL PRIMARY KEY,
+    "code"                varchar(255)  NOT NULL,
+    "race_category_id"    uuid          NOT NULL,
+    "discount_percentage" decimal(5, 2) NOT NULL,
+    "max_uses"            integer       NULL,
+    "used_count"          integer       NOT NULL DEFAULT 0,
+    "expires_at"          timestamp(0) without time zone NULL,
+    "one_per_email"       boolean       NOT NULL DEFAULT false,
+    "is_active"           boolean       NOT NULL DEFAULT true,
+    "description"         varchar(255)  NULL,
+    "created_at"          timestamp(0) without time zone NULL,
+    "updated_at"          timestamp(0) without time zone NULL,
+    CONSTRAINT "discount_codes_code_unique" UNIQUE ("code"),
+    CONSTRAINT "discount_codes_race_category_id_foreign"
+        FOREIGN KEY ("race_category_id")
+        REFERENCES "race_categories" ("id")
+        ON DELETE CASCADE
+);
+
+-- 2. Add discount columns to the registrations table
+ALTER TABLE "registrations" ADD COLUMN "discount_code_id" uuid NULL;
+ALTER TABLE "registrations" ADD COLUMN "discount_amount"  decimal(10, 2) NULL;
+ALTER TABLE "registrations" ADD CONSTRAINT "registrations_discount_code_id_foreign"
+    FOREIGN KEY ("discount_code_id")
+    REFERENCES "discount_codes" ("id")
+    ON DELETE SET NULL;
+
+-- 3. Tell Laravel both migrations have been applied so a future `migrate`
+--    against prod will not try to re-run them.
+WITH next_batch AS (SELECT COALESCE(MAX(batch), 0) + 1 AS b FROM migrations)
+INSERT INTO migrations (migration, batch)
+SELECT '2026_05_20_223149_create_discount_codes_table', b FROM next_batch
+UNION ALL
+SELECT '2026_05_20_223150_add_discount_fields_to_registrations_table', b FROM next_batch;
+
+COMMIT;
+
+
+================================================================================
+VERIFICATION BLOCK — run after the COMMIT
+================================================================================
+
+-- Should return both migration rows
+SELECT migration, batch
+FROM migrations
+WHERE migration LIKE '2026_05_20_%';
+
+-- Should list every discount_codes column in order
+SELECT column_name, data_type
+FROM information_schema.columns
+WHERE table_name = 'discount_codes'
+ORDER BY ordinal_position;
+
+-- Should return exactly 2 rows: discount_code_id (uuid) and discount_amount (numeric)
+SELECT column_name, data_type
+FROM information_schema.columns
+WHERE table_name = 'registrations'
+  AND column_name LIKE 'discount%';
+
+
+================================================================================
+NOTES
+================================================================================
+- `unsignedInteger` in Laravel migrations maps to `integer` on Postgres
+  (Postgres has no unsigned integer type). The dev DB uses the same
+  translation, so prod will match dev.
+- The `after('...')` calls in the Laravel migrations are silently ignored by
+  Postgres (no column ordering), so `discount_code_id` and `discount_amount`
+  will land at the end of `registrations`. Harmless.
+- The migration filenames inside the INSERT INTO migrations (...) statement
+  must match exactly — no `.php` suffix.
+
+
+================================================================================
+ROLLBACK (only if needed)
+================================================================================
+Run inside a new transaction — this reverses every step in reverse order.
+
+BEGIN;
+
+DELETE FROM migrations
+WHERE migration IN (
+    '2026_05_20_223149_create_discount_codes_table',
+    '2026_05_20_223150_add_discount_fields_to_registrations_table'
+);
+
+ALTER TABLE "registrations" DROP CONSTRAINT IF EXISTS "registrations_discount_code_id_foreign";
+ALTER TABLE "registrations" DROP COLUMN IF EXISTS "discount_amount";
+ALTER TABLE "registrations" DROP COLUMN IF EXISTS "discount_code_id";
+
+DROP TABLE IF EXISTS "discount_codes";
+
+COMMIT;
+
+WARNING: rolling back will permanently lose any discount codes and any
+discount_code_id / discount_amount values already recorded on registrations.
+Only run the rollback if you are sure that data is not needed.

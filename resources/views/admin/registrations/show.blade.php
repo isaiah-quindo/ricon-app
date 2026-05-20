@@ -113,7 +113,7 @@
                 Proof of Payment
             </h3>
             <div class="flex flex-wrap gap-4 items-start">
-                <div class="flex-1">
+                <div class="flex-1 min-w-0">
                     <div class="grid grid-cols-2 gap-3 mb-4">
                         <div>
                             <p class="text-xs text-gray-400 mb-0.5">Payment Method</p>
@@ -283,8 +283,22 @@
                 </div>
                 @endif
                 <div class="flex justify-between">
-                    <span class="text-xs text-indigo-500">Entry Fee</span>
-                    <span class="text-xs font-semibold text-indigo-900">₱{{ number_format($registration->price_paid ?? $registration->raceCategory->price, 2) }}</span>
+                    <span class="text-xs text-indigo-500">Base Fee</span>
+                    <span class="text-xs font-semibold text-indigo-900">₱{{ number_format($registration->raceCategory->price, 2) }}</span>
+                </div>
+                @if($registration->discountCode)
+                <div class="flex justify-between">
+                    <span class="text-xs text-indigo-500">Discount Code</span>
+                    <span class="text-xs font-mono font-semibold text-indigo-900">{{ $registration->discountCode->code }}</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-xs text-indigo-500">Discount Amount</span>
+                    <span class="text-xs font-semibold text-green-700">−₱{{ number_format($registration->discount_amount, 2) }}</span>
+                </div>
+                @endif
+                <div class="flex justify-between pt-2 border-t border-indigo-200">
+                    <span class="text-xs font-semibold text-indigo-700">Paid</span>
+                    <span class="text-xs font-bold text-indigo-900">₱{{ number_format($registration->price_paid ?? $registration->raceCategory->price, 2) }}</span>
                 </div>
             </div>
         </div>
