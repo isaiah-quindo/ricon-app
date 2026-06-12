@@ -152,7 +152,7 @@
 <body>
     <div class="wrapper">
         <div class="header">
-            <h1>The Great Cordileera 100</h1>
+            <h1>The Great Cordillera 100</h1>
             <p>Race Registration System</p>
             <div class="badge">Registration Update</div>
         </div>

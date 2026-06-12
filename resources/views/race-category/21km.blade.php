@@ -143,14 +143,14 @@
                 <p class="absolute top-3 right-3 text-green-400 text-xs">⚠ Limited slots</p>
                 <p class="text-green-400 text-xs font-semibold uppercase tracking-wider mb-1">Early Bird</p>
                 <p class="text-white font-bold text-2xl mb-1">₱2,490</p>
-                <p class="text-gray-500 text-sm">May 16 - Jun 15</p>
+                <p class="text-gray-500 text-sm">May 16 - Jun 30</p>
             </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
             <div class="bg-[#1a1a1a] bg-opacity-50 rounded-xl p-5 border border-white/5 text-center">
                 <p class="text-green-400 text-xs font-semibold uppercase tracking-wider mb-1">Regular</p>
                 <p class="text-white font-bold text-2xl mb-1">₱3,000</p>
-                <p class="text-gray-500 text-sm">Jun 16 - Aug 15</p>
+                <p class="text-gray-500 text-sm">Jul 1 - Aug 15</p>
             </div>
             <div class="bg-[#1a1a1a] bg-opacity-50 rounded-xl p-5 border border-white/5 text-center">
                 <p class="text-green-400 text-xs font-semibold uppercase tracking-wider mb-1">Late</p>
