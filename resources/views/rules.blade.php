@@ -551,6 +551,10 @@
             'text' => 'Personal information collected during registration — including your name, birthdate, address, contact details, emergency contacts, and payment proof — is used solely for race administration purposes. All data is handled in accordance with the Data Privacy Act of 2012 (Republic Act No. 10173). Your information will not be shared with third parties except as required for event operations.',
             ],
             [
+            'title' => 'Promotional Communications',
+            'text' => 'By registering for the event, you consent to receive promotional and marketing communications from the organizers via email, SMS, or other channels. These may include updates on future races, partner offers, training resources, and event-related announcements. You may opt out at any time by following the unsubscribe instructions in any email, or by contacting the organizers directly. Opting out of promotional communications will not affect transactional messages essential to your registration (e.g., payment confirmations, race-day instructions).',
+            ],
+            [
             'title' => 'Limitation of Liability',
             'text' => 'The organizers, race officials, volunteers, and all associated parties shall not be held liable for any injury, illness, death, loss, or damage — whether personal, property, or financial — arising from participation in, or travel to and from, the event.',
             ],
