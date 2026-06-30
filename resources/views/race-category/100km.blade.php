@@ -173,15 +173,16 @@
                 <p class="text-gray-400 font-bold text-2xl mb-1 line-through">₱6,490</p>
                 <p class="text-gray-500 text-sm">April 15 - May 15</p>
             </div>
-            <div class="relative bg-[#1a1a1a] bg-opacity-50 rounded-xl p-5 border border-orange-500 text-center">
-                <p class="absolute top-3 right-3 text-orange-400 text-xs">⚠ Limited slots</p>
-                <p class="text-orange-500 text-xs font-semibold uppercase tracking-wider mb-1">Early Bird</p>
-                <p class="text-white font-bold text-2xl mb-1">₱6,990</p>
+            <div class="relative bg-[#1a1a1a] bg-opacity-30 rounded-xl p-5 border border-white/5 text-center opacity-60">
+                <p class="absolute top-3 right-3 text-gray-400 text-xs bg-gray-700/60 px-2 py-0.5 rounded-full">Ended</p>
+                <p class="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-1">Early Bird</p>
+                <p class="text-gray-400 font-bold text-2xl mb-1 line-through">₱6,990</p>
                 <p class="text-gray-500 text-sm">May 16 - Jun 30</p>
             </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-            <div class="bg-[#1a1a1a] bg-opacity-50 rounded-xl p-5 border border-white/5 text-center">
+            <div class="relative bg-[#1a1a1a] bg-opacity-50 rounded-xl p-5 border border-orange-500 text-center">
+                <p class="absolute top-3 right-3 text-orange-400 text-xs">⚠ Limited slots</p>
                 <p class="text-orange-500 text-xs font-semibold uppercase tracking-wider mb-1">Regular</p>
                 <p class="text-white font-bold text-2xl mb-1">₱7,900</p>
                 <p class="text-gray-500 text-sm">Jul 1 - Aug 15</p>
