@@ -22,6 +22,12 @@ return [
         'key' => env('RESEND_API_KEY'),
     ],
 
+    'mailchimp' => [
+        'key'     => env('MAILCHIMP_API_KEY'),
+        'list_id' => env('MAILCHIMP_LIST_ID'),
+        'dc'      => env('MAILCHIMP_DC'), // server prefix, e.g. "us21" (the suffix of the API key)
+    ],
+
     'ses' => [
         'key' => env('AWS_ACCESS_KEY_ID'),
         'secret' => env('AWS_SECRET_ACCESS_KEY'),

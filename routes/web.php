@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\RegistrationController as AdminRegistrationController;
 use App\Http\Controllers\Admin\RaceCategoryController;
 use App\Http\Controllers\Admin\DiscountCodeController;
+use App\Http\Controllers\Admin\TrainingSignupController;
+use App\Http\Controllers\TrainingProgramController;
 
 // ----------------------------------------------------------
 // Public Routes
@@ -27,6 +29,15 @@ Route::prefix('register')->name('registration.')->group(function () {
     Route::post('/', [RegistrationController::class, 'store'])->name('store');
     Route::post('/validate-discount', [RegistrationController::class, 'validateDiscount'])->name('validateDiscount');
     Route::get('/success', [RegistrationController::class, 'success'])->name('success');
+});
+
+Route::prefix('training')->name('training.')->group(function () {
+    Route::get('/', [TrainingProgramController::class, 'landing'])->name('landing');
+    Route::post('/signup', [TrainingProgramController::class, 'signup'])
+        ->middleware('throttle:10,1')->name('signup');
+    Route::post('/resend', [TrainingProgramController::class, 'resend'])
+        ->middleware('throttle:5,1')->name('resend');
+    Route::get('/p/{token}', [TrainingProgramController::class, 'show'])->name('program');
 });
 
 // ----------------------------------------------------------
@@ -56,6 +67,13 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::resource('discount-codes', DiscountCodeController::class)
         ->except(['show', 'destroy'])
         ->names('discount-codes');
+
+    // Training Program signups
+    Route::prefix('training-signups')->name('training-signups.')->group(function () {
+        Route::get('/', [TrainingSignupController::class, 'index'])->name('index');
+        Route::get('/export', [TrainingSignupController::class, 'export'])->name('export');
+        Route::post('/{trainingSignup}/resend-link', [TrainingSignupController::class, 'resendLink'])->name('resendLink');
+    });
 });
 
 // ----------------------------------------------------------
