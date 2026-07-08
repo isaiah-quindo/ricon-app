@@ -293,7 +293,7 @@
         return {
             name: '',
             email: '',
-            registered: true,
+            registered: false,
             plan: 'tgc100k',
             submitting: false,
             redirecting: false,
@@ -347,8 +347,8 @@
                     if (json.status === 'created' && json.url) {
                         if (typeof fbq === 'function') fbq('track', 'Lead');
                         this.redirecting = true;
-                        this.showToast("You're in, " + this.name.trim() + "! Taking you to Week 1 of your program.");
-                        setTimeout(() => location.assign(json.url), 1400);
+                        this.showToast("You're in, " + this.name.trim() + "! We also emailed your personal link to " + this.email.trim() + ". Taking you to your program now.");
+                        setTimeout(() => location.assign(json.url), 2200);
                         return;
                     }
 

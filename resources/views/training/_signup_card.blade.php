@@ -2,12 +2,12 @@
     {{-- Toast --}}
     <div x-show="toast.visible" x-cloak
         x-transition:enter="transition ease-out duration-300"
-        x-transition:enter-start="opacity-0 translate-y-3"
+        x-transition:enter-start="opacity-0 -translate-y-3"
         x-transition:enter-end="opacity-100 translate-y-0"
         x-transition:leave="transition ease-in duration-200"
         x-transition:leave-start="opacity-100 translate-y-0"
-        x-transition:leave-end="opacity-0 translate-y-3"
-        class="fixed bottom-6 left-4 right-4 sm:left-auto sm:right-6 sm:max-w-sm z-[60]"
+        x-transition:leave-end="opacity-0 -translate-y-3"
+        class="fixed top-6 inset-x-4 sm:inset-x-0 sm:mx-auto sm:w-full sm:max-w-sm z-[60]"
         role="status" aria-live="polite">
         <div class="flex items-start gap-3 rounded-xl border bg-[#111111] px-4 py-3.5 shadow-2xl shadow-black/50"
             :class="toast.type === 'error' ? 'border-red-500/40' : 'border-blue-500/40'">
@@ -69,17 +69,17 @@
         <div>
             <p class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5">Are you registered for The Great Cordillera?</p>
             <div class="grid grid-cols-2 gap-3">
-                <button type="button" @click="registered = true"
-                    :class="registered ? 'border-blue-500 bg-blue-500/10 text-white' : 'border-white/10 text-gray-400 hover:border-white/30'"
-                    class="rounded-lg border px-4 py-3 text-left transition-colors">
-                    <span class="block text-sm font-bold">Yes</span>
-                    <span class="block text-xs opacity-60">I'm in</span>
-                </button>
                 <button type="button" @click="registered = false"
                     :class="!registered ? 'border-blue-500 bg-blue-500/10 text-white' : 'border-white/10 text-gray-400 hover:border-white/30'"
                     class="rounded-lg border px-4 py-3 text-left transition-colors">
                     <span class="block text-sm font-bold">Not yet</span>
                     <span class="block text-xs opacity-60">Still deciding</span>
+                </button>
+                <button type="button" @click="registered = true"
+                    :class="registered ? 'border-blue-500 bg-blue-500/10 text-white' : 'border-white/10 text-gray-400 hover:border-white/30'"
+                    class="rounded-lg border px-4 py-3 text-left transition-colors">
+                    <span class="block text-sm font-bold">Yes</span>
+                    <span class="block text-xs opacity-60">I'm in</span>
                 </button>
             </div>
         </div>
