@@ -200,14 +200,17 @@ function renderWeek(plan, week, currentWeek) {
     <div class="week__brief">${week.coach_brief.map(p => `<p>${p}</p>`).join('')}</div>
   `;
 
-  // Block callout: training focus + block goal
-  if (week.training_focus || week.block_goal) {
+  // Block callout: training focus + key session
+  if (week.training_focus || week.key_session) {
     html += '<div class="block-callout">';
     if (week.training_focus) {
       html += `<div class="block-row"><div class="block-key">Training Focus</div><div class="block-val">${week.training_focus}</div></div>`;
     }
-    if (week.block_goal) {
-      html += `<div class="block-row"><div class="block-key">Block Goal</div><div class="block-val">${week.block_goal}</div></div>`;
+    if (week.key_session) {
+      const ks = week.key_session;
+      let ksDetail = ks.duration + ' ' + ks.title;
+      if (ks.vert_gain_m) ksDetail += ' &middot; &uarr; ' + ks.vert_gain_m;
+      html += `<div class="block-row"><div class="block-key">Key Session</div><div class="block-val">${ksDetail}</div></div>`;
     }
     html += '</div>';
   }
