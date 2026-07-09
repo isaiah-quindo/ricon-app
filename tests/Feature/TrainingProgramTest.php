@@ -228,7 +228,7 @@ class TrainingProgramTest extends TestCase
         $this->get('/training')
             ->assertOk()
             ->assertSee('Week 5 of 24')
-            ->assertSee('edifyendurance@gmail.com');
+            ->assertSee('coachdon@edifyendurance.com');
 
         $this->travelBack();
     }

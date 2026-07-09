@@ -570,6 +570,17 @@ body {
   line-height: 1.6; letter-spacing: 0.02em; margin-top: -8px;
 }
 
+/* ── Footer ── */
+.site-footer {
+  text-align: center;
+  padding: 20px 24px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.18);
+}
+
 /* ── Mobile ── */
 @media (max-width: 520px) {
   .screen { padding: 80px 20px 56px; }
@@ -621,6 +632,8 @@ body {
   </a>
 
   @yield('content')
+
+  <footer class="site-footer">TGC 2026 Training Program by Edify Endurance</footer>
 
   @stack('scripts')
 </body>
