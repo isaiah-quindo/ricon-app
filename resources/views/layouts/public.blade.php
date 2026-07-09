@@ -59,6 +59,7 @@
 
                 <div class="hidden md:flex items-center gap-8">
                     <a href="/#race-categories" class="text-gray-300 hover:text-white text-sm font-medium transition-colors">Race Categories</a>
+                    <a href="{{ route('training.landing') }}" class="text-gray-300 hover:text-white text-sm font-medium transition-colors">Training</a>
                     <a href="{{ route('rules') }}" class="text-gray-300 hover:text-white text-sm font-medium transition-colors">Rules</a>
                     <a href="/about" class="text-gray-300 hover:text-white text-sm font-medium transition-colors">About Us</a>
                 </div>
@@ -90,6 +91,7 @@
             class="md:hidden border-t border-white/10">
             <div class="mx-auto px-8 py-4 flex flex-col gap-4" style="max-width:1280px;">
                 <a href="/#race-categories" @click="open = false" class="text-gray-300 hover:text-white text-sm font-medium transition-colors py-2">Race Categories</a>
+                <a href="{{ route('training.landing') }}" @click="open = false" class="text-gray-300 hover:text-white text-sm font-medium transition-colors py-2">Training</a>
                 <a href="{{ route('rules') }}" @click="open = false" class="text-gray-300 hover:text-white text-sm font-medium transition-colors py-2">Rules</a>
                 <a href="/about" @click="open = false" class="text-gray-300 hover:text-white text-sm font-medium transition-colors py-2">About Us</a>
                 <a href="{{ route('registration.create') }}" class="mt-2 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-bold rounded-lg bg-orange-600 text-white hover:bg-orange-700 focus:outline-hidden">
@@ -142,6 +144,7 @@
                 </a>
                 <div class="flex flex-wrap items-center gap-6 text-sm text-gray-400">
                     <a href="/#race-categories" class="hover:text-white transition-colors">Race Categories</a>
+                    <a href="{{ route('training.landing') }}" class="hover:text-white transition-colors">Training</a>
                     <a href="{{ route('rules') }}" class="hover:text-white transition-colors">Rules & Guidelines</a>
                     <a href="/about" class="hover:text-white transition-colors">About</a>
                 </div>
