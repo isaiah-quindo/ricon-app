@@ -223,11 +223,11 @@
                         </p>
                     </div>
                     <div class="flex flex-col items-start md:items-center gap-3">
-                        <a href="mailto:edifyendurance@gmail.com?subject=Personalized%20Training%20Plan%20Inquiry"
+                        <a href="mailto:coachdon@edifyendurance.com?subject=Personalized%20Training%20Plan%20Inquiry"
                             class="py-3 px-8 inline-flex items-center gap-x-2 text-sm font-bold rounded-lg bg-orange-600 text-white hover:bg-orange-700 focus:outline-hidden">
                             Email Edify Endurance
                         </a>
-                        <p class="text-gray-500 text-xs">edifyendurance@gmail.com</p>
+                        <p class="text-gray-500 text-xs">coachdon@edifyendurance.com</p>
                     </div>
                 </div>
             </div>
@@ -251,7 +251,7 @@
                 ['Is it really free?', 'Yes. The full 24-week program is free: every week, every session. No card, no trial, no upsell.'],
                 ['Do I have to be registered for The Great Cordillera?', 'No. The program is open to everyone. It\'s built for TGC\'s terrain, but it works for any mountain goal, or for just getting seriously fit.'],
                 ['What if I lose my link?', 'Use "Re-send my link" on this page and we\'ll email it again. Your progress is tied to your start date, so nothing is lost.'],
-                ['I\'m joining late. Did I miss too much?', 'You can still jump in: the plan always shows the current week, and every past week stays open to review. If you want the early base phases rebuilt around your timeline, Edify Endurance offers personalized premium plans. Email edifyendurance@gmail.com for rates.'],
+                ['I\'m joining late. Did I miss too much?', 'You can still jump in: the plan always shows the current week, and every past week stays open to review. If you want the early base phases rebuilt around your timeline, Edify Endurance offers personalized premium plans. Email coachdon@edifyendurance.com for rates.'],
                 ['I live somewhere flat. Can I still follow it?', 'Yes. The plan is written for flat-city runners. Hill sessions map to stairways, incline treadmills, parking ramps, and whatever vert you can find.'],
             ] as $i => [$q, $a])
             <div class="bg-[#1a1a1a] rounded-xl overflow-hidden">

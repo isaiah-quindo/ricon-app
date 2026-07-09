@@ -258,9 +258,9 @@
                 <p class="upsell-text">
                     The free program is one shared calendar for everyone. If you joined late, or want a plan built around your current fitness, your schedule, and your goal race, the coaches behind this program offer premium, personalized training plans.
                 </p>
-                <a class="upsell-btn" href="mailto:edifyendurance@gmail.com?subject=Personalized%20Training%20Plan%20Inquiry"
+                <a class="upsell-btn" href="mailto:coachdon@edifyendurance.com?subject=Personalized%20Training%20Plan%20Inquiry"
                     style="display:inline-block; background-color:#F04C24; color:#ffffff !important; text-decoration:none; padding:12px 26px; border-radius:6px; font-size:14px; font-weight:bold;">Ask About Personalized Plans</a>
-                <p class="upsell-note">Email <a href="mailto:edifyendurance@gmail.com">edifyendurance@gmail.com</a> for rates.</p>
+                <p class="upsell-note">Email <a href="mailto:coachdon@edifyendurance.com">coachdon@edifyendurance.com</a> for rates.</p>
             </div>
 
             <p class="text">See you on the trails! 🏔️</p>
