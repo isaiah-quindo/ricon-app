@@ -81,6 +81,23 @@ class TrainingProgramController extends Controller
 
         $program = json_decode(File::get(resource_path('data/training_program.json')), true);
 
+        // Weeks past max_open_week are locked: keep only the skeleton the UI
+        // needs (nav labels, volume chart) so unreleased content never ships
+        $maxOpen = $program['max_open_week'] ?? null;
+        if ($maxOpen) {
+            foreach ($program['plans'] as &$plan) {
+                foreach ($plan['weeks'] as &$week) {
+                    if ($week['week'] > $maxOpen) {
+                        $week = array_intersect_key($week, array_flip([
+                            'week', 'phase', 'is_deload', 'dates_label', 'unlock_date', 'total_hours',
+                        ])) + ['locked' => true];
+                    }
+                }
+                unset($week);
+            }
+            unset($plan);
+        }
+
         return view('training.program', compact('signup', 'program'));
     }
 

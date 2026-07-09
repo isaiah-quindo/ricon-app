@@ -263,6 +263,7 @@ body {
 .day-row.is-rest .day-name {
   border-color: rgba(255,255,255,0.08);
 }
+.day-row.is-rest.is-today { opacity: 0.55; }
 
 /* ── Day body ── */
 .day-body { flex: 1; min-width: 0; font-family: 'Manrope', sans-serif; }
@@ -327,15 +328,12 @@ body {
 }
 .day-badge.key-badge { color: var(--orange); }
 .day-badge.race-badge { color: #D4A843; }
-
-/* ── 60K notice ── */
-.notice {
-  font-size: 12px;
-  color: rgba(212,168,67,0.75);
-  border: 1px solid rgba(212,168,67,0.2);
-  padding: 12px 16px;
-  line-height: 1.6;
-  margin-bottom: 32px;
+.day-badge.today-badge {
+  margin-left: 8px;
+  color: #5B90C8;
+  border: 1px solid #5B90C8;
+  border-radius: 999px;
+  padding: 3px 9px 2px;
 }
 
 /* ── Button ── */

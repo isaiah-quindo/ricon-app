@@ -118,7 +118,7 @@
         .cta a {
             display: inline-block;
             background-color: #F04C24;
-            color: #ffffff;
+            color: #ffffff !important;
             text-decoration: none;
             padding: 14px 32px;
             border-radius: 6px;
@@ -147,7 +147,7 @@
         }
 
         .upsell-eyebrow {
-            color: #93b4f5;
+            color: #f5a623;
             font-size: 11px;
             font-weight: bold;
             letter-spacing: 2px;
@@ -170,8 +170,8 @@
 
         .upsell-btn {
             display: inline-block;
-            background-color: #2543e8;
-            color: #ffffff;
+            background-color: #F04C24;
+            color: #ffffff !important;
             text-decoration: none;
             padding: 12px 26px;
             border-radius: 6px;
@@ -187,7 +187,7 @@
         }
 
         .upsell-note a {
-            color: #93b4f5;
+            color: #f5a623;
         }
 
         .footer {
@@ -239,7 +239,8 @@
             </div>
 
             <div class="cta">
-                <a href="{{ $signup->program_url }}">Open My Training Program</a>
+                <a href="{{ $signup->program_url }}"
+                    style="display:inline-block; background-color:#F04C24; color:#ffffff !important; text-decoration:none; padding:14px 32px; border-radius:6px; font-size:15px; font-weight:bold;">Open My Training Program</a>
             </div>
 
             <p class="link-fallback">
@@ -257,7 +258,8 @@
                 <p class="upsell-text">
                     The free program is one shared calendar for everyone. If you joined late, or want a plan built around your current fitness, your schedule, and your goal race, the coaches behind this program offer premium, personalized training plans.
                 </p>
-                <a class="upsell-btn" href="mailto:edifyendurance@gmail.com?subject=Personalized%20Training%20Plan%20Inquiry">Ask About Personalized Plans</a>
+                <a class="upsell-btn" href="mailto:edifyendurance@gmail.com?subject=Personalized%20Training%20Plan%20Inquiry"
+                    style="display:inline-block; background-color:#F04C24; color:#ffffff !important; text-decoration:none; padding:12px 26px; border-radius:6px; font-size:14px; font-weight:bold;">Ask About Personalized Plans</a>
                 <p class="upsell-note">Email <a href="mailto:edifyendurance@gmail.com">edifyendurance@gmail.com</a> for rates.</p>
             </div>
 

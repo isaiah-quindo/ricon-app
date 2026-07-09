@@ -71,9 +71,14 @@ function daysSinceStart() {
   return Math.floor((today() - START) / 86400000);
 }
 
-// Shared calendar week: week 1 started on program_start, clamped to 1..total
+// Weeks past this are locked (content withheld until released)
+function maxOpenWeek(plan) {
+  return Math.min(plan.total_weeks, DATA.max_open_week || plan.total_weeks);
+}
+
+// Shared calendar week: week 1 started on program_start, clamped to 1..max open
 function currentWeekNum(plan) {
-  return Math.min(plan.total_weeks, Math.max(1, Math.floor(daysSinceStart() / 7) + 1));
+  return Math.min(maxOpenWeek(plan), Math.max(1, Math.floor(daysSinceStart() / 7) + 1));
 }
 
 function isProgramComplete(plan) {
@@ -108,6 +113,8 @@ function render() {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
 
   if (currentView === 'week') {
+    // Never render a locked week, even from a stale selection
+    if (selectedWeekNum) selectedWeekNum = Math.min(selectedWeekNum, maxOpenWeek(plan));
     const viewWeek = selectedWeekNum
       ? plan.weeks.find(w => w.week === selectedWeekNum)
       : week;
@@ -123,10 +130,6 @@ function renderWelcome(plan, week) {
   const screen = document.getElementById('s-welcome');
   const complete = isProgramComplete(plan);
 
-  const notice = (activePlan === 'tgc60k')
-    ? `<div class="notice">The 60K plan follows the same periodization and session types as the 100K, scaled to ~60km and 4,200m of gain.</div>`
-    : '';
-
   if (complete) {
     screen.innerHTML = `
       <div class="label">${SIGNUP.first_name}, the block is done</div>
@@ -135,7 +138,6 @@ function renderWelcome(plan, week) {
         The full ${plan.total_weeks}-week program has wrapped.
         Every week stays open, so you can review any block whenever you need it.
       </p>
-      ${notice}
       <button class="btn" id="enterBtn">
         Review the plan
         <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -154,7 +156,6 @@ function renderWelcome(plan, week) {
         ${weekDatesLabel(week.week)}. ${week.total_hours}.<br>
         ${keySub}
       </p>
-      ${notice}
       <button class="btn" id="enterBtn">
         See this week's plan
         <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -211,19 +212,21 @@ function renderWeek(plan, week, currentWeek) {
     html += '</div>';
   }
 
-  // Schedule
+  // Schedule: mark today's row, but only when viewing the current week
+  const todayName = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][today().getDay()];
   html += '<div class="schedule">';
   for (const day of week.days) {
-    html += renderDayRow(day);
+    html += renderDayRow(day, isThisWeek && day.day === todayName);
   }
   html += '</div>';
 
   // Reference: RPE scale + volume arc
   html += renderReference(plan, week);
 
-  // Week navigation: all weeks open, no drip cap
+  // Week navigation: past and current weeks open, locked weeks disabled
   const hasPrev = week.week > 1;
-  const hasNext = week.week < plan.total_weeks;
+  const hasNext = week.week < maxOpenWeek(plan);
+  const nextLocked = !hasNext && week.week < plan.total_weeks;
   html += `
     <div class="week-nav">
       <button class="week-nav__btn" id="prevWeekBtn" ${hasPrev ? '' : 'disabled'}>
@@ -231,7 +234,7 @@ function renderWeek(plan, week, currentWeek) {
       </button>
       <span class="week-nav__label">Week ${week.week} of ${plan.total_weeks}</span>
       <button class="week-nav__btn" id="nextWeekBtn" ${hasNext ? '' : 'disabled'}>
-        Week ${week.week + 1} &rarr;
+        ${nextLocked ? `Week ${week.week + 1} &middot; Soon` : `Week ${week.week + 1} &rarr;`}
       </button>
     </div>
   `;
@@ -261,16 +264,19 @@ function renderWeek(plan, week, currentWeek) {
   }
 }
 
-function renderDayRow(day) {
+function renderDayRow(day, isToday = false) {
+  const todayBadge = `<div class="day-badge today-badge">Today</div>`;
+
   if (day.is_rest) {
     const isTravel = day.category === 'Rest' && (day.title.toLowerCase().includes('travel') || day.title.toLowerCase().includes('pre-race'));
     const label = isTravel ? day.title : 'Rest';
     return `
-      <div class="day-row is-rest">
+      <div class="day-row is-rest${isToday ? ' is-today' : ''}">
         <div class="day-name">${day.day.slice(0,3).toUpperCase()}</div>
         <div class="day-body">
           <div class="day-title">${label}</div>
         </div>
+        ${isToday ? todayBadge : ''}
       </div>`;
   }
 
@@ -279,8 +285,9 @@ function renderDayRow(day) {
   const catColor = CAT_COLOR[day.category] || '#777';
 
   let rowClass = 'day-row';
-  if (isKey)  rowClass += ' is-key';
-  if (isRace) rowClass += ' is-race';
+  if (isKey)   rowClass += ' is-key';
+  if (isRace)  rowClass += ' is-race';
+  if (isToday) rowClass += ' is-today';
 
   let tags = '';
   if (catColor && day.category !== 'Race') {
@@ -292,9 +299,10 @@ function renderDayRow(day) {
     tags += `<span class="day-cat" style="margin-left:4px"><span class="day-cat-dot" style="background:rgba(255,255,255,0.2)"></span>RPE ${day.rpe}</span>`;
   }
 
-  const badge = isKey  ? `<div class="day-badge key-badge">Key&nbsp;Session</div>`
-              : isRace ? `<div class="day-badge race-badge">Race&nbsp;Day</div>`
-              : '';
+  // Today pill sits next to the key/race badge when they land on the same day
+  const badge = (isKey  ? `<div class="day-badge key-badge">Key&nbsp;Session</div>`
+              :  isRace ? `<div class="day-badge race-badge">Race&nbsp;Day</div>`
+              :  '') + (isToday ? todayBadge : '');
 
   return `
     <div class="${rowClass}">
