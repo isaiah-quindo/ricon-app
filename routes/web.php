@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\RegistrationController as AdminRegistrationContro
 use App\Http\Controllers\Admin\RaceCategoryController;
 use App\Http\Controllers\Admin\DiscountCodeController;
 use App\Http\Controllers\Admin\TrainingSignupController;
+use App\Http\Controllers\QuizLeadController;
 use App\Http\Controllers\TrainingProgramController;
 
 // ----------------------------------------------------------
@@ -22,6 +23,8 @@ Route::prefix('race-category')->name('race-category.')->group(function () {
     Route::get('/60km',  fn() => view('race-category.60km'))->name('60km');
     Route::get('/21km',  fn() => view('race-category.21km'))->name('21km');
     Route::get('/10km',  fn() => view('race-category.10km'))->name('10km');
+    Route::post('/21km/quiz', [QuizLeadController::class, 'store'])
+        ->middleware('throttle:10,1')->name('21km.quiz');
 });
 
 Route::prefix('register')->name('registration.')->group(function () {

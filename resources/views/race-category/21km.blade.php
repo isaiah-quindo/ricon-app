@@ -178,6 +178,117 @@
 
 
 {{-- ========================================================
+         READINESS QUIZ
+    ======================================================== --}}
+<section id="readiness-quiz" class="bg-[#111111] py-24" x-data="tgc21kQuiz()">
+    <div class="mx-auto px-8" style="max-width:1280px;">
+        <div class="max-w-2xl mx-auto">
+            <p class="text-green-400 text-sm font-semibold uppercase tracking-wider mb-2 text-center">Readiness Check</p>
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-3 text-center">Are you ready for TGC 21K?</h2>
+            <p class="text-gray-400 mb-10 text-center">2 minutes. 5 questions. An honest answer.</p>
+
+            <div class="bg-[#0d0d0d] border border-white/10 rounded-2xl overflow-hidden">
+                {{-- Progress --}}
+                <div class="h-1 bg-white/5">
+                    <div class="h-full bg-green-500 transition-all duration-500" :style="`width:${progress}%`"></div>
+                </div>
+
+                <div class="p-6 md:p-10">
+                    {{-- Welcome --}}
+                    <template x-if="screen === 'welcome'">
+                        <div>
+                            <p class="text-green-400 text-xs font-semibold uppercase tracking-widest mb-4">The Great Cordillera · Nov 15, 2026</p>
+                            <p class="text-gray-300 leading-relaxed mb-8 max-w-md">Five quick questions about where your running is today. At the end, you get an honest read: go for the 21K, build up to it, or start with the 10K.</p>
+                            <button type="button" @click="start"
+                                class="py-3 px-8 inline-flex items-center gap-x-2 text-sm font-bold rounded-lg bg-green-600 text-white hover:bg-green-700 focus:outline-hidden">
+                                Find out
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                                </svg>
+                            </button>
+                        </div>
+                    </template>
+
+                    {{-- Questions --}}
+                    <template x-if="screen === 'question'">
+                        <div>
+                            <p class="text-green-400 text-xs font-semibold uppercase tracking-widest mb-3" x-text="`Question ${qIndex + 1} of ${questions.length}`"></p>
+                            <h3 class="text-xl md:text-2xl font-bold text-white mb-6" x-text="questions[qIndex].text"></h3>
+                            <div class="space-y-2.5">
+                                <template x-for="(option, i) in questions[qIndex].options" :key="`${qIndex}-${i}`">
+                                    <button type="button" @click="pick(i, option.pts)"
+                                        class="w-full flex items-center gap-4 px-5 py-4 rounded-xl border text-left transition-colors"
+                                        :class="selected === i ? 'border-green-500 bg-green-500/10' : 'border-white/10 hover:border-green-500/50 hover:bg-green-500/5'">
+                                        <span class="w-8 h-8 flex-shrink-0 rounded-lg border flex items-center justify-center text-xs font-bold transition-colors"
+                                            :class="selected === i ? 'bg-green-600 border-green-600 text-white' : 'border-white/20 text-gray-400'"
+                                            x-text="['A','B','C'][i]"></span>
+                                        <span class="text-sm font-medium transition-colors" :class="selected === i ? 'text-white' : 'text-gray-300'" x-text="option.label"></span>
+                                    </button>
+                                </template>
+                            </div>
+                        </div>
+                    </template>
+
+                    {{-- Collect --}}
+                    <template x-if="screen === 'collect'">
+                        <div>
+                            <p class="text-green-400 text-xs font-semibold uppercase tracking-widest mb-3">Almost there</p>
+                            <h3 class="text-xl md:text-2xl font-bold text-white mb-2">Where do we send your result?</h3>
+                            <p class="text-gray-400 text-sm mb-6 max-w-sm">Enter your name and email. We'll show you your result and keep you posted on TGC 2026.</p>
+                            <form @submit.prevent="submit" class="space-y-4 max-w-sm">
+                                <div>
+                                    <label for="quizName" class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5">First name</label>
+                                    <input id="quizName" type="text" x-model="name" autocomplete="given-name" placeholder="Your first name"
+                                        class="w-full rounded-lg border border-white/10 bg-white/5 text-white text-sm px-3.5 py-2.5 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" />
+                                </div>
+                                <div>
+                                    <label for="quizEmail" class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5">Email address</label>
+                                    <input id="quizEmail" type="email" x-model="email" autocomplete="email" placeholder="you@example.com"
+                                        class="w-full rounded-lg border border-white/10 bg-white/5 text-white text-sm px-3.5 py-2.5 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" />
+                                </div>
+                                <p x-show="error" x-cloak class="text-red-400 text-xs" x-text="error"></p>
+                                <button type="submit" :disabled="submitting"
+                                    class="py-3 px-8 inline-flex items-center gap-x-2 text-sm font-bold rounded-lg bg-green-600 text-white hover:bg-green-700 focus:outline-hidden disabled:opacity-50 disabled:pointer-events-none">
+                                    <span x-text="submitting ? 'One moment…' : 'See my result'"></span>
+                                </button>
+                            </form>
+                        </div>
+                    </template>
+
+                    {{-- Result --}}
+                    <template x-if="screen === 'result'">
+                        <div>
+                            <p class="text-green-400 text-xs font-semibold uppercase tracking-widest mb-3">Your Result</p>
+                            <h3 class="text-2xl md:text-3xl font-black text-white mb-4" x-text="results[result].title"></h3>
+                            <div class="w-9 h-0.5 bg-green-500 mb-5"></div>
+                            <p class="text-gray-400 leading-relaxed mb-8 max-w-lg whitespace-pre-line" x-text="results[result].body"></p>
+                            <div class="flex flex-wrap items-center gap-5">
+                                <a href="{{ route('registration.create') }}"
+                                    class="py-3 px-8 inline-flex items-center gap-x-2 text-sm font-bold rounded-lg bg-green-600 text-white hover:bg-green-700 focus:outline-hidden">
+                                    <span x-text="results[result].cta"></span>
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                                    </svg>
+                                </a>
+                                <a x-show="result === 'c'" x-cloak href="{{ route('race-category.10km') }}"
+                                    class="text-sm text-green-400 hover:text-green-300 transition-colors font-medium">
+                                    View the TGC 10K course
+                                </a>
+                            </div>
+                            <button type="button" @click="retake"
+                                class="mt-6 block text-xs text-gray-500 hover:text-gray-300 transition-colors">
+                                Retake the quiz
+                            </button>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{{-- ========================================================
          REQUIREMENTS
     ======================================================== --}}
 <section class="bg-[#0d0d0d] py-24">
@@ -264,3 +375,155 @@
 </section>
 
 @endsection
+
+@push('scripts')
+<script>
+    function tgc21kQuiz() {
+        return {
+            screen: 'welcome', // 'welcome' | 'question' | 'collect' | 'result'
+            qIndex: 0,
+            score: 0,
+            selected: null,
+            locked: false,
+            name: '',
+            email: '',
+            submitting: false,
+            error: '',
+            result: 'c',
+            questions: [
+                { text: 'How far can you run today without stopping?', options: [
+                    { label: '10km or more', pts: 3 },
+                    { label: '5 to 9km', pts: 2 },
+                    { label: 'Less than 5km', pts: 1 },
+                ]},
+                { text: 'How many hours a week can you commit to training?', options: [
+                    { label: '5 hours or more', pts: 3 },
+                    { label: '3 to 4 hours', pts: 2 },
+                    { label: '1 to 2 hours', pts: 1 },
+                ]},
+                { text: 'Have you ever run or hiked a significant uphill for 30 minutes or more?', options: [
+                    { label: 'Yes, regularly', pts: 3 },
+                    { label: 'A few times', pts: 2 },
+                    { label: 'Not really', pts: 1 },
+                ]},
+                { text: 'Where do you do most of your running?', options: [
+                    { label: 'Trails: uneven ground, roots, mud', pts: 3 },
+                    { label: 'Mix of road and light trail', pts: 2 },
+                    { label: 'Road or treadmill', pts: 1 },
+                ]},
+                { text: 'Four months of consistent training. Honest answer: can you commit?', options: [
+                    { label: "Yes. I've done it before.", pts: 3 },
+                    { label: 'I think so. Never really tested it.', pts: 2 },
+                    { label: "That's a stretch for me right now.", pts: 1 },
+                ]},
+            ],
+            results: {
+                a: {
+                    title: '21K is yours. Register.',
+                    body: "Your scores say you're already in a good position. Four months gives you time to train smart, not from scratch.\n\nThe Cordillera will ask something real of you in November. Based on where you're starting, you can answer it.\n\nSlots are limited. Register before the price goes up.",
+                    cta: 'Register Now',
+                },
+                b: {
+                    title: "21K is achievable. Here's the plan.",
+                    body: "You're not quite there yet, but four months is a long time if you use it well.\n\nMost runners who finish TGC 21K didn't start at peak fitness. They started early and stayed consistent.\n\nRegister now and give yourself the runway to get ready.",
+                    cta: 'Register Now',
+                },
+                c: {
+                    title: 'TGC 10K is the right call.',
+                    body: "Based on where you are right now, the 10K puts you on the right mountain without setting you up to struggle.\n\nAnd it gets you to the start line with something to improve next year.\n\nRegister for the 10K. Come back for the 21K when the time is right.",
+                    cta: 'Register for TGC 10K',
+                },
+            },
+
+            get progress() {
+                if (this.screen === 'welcome') return 0;
+                if (this.screen === 'question') return ((this.qIndex + 1) / 7) * 100;
+                if (this.screen === 'collect') return (6 / 7) * 100;
+                return 100;
+            },
+
+            start() {
+                this.score = 0;
+                this.qIndex = 0;
+                this.selected = null;
+                this.error = '';
+                this.screen = 'question';
+            },
+
+            pick(i, pts) {
+                if (this.locked) return;
+                this.locked = true;
+                this.selected = i;
+                this.score += pts;
+
+                setTimeout(() => {
+                    this.selected = null;
+                    this.locked = false;
+                    if (this.qIndex < this.questions.length - 1) {
+                        this.qIndex++;
+                    } else {
+                        this.screen = 'collect';
+                    }
+                }, 400);
+            },
+
+            async submit() {
+                this.error = '';
+                if (!this.name.trim()) { this.error = 'Please enter your first name.'; return; }
+                if (!this.email.trim() || !this.email.includes('@')) { this.error = 'Please enter a valid email address.'; return; }
+
+                this.submitting = true;
+                let serverResult = null;
+                try {
+                    const res = await fetch("{{ route('race-category.21km.quiz') }}", {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content
+                                ?? "{{ csrf_token() }}",
+                        },
+                        body: JSON.stringify({
+                            first_name: this.name.trim(),
+                            email: this.email.trim(),
+                            score: this.score,
+                        }),
+                    });
+
+                    if (res.status === 429) {
+                        this.error = 'Too many attempts. Please wait a minute and try again.';
+                        return;
+                    }
+
+                    if (res.status === 422) {
+                        const json = await res.json();
+                        this.error = json.errors ? Object.values(json.errors)[0][0] : 'Please check your details and try again.';
+                        return;
+                    }
+
+                    if (res.ok) {
+                        serverResult = (await res.json()).result ?? null;
+                        if (typeof fbq === 'function') fbq('track', 'Lead');
+                    }
+                } catch (e) {
+                    // A network hiccup shouldn't hold the result hostage
+                } finally {
+                    this.submitting = false;
+                }
+
+                this.showResult(serverResult);
+            },
+
+            showResult(r) {
+                this.result = r ?? (this.score >= 13 ? 'a' : this.score >= 8 ? 'b' : 'c');
+                this.screen = 'result';
+            },
+
+            retake() {
+                this.error = '';
+                this.screen = 'welcome';
+            },
+        };
+    }
+</script>
+@endpush
