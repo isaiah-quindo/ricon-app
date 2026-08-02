@@ -29,10 +29,28 @@
                 </svg>
             </div>
 
-            <h1 class="text-2xl font-extrabold text-gray-900 mb-2">You're registered!</h1>
-            <p class="text-gray-500 text-sm mb-8 leading-relaxed">
+            <h1 class="text-2xl font-extrabold text-gray-900 mb-2">
+                {{ $participantCount > 1 ? "You're all registered!" : "You're registered!" }}
+            </h1>
+            <p class="text-gray-500 text-sm mb-6 leading-relaxed">
+                @if($participantCount > 1)
+                All {{ $participantCount }} registrations have been submitted. Our team will review your payment proof and email each participant once their spot is confirmed.
+                @else
                 Your registration has been submitted successfully. Our team will review your payment proof and notify you by email once your registration is confirmed.
+                @endif
             </p>
+
+            {{-- Reference code --}}
+            @if($groupReference)
+            <div class="bg-white rounded-xl border border-gray-200 p-4 mb-6">
+                <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Reference Code</p>
+                <p class="text-xl font-bold font-mono text-gray-900 tracking-wide">{{ $groupReference }}</p>
+                <p class="text-xs text-gray-400 mt-1.5">
+                    Quote this if you need to contact us about
+                    {{ $participantCount > 1 ? 'this group' : 'your registration' }}.
+                </p>
+            </div>
+            @endif
 
             {{-- Info card --}}
             <div class="bg-white rounded-xl border border-gray-200 p-6 text-left mb-6 space-y-3">
@@ -48,7 +66,13 @@
                     </div>
                     <div class="flex items-start gap-3">
                         <div class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">3</div>
-                        <p class="text-sm text-gray-700">You'll receive a confirmation email with your race details and bib number.</p>
+                        <p class="text-sm text-gray-700">
+                            @if($participantCount > 1)
+                            Each participant receives their own confirmation email with their race details and bib number.
+                            @else
+                            You'll receive a confirmation email with your race details and bib number.
+                            @endif
+                        </p>
                     </div>
                 </div>
             </div>
