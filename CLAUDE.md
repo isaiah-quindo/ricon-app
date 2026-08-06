@@ -2,6 +2,10 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Rules
+
+- **Never read or edit `.env`** (or any `.env.*` file). If a change to environment variables is needed, do not open the file — instead, show the user the exact line(s)/key(s) to add or change, and let them apply it themselves.
+
 ## Commands
 
 ```bash
