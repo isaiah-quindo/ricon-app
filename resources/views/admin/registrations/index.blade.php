@@ -66,12 +66,24 @@
         </select>
     </div>
 
+    <div class="flex-1 min-w-40">
+        <label class="block text-xs font-medium text-gray-500 mb-1.5">Group</label>
+        <select name="group"
+            class="w-full rounded-lg border border-gray-200 bg-white text-sm text-gray-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+            <option value="">Everyone</option>
+            <option value="any" {{ request('group') === 'any' ? 'selected' : '' }}>Group registrations only</option>
+            @if(request('group') && request('group') !== 'any')
+            <option value="{{ request('group') }}" selected>{{ request('group') }}</option>
+            @endif
+        </select>
+    </div>
+
     <div class="flex items-center gap-2">
         <button type="submit"
             class="px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors">
             Filter
         </button>
-        @if(request('category') || request('status') || request('shirt_size') || request('age_group') || request('sex'))
+        @if(request('category') || request('status') || request('shirt_size') || request('age_group') || request('sex') || request('group'))
         <a href="{{ route('admin.registrations.index') }}"
             class="px-4 py-2 bg-gray-100 text-gray-600 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors">
             Clear
@@ -86,8 +98,20 @@
 
 
 </form>
-<div class="ml-auto text-sm text-gray-900 mb-4 px-4">
-    {{ $registrations->total() }} result{{ $registrations->total() !== 1 ? 's' : '' }}
+<div class="flex items-center justify-between gap-4 mb-4 px-4">
+    <span class="text-sm text-gray-900">
+        {{ $registrations->total() }} result{{ $registrations->total() !== 1 ? 's' : '' }}
+    </span>
+
+    {{-- Group registrations are transactions rather than people, so they get their
+         own screen rather than a filter on this list. --}}
+    <a href="{{ route('admin.registration-groups.index') }}"
+        class="inline-flex items-center gap-2 px-4 py-2 bg-amber-50 border border-amber-200 text-amber-800 text-sm font-medium rounded-lg hover:bg-amber-100 transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+        </svg>
+        Group Registrations
+    </a>
 </div>
 {{-- Table --}}
 <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
@@ -147,7 +171,19 @@
                 <tr class="hover:bg-gray-50 transition-colors">
                     <td class="px-5 py-4">
                         <div>
-                            <p class="text-sm font-semibold text-gray-900">{{ $reg->last_name }}, {{ $reg->first_name }}</p>
+                            <div class="flex items-center gap-2">
+                                <p class="text-sm font-semibold text-gray-900">{{ $reg->last_name }}, {{ $reg->first_name }}</p>
+                                @if($reg->group?->isGroup())
+                                <a href="{{ route('admin.registrations.index', ['group' => $reg->group->reference_code]) }}"
+                                    title="Group of {{ $reg->group->participant_count }} — {{ $reg->group->reference_code }}"
+                                    class="inline-flex items-center gap-1 px-1.5 py-0.5 bg-amber-50 border border-amber-200 text-amber-700 text-[10px] font-semibold rounded hover:bg-amber-100 transition-colors">
+                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                    </svg>
+                                    {{ $reg->group->participant_count }}
+                                </a>
+                                @endif
+                            </div>
                             <p class="text-xs text-gray-400 mt-0.5">{{ $reg->email }}</p>
                         </div>
                     </td>

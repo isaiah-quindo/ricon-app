@@ -66,7 +66,20 @@
                         </div>
                     </td>
                     <td class="px-6 py-4 text-sm text-gray-700">
-                        {{ $code->raceCategory?->name ?? '—' }}
+                        @php($names = $code->raceCategories->pluck('name'))
+                        @if($names->isEmpty())
+                            <span class="text-gray-300">—</span>
+                        @elseif($names->count() === $allCategoryCount)
+                            <span class="inline-flex items-center px-2 py-0.5 bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-semibold rounded">
+                                All categories
+                            </span>
+                        @else
+                            <div class="flex flex-wrap gap-1">
+                                @foreach($names as $name)
+                                <span class="inline-flex items-center px-2 py-0.5 bg-gray-100 text-gray-700 text-xs font-medium rounded">{{ $name }}</span>
+                                @endforeach
+                            </div>
+                        @endif
                     </td>
                     <td class="px-6 py-4 text-sm font-medium text-gray-900">
                         {{ rtrim(rtrim(number_format($code->discount_percentage, 2), '0'), '.') }}%

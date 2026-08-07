@@ -12,6 +12,9 @@ window.Alpine = Alpine;
 window.Chart = Chart;
 window.gsap = gsap;
 window.ScrollTrigger = ScrollTrigger;
+// Exposed so views that inject markup after load (e.g. the group registration
+// form adding a participant card) can re-init Preline components.
+window.HSStaticMethods = HSStaticMethods;
 
 Alpine.start();
 

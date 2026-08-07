@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\RegistrationController as AdminRegistrationController;
+use App\Http\Controllers\Admin\RegistrationGroupController;
 use App\Http\Controllers\Admin\RaceCategoryController;
 use App\Http\Controllers\Admin\DiscountCodeController;
 use App\Http\Controllers\Admin\TrainingSignupController;
@@ -30,7 +31,11 @@ Route::prefix('race-category')->name('race-category.')->group(function () {
 Route::prefix('register')->name('registration.')->group(function () {
     Route::get('/', [RegistrationController::class, 'create'])->name('create');
     Route::post('/', [RegistrationController::class, 'store'])->name('store');
-    Route::post('/validate-discount', [RegistrationController::class, 'validateDiscount'])->name('validateDiscount');
+    // Group registration (5+ participants, volume discount, no discount codes)
+    Route::get('/group', [RegistrationController::class, 'createGroup'])->name('group.create');
+    Route::post('/group', [RegistrationController::class, 'storeGroup'])->name('group.store');
+    Route::post('/validate-discount', [RegistrationController::class, 'validateDiscount'])
+        ->middleware('throttle:20,1')->name('validateDiscount');
     Route::get('/success', [RegistrationController::class, 'success'])->name('success');
 });
 
@@ -61,6 +66,17 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
         Route::post('/{registration}/reject', [AdminRegistrationController::class, 'reject'])->name('reject');
         Route::post('/{registration}/resend-email', [AdminRegistrationController::class, 'resendEmail'])->name('resendEmail');
         Route::patch('/{registration}/bib', [AdminRegistrationController::class, 'updateBib'])->name('updateBib');
+    });
+
+    // Group registrations, viewed as transactions
+    Route::prefix('registration-groups')->name('registration-groups.')->group(function () {
+        Route::get('/', [RegistrationGroupController::class, 'index'])->name('index');
+        Route::get('/{registrationGroup}', [RegistrationGroupController::class, 'show'])->name('show');
+        Route::post('/{registrationGroup}/mark-paid', [RegistrationGroupController::class, 'markPaid'])->name('markPaid');
+        Route::post('/{registrationGroup}/reject-payment', [RegistrationGroupController::class, 'rejectPayment'])->name('rejectPayment');
+        Route::post('/{registrationGroup}/notes', [RegistrationGroupController::class, 'updateNotes'])->name('updateNotes');
+        Route::post('/{registrationGroup}/approve-all', [RegistrationGroupController::class, 'approveAll'])->name('approveAll');
+        Route::post('/{registrationGroup}/resend-summary', [RegistrationGroupController::class, 'resendSummary'])->name('resendSummary');
     });
 
     // Race Categories

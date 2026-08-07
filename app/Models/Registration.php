@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Registration extends Model
 {
-    use HasUuids;
+    use HasFactory, HasUuids;
 
     protected $fillable = [
         'race_category_id',
@@ -31,6 +32,7 @@ class Registration extends Model
         'price_paid',
         'discount_code_id',
         'discount_amount',
+        'registration_group_id',
     ];
 
     protected $casts = [
@@ -54,6 +56,22 @@ class Registration extends Model
     public function paymentProof()
     {
         return $this->hasOne(PaymentProof::class);
+    }
+
+    // Null for individual registrations, which are not part of any group.
+    public function group()
+    {
+        return $this->belongsTo(RegistrationGroup::class, 'registration_group_id');
+    }
+
+    /**
+     * A group is paid for by one transfer, so nobody in it can be approved until that
+     * transfer has been recorded. Individual registrations are unaffected — their proof
+     * is reviewed as part of approving them.
+     */
+    public function isBlockedByGroupPayment(): bool
+    {
+        return $this->group !== null && ! $this->group->isPaymentVerified();
     }
 
     public function reviewer()

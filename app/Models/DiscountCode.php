@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class DiscountCode extends Model
 {
-    use HasUuids;
+    use HasFactory, HasUuids;
 
     protected $fillable = [
         'code',
-        'race_category_id',
         'discount_percentage',
         'max_uses',
         'used_count',
@@ -30,9 +30,27 @@ class DiscountCode extends Model
         'used_count'          => 'integer',
     ];
 
-    public function raceCategory()
+    /** A code can cover several categories; it applies to entries in any of them. */
+    public function raceCategories()
     {
-        return $this->belongsTo(RaceCategory::class);
+        return $this->belongsToMany(RaceCategory::class, 'discount_code_race_category');
+    }
+
+    public function appliesTo(?string $raceCategoryId): bool
+    {
+        if (! $raceCategoryId) {
+            return false;
+        }
+
+        return $this->relationLoaded('raceCategories')
+            ? $this->raceCategories->contains('id', $raceCategoryId)
+            : $this->raceCategories()->whereKey($raceCategoryId)->exists();
+    }
+
+    /** @return array<int, string> */
+    public function raceCategoryIds(): array
+    {
+        return $this->raceCategories()->pluck('race_categories.id')->all();
     }
 
     public function registrations()
@@ -46,7 +64,7 @@ class DiscountCode extends Model
         if (! $this->is_active) {
             return 'Code is inactive.';
         }
-        if ($this->race_category_id !== $raceCategoryId) {
+        if (! $this->appliesTo($raceCategoryId)) {
             return 'Code is not valid for the selected race category.';
         }
         if ($this->expires_at && $this->expires_at->isPast()) {

@@ -160,10 +160,104 @@
     {{-- Right column: Actions --}}
     <div class="space-y-4">
 
+        {{-- Group panel --}}
+        @if($registration->group?->isGroup())
+        @php
+            $group = $registration->group;
+            $members = $group->registrations->sortBy(fn($m) => $m->last_name . $m->first_name);
+            $pendingCount = $members->where('status', '!=', 'approved')->count();
+        @endphp
+        <div class="bg-amber-50 rounded-xl border border-amber-200 p-5">
+            <div class="flex items-start justify-between gap-2 mb-3">
+                <div>
+                    <h3 class="text-sm font-semibold text-amber-900">Group Registration</h3>
+                    <p class="text-xs font-mono text-amber-700 mt-0.5">{{ $group->reference_code }}</p>
+                </div>
+                <span class="px-2 py-0.5 bg-amber-200 text-amber-900 text-xs font-semibold rounded">
+                    {{ $group->participant_count }} people
+                </span>
+            </div>
+
+            <dl class="space-y-1.5 mb-4 pb-4 border-b border-amber-200">
+                <div class="flex justify-between">
+                    <dt class="text-xs text-amber-700">Group Subtotal</dt>
+                    <dd class="text-xs font-semibold text-amber-900">₱{{ number_format($group->subtotal, 2) }}</dd>
+                </div>
+                @if($group->discount_source === 'group')
+                <div class="flex justify-between">
+                    <dt class="text-xs text-amber-700">Group Discount ({{ rtrim(rtrim(number_format($group->group_discount_percentage, 2), '0'), '.') }}%)</dt>
+                    <dd class="text-xs font-semibold text-green-700">−₱{{ number_format($group->discount_total, 2) }}</dd>
+                </div>
+                @elseif($group->discount_source === 'code')
+                <div class="flex justify-between">
+                    <dt class="text-xs text-amber-700">Code <span class="font-mono">{{ $group->discountCode?->code }}</span></dt>
+                    <dd class="text-xs font-semibold text-green-700">−₱{{ number_format($group->discount_total, 2) }}</dd>
+                </div>
+                @endif
+                <div class="flex justify-between pt-1.5 border-t border-amber-200">
+                    <dt class="text-xs font-semibold text-amber-800">Total Paid</dt>
+                    <dd class="text-xs font-bold text-amber-900">₱{{ number_format($group->total_due, 2) }}</dd>
+                </div>
+            </dl>
+
+            <p class="text-xs font-semibold text-amber-800 uppercase tracking-wider mb-2">Members</p>
+            <ul class="space-y-1.5 mb-4">
+                @foreach($members as $member)
+                <li class="flex items-center justify-between gap-2 text-xs">
+                    @if($member->is($registration))
+                    <span class="font-semibold text-amber-900 truncate">
+                        {{ $member->first_name }} {{ $member->last_name }}
+                        <span class="text-amber-600 font-normal">(viewing)</span>
+                    </span>
+                    @else
+                    <a href="{{ route('admin.registrations.show', $member) }}"
+                        class="text-amber-800 hover:text-amber-900 hover:underline truncate">
+                        {{ $member->first_name }} {{ $member->last_name }}
+                    </a>
+                    @endif
+                    <span class="flex items-center gap-1.5 flex-shrink-0">
+                        <span class="text-amber-600">{{ $member->raceCategory?->name }}</span>
+                        @include('admin.registrations._status_badge', ['status' => $member->status])
+                    </span>
+                </li>
+                @endforeach
+            </ul>
+
+            {{-- Payment and bulk approval live on the group page, so there is one place
+                 where the transaction is settled. --}}
+            <a href="{{ route('admin.registration-groups.show', $group) }}"
+                class="w-full px-4 py-2.5 bg-amber-600 text-white text-sm font-medium rounded-lg hover:bg-amber-700 transition-colors flex items-center justify-center gap-2">
+                Open group transaction
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </a>
+
+            <div class="mt-3 text-xs text-amber-700 space-y-1">
+                <p>{{ $group->participant_count - $pendingCount }} of {{ $group->participant_count }} approved.</p>
+                <p>All members share one proof of payment. Rejecting one member does not affect the others.</p>
+            </div>
+        </div>
+        @endif
+
         {{-- Approve action --}}
         @if(in_array($registration->status, ['pending', 'payment_submitted']))
         <div class="bg-white rounded-xl border border-gray-200 p-5">
             <h3 class="text-sm font-semibold text-gray-800 mb-3">Approve Registration</h3>
+            @if($registration->isBlockedByGroupPayment())
+            {{-- A group is settled by one transfer; no member is approved before it lands. --}}
+            <p class="text-xs text-gray-500 mb-4">
+                This runner is part of a group. Record the group's payment before approving anyone in it.
+            </p>
+            <button type="button" disabled
+                class="w-full px-4 py-2.5 bg-gray-100 text-gray-400 text-sm font-medium rounded-lg cursor-not-allowed">
+                Approve
+            </button>
+            <a href="{{ route('admin.registration-groups.show', $registration->group) }}"
+                class="block text-center text-xs text-amber-700 hover:text-amber-800 font-medium mt-2">
+                Go to {{ $registration->group->reference_code }} to record it
+            </a>
+            @else
             <p class="text-xs text-gray-500 mb-4">
                 Approving will assign a bib number and mark this registration as confirmed.
             </p>
@@ -178,6 +272,7 @@
                     Approve
                 </button>
             </form>
+            @endif
         </div>
 
         {{-- Reject action --}}
@@ -294,6 +389,14 @@
                 <div class="flex justify-between">
                     <span class="text-xs text-indigo-500">Discount Amount</span>
                     <span class="text-xs font-semibold text-green-700">−₱{{ number_format($registration->discount_amount, 2) }}</span>
+                </div>
+                @elseif($registration->group?->discount_source === 'group' && $registration->discount_amount)
+                <div class="flex justify-between">
+                    <span class="text-xs text-indigo-500">Group Discount</span>
+                    <span class="text-xs font-semibold text-green-700">
+                        {{ rtrim(rtrim(number_format($registration->group->group_discount_percentage, 2), '0'), '.') }}%
+                        · −₱{{ number_format($registration->discount_amount, 2) }}
+                    </span>
                 </div>
                 @endif
                 <div class="flex justify-between pt-2 border-t border-indigo-200">
