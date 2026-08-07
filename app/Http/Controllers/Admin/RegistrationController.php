@@ -93,7 +93,7 @@ class RegistrationController extends Controller
                     $reg->shirt_size,
                     $reg->emergency_contact_name,
                     $reg->emergency_contact_number,
-                    $reg->bib_number,
+                    $reg->formatted_bib,
                     $reg->price_paid,
                     $reg->discountCode?->code ?? '',
                     $reg->discount_amount,

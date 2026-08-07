@@ -202,13 +202,14 @@
                 <p class="text-cyan-400 text-xs font-semibold uppercase tracking-wider mb-3">Recommended</p>
                 <h2 class="text-xl font-bold text-white mb-5">Recommended Gear</h2>
                 <ul class="space-y-2 mb-6">
-                    @foreach (['Anti-chafing cream (vaseline, petroleum jelly)','Trekking poles', 'Sunscreen', 'Insect repellent lotion', 'Cap or sun hat'] as $item)
+                    @foreach (['*Utensils (cups, bowls and sporks)', 'Anti-chafing cream (vaseline, petroleum jelly)','Trekking poles', 'Sunscreen', 'Insect repellent lotion', 'Cap or sun hat'] as $item)
                     <li class="flex items-center gap-3 text-sm text-gray-400">
                         <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 flex-shrink-0"></span>
                         {{ $item }}
                     </li>
                     @endforeach
                 </ul>
+                <p class="text-gray-400 text-xs pb-4">* No disposable utensils will be provided at the aid station. Kindly make sure you have your own utensils to enjoy the different beverage and food items at the aid station.</p>
                 <a href="{{ route('rules') }}#entry" class="inline-flex items-center gap-1.5 text-sm text-cyan-400 hover:text-cyan-300 transition-colors font-medium">
                     View full gear & entry rules
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

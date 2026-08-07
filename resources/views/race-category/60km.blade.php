@@ -217,13 +217,14 @@
                 <p class="text-red-500 text-xs font-semibold uppercase tracking-wider mb-3">Requirements</p>
                 <h2 class="text-xl font-bold text-white mb-5">Mandatory Gear</h2>
                 <ul class="space-y-2 mb-6">
-                    @foreach (['Trail running shoes', 'Hydration pack (1.5 liters)', 'Emergency blanket', 'Headlamp + extra batteries (fully charged)', 'First aid kit', 'Whistle', 'Waterproof jacket (10,000mm Schmerber Rating)', 'Mobile phone (fully charged)', 'Race bib (provided)', 'Cash (₱1,000)', 'Ziploc bag for your trash', 'Trail food — minimum 1,000 kcal (250–300 kcal/hr until next aid station; e.g. 2–3 gels, 2–3 energy bars, or equivalent)'] as $item)
+                    @foreach (['*Utensils (cups, bowls and sporks)', 'Trail running shoes', 'Hydration pack (1.5 liters)', 'Emergency blanket', 'Headlamp + extra batteries (fully charged)', 'First aid kit', 'Whistle', 'Waterproof jacket (10,000mm Schmerber Rating)', 'Mobile phone (fully charged)', 'Race bib (provided)', 'Cash (₱1,000)', 'Ziploc bag for your trash', 'Trail food — minimum 1,000 kcal (250–300 kcal/hr until next aid station; e.g. 2–3 gels, 2–3 energy bars, or equivalent)'] as $item)
                     <li class="flex items-center gap-3 text-sm text-gray-400">
                         <span class="w-1.5 h-1.5 rounded-full bg-red-500 flex-shrink-0"></span>
                         {{ $item }}
                     </li>
                     @endforeach
                 </ul>
+                <p class="text-gray-400 text-xs pb-4">* No disposable utensils will be provided at the aid station. Kindly make sure you have your own utensils to enjoy the different beverage and food items at the aid station.</p>
                 <a href="{{ route('rules') }}#entry" class="inline-flex items-center gap-1.5 text-sm text-red-500 hover:text-red-400 transition-colors font-medium">
                     View full gear & entry rules
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -237,14 +238,13 @@
                 <p class="text-red-500 text-xs font-semibold uppercase tracking-wider mb-3">Recommended</p>
                 <h2 class="text-xl font-bold text-white mb-5">Recommended Gear</h2>
                 <ul class="space-y-2 mb-6">
-                    @foreach (['*Utensils (cups, bowls and sporks)', 'Anti-chafing cream (vaseline, petroleum jelly)', 'Trekking poles', 'Ice banda', 'Sunscreen', 'Sun glasses', 'Insect repellent lotion', 'Cap or sun hat', 'Spare socks', 'Spare top in case of dropout', 'Spare headlamp', 'Spare batteries', 'Power bank'] as $item)
+                    @foreach (['Anti-chafing cream (vaseline, petroleum jelly)', 'Trekking poles', 'Ice banda', 'Sunscreen', 'Sun glasses', 'Insect repellent lotion', 'Cap or sun hat', 'Spare socks', 'Spare top in case of dropout', 'Spare headlamp', 'Spare batteries', 'Power bank'] as $item)
                     <li class="flex items-center gap-3 text-sm text-gray-400">
                         <span class="w-1.5 h-1.5 rounded-full bg-red-500 flex-shrink-0"></span>
                         {{ $item }}
                     </li>
                     @endforeach
                 </ul>
-                <p class="text-gray-400 text-xs pb-4">* No disposable utensils will be provided at the aid station. Kindly make sure you have your own utensils to enjoy the different beverage and food items at the aid station.</p>
                 <a href="{{ route('rules') }}#entry" class="inline-flex items-center gap-1.5 text-sm text-red-500 hover:text-red-400 transition-colors font-medium">
                     View full gear & entry rules
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

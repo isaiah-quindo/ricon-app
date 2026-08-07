@@ -122,7 +122,7 @@
                     <div class="bg-[#0d0d0d] rounded-xl p-4">
                         <span class="inline-block text-xs font-bold text-orange-500 bg-orange-500/10 px-2 py-0.5 rounded-full mb-3">100 KM</span>
                         <ul class="space-y-1.5">
-                            @foreach(['Trail running shoes', 'Hydration pack (1.5 liters)', 'Emergency blanket', 'Headlamp + extra batteries (fully charged)', 'First aid kit', 'Whistle', 'Waterproof jacket (10,000mm Schmerber Rating)', 'Mobile phone (fully charged)', 'Race bib (provided)', 'Cash (₱1,000)', 'Ziploc bag for your trash', 'Trail food — min. 1,000 kcal (250–300 kcal/hr until next aid station; e.g. 2–3 gels, 2–3 energy bars, or equivalent)'] as $item)
+                            @foreach(['Utensils (cups, bowls, and sporks)', 'Trail running shoes', 'Hydration pack (1.5 liters)', 'Emergency blanket', 'Headlamp + extra batteries (fully charged)', 'First aid kit', 'Whistle', 'Waterproof jacket (10,000mm Schmerber Rating)', 'Mobile phone (fully charged)', 'Race bib (provided)', 'Cash (₱1,000)', 'Ziploc bag for your trash', 'Trail food — min. 1,000 kcal (250–300 kcal/hr until next aid station; e.g. 2–3 gels, 2–3 energy bars, or equivalent)'] as $item)
                             <li class="flex items-center gap-2 text-xs text-gray-400">
                                 <span class="w-1 h-1 rounded-full bg-orange-500 flex-shrink-0"></span>{{ $item }}
                             </li>
@@ -134,7 +134,7 @@
                     <div class="bg-[#0d0d0d] rounded-xl p-4">
                         <span class="inline-block text-xs font-bold text-red-400 bg-red-500/10 px-2 py-0.5 rounded-full mb-3">60 KM</span>
                         <ul class="space-y-1.5">
-                            @foreach(['Trail running shoes', 'Hydration pack (1.5 liters)', 'Emergency blanket', 'Headlamp + extra batteries (fully charged)', 'First aid kit', 'Whistle', 'Waterproof jacket (10,000mm Schmerber Rating)', 'Mobile phone (fully charged)', 'Race bib (provided)', 'Cash (₱1,000)', 'Ziploc bag for your trash', 'Trail food — min. 1,000 kcal (250–300 kcal/hr until next aid station; e.g. 2–3 gels, 2–3 energy bars, or equivalent)'] as $item)
+                            @foreach(['Utensils (cups, bowls, and sporks)', 'Trail running shoes', 'Hydration pack (1.5 liters)', 'Emergency blanket', 'Headlamp + extra batteries (fully charged)', 'First aid kit', 'Whistle', 'Waterproof jacket (10,000mm Schmerber Rating)', 'Mobile phone (fully charged)', 'Race bib (provided)', 'Cash (₱1,000)', 'Ziploc bag for your trash', 'Trail food — min. 1,000 kcal (250–300 kcal/hr until next aid station; e.g. 2–3 gels, 2–3 energy bars, or equivalent)'] as $item)
                             <li class="flex items-center gap-2 text-xs text-gray-400">
                                 <span class="w-1 h-1 rounded-full bg-red-400 flex-shrink-0"></span>{{ $item }}
                             </li>
