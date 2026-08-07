@@ -43,9 +43,6 @@ Route::prefix('training')->name('training.')->group(function () {
     Route::get('/p/{token}', [TrainingProgramController::class, 'show'])->name('program');
 });
 
-// TEMP: preview the 500 error page — remove after checking
-Route::get('/preview-500', fn() => abort(500));
-
 // ----------------------------------------------------------
 // Admin Routes (auth protected)
 // ----------------------------------------------------------
