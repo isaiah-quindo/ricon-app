@@ -525,6 +525,75 @@ body {
   color: rgba(255,255,255,0.78);
   line-height: 1.45;
 }
+.ks-note {
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.45);
+  margin-top: 4px;
+  font-style: italic;
+}
+
+/* ── Featured Workout ── */
+.featured-workout {
+  margin-top: 32px;
+  border: 1px solid rgba(240,76,36,0.3);
+  border-top: 3px solid var(--orange);
+  padding: 20px 20px 16px;
+  background: rgba(240,76,36,0.05);
+}
+.fw-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 6px;
+}
+.fw-title {
+  font-family: 'Kufam', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+.fw-intro {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+.fw-section { margin-bottom: 16px; }
+.fw-section-heading {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+.fw-note {
+  font-size: 11px;
+  color: var(--muted);
+  font-style: italic;
+  margin-bottom: 8px;
+}
+.fw-items { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+.fw-items li {
+  font-size: 12px;
+  color: rgba(255,255,255,0.82);
+  line-height: 1.5;
+  padding-left: 14px;
+  position: relative;
+}
+.fw-items li::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  color: var(--orange);
+  font-weight: 700;
+}
 
 /* ── Gate screen ── */
 .gate__sub {

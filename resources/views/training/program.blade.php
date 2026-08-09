@@ -210,7 +210,10 @@ function renderWeek(plan, week, currentWeek) {
       const ks = week.key_session;
       let ksDetail = ks.duration + ' ' + ks.title;
       if (ks.vert_gain_m) ksDetail += ' &middot; &uarr; ' + ks.vert_gain_m;
-      html += `<div class="block-row"><div class="block-key">Key Session</div><div class="block-val">${ksDetail}</div></div>`;
+      let ksHtml = `<div class="block-row"><div class="block-key">Key Session</div><div class="block-val">${ksDetail}`;
+      if (ks.note) ksHtml += `<div class="ks-note">${ks.note}</div>`;
+      ksHtml += '</div></div>';
+      html += ksHtml;
     }
     html += '</div>';
   }
@@ -222,6 +225,25 @@ function renderWeek(plan, week, currentWeek) {
     html += renderDayRow(day, isThisWeek && day.day === todayName);
   }
   html += '</div>';
+
+  // Featured Workout (if present)
+  if (week.featured_workout) {
+    const fw = week.featured_workout;
+    let fwHtml = '<div class="featured-workout">';
+    fwHtml += '<div class="fw-label">Featured Workout &middot; ' + fw.day + '</div>';
+    fwHtml += '<div class="fw-title">' + fw.title + '</div>';
+    fwHtml += '<div class="fw-intro">' + fw.intro + '</div>';
+    for (const sec of fw.sections) {
+      fwHtml += '<div class="fw-section">';
+      fwHtml += '<div class="fw-section-heading">' + sec.heading + '</div>';
+      if (sec.note) fwHtml += '<div class="fw-note">' + sec.note + '</div>';
+      fwHtml += '<ul class="fw-items">';
+      for (const item of sec.items) fwHtml += '<li>' + item + '</li>';
+      fwHtml += '</ul></div>';
+    }
+    fwHtml += '</div>';
+    html += fwHtml;
+  }
 
   // Reference: RPE scale + volume arc
   html += renderReference(plan, week);
