@@ -128,11 +128,11 @@
                 <div class="grid grid-cols-2 gap-6 mb-6">
                     <div>
                         <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Distance</p>
-                        <p class="text-white font-bold text-xl">100 KM</p>
+                        <p class="text-white font-bold text-xl">102.48 KM</p>
                     </div>
                     <div>
                         <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Elevation Gain</p>
-                        <p class="text-white font-bold text-xl">7000M D+</p>
+                        <p class="text-white font-bold text-xl">6124M D+</p>
                     </div>
                 </div>
                 <a href="{{ route('race-category.100km') }}"
@@ -168,11 +168,11 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
                         <div>
                             <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Distance</p>
-                            <p class="text-white font-bold">60 KM</p>
+                            <p class="text-white font-bold">61.34 KM</p>
                         </div>
                         <div>
                             <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Elevation Gain</p>
-                            <p class="text-white font-bold">4200M D+</p>
+                            <p class="text-white font-bold">3584M D+</p>
                         </div>
                     </div>
                     <a href="{{ route('race-category.60km') }}"
@@ -212,11 +212,11 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
                             <div>
                                 <p class="text-gray-500 text-xs uppercase tracking-wider mb-0.5">Distance</p>
-                                <p class="text-white font-bold text-sm">21 KM</p>
+                                <p class="text-white font-bold text-sm">21.78 KM</p>
                             </div>
                             <div>
                                 <p class="text-gray-500 text-xs uppercase tracking-wider mb-0.5">Elevation Gain</p>
-                                <p class="text-white font-bold text-sm">1300M D+</p>
+                                <p class="text-white font-bold text-sm">1194M D+</p>
                             </div>
                         </div>
                         <a href="{{ route('race-category.21km') }}"
@@ -245,11 +245,11 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
                             <div>
                                 <p class="text-gray-500 text-xs uppercase tracking-wider mb-0.5">Distance</p>
-                                <p class="text-white font-bold text-sm">10 KM</p>
+                                <p class="text-white font-bold text-sm">10.32 KM</p>
                             </div>
                             <div>
                                 <p class="text-gray-500 text-xs uppercase tracking-wider mb-0.5">Elevation Gain</p>
-                                <p class="text-white font-bold text-sm">500M D+</p>
+                                <p class="text-white font-bold text-sm">364M D+</p>
                             </div>
                         </div>
                         <a href="{{ route('race-category.10km') }}"

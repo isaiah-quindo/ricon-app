@@ -38,11 +38,11 @@
         <div class="grid grid-cols-2 md:grid-cols-6 md:divide-x divide-white/20">
             <div class="py-8 px-6 first:pl-0">
                 <p class="text-white text-xs uppercase tracking-wider mb-1">Distance</p>
-                <p class="text-white font-black text-2xl">100 KM</p>
+                <p class="text-white font-black text-2xl">102.48 KM</p>
             </div>
             <div class="py-8 px-6">
                 <p class="text-white text-xs uppercase tracking-wider mb-1">Est. Elevation Gain</p>
-                <p class="text-white font-black text-2xl">7,000M D+</p>
+                <p class="text-white font-black text-2xl">6,124M D+</p>
             </div>
             <div class="py-8 pr-6 pl-0 md:pl-6">
                 <p class="text-white text-xs uppercase tracking-wider mb-1">Cutoff Time</p>

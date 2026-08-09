@@ -125,7 +125,7 @@
       }
     ]
   },
-  "max_open_week": 7,
+  "max_open_week": 15,
   "plans": {
     "tgc100k": {
       "distance": "TGC 100K",
@@ -1031,15 +1031,95 @@
           "training_focus": "Specificity",
           "block_goal": "2 mins x 10 at RPE 9 (20 mins speed work), 2 mins rest, 1:1 ratio",
           "coach_brief": [
-            "This is the week where it stops feeling manageable. The hardest intervals of the phase, the longest Saturday climb so far, and no real break between them. You're practicing finishing sessions that you started tired.",
+            "For the next 2 to 3 weeks, our training plan includes one of the most important sessions for preparing your legs for The Great Cordillera 100. This workout builds the strength, endurance, and pacing you will need for the long climbs and technical terrain on race day.",
             "Sunday's power-walk keeps the legs moving without adding more damage, so don't skip it and don't make it harder than it needs to be."
           ],
           "key_session": {
-            "day": "Saturday",
-            "title": "High Vert Circuit",
-            "duration": "4h",
-            "vert_gain_m": "900m",
-            "full_pack": false
+            "day": "Wednesday",
+            "title": "Pyramidal Hill Overloads",
+            "duration": "1.5h",
+            "vert_gain_m": "",
+            "full_pack": false,
+            "note": "Feel free to swap with an easy day if your schedule doesn't work."
+          },
+          "featured_workout": {
+            "title": "Pyramidal Hill Overloads",
+            "day": "Wednesday",
+            "intro": "A pyramid of timed uphill efforts with equal recovery. The structure trains you to surge when terrain demands it, back off on descent, and repeat — which is exactly how mountain racing moves. Use this guide for all three weeks.",
+            "sections": [
+              {
+                "heading": "Warm-up",
+                "items": [
+                  "20 minutes easy run (RPE 2-3)",
+                  "Dynamic mobility drills",
+                  "3-4 x 20-second strides"
+                ]
+              },
+              {
+                "heading": "Main Set",
+                "items": [
+                  "1 min uphill @ RPE 6",
+                  "2 mins uphill @ RPE 6-7",
+                  "3 mins uphill @ RPE 7",
+                  "4 mins uphill @ RPE 7-8",
+                  "5 mins uphill @ RPE 8 (controlled, not all out)",
+                  "4 mins uphill @ RPE 7-8",
+                  "3 mins uphill @ RPE 7",
+                  "2 mins uphill @ RPE 6-7",
+                  "1 min uphill @ RPE 6"
+                ]
+              },
+              {
+                "heading": "Recovery",
+                "items": [
+                  "Easy jog or walk downhill for approximately the same duration as each work interval."
+                ]
+              },
+              {
+                "heading": "Cooldown",
+                "items": [
+                  "Easy running until you reach 1.5 hours total training time."
+                ]
+              },
+              {
+                "heading": "Coaching Tips",
+                "items": [
+                  "Run by effort (RPE), not pace.",
+                  "Maintain a quick cadence. Don't sprint the shorter intervals.",
+                  "Keep your posture tall with a slight lean from the ankles.",
+                  "If the climb becomes too steep, switch to a strong power hike. This is exactly what you'll do during many sections of TGC 100.",
+                  "Finish the workout feeling like you could complete one more interval. Leave a little in the tank."
+                ]
+              },
+              {
+                "heading": "Why This Workout?",
+                "note": "This session develops:",
+                "items": [
+                  "Sustained climbing strength",
+                  "Better lactate clearance",
+                  "Efficient uphill pacing",
+                  "Fatigue resistance for long mountain ultras like The Great Cordillera 100"
+                ]
+              },
+              {
+                "heading": "No Hills? No Problem!",
+                "note": "Not everyone has access to long climbs, and that's perfectly okay. Here are some alternatives that provide a similar training stimulus.",
+                "items": [
+                  "Option 1 – Flat Tempo Pyramid (Recommended): complete the same 1-2-3-4-5-4-3-2-1 structure on flat terrain at RPE 6-8, easy jog recovery for the same duration as each interval, focus on consistent effort instead of pace.",
+                  "Option 2 – Treadmill: set incline to 5-8%, complete the same pyramid at RPE 6-8, avoid holding handrails.",
+                  "Option 3 – Stairs or Parking Garage: run or power hike continuously during each interval, walk back down for recovery, excellent for building climbing-specific strength."
+                ]
+              },
+              {
+                "heading": "Remember",
+                "items": [
+                  "Stay relaxed and controlled.",
+                  "Keep your cadence smooth and consistent.",
+                  "Power hike when appropriate.",
+                  "Prioritize good form over speed."
+                ]
+              }
+            ]
           },
           "days": [
             {
@@ -1067,15 +1147,15 @@
               "day": "Tuesday"
             },
             {
-              "title": "Hilly Run",
+              "title": "Pyramidal Hill Overloads",
               "duration": "1.5h",
               "detail": "",
-              "rpe": "5",
+              "rpe": "",
               "vert_gain_m": "",
               "is_rest": false,
               "full_pack": false,
-              "category": "Endurance Run",
-              "raw": "1.5h Hilly Run (RPE 5)",
+              "category": "Running Intervals",
+              "raw": "1.5h Pyramidal Hill Overloads",
               "day": "Wednesday"
             },
             {
@@ -1091,15 +1171,15 @@
               "day": "Thursday"
             },
             {
-              "title": "Rest",
+              "title": "REST or ACTIVE RECOVERY",
               "duration": "",
-              "detail": "",
+              "detail": "Core workout",
               "rpe": "",
               "vert_gain_m": "",
-              "is_rest": true,
+              "is_rest": false,
               "full_pack": false,
-              "category": "Rest",
-              "raw": "REST",
+              "category": "Recovery",
+              "raw": "REST or ACTIVE RECOVERY (Core workout)",
               "day": "Friday"
             },
             {
@@ -1115,15 +1195,15 @@
               "day": "Saturday"
             },
             {
-              "title": "Power-walk on Incline",
+              "title": "Power-walk on Incline Treadmill",
               "duration": "1.5h",
               "detail": "12%+",
               "rpe": "",
               "vert_gain_m": "",
               "is_rest": false,
               "full_pack": false,
-              "category": "Specificity",
-              "raw": "1.5h Power-walk on Incline (12%+)",
+              "category": "Running Intervals",
+              "raw": "1.5h Power-walk on Incline Treadmill (12%+)",
               "day": "Sunday"
             }
           ]
@@ -1142,11 +1222,91 @@
             "Wednesday's pyramidal session is about surging and recovering repeatedly, which is how mountain terrain actually moves. It's also worth starting to think through race execution in real terms this week, when you eat and how you handle the big climbs, because November is closer than it looks."
           ],
           "key_session": {
-            "day": "Saturday",
-            "title": "Hilly Run",
-            "duration": "4.5h",
-            "vert_gain_m": "1000m",
-            "full_pack": false
+            "day": "Wednesday",
+            "title": "Pyramidal Hill Overloads",
+            "duration": "1.5h",
+            "vert_gain_m": "",
+            "full_pack": false,
+            "note": "Feel free to swap with an easy day if your schedule doesn't work."
+          },
+          "featured_workout": {
+            "title": "Pyramidal Hill Overloads",
+            "day": "Wednesday",
+            "intro": "A pyramid of timed uphill efforts with equal recovery. The structure trains you to surge when terrain demands it, back off on descent, and repeat — which is exactly how mountain racing moves. Use this guide for all three weeks.",
+            "sections": [
+              {
+                "heading": "Warm-up",
+                "items": [
+                  "20 minutes easy run (RPE 2-3)",
+                  "Dynamic mobility drills",
+                  "3-4 x 20-second strides"
+                ]
+              },
+              {
+                "heading": "Main Set",
+                "items": [
+                  "1 min uphill @ RPE 6",
+                  "2 mins uphill @ RPE 6-7",
+                  "3 mins uphill @ RPE 7",
+                  "4 mins uphill @ RPE 7-8",
+                  "5 mins uphill @ RPE 8 (controlled, not all out)",
+                  "4 mins uphill @ RPE 7-8",
+                  "3 mins uphill @ RPE 7",
+                  "2 mins uphill @ RPE 6-7",
+                  "1 min uphill @ RPE 6"
+                ]
+              },
+              {
+                "heading": "Recovery",
+                "items": [
+                  "Easy jog or walk downhill for approximately the same duration as each work interval."
+                ]
+              },
+              {
+                "heading": "Cooldown",
+                "items": [
+                  "Easy running until you reach 1.5 hours total training time."
+                ]
+              },
+              {
+                "heading": "Coaching Tips",
+                "items": [
+                  "Run by effort (RPE), not pace.",
+                  "Maintain a quick cadence. Don't sprint the shorter intervals.",
+                  "Keep your posture tall with a slight lean from the ankles.",
+                  "If the climb becomes too steep, switch to a strong power hike. This is exactly what you'll do during many sections of TGC 100.",
+                  "Finish the workout feeling like you could complete one more interval. Leave a little in the tank."
+                ]
+              },
+              {
+                "heading": "Why This Workout?",
+                "note": "This session develops:",
+                "items": [
+                  "Sustained climbing strength",
+                  "Better lactate clearance",
+                  "Efficient uphill pacing",
+                  "Fatigue resistance for long mountain ultras like The Great Cordillera 100"
+                ]
+              },
+              {
+                "heading": "No Hills? No Problem!",
+                "note": "Not everyone has access to long climbs, and that's perfectly okay. Here are some alternatives that provide a similar training stimulus.",
+                "items": [
+                  "Option 1 – Flat Tempo Pyramid (Recommended): complete the same 1-2-3-4-5-4-3-2-1 structure on flat terrain at RPE 6-8, easy jog recovery for the same duration as each interval, focus on consistent effort instead of pace.",
+                  "Option 2 – Treadmill: set incline to 5-8%, complete the same pyramid at RPE 6-8, avoid holding handrails.",
+                  "Option 3 – Stairs or Parking Garage: run or power hike continuously during each interval, walk back down for recovery, excellent for building climbing-specific strength."
+                ]
+              },
+              {
+                "heading": "Remember",
+                "items": [
+                  "Stay relaxed and controlled.",
+                  "Keep your cadence smooth and consistent.",
+                  "Power hike when appropriate.",
+                  "Prioritize good form over speed."
+                ]
+              }
+            ]
           },
           "days": [
             {
@@ -1198,15 +1358,15 @@
               "day": "Thursday"
             },
             {
-              "title": "Rest",
+              "title": "REST or ACTIVE RECOVERY",
               "duration": "",
-              "detail": "",
+              "detail": "Foam Rolling",
               "rpe": "",
               "vert_gain_m": "",
-              "is_rest": true,
+              "is_rest": false,
               "full_pack": false,
-              "category": "Rest",
-              "raw": "REST",
+              "category": "Recovery",
+              "raw": "REST or ACTIVE RECOVERY (Foam Rolling)",
               "day": "Friday"
             },
             {
@@ -1222,15 +1382,15 @@
               "day": "Saturday"
             },
             {
-              "title": "Cross-train / Bike Focus",
+              "title": "General Aerobic Run or Cross-train",
               "duration": "1.5h",
-              "detail": "",
-              "rpe": "",
+              "detail": "ex: Indoor cycling",
+              "rpe": "2-3",
               "vert_gain_m": "",
               "is_rest": false,
               "full_pack": false,
               "category": "Specificity",
-              "raw": "1.5h Cross-train / Bike Focus",
+              "raw": "1.5h General Aerobic Run or Cross-train (ex: Indoor cycling) (RPE 2-3)",
               "day": "Sunday"
             }
           ]
@@ -1249,11 +1409,91 @@
             "Saturday is two hours on flat ground. Let it be easy. The next block builds on this recovery, not on more fatigue."
           ],
           "key_session": {
-            "day": "Saturday",
-            "title": "Flat trail jog",
-            "duration": "2h",
+            "day": "Wednesday",
+            "title": "Pyramidal Hill Overloads",
+            "duration": "1h",
             "vert_gain_m": "",
-            "full_pack": false
+            "full_pack": false,
+            "note": "Feel free to swap with an easy day if your schedule doesn't work."
+          },
+          "featured_workout": {
+            "title": "Pyramidal Hill Overloads",
+            "day": "Wednesday",
+            "intro": "A pyramid of timed uphill efforts with equal recovery. The structure trains you to surge when terrain demands it, back off on descent, and repeat — which is exactly how mountain racing moves. Use this guide for all three weeks.",
+            "sections": [
+              {
+                "heading": "Warm-up",
+                "items": [
+                  "20 minutes easy run (RPE 2-3)",
+                  "Dynamic mobility drills",
+                  "3-4 x 20-second strides"
+                ]
+              },
+              {
+                "heading": "Main Set",
+                "items": [
+                  "1 min uphill @ RPE 6",
+                  "2 mins uphill @ RPE 6-7",
+                  "3 mins uphill @ RPE 7",
+                  "4 mins uphill @ RPE 7-8",
+                  "5 mins uphill @ RPE 8 (controlled, not all out)",
+                  "4 mins uphill @ RPE 7-8",
+                  "3 mins uphill @ RPE 7",
+                  "2 mins uphill @ RPE 6-7",
+                  "1 min uphill @ RPE 6"
+                ]
+              },
+              {
+                "heading": "Recovery",
+                "items": [
+                  "Easy jog or walk downhill for approximately the same duration as each work interval."
+                ]
+              },
+              {
+                "heading": "Cooldown",
+                "items": [
+                  "Easy running until you reach 1.5 hours total training time."
+                ]
+              },
+              {
+                "heading": "Coaching Tips",
+                "items": [
+                  "Run by effort (RPE), not pace.",
+                  "Maintain a quick cadence. Don't sprint the shorter intervals.",
+                  "Keep your posture tall with a slight lean from the ankles.",
+                  "If the climb becomes too steep, switch to a strong power hike. This is exactly what you'll do during many sections of TGC 100.",
+                  "Finish the workout feeling like you could complete one more interval. Leave a little in the tank."
+                ]
+              },
+              {
+                "heading": "Why This Workout?",
+                "note": "This session develops:",
+                "items": [
+                  "Sustained climbing strength",
+                  "Better lactate clearance",
+                  "Efficient uphill pacing",
+                  "Fatigue resistance for long mountain ultras like The Great Cordillera 100"
+                ]
+              },
+              {
+                "heading": "No Hills? No Problem!",
+                "note": "Not everyone has access to long climbs, and that's perfectly okay. Here are some alternatives that provide a similar training stimulus.",
+                "items": [
+                  "Option 1 – Flat Tempo Pyramid (Recommended): complete the same 1-2-3-4-5-4-3-2-1 structure on flat terrain at RPE 6-8, easy jog recovery for the same duration as each interval, focus on consistent effort instead of pace.",
+                  "Option 2 – Treadmill: set incline to 5-8%, complete the same pyramid at RPE 6-8, avoid holding handrails.",
+                  "Option 3 – Stairs or Parking Garage: run or power hike continuously during each interval, walk back down for recovery, excellent for building climbing-specific strength."
+                ]
+              },
+              {
+                "heading": "Remember",
+                "items": [
+                  "Stay relaxed and controlled.",
+                  "Keep your cadence smooth and consistent.",
+                  "Power hike when appropriate.",
+                  "Prioritize good form over speed."
+                ]
+              }
+            ]
           },
           "days": [
             {
@@ -1269,7 +1509,7 @@
               "day": "Monday"
             },
             {
-              "title": "Easy",
+              "title": "Easy to 1.5h",
               "duration": "1h",
               "detail": "",
               "rpe": "2",
@@ -1277,19 +1517,19 @@
               "is_rest": false,
               "full_pack": false,
               "category": "Recovery",
-              "raw": "1h Easy (RPE 2)",
+              "raw": "1h Easy to 1.5h (RPE 2)",
               "day": "Tuesday"
             },
             {
-              "title": "Easy Run",
+              "title": "Pyramidal Hill Overloads",
               "duration": "1h",
               "detail": "",
-              "rpe": "2",
+              "rpe": "",
               "vert_gain_m": "",
               "is_rest": false,
               "full_pack": false,
-              "category": "Recovery",
-              "raw": "1h Easy Run (RPE 2)",
+              "category": "Running Intervals",
+              "raw": "1h Pyramidal Hill Overloads",
               "day": "Wednesday"
             },
             {
@@ -1305,19 +1545,19 @@
               "day": "Thursday"
             },
             {
-              "title": "Rest",
+              "title": "REST or ACTIVE RECOVERY",
               "duration": "",
-              "detail": "",
+              "detail": "Yoga",
               "rpe": "",
               "vert_gain_m": "",
-              "is_rest": true,
+              "is_rest": false,
               "full_pack": false,
-              "category": "Rest",
-              "raw": "REST",
+              "category": "Recovery",
+              "raw": "REST or ACTIVE RECOVERY (Yoga)",
               "day": "Friday"
             },
             {
-              "title": "Flat trail jog",
+              "title": "Flat trail or soft surfaces jog",
               "duration": "2h",
               "detail": "",
               "rpe": "2",
@@ -1325,7 +1565,7 @@
               "is_rest": false,
               "full_pack": false,
               "category": "Endurance Run",
-              "raw": "2h Flat trail jog (RPE 2)",
+              "raw": "2h Flat trail or soft surfaces jog (RPE 2)",
               "day": "Saturday"
             },
             {
@@ -1348,7 +1588,7 @@
           "is_deload": false,
           "dates_label": "Aug 10 - Aug 16",
           "unlock_date": "2026-08-10",
-          "total_hours": "11 hours",
+          "total_hours": "11.5 hours",
           "training_focus": "Threshold",
           "block_goal": "Recovery",
           "coach_brief": [
@@ -1360,127 +1600,21 @@
             "title": "Hilly Run",
             "duration": "4.5h",
             "vert_gain_m": "1100m",
-            "full_pack": false
+            "full_pack": false,
+            "note": null
           },
+          "featured_workout": null,
           "days": [
             {
-              "title": "Rest",
+              "title": "REST or Foam Roll",
               "duration": "",
               "detail": "",
               "rpe": "",
               "vert_gain_m": "",
-              "is_rest": true,
-              "full_pack": false,
-              "category": "Rest",
-              "raw": "REST",
-              "day": "Monday"
-            },
-            {
-              "title": "Easy",
-              "duration": "1.5h",
-              "detail": "",
-              "rpe": "3",
-              "vert_gain_m": "",
               "is_rest": false,
               "full_pack": false,
-              "category": "Recovery",
-              "raw": "1.5h Easy (RPE 3)",
-              "day": "Tuesday"
-            },
-            {
-              "title": "Continuous Stairway Loops",
-              "duration": "1.5h",
-              "detail": "",
-              "rpe": "",
-              "vert_gain_m": "",
-              "is_rest": false,
-              "full_pack": false,
-              "category": "Running Intervals",
-              "raw": "1.5h Continuous Stairway Loops",
-              "day": "Wednesday"
-            },
-            {
-              "title": "Easy",
-              "duration": "1h",
-              "detail": "",
-              "rpe": "2",
-              "vert_gain_m": "",
-              "is_rest": false,
-              "full_pack": false,
-              "category": "Recovery",
-              "raw": "1h Easy (RPE 2)",
-              "day": "Thursday"
-            },
-            {
-              "title": "Rest",
-              "duration": "",
-              "detail": "",
-              "rpe": "",
-              "vert_gain_m": "",
-              "is_rest": true,
-              "full_pack": false,
-              "category": "Rest",
-              "raw": "REST",
-              "day": "Friday"
-            },
-            {
-              "title": "Hilly Run",
-              "duration": "4.5h",
-              "detail": "",
-              "rpe": "",
-              "vert_gain_m": "1100m",
-              "is_rest": false,
-              "full_pack": false,
-              "category": "Endurance Run",
-              "raw": "4.5h Hilly Run (Gain: 1,100m)",
-              "day": "Saturday"
-            },
-            {
-              "title": "Multi-Hour Gym Step-Up / Run",
-              "duration": "2h",
-              "detail": "",
-              "rpe": "",
-              "vert_gain_m": "",
-              "is_rest": false,
-              "full_pack": false,
-              "category": "Specificity",
-              "raw": "2h Multi-Hour Gym Step-Up / Run",
-              "day": "Sunday"
-            }
-          ]
-        },
-        {
-          "week": 12,
-          "phase": "Build 1",
-          "is_deload": false,
-          "dates_label": "Aug 17 - Aug 23",
-          "unlock_date": "2026-08-17",
-          "total_hours": "11.5 hours",
-          "training_focus": "Night Running",
-          "block_goal": "Steady State Run",
-          "coach_brief": [
-            "Week 12, Build 1. Now you sharpen the climb and the descent. Stairway loops, urban vert, downhill control.",
-            "Your anchor this week is Saturday's 5h High Vert Focus with 1200m of vert.",
-            "Total volume: 11.5 hours. Keep your easy days genuinely easy at RPE 2-3. The hard work is in the hills and the long run."
-          ],
-          "key_session": {
-            "day": "Saturday",
-            "title": "High Vert Focus",
-            "duration": "5h",
-            "vert_gain_m": "1200m",
-            "full_pack": false
-          },
-          "days": [
-            {
-              "title": "Rest",
-              "duration": "",
-              "detail": "",
-              "rpe": "",
-              "vert_gain_m": "",
-              "is_rest": true,
-              "full_pack": false,
-              "category": "Rest",
-              "raw": "REST",
+              "category": "Other",
+              "raw": "REST or Foam Roll",
               "day": "Monday"
             },
             {
@@ -1499,16 +1633,16 @@
               "title": "Sustained Incline Treadmill",
               "duration": "1.5h",
               "detail": "",
-              "rpe": "",
+              "rpe": "3-4",
               "vert_gain_m": "",
               "is_rest": false,
               "full_pack": false,
               "category": "Running Intervals",
-              "raw": "1.5h Sustained Incline Treadmill",
+              "raw": "1.5h Sustained Incline Treadmill (RPE 3-4)",
               "day": "Wednesday"
             },
             {
-              "title": "Easy",
+              "title": "Easy  + Tibialis Raises",
               "duration": "1h",
               "detail": "",
               "rpe": "2",
@@ -1516,43 +1650,153 @@
               "is_rest": false,
               "full_pack": false,
               "category": "Recovery",
-              "raw": "1h Easy (RPE 2)",
+              "raw": "1h Easy (RPE 2) + Tibialis Raises",
               "day": "Thursday"
             },
             {
-              "title": "Rest",
+              "title": "REST or ACTIVE RECOVERY",
               "duration": "",
-              "detail": "",
+              "detail": "Core Workout 20-30 mins",
               "rpe": "",
               "vert_gain_m": "",
-              "is_rest": true,
+              "is_rest": false,
               "full_pack": false,
-              "category": "Rest",
-              "raw": "REST",
+              "category": "Recovery",
+              "raw": "REST or ACTIVE RECOVERY (Core Workout 20-30 mins)",
               "day": "Friday"
             },
             {
-              "title": "High Vert Focus",
+              "title": "Hilly Run",
+              "duration": "4.5h",
+              "detail": "",
+              "rpe": "3-5",
+              "vert_gain_m": "1100m",
+              "is_rest": false,
+              "full_pack": false,
+              "category": "Endurance Run",
+              "raw": "4.5h Hilly Run (Gain: 1,100m) (RPE 3-5)",
+              "day": "Saturday"
+            },
+            {
+              "title": "Easy + Tempo",
+              "duration": "1.5h",
+              "detail": "",
+              "rpe": "5",
+              "vert_gain_m": "",
+              "is_rest": false,
+              "full_pack": false,
+              "category": "Tempo Run",
+              "raw": "1.5h Easy + Tempo (RPE 5)",
+              "day": "Sunday"
+            }
+          ]
+        },
+        {
+          "week": 12,
+          "phase": "Build 1",
+          "is_deload": false,
+          "dates_label": "Aug 17 - Aug 23",
+          "unlock_date": "2026-08-17",
+          "total_hours": "12 hours",
+          "training_focus": "Night Running",
+          "block_goal": "Steady State Run",
+          "coach_brief": [
+            "Week 12, Build 1. Now you sharpen the climb and the descent. Stairway loops, urban vert, downhill control.",
+            "Your anchor this week is Saturday's 5h Long Trail High Vert Focus with 1200m of vert.",
+            "Total volume: 12 hours. Keep your easy days genuinely easy at RPE 2-3. The hard work is in the hills and the long run."
+          ],
+          "key_session": {
+            "day": "Saturday",
+            "title": "Long Trail High Vert Focus",
+            "duration": "5h",
+            "vert_gain_m": "1200m",
+            "full_pack": false,
+            "note": null
+          },
+          "featured_workout": null,
+          "days": [
+            {
+              "title": "Active Recovery",
+              "duration": "0.5h",
+              "detail": "Brisk Walk or Yoga or Cycling",
+              "rpe": "",
+              "vert_gain_m": "",
+              "is_rest": false,
+              "full_pack": false,
+              "category": "Recovery",
+              "raw": "0.5h Active Recovery (Brisk Walk or Yoga or Cycling)",
+              "day": "Monday"
+            },
+            {
+              "title": "Easy",
+              "duration": "1.5h",
+              "detail": "",
+              "rpe": "3",
+              "vert_gain_m": "",
+              "is_rest": false,
+              "full_pack": false,
+              "category": "Recovery",
+              "raw": "1.5h Easy (RPE 3)",
+              "day": "Tuesday"
+            },
+            {
+              "title": "Sustained Incline Treadmill",
+              "duration": "1.5h",
+              "detail": "",
+              "rpe": "4-5",
+              "vert_gain_m": "",
+              "is_rest": false,
+              "full_pack": false,
+              "category": "Running Intervals",
+              "raw": "1.5h Sustained Incline Treadmill (RPE 4-5)",
+              "day": "Wednesday"
+            },
+            {
+              "title": "Easy  + Eccentric Goblet Squats",
+              "duration": "1h",
+              "detail": "",
+              "rpe": "3-4",
+              "vert_gain_m": "",
+              "is_rest": false,
+              "full_pack": false,
+              "category": "Recovery",
+              "raw": "1h Easy (RPE 3-4) + Eccentric Goblet Squats",
+              "day": "Thursday"
+            },
+            {
+              "title": "Recovery Run  + Core",
+              "duration": "0.5h",
+              "detail": "",
+              "rpe": "2-3",
+              "vert_gain_m": "",
+              "is_rest": false,
+              "full_pack": false,
+              "category": "Recovery",
+              "raw": "0.5h Recovery Run (RPE 2-3) + Core",
+              "day": "Friday"
+            },
+            {
+              "title": "Long Trail High Vert Focus",
               "duration": "5h",
               "detail": "",
-              "rpe": "",
+              "rpe": "3-5",
               "vert_gain_m": "1200m",
               "is_rest": false,
               "full_pack": false,
               "category": "Endurance Run",
-              "raw": "5h High Vert Focus (Gain: 1,200m)",
+              "raw": "5h Long Trail High Vert Focus (Gain: 1,200m) (RPE 3-5)",
               "day": "Saturday"
             },
             {
-              "title": "Back-To-Back Fat Fatigue Run",
-              "duration": "2h",
+              "title": "Steady Run",
+              "duration": "1.5h",
               "detail": "",
-              "rpe": "",
+              "rpe": "5-6",
               "vert_gain_m": "",
               "is_rest": false,
               "full_pack": false,
               "category": "Other",
-              "raw": "2h Back-To-Back Fat Fatigue Run",
+              "raw": "1.5h Steady Run (RPE 5-6)",
               "day": "Sunday"
             }
           ]
@@ -1563,32 +1807,34 @@
           "is_deload": false,
           "dates_label": "Aug 24 - Aug 30",
           "unlock_date": "2026-08-24",
-          "total_hours": "12 hours",
+          "total_hours": "12.5 hours",
           "training_focus": "Technical Climbs",
           "block_goal": null,
           "coach_brief": [
             "Week 13, Build 1. Now you sharpen the climb and the descent. Stairway loops, urban vert, downhill control.",
-            "Your anchor this week is Saturday's 5h Big Vert Blocks with 1300m of vert.",
-            "Total volume: 12 hours. Keep your easy days genuinely easy at RPE 2-3. The hard work is in the hills and the long run."
+            "Your anchor this week is Saturday's 5.5h Long Trail High Vert Focus with 1300m of vert.",
+            "Total volume: 12.5 hours. Keep your easy days genuinely easy at RPE 2-3. The hard work is in the hills and the long run."
           ],
           "key_session": {
             "day": "Saturday",
-            "title": "Big Vert Blocks",
-            "duration": "5h",
+            "title": "Long Trail High Vert Focus",
+            "duration": "5.5h",
             "vert_gain_m": "1300m",
-            "full_pack": false
+            "full_pack": false,
+            "note": null
           },
+          "featured_workout": null,
           "days": [
             {
-              "title": "Rest",
-              "duration": "",
-              "detail": "",
+              "title": "Active Recovery",
+              "duration": "0.5h",
+              "detail": "Brisk Walk or Yoga or Cycling",
               "rpe": "",
               "vert_gain_m": "",
-              "is_rest": true,
+              "is_rest": false,
               "full_pack": false,
-              "category": "Rest",
-              "raw": "REST",
+              "category": "Recovery",
+              "raw": "0.5h Active Recovery (Brisk Walk or Yoga or Cycling)",
               "day": "Monday"
             },
             {
@@ -1604,19 +1850,19 @@
               "day": "Tuesday"
             },
             {
-              "title": "Urban Vert Hunt",
+              "title": "Sustained Incline Treadmill",
               "duration": "2h",
-              "detail": "Stairs/Bridges",
-              "rpe": "",
+              "detail": "",
+              "rpe": "5-6",
               "vert_gain_m": "",
               "is_rest": false,
               "full_pack": false,
               "category": "Running Intervals",
-              "raw": "2h Urban Vert Hunt (Stairs/Bridges)",
+              "raw": "2h Sustained Incline Treadmill (RPE 5-6)",
               "day": "Wednesday"
             },
             {
-              "title": "Easy",
+              "title": "Easy  + Deficit Reverse Lunges",
               "duration": "1h",
               "detail": "",
               "rpe": "2",
@@ -1624,43 +1870,43 @@
               "is_rest": false,
               "full_pack": false,
               "category": "Recovery",
-              "raw": "1h Easy (RPE 2)",
+              "raw": "1h Easy (RPE 2) + Deficit Reverse Lunges",
               "day": "Thursday"
             },
             {
-              "title": "Rest",
-              "duration": "",
+              "title": "Recovery Run  + Core",
+              "duration": "0.75h",
               "detail": "",
-              "rpe": "",
+              "rpe": "2-3",
               "vert_gain_m": "",
-              "is_rest": true,
+              "is_rest": false,
               "full_pack": false,
-              "category": "Rest",
-              "raw": "REST",
+              "category": "Recovery",
+              "raw": "0.75h Recovery Run (RPE 2-3) + Core",
               "day": "Friday"
             },
             {
-              "title": "Big Vert Blocks",
-              "duration": "5h",
+              "title": "Long Trail High Vert Focus",
+              "duration": "5.5h",
               "detail": "",
-              "rpe": "",
+              "rpe": "3-5",
               "vert_gain_m": "1300m",
               "is_rest": false,
               "full_pack": false,
               "category": "Endurance Run",
-              "raw": "5h Big Vert Blocks (Gain: 1,300m)",
+              "raw": "5.5h Long Trail High Vert Focus (Gain: 1,300m) (RPE 3-5)",
               "day": "Saturday"
             },
             {
-              "title": "Active Power Hike w/ Race Pack",
-              "duration": "2h",
+              "title": "Progression Run",
+              "duration": "1.5h",
               "detail": "",
-              "rpe": "",
+              "rpe": "2-3",
               "vert_gain_m": "",
               "is_rest": false,
-              "full_pack": true,
-              "category": "Specificity",
-              "raw": "2h Active Power Hike w/ Race Pack",
+              "full_pack": false,
+              "category": "Other",
+              "raw": "1.5h Progression Run (RPE 2-3 to RPE 6)",
               "day": "Sunday"
             }
           ]
@@ -1671,48 +1917,50 @@
           "is_deload": false,
           "dates_label": "Aug 31 - Sept 06",
           "unlock_date": "2026-08-31",
-          "total_hours": "12.5 hours",
+          "total_hours": "13 hours",
           "training_focus": "Heat Training",
           "block_goal": null,
           "coach_brief": [
             "Week 14, Build 1. Now you sharpen the climb and the descent. Stairway loops, urban vert, downhill control.",
-            "Your anchor this week is Saturday's 5.5h Max Vert Prep with 1400m of vert.",
-            "Total volume: 12.5 hours. Keep your easy days genuinely easy at RPE 2-3. The hard work is in the hills and the long run."
+            "Your anchor this week is Saturday's 5.5h Max Vert Prep with 1500m of vert.",
+            "Total volume: 13 hours. Keep your easy days genuinely easy at RPE 2-3. The hard work is in the hills and the long run."
           ],
           "key_session": {
             "day": "Saturday",
             "title": "Max Vert Prep",
             "duration": "5.5h",
-            "vert_gain_m": "1400m",
-            "full_pack": false
+            "vert_gain_m": "1500m",
+            "full_pack": false,
+            "note": null
           },
+          "featured_workout": null,
           "days": [
             {
-              "title": "Rest",
-              "duration": "",
-              "detail": "",
+              "title": "Active Recovery",
+              "duration": "0.5h",
+              "detail": "Brisk Walk or Yoga or Cycling",
               "rpe": "",
               "vert_gain_m": "",
-              "is_rest": true,
+              "is_rest": false,
               "full_pack": false,
-              "category": "Rest",
-              "raw": "REST",
+              "category": "Recovery",
+              "raw": "0.5h Active Recovery (Brisk Walk or Yoga or Cycling)",
               "day": "Monday"
             },
             {
               "title": "Easy",
-              "duration": "1.5h",
+              "duration": "1.75h",
               "detail": "",
               "rpe": "3",
               "vert_gain_m": "",
               "is_rest": false,
               "full_pack": false,
               "category": "Recovery",
-              "raw": "1.5h Easy (RPE 3)",
+              "raw": "1.75h Easy (RPE 3)",
               "day": "Tuesday"
             },
             {
-              "title": "Hill Repeats w/ Downhill Focus",
+              "title": "Long Hill Repeats w/ Downhill Focus",
               "duration": "2h",
               "detail": "",
               "rpe": "",
@@ -1720,11 +1968,11 @@
               "is_rest": false,
               "full_pack": false,
               "category": "Running Intervals",
-              "raw": "2h Hill Repeats w/ Downhill Focus",
+              "raw": "2h Long Hill Repeats w/ Downhill Focus",
               "day": "Wednesday"
             },
             {
-              "title": "Easy",
+              "title": "Easy  + Weighted Step-Downs",
               "duration": "1h",
               "detail": "",
               "rpe": "2",
@@ -1732,43 +1980,43 @@
               "is_rest": false,
               "full_pack": false,
               "category": "Recovery",
-              "raw": "1h Easy (RPE 2)",
+              "raw": "1h Easy (RPE 2) + Weighted Step-Downs",
               "day": "Thursday"
             },
             {
-              "title": "Rest",
-              "duration": "",
-              "detail": "",
-              "rpe": "",
-              "vert_gain_m": "",
-              "is_rest": true,
-              "full_pack": false,
-              "category": "Rest",
-              "raw": "REST",
-              "day": "Friday"
-            },
-            {
-              "title": "Max Vert Prep",
-              "duration": "5.5h",
-              "detail": "",
-              "rpe": "",
-              "vert_gain_m": "1400m",
-              "is_rest": false,
-              "full_pack": false,
-              "category": "Endurance Run",
-              "raw": "5.5h Max Vert Prep (Gain: 1,400m)",
-              "day": "Saturday"
-            },
-            {
-              "title": "Smooth Aerobic Finish",
-              "duration": "2h",
+              "title": "Easy Run  + Core",
+              "duration": "0.5h",
               "detail": "",
               "rpe": "2-3",
               "vert_gain_m": "",
               "is_rest": false,
               "full_pack": false,
               "category": "Specificity",
-              "raw": "2h Smooth Aerobic Finish (RPE 2-3)",
+              "raw": "0.5h Easy Run (RPE 2-3) + Core",
+              "day": "Friday"
+            },
+            {
+              "title": "Max Vert Prep",
+              "duration": "5.5h",
+              "detail": "",
+              "rpe": "3-5",
+              "vert_gain_m": "1500m",
+              "is_rest": false,
+              "full_pack": false,
+              "category": "Endurance Run",
+              "raw": "5.5h Max Vert Prep (Gain: 1,500m) (RPE 3-5)",
+              "day": "Saturday"
+            },
+            {
+              "title": "Smooth Aerobic Finish",
+              "duration": "2h",
+              "detail": "",
+              "rpe": "3-4",
+              "vert_gain_m": "",
+              "is_rest": false,
+              "full_pack": false,
+              "category": "Specificity",
+              "raw": "2h Smooth Aerobic Finish (RPE 3-4)",
               "day": "Sunday"
             }
           ]
@@ -1779,32 +2027,34 @@
           "is_deload": true,
           "dates_label": "Sept 07 - Sept 13",
           "unlock_date": "2026-09-07",
-          "total_hours": "7.5 hours",
+          "total_hours": "8 hours",
           "training_focus": "Hike Recon",
           "block_goal": "Specificity",
           "coach_brief": [
             "Week 15, Deload 3. Pull back this week. The work sticks when you recover.",
             "Saturday is 2.5h Rolling Terrain Run. That's enough.",
-            "Volume drops to 7.5 hours this week. Let the last block settle."
+            "Volume drops to 8 hours this week. Let the last block settle."
           ],
           "key_session": {
             "day": "Saturday",
             "title": "Rolling Terrain Run",
             "duration": "2.5h",
             "vert_gain_m": "",
-            "full_pack": false
+            "full_pack": false,
+            "note": null
           },
+          "featured_workout": null,
           "days": [
             {
-              "title": "Rest",
-              "duration": "",
-              "detail": "",
+              "title": "Active Recovery",
+              "duration": "0.5h",
+              "detail": "Brisk Walk or Yoga or Cycling",
               "rpe": "",
               "vert_gain_m": "",
-              "is_rest": true,
+              "is_rest": false,
               "full_pack": false,
-              "category": "Rest",
-              "raw": "REST",
+              "category": "Recovery",
+              "raw": "0.5h Active Recovery (Brisk Walk or Yoga or Cycling)",
               "day": "Monday"
             },
             {
@@ -1832,7 +2082,7 @@
               "day": "Wednesday"
             },
             {
-              "title": "Easy",
+              "title": "Easy  + Single-Leg Romanian Deadlifts",
               "duration": "1h",
               "detail": "",
               "rpe": "2",
@@ -1840,7 +2090,7 @@
               "is_rest": false,
               "full_pack": false,
               "category": "Recovery",
-              "raw": "1h Easy (RPE 2)",
+              "raw": "1h Easy (RPE 2) + Single-Leg Romanian Deadlifts",
               "day": "Thursday"
             },
             {
@@ -1859,24 +2109,24 @@
               "title": "Rolling Terrain Run",
               "duration": "2.5h",
               "detail": "",
-              "rpe": "",
+              "rpe": "4",
               "vert_gain_m": "",
               "is_rest": false,
               "full_pack": false,
               "category": "Endurance Run",
-              "raw": "2.5h Rolling Terrain Run",
+              "raw": "2.5h Rolling Terrain Run (RPE 4)",
               "day": "Saturday"
             },
             {
               "title": "Soft Surface Recovery Jog",
               "duration": "1h",
               "detail": "",
-              "rpe": "",
+              "rpe": "2-3",
               "vert_gain_m": "",
               "is_rest": false,
               "full_pack": false,
               "category": "Recovery",
-              "raw": "1h Soft Surface Recovery Jog",
+              "raw": "1h Soft Surface Recovery Jog (RPE 2-3)",
               "day": "Sunday"
             }
           ]
@@ -3758,15 +4008,95 @@
           "training_focus": "Specificity",
           "block_goal": "2 mins x 10 at RPE 9 (20 mins speed work), 2 mins rest, 1:1 ratio",
           "coach_brief": [
-            "This is the week where it stops feeling manageable. The hardest intervals of the phase, the longest Saturday climb so far, and no real break between them. You're practicing finishing sessions that you started tired.",
+            "For the next 2 to 3 weeks, our training plan includes one of the most important sessions for preparing your legs for The Great Cordillera 100. This workout builds the strength, endurance, and pacing you will need for the long climbs and technical terrain on race day.",
             "Sunday's power-walk keeps the legs moving without adding more damage, so don't skip it and don't make it harder than it needs to be."
           ],
           "key_session": {
-            "day": "Saturday",
-            "title": "High Vert Circuit",
-            "duration": "2.75h",
-            "vert_gain_m": "700m",
-            "full_pack": false
+            "day": "Wednesday",
+            "title": "Pyramidal Hill Overloads",
+            "duration": "1.25h",
+            "vert_gain_m": "",
+            "full_pack": false,
+            "note": "Feel free to swap with an easy day if your schedule doesn't work."
+          },
+          "featured_workout": {
+            "title": "Pyramidal Hill Overloads",
+            "day": "Wednesday",
+            "intro": "A pyramid of timed uphill efforts with equal recovery. The structure trains you to surge when terrain demands it, back off on descent, and repeat — which is exactly how mountain racing moves. Use this guide for all three weeks.",
+            "sections": [
+              {
+                "heading": "Warm-up",
+                "items": [
+                  "20 minutes easy run (RPE 2-3)",
+                  "Dynamic mobility drills",
+                  "3-4 x 20-second strides"
+                ]
+              },
+              {
+                "heading": "Main Set",
+                "items": [
+                  "1 min uphill @ RPE 6",
+                  "2 mins uphill @ RPE 6-7",
+                  "3 mins uphill @ RPE 7",
+                  "4 mins uphill @ RPE 7-8",
+                  "5 mins uphill @ RPE 8 (controlled, not all out)",
+                  "4 mins uphill @ RPE 7-8",
+                  "3 mins uphill @ RPE 7",
+                  "2 mins uphill @ RPE 6-7",
+                  "1 min uphill @ RPE 6"
+                ]
+              },
+              {
+                "heading": "Recovery",
+                "items": [
+                  "Easy jog or walk downhill for approximately the same duration as each work interval."
+                ]
+              },
+              {
+                "heading": "Cooldown",
+                "items": [
+                  "Easy running until you reach 1.5 hours total training time."
+                ]
+              },
+              {
+                "heading": "Coaching Tips",
+                "items": [
+                  "Run by effort (RPE), not pace.",
+                  "Maintain a quick cadence. Don't sprint the shorter intervals.",
+                  "Keep your posture tall with a slight lean from the ankles.",
+                  "If the climb becomes too steep, switch to a strong power hike. This is exactly what you'll do during many sections of TGC 100.",
+                  "Finish the workout feeling like you could complete one more interval. Leave a little in the tank."
+                ]
+              },
+              {
+                "heading": "Why This Workout?",
+                "note": "This session develops:",
+                "items": [
+                  "Sustained climbing strength",
+                  "Better lactate clearance",
+                  "Efficient uphill pacing",
+                  "Fatigue resistance for long mountain ultras like The Great Cordillera 100"
+                ]
+              },
+              {
+                "heading": "No Hills? No Problem!",
+                "note": "Not everyone has access to long climbs, and that's perfectly okay. Here are some alternatives that provide a similar training stimulus.",
+                "items": [
+                  "Option 1 – Flat Tempo Pyramid (Recommended): complete the same 1-2-3-4-5-4-3-2-1 structure on flat terrain at RPE 6-8, easy jog recovery for the same duration as each interval, focus on consistent effort instead of pace.",
+                  "Option 2 – Treadmill: set incline to 5-8%, complete the same pyramid at RPE 6-8, avoid holding handrails.",
+                  "Option 3 – Stairs or Parking Garage: run or power hike continuously during each interval, walk back down for recovery, excellent for building climbing-specific strength."
+                ]
+              },
+              {
+                "heading": "Remember",
+                "items": [
+                  "Stay relaxed and controlled.",
+                  "Keep your cadence smooth and consistent.",
+                  "Power hike when appropriate.",
+                  "Prioritize good form over speed."
+                ]
+              }
+            ]
           },
           "days": [
             {
@@ -3794,15 +4124,15 @@
               "day": "Tuesday"
             },
             {
-              "title": "Hilly Run",
+              "title": "Pyramidal Hill Overloads",
               "duration": "1.25h",
               "detail": "",
-              "rpe": "5",
+              "rpe": "",
               "vert_gain_m": "",
               "is_rest": false,
               "full_pack": false,
-              "category": "Endurance Run",
-              "raw": "1.25h Hilly Run (RPE 5)",
+              "category": "Running Intervals",
+              "raw": "1.25h Pyramidal Hill Overloads",
               "day": "Wednesday"
             },
             {
@@ -3818,15 +4148,15 @@
               "day": "Thursday"
             },
             {
-              "title": "Rest",
+              "title": "REST or ACTIVE RECOVERY",
               "duration": "",
-              "detail": "",
+              "detail": "Core workout",
               "rpe": "",
               "vert_gain_m": "",
-              "is_rest": true,
+              "is_rest": false,
               "full_pack": false,
-              "category": "Rest",
-              "raw": "REST",
+              "category": "Recovery",
+              "raw": "REST or ACTIVE RECOVERY (Core workout)",
               "day": "Friday"
             },
             {
@@ -3842,15 +4172,15 @@
               "day": "Saturday"
             },
             {
-              "title": "Power-walk on Incline",
+              "title": "Power-walk on Incline Treadmill",
               "duration": "1h",
               "detail": "12%+",
               "rpe": "",
               "vert_gain_m": "",
               "is_rest": false,
               "full_pack": false,
-              "category": "Specificity",
-              "raw": "1h Power-walk on Incline (12%+)",
+              "category": "Running Intervals",
+              "raw": "1h Power-walk on Incline Treadmill (12%+)",
               "day": "Sunday"
             }
           ]
@@ -3869,11 +4199,91 @@
             "Wednesday's pyramidal session is about surging and recovering repeatedly, which is how mountain terrain actually moves. It's also worth starting to think through race execution in real terms this week, when you eat and how you handle the big climbs, because November is closer than it looks."
           ],
           "key_session": {
-            "day": "Saturday",
-            "title": "Hilly Run",
-            "duration": "3h",
-            "vert_gain_m": "800m",
-            "full_pack": false
+            "day": "Wednesday",
+            "title": "Pyramidal Hill Overloads",
+            "duration": "1.25h",
+            "vert_gain_m": "",
+            "full_pack": false,
+            "note": "Feel free to swap with an easy day if your schedule doesn't work."
+          },
+          "featured_workout": {
+            "title": "Pyramidal Hill Overloads",
+            "day": "Wednesday",
+            "intro": "A pyramid of timed uphill efforts with equal recovery. The structure trains you to surge when terrain demands it, back off on descent, and repeat — which is exactly how mountain racing moves. Use this guide for all three weeks.",
+            "sections": [
+              {
+                "heading": "Warm-up",
+                "items": [
+                  "20 minutes easy run (RPE 2-3)",
+                  "Dynamic mobility drills",
+                  "3-4 x 20-second strides"
+                ]
+              },
+              {
+                "heading": "Main Set",
+                "items": [
+                  "1 min uphill @ RPE 6",
+                  "2 mins uphill @ RPE 6-7",
+                  "3 mins uphill @ RPE 7",
+                  "4 mins uphill @ RPE 7-8",
+                  "5 mins uphill @ RPE 8 (controlled, not all out)",
+                  "4 mins uphill @ RPE 7-8",
+                  "3 mins uphill @ RPE 7",
+                  "2 mins uphill @ RPE 6-7",
+                  "1 min uphill @ RPE 6"
+                ]
+              },
+              {
+                "heading": "Recovery",
+                "items": [
+                  "Easy jog or walk downhill for approximately the same duration as each work interval."
+                ]
+              },
+              {
+                "heading": "Cooldown",
+                "items": [
+                  "Easy running until you reach 1.5 hours total training time."
+                ]
+              },
+              {
+                "heading": "Coaching Tips",
+                "items": [
+                  "Run by effort (RPE), not pace.",
+                  "Maintain a quick cadence. Don't sprint the shorter intervals.",
+                  "Keep your posture tall with a slight lean from the ankles.",
+                  "If the climb becomes too steep, switch to a strong power hike. This is exactly what you'll do during many sections of TGC 100.",
+                  "Finish the workout feeling like you could complete one more interval. Leave a little in the tank."
+                ]
+              },
+              {
+                "heading": "Why This Workout?",
+                "note": "This session develops:",
+                "items": [
+                  "Sustained climbing strength",
+                  "Better lactate clearance",
+                  "Efficient uphill pacing",
+                  "Fatigue resistance for long mountain ultras like The Great Cordillera 100"
+                ]
+              },
+              {
+                "heading": "No Hills? No Problem!",
+                "note": "Not everyone has access to long climbs, and that's perfectly okay. Here are some alternatives that provide a similar training stimulus.",
+                "items": [
+                  "Option 1 – Flat Tempo Pyramid (Recommended): complete the same 1-2-3-4-5-4-3-2-1 structure on flat terrain at RPE 6-8, easy jog recovery for the same duration as each interval, focus on consistent effort instead of pace.",
+                  "Option 2 – Treadmill: set incline to 5-8%, complete the same pyramid at RPE 6-8, avoid holding handrails.",
+                  "Option 3 – Stairs or Parking Garage: run or power hike continuously during each interval, walk back down for recovery, excellent for building climbing-specific strength."
+                ]
+              },
+              {
+                "heading": "Remember",
+                "items": [
+                  "Stay relaxed and controlled.",
+                  "Keep your cadence smooth and consistent.",
+                  "Power hike when appropriate.",
+                  "Prioritize good form over speed."
+                ]
+              }
+            ]
           },
           "days": [
             {
@@ -3925,15 +4335,15 @@
               "day": "Thursday"
             },
             {
-              "title": "Rest",
+              "title": "REST or ACTIVE RECOVERY",
               "duration": "",
-              "detail": "",
+              "detail": "Foam Rolling",
               "rpe": "",
               "vert_gain_m": "",
-              "is_rest": true,
+              "is_rest": false,
               "full_pack": false,
-              "category": "Rest",
-              "raw": "REST",
+              "category": "Recovery",
+              "raw": "REST or ACTIVE RECOVERY (Foam Rolling)",
               "day": "Friday"
             },
             {
@@ -3949,15 +4359,15 @@
               "day": "Saturday"
             },
             {
-              "title": "Cross-train / Bike Focus",
+              "title": "General Aerobic Run or Cross-train",
               "duration": "1h",
-              "detail": "",
-              "rpe": "",
+              "detail": "ex: Indoor cycling",
+              "rpe": "2-3",
               "vert_gain_m": "",
               "is_rest": false,
               "full_pack": false,
               "category": "Specificity",
-              "raw": "1h Cross-train / Bike Focus",
+              "raw": "1h General Aerobic Run or Cross-train (ex: Indoor cycling) (RPE 2-3)",
               "day": "Sunday"
             }
           ]
@@ -3976,11 +4386,91 @@
             "Saturday is two hours on flat ground. Let it be easy. The next block builds on this recovery, not on more fatigue."
           ],
           "key_session": {
-            "day": "Saturday",
-            "title": "Flat trail jog",
-            "duration": "1.75h",
+            "day": "Wednesday",
+            "title": "Pyramidal Hill Overloads",
+            "duration": "0.75h",
             "vert_gain_m": "",
-            "full_pack": false
+            "full_pack": false,
+            "note": "Feel free to swap with an easy day if your schedule doesn't work."
+          },
+          "featured_workout": {
+            "title": "Pyramidal Hill Overloads",
+            "day": "Wednesday",
+            "intro": "A pyramid of timed uphill efforts with equal recovery. The structure trains you to surge when terrain demands it, back off on descent, and repeat — which is exactly how mountain racing moves. Use this guide for all three weeks.",
+            "sections": [
+              {
+                "heading": "Warm-up",
+                "items": [
+                  "20 minutes easy run (RPE 2-3)",
+                  "Dynamic mobility drills",
+                  "3-4 x 20-second strides"
+                ]
+              },
+              {
+                "heading": "Main Set",
+                "items": [
+                  "1 min uphill @ RPE 6",
+                  "2 mins uphill @ RPE 6-7",
+                  "3 mins uphill @ RPE 7",
+                  "4 mins uphill @ RPE 7-8",
+                  "5 mins uphill @ RPE 8 (controlled, not all out)",
+                  "4 mins uphill @ RPE 7-8",
+                  "3 mins uphill @ RPE 7",
+                  "2 mins uphill @ RPE 6-7",
+                  "1 min uphill @ RPE 6"
+                ]
+              },
+              {
+                "heading": "Recovery",
+                "items": [
+                  "Easy jog or walk downhill for approximately the same duration as each work interval."
+                ]
+              },
+              {
+                "heading": "Cooldown",
+                "items": [
+                  "Easy running until you reach 1.5 hours total training time."
+                ]
+              },
+              {
+                "heading": "Coaching Tips",
+                "items": [
+                  "Run by effort (RPE), not pace.",
+                  "Maintain a quick cadence. Don't sprint the shorter intervals.",
+                  "Keep your posture tall with a slight lean from the ankles.",
+                  "If the climb becomes too steep, switch to a strong power hike. This is exactly what you'll do during many sections of TGC 100.",
+                  "Finish the workout feeling like you could complete one more interval. Leave a little in the tank."
+                ]
+              },
+              {
+                "heading": "Why This Workout?",
+                "note": "This session develops:",
+                "items": [
+                  "Sustained climbing strength",
+                  "Better lactate clearance",
+                  "Efficient uphill pacing",
+                  "Fatigue resistance for long mountain ultras like The Great Cordillera 100"
+                ]
+              },
+              {
+                "heading": "No Hills? No Problem!",
+                "note": "Not everyone has access to long climbs, and that's perfectly okay. Here are some alternatives that provide a similar training stimulus.",
+                "items": [
+                  "Option 1 – Flat Tempo Pyramid (Recommended): complete the same 1-2-3-4-5-4-3-2-1 structure on flat terrain at RPE 6-8, easy jog recovery for the same duration as each interval, focus on consistent effort instead of pace.",
+                  "Option 2 – Treadmill: set incline to 5-8%, complete the same pyramid at RPE 6-8, avoid holding handrails.",
+                  "Option 3 – Stairs or Parking Garage: run or power hike continuously during each interval, walk back down for recovery, excellent for building climbing-specific strength."
+                ]
+              },
+              {
+                "heading": "Remember",
+                "items": [
+                  "Stay relaxed and controlled.",
+                  "Keep your cadence smooth and consistent.",
+                  "Power hike when appropriate.",
+                  "Prioritize good form over speed."
+                ]
+              }
+            ]
           },
           "days": [
             {
@@ -3996,7 +4486,7 @@
               "day": "Monday"
             },
             {
-              "title": "Easy",
+              "title": "Easy to 1h",
               "duration": "0.75h",
               "detail": "",
               "rpe": "2",
@@ -4004,19 +4494,19 @@
               "is_rest": false,
               "full_pack": false,
               "category": "Recovery",
-              "raw": "0.75h Easy (RPE 2)",
+              "raw": "0.75h Easy to 1h (RPE 2)",
               "day": "Tuesday"
             },
             {
-              "title": "Easy Run",
+              "title": "Pyramidal Hill Overloads",
               "duration": "0.75h",
               "detail": "",
-              "rpe": "2",
+              "rpe": "",
               "vert_gain_m": "",
               "is_rest": false,
               "full_pack": false,
-              "category": "Recovery",
-              "raw": "0.75h Easy Run (RPE 2)",
+              "category": "Running Intervals",
+              "raw": "0.75h Pyramidal Hill Overloads",
               "day": "Wednesday"
             },
             {
@@ -4032,19 +4522,19 @@
               "day": "Thursday"
             },
             {
-              "title": "Rest",
+              "title": "REST or ACTIVE RECOVERY",
               "duration": "",
-              "detail": "",
+              "detail": "Yoga",
               "rpe": "",
               "vert_gain_m": "",
-              "is_rest": true,
+              "is_rest": false,
               "full_pack": false,
-              "category": "Rest",
-              "raw": "REST",
+              "category": "Recovery",
+              "raw": "REST or ACTIVE RECOVERY (Yoga)",
               "day": "Friday"
             },
             {
-              "title": "Flat trail jog",
+              "title": "Flat trail or soft surfaces jog",
               "duration": "1.75h",
               "detail": "",
               "rpe": "2",
@@ -4052,7 +4542,7 @@
               "is_rest": false,
               "full_pack": false,
               "category": "Endurance Run",
-              "raw": "1.75h Flat trail jog (RPE 2)",
+              "raw": "1.75h Flat trail or soft surfaces jog (RPE 2)",
               "day": "Saturday"
             },
             {
@@ -4075,7 +4565,7 @@
           "is_deload": false,
           "dates_label": "Aug 10 - Aug 16",
           "unlock_date": "2026-08-10",
-          "total_hours": "8 hours",
+          "total_hours": "11 hours",
           "training_focus": "Threshold",
           "block_goal": "Recovery",
           "coach_brief": [
@@ -4085,10 +4575,12 @@
           "key_session": {
             "day": "Saturday",
             "title": "Hilly Run",
-            "duration": "3.25h",
-            "vert_gain_m": "900m",
-            "full_pack": false
+            "duration": "4.5h",
+            "vert_gain_m": "1100m",
+            "full_pack": false,
+            "note": null
           },
+          "featured_workout": null,
           "days": [
             {
               "title": "Rest",
@@ -4104,26 +4596,26 @@
             },
             {
               "title": "Easy",
-              "duration": "1h",
+              "duration": "1.5h",
               "detail": "",
               "rpe": "3",
               "vert_gain_m": "",
               "is_rest": false,
               "full_pack": false,
               "category": "Recovery",
-              "raw": "1h Easy (RPE 3)",
+              "raw": "1.5h Easy (RPE 3)",
               "day": "Tuesday"
             },
             {
               "title": "Continuous Stairway Loops",
-              "duration": "1.25h",
+              "duration": "1.5h",
               "detail": "",
               "rpe": "",
               "vert_gain_m": "",
               "is_rest": false,
               "full_pack": false,
               "category": "Running Intervals",
-              "raw": "1.25h Continuous Stairway Loops",
+              "raw": "1.5h Continuous Stairway Loops",
               "day": "Wednesday"
             },
             {
@@ -4152,26 +4644,26 @@
             },
             {
               "title": "Hilly Run",
-              "duration": "3.25h",
+              "duration": "4.5h",
               "detail": "",
               "rpe": "",
-              "vert_gain_m": "900m",
+              "vert_gain_m": "1100m",
               "is_rest": false,
               "full_pack": false,
               "category": "Endurance Run",
-              "raw": "3.25h Hilly Run (Gain: 900m)",
+              "raw": "4.5h Hilly Run (Gain: 1,100m)",
               "day": "Saturday"
             },
             {
               "title": "Multi-Hour Gym Step-Up / Run",
-              "duration": "1.5h",
+              "duration": "2h",
               "detail": "",
               "rpe": "",
               "vert_gain_m": "",
               "is_rest": false,
               "full_pack": false,
               "category": "Specificity",
-              "raw": "1.5h Multi-Hour Gym Step-Up / Run",
+              "raw": "2h Multi-Hour Gym Step-Up / Run",
               "day": "Sunday"
             }
           ]
@@ -4182,21 +4674,23 @@
           "is_deload": false,
           "dates_label": "Aug 17 - Aug 23",
           "unlock_date": "2026-08-17",
-          "total_hours": "8.5 hours",
+          "total_hours": "11.5 hours",
           "training_focus": "Night Running",
           "block_goal": "Steady State Run",
           "coach_brief": [
             "Week 12, Build 1. Now you sharpen the climb and the descent. Stairway loops, urban vert, downhill control.",
-            "Your anchor this week is Saturday's 3.5h High Vert Focus with 1000m of vert.",
-            "Total volume: 8.5 hours. Keep your easy days genuinely easy at RPE 2-3. The hard work is in the hills and the long run."
+            "Your anchor this week is Saturday's 5h High Vert Focus with 1200m of vert.",
+            "Total volume: 11.5 hours. Keep your easy days genuinely easy at RPE 2-3. The hard work is in the hills and the long run."
           ],
           "key_session": {
             "day": "Saturday",
             "title": "High Vert Focus",
-            "duration": "3.5h",
-            "vert_gain_m": "1000m",
-            "full_pack": false
+            "duration": "5h",
+            "vert_gain_m": "1200m",
+            "full_pack": false,
+            "note": null
           },
+          "featured_workout": null,
           "days": [
             {
               "title": "Rest",
@@ -4212,26 +4706,26 @@
             },
             {
               "title": "Easy",
-              "duration": "1h",
+              "duration": "1.5h",
               "detail": "",
               "rpe": "3",
               "vert_gain_m": "",
               "is_rest": false,
               "full_pack": false,
               "category": "Recovery",
-              "raw": "1h Easy (RPE 3)",
+              "raw": "1.5h Easy (RPE 3)",
               "day": "Tuesday"
             },
             {
               "title": "Sustained Incline Treadmill",
-              "duration": "1.25h",
+              "duration": "1.5h",
               "detail": "",
               "rpe": "",
               "vert_gain_m": "",
               "is_rest": false,
               "full_pack": false,
               "category": "Running Intervals",
-              "raw": "1.25h Sustained Incline Treadmill",
+              "raw": "1.5h Sustained Incline Treadmill",
               "day": "Wednesday"
             },
             {
@@ -4260,26 +4754,26 @@
             },
             {
               "title": "High Vert Focus",
-              "duration": "3.5h",
+              "duration": "5h",
               "detail": "",
               "rpe": "",
-              "vert_gain_m": "1000m",
+              "vert_gain_m": "1200m",
               "is_rest": false,
               "full_pack": false,
               "category": "Endurance Run",
-              "raw": "3.5h High Vert Focus (Gain: 1,000m)",
+              "raw": "5h High Vert Focus (Gain: 1,200m)",
               "day": "Saturday"
             },
             {
               "title": "Back-To-Back Fat Fatigue Run",
-              "duration": "1.5h",
+              "duration": "2h",
               "detail": "",
               "rpe": "",
               "vert_gain_m": "",
               "is_rest": false,
               "full_pack": false,
               "category": "Other",
-              "raw": "1.5h Back-To-Back Fat Fatigue Run",
+              "raw": "2h Back-To-Back Fat Fatigue Run",
               "day": "Sunday"
             }
           ]
@@ -4290,21 +4784,23 @@
           "is_deload": false,
           "dates_label": "Aug 24 - Aug 30",
           "unlock_date": "2026-08-24",
-          "total_hours": "9 hours",
+          "total_hours": "12 hours",
           "training_focus": "Technical Climbs",
           "block_goal": null,
           "coach_brief": [
             "Week 13, Build 1. Now you sharpen the climb and the descent. Stairway loops, urban vert, downhill control.",
-            "Your anchor this week is Saturday's 3.5h Big Vert Blocks with 1100m of vert.",
-            "Total volume: 9 hours. Keep your easy days genuinely easy at RPE 2-3. The hard work is in the hills and the long run."
+            "Your anchor this week is Saturday's 5h Big Vert Blocks with 1300m of vert.",
+            "Total volume: 12 hours. Keep your easy days genuinely easy at RPE 2-3. The hard work is in the hills and the long run."
           ],
           "key_session": {
             "day": "Saturday",
             "title": "Big Vert Blocks",
-            "duration": "3.5h",
-            "vert_gain_m": "1100m",
-            "full_pack": false
+            "duration": "5h",
+            "vert_gain_m": "1300m",
+            "full_pack": false,
+            "note": null
           },
+          "featured_workout": null,
           "days": [
             {
               "title": "Rest",
@@ -4320,26 +4816,26 @@
             },
             {
               "title": "Easy",
-              "duration": "1h",
+              "duration": "1.5h",
               "detail": "",
               "rpe": "3",
               "vert_gain_m": "",
               "is_rest": false,
               "full_pack": false,
               "category": "Recovery",
-              "raw": "1h Easy (RPE 3)",
+              "raw": "1.5h Easy (RPE 3)",
               "day": "Tuesday"
             },
             {
               "title": "Urban Vert Hunt",
-              "duration": "1.5h",
+              "duration": "2h",
               "detail": "Stairs/Bridges",
               "rpe": "",
               "vert_gain_m": "",
               "is_rest": false,
               "full_pack": false,
               "category": "Running Intervals",
-              "raw": "1.5h Urban Vert Hunt (Stairs/Bridges)",
+              "raw": "2h Urban Vert Hunt (Stairs/Bridges)",
               "day": "Wednesday"
             },
             {
@@ -4368,26 +4864,26 @@
             },
             {
               "title": "Big Vert Blocks",
-              "duration": "3.5h",
+              "duration": "5h",
               "detail": "",
               "rpe": "",
-              "vert_gain_m": "1100m",
+              "vert_gain_m": "1300m",
               "is_rest": false,
               "full_pack": false,
               "category": "Endurance Run",
-              "raw": "3.5h Big Vert Blocks (Gain: 1,100m)",
+              "raw": "5h Big Vert Blocks (Gain: 1,300m)",
               "day": "Saturday"
             },
             {
               "title": "Active Power Hike w/ Race Pack",
-              "duration": "1.5h",
+              "duration": "2h",
               "detail": "",
               "rpe": "",
               "vert_gain_m": "",
               "is_rest": false,
               "full_pack": true,
               "category": "Specificity",
-              "raw": "1.5h Active Power Hike w/ Race Pack",
+              "raw": "2h Active Power Hike w/ Race Pack",
               "day": "Sunday"
             }
           ]
@@ -4398,21 +4894,23 @@
           "is_deload": false,
           "dates_label": "Aug 31 - Sept 06",
           "unlock_date": "2026-08-31",
-          "total_hours": "9.5 hours",
+          "total_hours": "12.5 hours",
           "training_focus": "Heat Training",
           "block_goal": null,
           "coach_brief": [
             "Week 14, Build 1. Now you sharpen the climb and the descent. Stairway loops, urban vert, downhill control.",
-            "Your anchor this week is Saturday's 3.75h Max Vert Prep with 1200m of vert.",
-            "Total volume: 9.5 hours. Keep your easy days genuinely easy at RPE 2-3. The hard work is in the hills and the long run."
+            "Your anchor this week is Saturday's 5.5h Max Vert Prep with 1400m of vert.",
+            "Total volume: 12.5 hours. Keep your easy days genuinely easy at RPE 2-3. The hard work is in the hills and the long run."
           ],
           "key_session": {
             "day": "Saturday",
             "title": "Max Vert Prep",
-            "duration": "3.75h",
-            "vert_gain_m": "1200m",
-            "full_pack": false
+            "duration": "5.5h",
+            "vert_gain_m": "1400m",
+            "full_pack": false,
+            "note": null
           },
+          "featured_workout": null,
           "days": [
             {
               "title": "Rest",
@@ -4428,26 +4926,26 @@
             },
             {
               "title": "Easy",
-              "duration": "1h",
+              "duration": "1.5h",
               "detail": "",
               "rpe": "3",
               "vert_gain_m": "",
               "is_rest": false,
               "full_pack": false,
               "category": "Recovery",
-              "raw": "1h Easy (RPE 3)",
+              "raw": "1.5h Easy (RPE 3)",
               "day": "Tuesday"
             },
             {
               "title": "Hill Repeats w/ Downhill Focus",
-              "duration": "1.5h",
+              "duration": "2h",
               "detail": "",
               "rpe": "",
               "vert_gain_m": "",
               "is_rest": false,
               "full_pack": false,
               "category": "Running Intervals",
-              "raw": "1.5h Hill Repeats w/ Downhill Focus",
+              "raw": "2h Hill Repeats w/ Downhill Focus",
               "day": "Wednesday"
             },
             {
@@ -4476,26 +4974,26 @@
             },
             {
               "title": "Max Vert Prep",
-              "duration": "3.75h",
+              "duration": "5.5h",
               "detail": "",
               "rpe": "",
-              "vert_gain_m": "1200m",
+              "vert_gain_m": "1400m",
               "is_rest": false,
               "full_pack": false,
               "category": "Endurance Run",
-              "raw": "3.75h Max Vert Prep (Gain: 1,200m)",
+              "raw": "5.5h Max Vert Prep (Gain: 1,400m)",
               "day": "Saturday"
             },
             {
               "title": "Smooth Aerobic Finish",
-              "duration": "1.5h",
+              "duration": "2h",
               "detail": "",
               "rpe": "2-3",
               "vert_gain_m": "",
               "is_rest": false,
               "full_pack": false,
               "category": "Specificity",
-              "raw": "1.5h Smooth Aerobic Finish (RPE 2-3)",
+              "raw": "2h Smooth Aerobic Finish (RPE 2-3)",
               "day": "Sunday"
             }
           ]
@@ -4506,21 +5004,23 @@
           "is_deload": true,
           "dates_label": "Sept 07 - Sept 13",
           "unlock_date": "2026-09-07",
-          "total_hours": "5.5 hours",
+          "total_hours": "7.5 hours",
           "training_focus": "Hike Recon",
           "block_goal": "Specificity",
           "coach_brief": [
             "Week 15, Deload 3. Pull back this week. The work sticks when you recover.",
-            "Saturday is 2h Rolling Terrain Run. That's enough.",
-            "Volume drops to 5.5 hours this week. Let the last block settle."
+            "Saturday is 2.5h Rolling Terrain Run. That's enough.",
+            "Volume drops to 7.5 hours this week. Let the last block settle."
           ],
           "key_session": {
             "day": "Saturday",
             "title": "Rolling Terrain Run",
-            "duration": "2h",
+            "duration": "2.5h",
             "vert_gain_m": "",
-            "full_pack": false
+            "full_pack": false,
+            "note": null
           },
+          "featured_workout": null,
           "days": [
             {
               "title": "Rest",
@@ -4536,38 +5036,38 @@
             },
             {
               "title": "Easy",
-              "duration": "0.75h",
+              "duration": "1h",
               "detail": "",
               "rpe": "2",
               "vert_gain_m": "",
               "is_rest": false,
               "full_pack": false,
               "category": "Recovery",
-              "raw": "0.75h Easy (RPE 2)",
+              "raw": "1h Easy (RPE 2)",
               "day": "Tuesday"
             },
             {
               "title": "Light Hill Reps",
-              "duration": "0.75h",
+              "duration": "1h",
               "detail": "",
               "rpe": "4",
               "vert_gain_m": "",
               "is_rest": false,
               "full_pack": false,
               "category": "Running Intervals",
-              "raw": "0.75h Light Hill Reps (RPE 4)",
+              "raw": "1h Light Hill Reps (RPE 4)",
               "day": "Wednesday"
             },
             {
               "title": "Easy",
-              "duration": "0.75h",
+              "duration": "1h",
               "detail": "",
               "rpe": "2",
               "vert_gain_m": "",
               "is_rest": false,
               "full_pack": false,
               "category": "Recovery",
-              "raw": "0.75h Easy (RPE 2)",
+              "raw": "1h Easy (RPE 2)",
               "day": "Thursday"
             },
             {
@@ -4584,26 +5084,26 @@
             },
             {
               "title": "Rolling Terrain Run",
-              "duration": "2h",
+              "duration": "2.5h",
               "detail": "",
               "rpe": "",
               "vert_gain_m": "",
               "is_rest": false,
               "full_pack": false,
               "category": "Endurance Run",
-              "raw": "2h Rolling Terrain Run",
+              "raw": "2.5h Rolling Terrain Run",
               "day": "Saturday"
             },
             {
               "title": "Soft Surface Recovery Jog",
-              "duration": "0.75h",
+              "duration": "1h",
               "detail": "",
               "rpe": "",
               "vert_gain_m": "",
               "is_rest": false,
               "full_pack": false,
               "category": "Recovery",
-              "raw": "0.75h Soft Surface Recovery Jog",
+              "raw": "1h Soft Surface Recovery Jog",
               "day": "Sunday"
             }
           ]
