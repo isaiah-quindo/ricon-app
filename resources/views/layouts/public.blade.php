@@ -7,15 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title') — RICON</title>
     <!-- Facebook Open Graph -->
-    <meta property="og:type" content="website">
+    <meta property="og:type" content="@yield('og_type', 'website')">
     <meta property="og:url" content="{{ secure_url(request()->getRequestUri()) }}">
     <meta property="og:site_name" content="RICON">
     <meta property="og:title" content="@yield('og_title', 'RICON — The Great Cordillera 100 Ultra Trail')">
     <meta property="og:description" content="@yield('og_description', 'Experience the ultimate mountain challenge at The Great Cordillera 100 Ultra Trail. Choose from 10 KM, 21 KM, 60 KM, or 100 KM distances through the breathtaking Cordillera mountains.')">
-    <meta property="og:image" content="{{ secure_asset('images/facebook-image.png') }}">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:type" content="image/png">
+    @hasSection('og_image')
+        <meta property="og:image" content="@yield('og_image')">
+    @else
+        <meta property="og:image" content="{{ secure_asset('images/facebook-image.png') }}">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="630">
+        <meta property="og:image:type" content="image/png">
+    @endif
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700,800,900&display=swap" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -58,6 +62,7 @@
                 </a>
 
                 <div class="hidden md:flex items-center gap-8">
+                    <a href="{{ route('news.index') }}" class="text-gray-300 hover:text-white text-sm font-medium transition-colors">News</a>
                     <a href="/#race-categories" class="text-gray-300 hover:text-white text-sm font-medium transition-colors">Race Categories</a>
                     <a href="{{ route('training.landing') }}" class="text-gray-300 hover:text-white text-sm font-medium transition-colors">Training</a>
                     <a href="{{ route('rules') }}" class="text-gray-300 hover:text-white text-sm font-medium transition-colors">Rules</a>
@@ -90,6 +95,7 @@
             x-transition:leave-end="opacity-0 -translate-y-2"
             class="md:hidden border-t border-white/10">
             <div class="mx-auto px-8 py-4 flex flex-col gap-4" style="max-width:1280px;">
+                <a href="{{ route('news.index') }}" @click="open = false" class="text-gray-300 hover:text-white text-sm font-medium transition-colors py-2">News</a>
                 <a href="/#race-categories" @click="open = false" class="text-gray-300 hover:text-white text-sm font-medium transition-colors py-2">Race Categories</a>
                 <a href="{{ route('training.landing') }}" @click="open = false" class="text-gray-300 hover:text-white text-sm font-medium transition-colors py-2">Training</a>
                 <a href="{{ route('rules') }}" @click="open = false" class="text-gray-300 hover:text-white text-sm font-medium transition-colors py-2">Rules</a>
@@ -145,6 +151,7 @@
                 <div class="flex flex-wrap items-center gap-6 text-sm text-gray-400">
                     <a href="/#race-categories" class="hover:text-white transition-colors">Race Categories</a>
                     <a href="{{ route('training.landing') }}" class="hover:text-white transition-colors">Training</a>
+                    <a href="{{ route('news.index') }}" class="hover:text-white transition-colors">News</a>
                     <a href="{{ route('rules') }}" class="hover:text-white transition-colors">Rules & Guidelines</a>
                     <a href="/about" class="hover:text-white transition-colors">About</a>
                 </div>

@@ -50,6 +50,11 @@
                           {{ request()->routeIs('admin.training-signups.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
                     Signups
                 </a>
+                <a href="{{ route('admin.news.index') }}"
+                    class="px-3 py-2 rounded-lg text-sm font-medium transition-colors
+                          {{ request()->routeIs('admin.news.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
+                    News
+                </a>
             </nav>
 
             <!-- Desktop user + logout -->
@@ -105,6 +110,11 @@
                     class="px-3 py-2 rounded-lg text-sm font-medium transition-colors
                           {{ request()->routeIs('admin.training-signups.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
                     Signups
+                </a>
+                <a href="{{ route('admin.news.index') }}"
+                    class="px-3 py-2 rounded-lg text-sm font-medium transition-colors
+                          {{ request()->routeIs('admin.news.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
+                    News
                 </a>
                 <div class="mt-2 pt-3 border-t border-gray-800 flex items-center justify-between">
                     <span class="text-sm text-gray-400">{{ Auth::user()->name }}</span>

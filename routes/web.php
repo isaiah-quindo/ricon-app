@@ -1,29 +1,34 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\DiscountCodeController;
+use App\Http\Controllers\Admin\NewsPostController;
+use App\Http\Controllers\Admin\RaceCategoryController;
 use App\Http\Controllers\Admin\RegistrationController as AdminRegistrationController;
 use App\Http\Controllers\Admin\RegistrationGroupController;
-use App\Http\Controllers\Admin\RaceCategoryController;
-use App\Http\Controllers\Admin\DiscountCodeController;
 use App\Http\Controllers\Admin\TrainingSignupController;
+use App\Http\Controllers\NewsController;
 use App\Http\Controllers\QuizLeadController;
+use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\TrainingProgramController;
+use Illuminate\Support\Facades\Route;
 
 // ----------------------------------------------------------
 // Public Routes
 // ----------------------------------------------------------
 
-Route::get('/', fn() => view('welcome'));
-Route::get('/rules', fn() => view('rules'))->name('rules');
-Route::get('/about', fn() => view('about'))->name('about');
+Route::get('/', fn () => view('welcome'));
+Route::get('/rules', fn () => view('rules'))->name('rules');
+Route::get('/about', fn () => view('about'))->name('about');
+
+Route::get('/news', [NewsController::class, 'index'])->name('news.index');
+Route::get('/news/{newsPost}', [NewsController::class, 'show'])->name('news.show'); // binds by slug
 
 Route::prefix('race-category')->name('race-category.')->group(function () {
-    Route::get('/100km', fn() => view('race-category.100km'))->name('100km');
-    Route::get('/60km',  fn() => view('race-category.60km'))->name('60km');
-    Route::get('/21km',  fn() => view('race-category.21km'))->name('21km');
-    Route::get('/10km',  fn() => view('race-category.10km'))->name('10km');
+    Route::get('/100km', fn () => view('race-category.100km'))->name('100km');
+    Route::get('/60km', fn () => view('race-category.60km'))->name('60km');
+    Route::get('/21km', fn () => view('race-category.21km'))->name('21km');
+    Route::get('/10km', fn () => view('race-category.10km'))->name('10km');
     Route::post('/21km/quiz', [QuizLeadController::class, 'store'])
         ->middleware('throttle:10,1')->name('21km.quiz');
 });
@@ -93,10 +98,14 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
         Route::get('/export', [TrainingSignupController::class, 'export'])->name('export');
         Route::post('/{trainingSignup}/resend-link', [TrainingSignupController::class, 'resendLink'])->name('resendLink');
     });
+
+    // News posts (upload route must precede the resource so it isn't captured by {news})
+    Route::post('news/upload-image', [NewsPostController::class, 'uploadImage'])->name('news.uploadImage');
+    Route::resource('news', NewsPostController::class)->except(['show'])->names('news');
 });
 
 // ----------------------------------------------------------
 // Auth Routes (login/logout for admin)
 // ----------------------------------------------------------
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';
