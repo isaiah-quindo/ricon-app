@@ -30,13 +30,13 @@
 
     <div class="relative z-10 text-center px-8 w-full" style="max-width:1280px; margin:2rem auto;">
         {{-- Event logo placeholder --}}
-        <div data-hero-logo class="mx-auto mb-20 w-48 h-32 flex items-center justify-center text-gray-500 text-xs select-none">
-            <img src="/tgc-logo-white.png" alt="The Greact Cordillera 100" />
+        <div data-hero-logo class="mx-auto mb-20 w-44 h-[7.5rem] md:w-72 md:h-64 flex items-center justify-center text-gray-500 text-xs select-none">
+            <img src="/tgc-logo-white.png" alt="The Greact Cordillera 100" class="w-full h-full object-contain" />
         </div>
 
         <h1 class="max-w-[600px] mx-auto text-2xl md:text-4xl lg:text-4xl font-black leading-tight text-white mb-5">
-            <span class="block overflow-hidden"><span data-hero-line class="inline-block">The Mountain Will Test You.</span></span>
-            <span class="block overflow-hidden"><span data-hero-line class="inline-block">The Journey Will Change You.</span></span>
+            <span class="block overflow-hidden"><span data-hero-line class="inline-block text-pretty">The Mountain Will Test You.</span></span>
+            <span class="block overflow-hidden"><span data-hero-line class="inline-block text-pretty">The Journey Will Change You.</span></span>
         </h1>
 
         <p data-hero-sub class="text-white text-lg/6 max-w-2xl mx-auto mb-8">
@@ -87,25 +87,25 @@
                 },
             }"
             x-init="tick(); setInterval(() => tick(), 1000)"
-            class="flex flex-wrap items-center justify-center gap-6 md:gap-12">
+            class="grid grid-cols-4 gap-3 md:flex md:flex-wrap md:items-center md:justify-center md:gap-12">
             <div class="flex flex-col items-center">
-                <p class="text-5xl md:text-7xl font-black text-white tabular-nums" x-text="String(days).padStart(2, '0')"></p>
-                <p class="text-gray-500 text-xs md:text-sm uppercase tracking-wider mt-2">Days</p>
+                <p class="text-3xl sm:text-4xl md:text-7xl font-black text-white tabular-nums" x-text="String(days).padStart(2, '0')"></p>
+                <p class="text-gray-500 text-[10px] md:text-sm uppercase tracking-wider mt-2">Days</p>
             </div>
-            <p class="text-3xl md:text-5xl font-black text-white/20 -mt-6">:</p>
+            <p class="hidden md:block text-3xl md:text-5xl font-black text-white/20 -mt-6">:</p>
             <div class="flex flex-col items-center">
-                <p class="text-5xl md:text-7xl font-black text-white tabular-nums" x-text="String(hours).padStart(2, '0')"></p>
-                <p class="text-gray-500 text-xs md:text-sm uppercase tracking-wider mt-2">Hours</p>
+                <p class="text-3xl sm:text-4xl md:text-7xl font-black text-white tabular-nums" x-text="String(hours).padStart(2, '0')"></p>
+                <p class="text-gray-500 text-[10px] md:text-sm uppercase tracking-wider mt-2">Hours</p>
             </div>
-            <p class="text-3xl md:text-5xl font-black text-white/20 -mt-6">:</p>
+            <p class="hidden md:block text-3xl md:text-5xl font-black text-white/20 -mt-6">:</p>
             <div class="flex flex-col items-center">
-                <p class="text-5xl md:text-7xl font-black text-white tabular-nums" x-text="String(minutes).padStart(2, '0')"></p>
-                <p class="text-gray-500 text-xs md:text-sm uppercase tracking-wider mt-2">Minutes</p>
+                <p class="text-3xl sm:text-4xl md:text-7xl font-black text-white tabular-nums" x-text="String(minutes).padStart(2, '0')"></p>
+                <p class="text-gray-500 text-[10px] md:text-sm uppercase tracking-wider mt-2">Minutes</p>
             </div>
-            <p class="text-3xl md:text-5xl font-black text-white/20 -mt-6">:</p>
+            <p class="hidden md:block text-3xl md:text-5xl font-black text-white/20 -mt-6">:</p>
             <div class="flex flex-col items-center">
-                <p class="text-5xl md:text-7xl font-black text-white tabular-nums" x-text="String(seconds).padStart(2, '0')"></p>
-                <p class="text-gray-500 text-xs md:text-sm uppercase tracking-wider mt-2">Seconds</p>
+                <p class="text-3xl sm:text-4xl md:text-7xl font-black text-white tabular-nums" x-text="String(seconds).padStart(2, '0')"></p>
+                <p class="text-gray-500 text-[10px] md:text-sm uppercase tracking-wider mt-2">Seconds</p>
             </div>
         </div>
     </div>
