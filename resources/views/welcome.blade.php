@@ -8,39 +8,50 @@
          HERO Section
     ======================================================== --}}
 <section x-data="{ offset: 0 }" @scroll.window="offset = window.scrollY * 0.4" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-0">
-    {{-- Background image with parallax --}}
+    {{-- Loading screen --}}
+    <div data-loader class="fixed inset-0 z-[100] bg-[#0a0a0a] flex flex-col items-center justify-center select-none">
+        <img src="/ricon-logo.svg" alt="Ricon" class="w-28 mb-8 opacity-80" />
+        <p data-loader-percent class="text-white text-5xl md:text-6xl font-black tabular-nums">0%</p>
+        <div class="w-56 h-[2px] bg-white/10 mt-6 overflow-hidden rounded-full">
+            <div data-loader-bar class="h-full w-0 bg-orange-500"></div>
+        </div>
+    </div>
+
+    {{-- Background video with parallax --}}
     <div class="absolute left-0 right-0 bg-gray-800 select-none"
         style="top: -25%; height: 150%; will-change: transform;"
         :style="`transform: translateY(${offset}px)`">
-        <img src="/hero-bg.png" class="w-full h-lvh object-cover" />
+        <video class="w-full h-lvh object-cover" poster="/hero-bg.png" autoplay muted loop playsinline preload="auto">
+            <source src="/hero-bg.mp4" type="video/mp4">
+        </video>
     </div>
-    <!-- {{-- Dark overlay --}}
-        <div class="absolute inset-0 bg-black/55"></div> -->
+    {{-- Dark overlay --}}
+    <div data-hero-overlay class="absolute inset-0 bg-black/35"></div>
 
     <div class="relative z-10 text-center px-8 w-full" style="max-width:1280px; margin:2rem auto;">
         {{-- Event logo placeholder --}}
-        <div data-hero-item class="mx-auto mb-20 w-48 h-32 flex items-center justify-center text-gray-500 text-xs select-none">
-            <img src="/tgc100-logo.png" alt="The Greact Cordillera 100" />
+        <div data-hero-logo class="mx-auto mb-20 w-48 h-32 flex items-center justify-center text-gray-500 text-xs select-none">
+            <img src="/tgc-logo-white.png" alt="The Greact Cordillera 100" />
         </div>
 
-        <h1 data-hero-item class="max-w-[600px] mx-auto text-2xl md:text-4xl lg:text-4xl font-black leading-tight text-white mb-5">
-            The Mountain Will Test You.
-            The Journey Will Change You.
+        <h1 class="max-w-[600px] mx-auto text-2xl md:text-4xl lg:text-4xl font-black leading-tight text-white mb-5">
+            <span class="block overflow-hidden"><span data-hero-line class="inline-block">The Mountain Will Test You.</span></span>
+            <span class="block overflow-hidden"><span data-hero-line class="inline-block">The Journey Will Change You.</span></span>
         </h1>
 
-        <p data-hero-item class="text-white text-lg/6 max-w-2xl mx-auto mb-8">
+        <p data-hero-sub class="text-white text-lg/6 max-w-2xl mx-auto mb-8">
             A 100KM ultra trail across the rugged beauty of Benguet and the untamed Cordillera mountains,
             where endurance meets breathtaking landscapes.
         </p>
 
-        <div data-hero-item class="m-auto max-w-[600px] mb-8 grid grid-cols-1 md:grid-cols-2 gap-4 flex place-items-center">
+        <div data-hero-badges class="m-auto max-w-[600px] mb-8 grid grid-cols-1 md:grid-cols-2 gap-4 flex place-items-center">
             <a href="https://utmb.world/utmb-index" target="_blank">
                 <img src="/images/utmb-index.png" class="w-[120px]" alt="UTMB Index" />
             </a>
             <img src="/images/itra-logo-dark.svg" class="w-20" alt="ITRA" />
         </div>
 
-        <a data-hero-item href="#race-categories" class="py-3 px-8 inline-flex items-center gap-x-2 text-sm font-bold rounded-lg bg-orange-600 text-primary-foreground hover:bg-orange-700 focus:outline-hidden focus:bg-primary-focus  disabled:opacity-50 disabled:pointer-events-none">
+        <a data-hero-cta href="#race-categories" class="py-3 px-8 inline-flex items-center gap-x-2 text-sm font-bold rounded-lg bg-orange-600 text-primary-foreground hover:bg-orange-700 focus:outline-hidden focus:bg-primary-focus  disabled:opacity-50 disabled:pointer-events-none">
             Choose your Adventure
         </a>
     </div>
@@ -59,11 +70,44 @@
             Traverse the scenic trails of Benguet and the wild Cordillera mountainscape, a journey through living heritage across Luzon's highland spine. Pine-canopied ridgelines, river crossings, and steep ascents connect Baguio City to the municipalities of Benguet, demanding both strength and respect.
         </p>
 
-        <p data-reveal class="text-gray-400 text-sm mb-2">Race day in</p>
+        <p data-reveal class="text-gray-400 text-sm mb-6">Race day in</p>
         @php
-        $daysLeft = max(0, (int) now()->diffInDays(\Carbon\Carbon::parse('2026-11-13'), false));
+        $raceDateIso = \Carbon\Carbon::parse('2026-11-13', 'Asia/Manila')->toIso8601String();
         @endphp
-        <p data-reveal class="text-6xl md:text-7xl font-black text-white">{{ $daysLeft }} days</p>
+        <div data-reveal
+            x-data="{
+                target: new Date('{{ $raceDateIso }}').getTime(),
+                days: 0, hours: 0, minutes: 0, seconds: 0,
+                tick() {
+                    const diff = Math.max(0, this.target - Date.now());
+                    this.days = Math.floor(diff / 86400000);
+                    this.hours = Math.floor((diff % 86400000) / 3600000);
+                    this.minutes = Math.floor((diff % 3600000) / 60000);
+                    this.seconds = Math.floor((diff % 60000) / 1000);
+                },
+            }"
+            x-init="tick(); setInterval(() => tick(), 1000)"
+            class="flex flex-wrap items-center justify-center gap-6 md:gap-12">
+            <div class="flex flex-col items-center">
+                <p class="text-5xl md:text-7xl font-black text-white tabular-nums" x-text="String(days).padStart(2, '0')"></p>
+                <p class="text-gray-500 text-xs md:text-sm uppercase tracking-wider mt-2">Days</p>
+            </div>
+            <p class="text-3xl md:text-5xl font-black text-white/20 -mt-6">:</p>
+            <div class="flex flex-col items-center">
+                <p class="text-5xl md:text-7xl font-black text-white tabular-nums" x-text="String(hours).padStart(2, '0')"></p>
+                <p class="text-gray-500 text-xs md:text-sm uppercase tracking-wider mt-2">Hours</p>
+            </div>
+            <p class="text-3xl md:text-5xl font-black text-white/20 -mt-6">:</p>
+            <div class="flex flex-col items-center">
+                <p class="text-5xl md:text-7xl font-black text-white tabular-nums" x-text="String(minutes).padStart(2, '0')"></p>
+                <p class="text-gray-500 text-xs md:text-sm uppercase tracking-wider mt-2">Minutes</p>
+            </div>
+            <p class="text-3xl md:text-5xl font-black text-white/20 -mt-6">:</p>
+            <div class="flex flex-col items-center">
+                <p class="text-5xl md:text-7xl font-black text-white tabular-nums" x-text="String(seconds).padStart(2, '0')"></p>
+                <p class="text-gray-500 text-xs md:text-sm uppercase tracking-wider mt-2">Seconds</p>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -397,19 +441,53 @@
         if (!window.gsap) return;
 
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (prefersReducedMotion) return;
+        const loaderEl = document.querySelector('[data-loader]');
+
+        if (prefersReducedMotion) {
+            if (loaderEl) loaderEl.style.display = 'none';
+            return;
+        }
 
         const { gsap, ScrollTrigger } = window;
 
-        // Hero: staggered fade-up on load
-        gsap.from('[data-hero-item]', {
-            y: 24,
-            opacity: 0,
-            duration: 0.9,
-            ease: 'power3.out',
-            stagger: 0.12,
-            delay: 0.1,
-        });
+        document.body.style.overflow = 'hidden';
+
+        const percentEl = document.querySelector('[data-loader-percent]');
+        const barEl = document.querySelector('[data-loader-bar]');
+        const counter = { val: 0 };
+
+        // Loading screen (0-100%) that opens up to reveal the hero
+        const master = gsap.timeline({ defaults: { ease: 'power3.out' }, delay: 0.1 });
+
+        master
+            .set('[data-hero-overlay]', { opacity: 0 })
+            .set('[data-hero-logo], [data-hero-sub], [data-hero-badges], [data-hero-cta]', { opacity: 0, y: 24 })
+            .set('[data-hero-line]', { yPercent: 110 })
+            .to(counter, {
+                val: 100,
+                duration: 2,
+                ease: 'power2.inOut',
+                onUpdate: () => {
+                    const v = Math.round(counter.val);
+                    if (percentEl) percentEl.textContent = v + '%';
+                    if (barEl) barEl.style.width = v + '%';
+                },
+            })
+            .to(loaderEl, {
+                yPercent: -100,
+                duration: 1,
+                ease: 'power4.inOut',
+                onComplete: () => {
+                    document.body.style.overflow = '';
+                    if (loaderEl) loaderEl.style.display = 'none';
+                },
+            }, '+=0.2')
+            .to('[data-hero-overlay]', { opacity: 1, duration: 1.6, ease: 'power1.out' }, '<')
+            .to('[data-hero-logo]', { opacity: 1, y: 0, duration: 1 }, '<+0.2')
+            .to('[data-hero-line]', { yPercent: 0, duration: 1.1, stagger: 0.18 }, '-=0.6')
+            .to('[data-hero-sub]', { opacity: 1, y: 0, duration: 0.9 }, '-=0.5')
+            .to('[data-hero-badges]', { opacity: 1, y: 0, duration: 0.9 }, '-=0.6')
+            .to('[data-hero-cta]', { opacity: 1, y: 0, duration: 0.8 }, '-=0.55');
 
         // Generic reveal on scroll
         gsap.utils.toArray('[data-reveal]').forEach((el) => {
