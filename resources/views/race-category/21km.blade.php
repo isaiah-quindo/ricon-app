@@ -147,13 +147,14 @@
             </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-            <div class="relative bg-[#1a1a1a] bg-opacity-50 rounded-xl p-5 border-green-500 border text-center">
-                <p class="absolute top-3 right-3 text-green-400 text-xs">⚠ Limited slots</p>
-                <p class="text-green-400 text-xs font-semibold uppercase tracking-wider mb-1">Regular</p>
-                <p class="text-white font-bold text-2xl mb-1">₱3,000</p>
+            <div class="relative bg-[#1a1a1a] bg-opacity-30 rounded-xl p-5 border border-white/5 text-center opacity-60">
+                <p class="absolute top-3 right-3 text-gray-400 text-xs bg-gray-700/60 px-2 py-0.5 rounded-full">Ended</p>
+                <p class="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-1">Regular</p>
+                <p class="text-gray-400 font-bold text-2xl mb-1 line-through">₱3,000</p>
                 <p class="text-gray-500 text-sm">Jul 1 - Aug 31</p>
             </div>
-            <div class="bg-[#1a1a1a] bg-opacity-50 rounded-xl p-5 border border-white/5 text-center">
+            <div class="relative bg-[#1a1a1a] bg-opacity-50 rounded-xl p-5 border-green-500 border text-center">
+                <p class="absolute top-3 right-3 text-green-400 text-xs">⚠ Limited slots</p>
                 <p class="text-green-400 text-xs font-semibold uppercase tracking-wider mb-1">Late</p>
                 <p class="text-white font-bold text-2xl mb-1">₱3,500</p>
                 <p class="text-gray-500 text-sm">Sep 1 - Sep 15</p>
