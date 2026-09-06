@@ -19,7 +19,7 @@
         </h1>
         <span class="block p-1 my-2 justify-self-start bg-white/50">
             <a href="https://utmb.world/utmb-index" target="_blank">
-                <img src="/images/index-100K.png" class="w-[150px]" alt="UTMB Index 100K"/>
+                <img src="/images/index-50k.avif" class="w-[150px]" alt="UTMB Index 50K"/>
             </a>
         </span>
         <p class="text-gray-300 text-lg">Province of Benguet</p>

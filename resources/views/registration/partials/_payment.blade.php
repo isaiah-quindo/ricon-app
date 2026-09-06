@@ -15,28 +15,22 @@
             </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-            <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 text-sm">
-                <p class="font-semibold text-gray-800 mb-3">Bank Transfer</p>
-                <dl class="space-y-2">
-                    <div>
-                        <dt class="text-gray-500 text-xs">Bank</dt>
-                        <dd class="font-medium text-gray-800">Rizal Commercial Banking Corporation (RCBC)</dd>
-                    </div>
-                    <div>
-                        <dt class="text-gray-500 text-xs">Account Name</dt>
-                        <dd class="font-medium text-gray-800">RiCON</dd>
-                    </div>
-                    <div>
-                        <dt class="text-gray-500 text-xs">Account Number</dt>
-                        <dd class="font-medium text-gray-800 tracking-wider">7-591-41115-4</dd>
-                    </div>
-                </dl>
-            </div>
-            <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 text-sm text-center">
-                <p class="font-semibold text-gray-800 mb-3">Scan to Pay</p>
-                <img src="{{ asset('images/qr-code.png') }}" alt="Payment QR Code" class="mx-auto w-full max-w-[160px] object-contain rounded-lg">
-            </div>
+        <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 text-sm">
+            <p class="font-semibold text-gray-800 mb-3">Bank Transfer</p>
+            <dl class="space-y-2">
+                <div>
+                    <dt class="text-gray-500 text-xs">Bank</dt>
+                    <dd class="font-medium text-gray-800">Rizal Commercial Banking Corporation (RCBC)</dd>
+                </div>
+                <div>
+                    <dt class="text-gray-500 text-xs">Account Name</dt>
+                    <dd class="font-medium text-gray-800">RiCON</dd>
+                </div>
+                <div>
+                    <dt class="text-gray-500 text-xs">Account Number</dt>
+                    <dd class="font-medium text-gray-800 tracking-wider">7-591-41115-4</dd>
+                </div>
+            </dl>
         </div>
 
         <div>
