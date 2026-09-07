@@ -60,6 +60,29 @@
                 <div class="hidden md:flex items-center gap-8">
                     <a href="/#race-categories" class="text-gray-300 hover:text-white text-sm font-medium transition-colors">Race Categories</a>
                     <a href="{{ route('training.landing') }}" class="text-gray-300 hover:text-white text-sm font-medium transition-colors">Training</a>
+
+                    <div class="relative" x-data="{ open: false }" @click.outside="open = false" @keydown.escape.window="open = false">
+                        <button @click="open = !open" type="button"
+                            class="flex items-center gap-1 text-gray-300 hover:text-white text-sm font-medium transition-colors">
+                            Programs
+                            <svg class="w-3.5 h-3.5 transition-transform duration-150" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div x-show="open"
+                            x-transition:enter="transition ease-out duration-150"
+                            x-transition:enter-start="opacity-0 -translate-y-1"
+                            x-transition:enter-end="opacity-100 translate-y-0"
+                            x-transition:leave="transition ease-in duration-100"
+                            x-transition:leave-start="opacity-100 translate-y-0"
+                            x-transition:leave-end="opacity-0 -translate-y-1"
+                            class="absolute left-0 mt-3 w-64 rounded-lg border border-white/10 bg-[#111111] shadow-xl py-2"
+                            style="display: none;">
+                            <span class="block px-4 py-2.5 text-sm text-gray-500 cursor-not-allowed">Become a RiCON Volunteer</span>
+                            <a href="{{ route('programs.tgc100-grant') }}" class="block px-4 py-2.5 text-sm text-gray-300 hover:text-white hover:bg-white/5 transition-colors">TGC Grant Application</a>
+                        </div>
+                    </div>
+
                     <a href="{{ route('rules') }}" class="text-gray-300 hover:text-white text-sm font-medium transition-colors">Rules</a>
                     <a href="/about" class="text-gray-300 hover:text-white text-sm font-medium transition-colors">About Us</a>
                 </div>
@@ -92,6 +115,20 @@
             <div class="mx-auto px-8 py-4 flex flex-col gap-4" style="max-width:1280px;">
                 <a href="/#race-categories" @click="open = false" class="text-gray-300 hover:text-white text-sm font-medium transition-colors py-2">Race Categories</a>
                 <a href="{{ route('training.landing') }}" @click="open = false" class="text-gray-300 hover:text-white text-sm font-medium transition-colors py-2">Training</a>
+
+                <div x-data="{ programsOpen: false }">
+                    <button type="button" @click="programsOpen = !programsOpen" class="w-full flex items-center justify-between text-gray-300 hover:text-white text-sm font-medium transition-colors py-2">
+                        Programs
+                        <svg class="w-3.5 h-3.5 transition-transform" :class="programsOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div x-show="programsOpen" x-transition class="pl-4 flex flex-col gap-1 pb-1">
+                        <span class="text-gray-500 text-sm py-2 cursor-not-allowed">Become a RiCON Volunteer</span>
+                        <a href="{{ route('programs.tgc100-grant') }}" @click="open = false" class="text-gray-300 hover:text-white text-sm font-medium transition-colors py-2">TGC Grant Application</a>
+                    </div>
+                </div>
+
                 <a href="{{ route('rules') }}" @click="open = false" class="text-gray-300 hover:text-white text-sm font-medium transition-colors py-2">Rules</a>
                 <a href="/about" @click="open = false" class="text-gray-300 hover:text-white text-sm font-medium transition-colors py-2">About Us</a>
                 <a href="{{ route('registration.create') }}" class="mt-2 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-bold rounded-lg bg-orange-600 text-white hover:bg-orange-700 focus:outline-hidden">

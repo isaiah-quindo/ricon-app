@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\RegistrationGroupController;
 use App\Http\Controllers\Admin\RaceCategoryController;
 use App\Http\Controllers\Admin\DiscountCodeController;
 use App\Http\Controllers\Admin\TrainingSignupController;
+use App\Http\Controllers\Admin\GrantApplicationController as AdminGrantApplicationController;
+use App\Http\Controllers\GrantApplicationController;
 use App\Http\Controllers\QuizLeadController;
 use App\Http\Controllers\TrainingProgramController;
 
@@ -18,6 +20,12 @@ use App\Http\Controllers\TrainingProgramController;
 Route::get('/', fn() => view('welcome'));
 Route::get('/rules', fn() => view('rules'))->name('rules');
 Route::get('/about', fn() => view('about'))->name('about');
+
+Route::prefix('programs')->name('programs.')->group(function () {
+    Route::get('/tgc100-grant', fn() => view('programs.tgc100-grant'))->name('tgc100-grant');
+    Route::post('/tgc100-grant', [GrantApplicationController::class, 'store'])
+        ->middleware('throttle:10,1')->name('tgc100-grant.store');
+});
 
 Route::prefix('race-category')->name('race-category.')->group(function () {
     Route::get('/100km', fn() => view('race-category.100km'))->name('100km');
@@ -92,6 +100,13 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
         Route::get('/', [TrainingSignupController::class, 'index'])->name('index');
         Route::get('/export', [TrainingSignupController::class, 'export'])->name('export');
         Route::post('/{trainingSignup}/resend-link', [TrainingSignupController::class, 'resendLink'])->name('resendLink');
+    });
+
+    // TGC100 Grant applications
+    Route::prefix('grant-applications')->name('grant-applications.')->group(function () {
+        Route::get('/', [AdminGrantApplicationController::class, 'index'])->name('index');
+        Route::get('/export', [AdminGrantApplicationController::class, 'export'])->name('export');
+        Route::get('/{grantApplication}', [AdminGrantApplicationController::class, 'show'])->name('show');
     });
 });
 
