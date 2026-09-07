@@ -80,7 +80,7 @@
     <div class="mx-auto px-8" style="max-width:1280px;">
         <p class="text-orange-500 text-lg font-semibold uppercase tracking-wider mb-2">Support</p>
         <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">What's Covered</h2>
-        <p class="text-gray-400 max-w-2xl mb-12 leading-relaxed">The TGC100 Grant removes the financial barrier between a committed runner and the start line of The Great Cordillera 100. Four line items, covered in full or in allowance.</p>
+        <p class="text-gray-400 max-w-2xl mb-12 leading-relaxed">The TGC100 Grant removes the financial barrier between a committed runner and the start line of The Great Cordillera 100.</p>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
             @foreach([
@@ -113,7 +113,7 @@
     <div class="mx-auto px-8" style="max-width:1280px;">
         <p class="text-orange-500 text-lg font-semibold uppercase tracking-wider mb-2">Timeline</p>
         <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Mechanics: How the Process Works</h2>
-        <p class="text-gray-400 max-w-2xl mb-12 leading-relaxed">Three stages, three weeks. Straightforward by design. We'd rather you spend the time training than chasing paperwork.</p>
+        <p class="text-gray-400 max-w-2xl mb-12 leading-relaxed">Three stages. Straightforward by design. We'd rather you spend the time training than chasing paperwork.</p>
 
         <div class="space-y-4">
             @foreach([
@@ -145,7 +145,7 @@
     <div class="mx-auto px-8" style="max-width:1280px;">
         <p class="text-orange-500 text-lg font-semibold uppercase tracking-wider mb-2">Application</p>
         <h2 class="text-3xl md:text-4xl font-bold text-white mb-3">TGC100 Grant Application Form</h2>
-        <p class="text-gray-400 mb-10 max-w-2xl leading-relaxed">All fields marked required (*) must be completed. Applications close September 13, 11:59 PM PHT. Submissions aren't connected yet, this is a preview of what applying will look like.</p>
+        <p class="text-gray-400 mb-10 max-w-2xl leading-relaxed">All fields marked required (*) must be completed. Applications close September 13, 11:59 PM PHT.</p>
 
         <div class="bg-[#111111] border border-white/10 rounded-2xl overflow-hidden">
 
@@ -431,7 +431,7 @@
     <div class="mx-auto px-8" style="max-width:1280px;">
         <p class="text-orange-500 text-lg font-semibold uppercase tracking-wider mb-2">Effective for the 2026 Application Cycle</p>
         <h2 class="text-3xl md:text-4xl font-bold text-white mb-3">TGC100 Grant: Terms &amp; Conditions</h2>
-        <p class="text-gray-400 mb-10 max-w-2xl leading-relaxed">Last updated September 3, 2026. By submitting an application for the TGC100 Grant, you agree to the terms below.</p>
+        <p class="text-gray-400 mb-10 max-w-2xl leading-relaxed">By submitting an application for the TGC100 Grant, you agree to the terms below.</p>
 
         <div class="space-y-3" x-data="{ open: null }">
             @php
