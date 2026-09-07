@@ -82,7 +82,7 @@
         <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">What's Covered</h2>
         <p class="text-gray-400 max-w-2xl mb-12 leading-relaxed">The TGC100 Grant removes the financial barrier between a committed runner and the start line of The Great Cordillera 100. Four line items, covered in full or in allowance.</p>
 
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
             @foreach([
                 ['icon' => 'M3 8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4Z|M13 5v2M13 11v2M13 17v2', 'title' => 'Registration', 'desc' => 'Full entry fee for TGC 100KM, covered.', 'amount' => '100%'],
                 ['icon' => 'M2 20v-7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v7|M2 13V8a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v3|M2 20h20', 'title' => 'Accommodation', 'desc' => 'Lodging for race weekend, arranged by RiCON.', 'amount' => 'Covered'],
@@ -367,7 +367,7 @@
                         class="py-3 px-6 text-lg font-bold rounded-lg border border-white/20 text-white hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent transition-colors">
                         Back
                     </button>
-                    <span id="tgcStepStatus" class="text-[11px] font-semibold uppercase tracking-wide text-gray-500"></span>
+                    <span id="tgcStepStatus" class="hidden sm:inline text-[11px] font-semibold uppercase tracking-wide text-gray-500"></span>
                     <button type="button" id="tgcBtnNext"
                         class="py-3 px-6 text-lg font-bold rounded-lg bg-orange-600 text-white hover:bg-orange-700 transition-colors">
                         Next
@@ -512,7 +512,9 @@
 
 <style>
     .tgc-input {
+        box-sizing: border-box;
         width: 100%;
+        min-width: 0;
         border-radius: 0.5rem;
         border: 1px solid rgba(255,255,255,0.1);
         background: #1a1a1a;
@@ -527,6 +529,7 @@
         -webkit-appearance: auto;
         appearance: auto;
         position: relative;
+        min-width: 0;
         padding-left: 2.75rem;
     }
     input[type="date"].tgc-input::-webkit-calendar-picker-indicator {
