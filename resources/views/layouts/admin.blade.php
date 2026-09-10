@@ -45,16 +45,42 @@
                           {{ request()->routeIs('admin.discount-codes.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
                     Discount Codes
                 </a>
-                <a href="{{ route('admin.training-signups.index') }}"
-                    class="px-3 py-2 rounded-lg text-sm font-medium transition-colors
-                          {{ request()->routeIs('admin.training-signups.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
-                    Signups
-                </a>
-                <a href="{{ route('admin.grant-applications.index') }}"
-                    class="px-3 py-2 rounded-lg text-sm font-medium transition-colors
-                          {{ request()->routeIs('admin.grant-applications.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
-                    Grant Applications
-                </a>
+                <div class="relative" x-data="{ open: false }" @click.outside="open = false" @keydown.escape.window="open = false">
+                    <button @click="open = !open" type="button"
+                        class="px-3 py-2 rounded-lg text-sm font-medium transition-colors inline-flex items-center gap-1
+                              {{ request()->routeIs('admin.training-signups.*') || request()->routeIs('admin.grant-applications.*') || request()->routeIs('admin.volunteer-applications.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
+                        Programs
+                        <svg class="w-3.5 h-3.5 transition-transform duration-150" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div x-show="open"
+                        x-transition:enter="transition ease-out duration-150"
+                        x-transition:enter-start="opacity-0 -translate-y-1"
+                        x-transition:enter-end="opacity-100 translate-y-0"
+                        x-transition:leave="transition ease-in duration-100"
+                        x-transition:leave-start="opacity-100 translate-y-0"
+                        x-transition:leave-end="opacity-0 -translate-y-1"
+                        class="absolute left-0 mt-2 w-56 rounded-lg border border-gray-800 bg-gray-900 shadow-xl py-1.5 z-50"
+                        style="display: none;">
+                        <a href="{{ route('admin.training-signups.index') }}"
+                            class="block px-4 py-2 text-sm transition-colors {{ request()->routeIs('admin.training-signups.*') && request('tab') !== 'quiz' ? 'text-white bg-gray-800' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
+                            Training Program
+                        </a>
+                        <a href="{{ route('admin.training-signups.index', ['tab' => 'quiz']) }}"
+                            class="block px-4 py-2 text-sm transition-colors {{ request()->routeIs('admin.training-signups.*') && request('tab') === 'quiz' ? 'text-white bg-gray-800' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
+                            21K Quiz
+                        </a>
+                        <a href="{{ route('admin.grant-applications.index') }}"
+                            class="block px-4 py-2 text-sm transition-colors {{ request()->routeIs('admin.grant-applications.*') ? 'text-white bg-gray-800' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
+                            Grant Applications
+                        </a>
+                        <a href="{{ route('admin.volunteer-applications.index') }}"
+                            class="block px-4 py-2 text-sm transition-colors {{ request()->routeIs('admin.volunteer-applications.*') ? 'text-white bg-gray-800' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
+                            Volunteer Applications
+                        </a>
+                    </div>
+                </div>
             </nav>
 
             <!-- Desktop user + logout -->
@@ -106,16 +132,38 @@
                           {{ request()->routeIs('admin.discount-codes.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
                     Discount Codes
                 </a>
-                <a href="{{ route('admin.training-signups.index') }}"
-                    class="px-3 py-2 rounded-lg text-sm font-medium transition-colors
-                          {{ request()->routeIs('admin.training-signups.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
-                    Signups
-                </a>
-                <a href="{{ route('admin.grant-applications.index') }}"
-                    class="px-3 py-2 rounded-lg text-sm font-medium transition-colors
-                          {{ request()->routeIs('admin.grant-applications.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
-                    Grant Applications
-                </a>
+                <div x-data="{ programsOpen: {{ request()->routeIs('admin.training-signups.*') || request()->routeIs('admin.grant-applications.*') || request()->routeIs('admin.volunteer-applications.*') ? 'true' : 'false' }} }">
+                    <button type="button" @click="programsOpen = !programsOpen"
+                        class="w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm font-medium transition-colors
+                              {{ request()->routeIs('admin.training-signups.*') || request()->routeIs('admin.grant-applications.*') || request()->routeIs('admin.volunteer-applications.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
+                        Programs
+                        <svg class="w-3.5 h-3.5 transition-transform" :class="programsOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div x-show="programsOpen" x-transition class="pl-3 flex flex-col gap-1 mt-1">
+                        <a href="{{ route('admin.training-signups.index') }}"
+                            class="px-3 py-2 rounded-lg text-sm font-medium transition-colors
+                                  {{ request()->routeIs('admin.training-signups.*') && request('tab') !== 'quiz' ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
+                            Training Program
+                        </a>
+                        <a href="{{ route('admin.training-signups.index', ['tab' => 'quiz']) }}"
+                            class="px-3 py-2 rounded-lg text-sm font-medium transition-colors
+                                  {{ request()->routeIs('admin.training-signups.*') && request('tab') === 'quiz' ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
+                            21K Quiz
+                        </a>
+                        <a href="{{ route('admin.grant-applications.index') }}"
+                            class="px-3 py-2 rounded-lg text-sm font-medium transition-colors
+                                  {{ request()->routeIs('admin.grant-applications.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
+                            Grant Applications
+                        </a>
+                        <a href="{{ route('admin.volunteer-applications.index') }}"
+                            class="px-3 py-2 rounded-lg text-sm font-medium transition-colors
+                                  {{ request()->routeIs('admin.volunteer-applications.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
+                            Volunteer Applications
+                        </a>
+                    </div>
+                </div>
                 <div class="mt-2 pt-3 border-t border-gray-800 flex items-center justify-between">
                     <span class="text-sm text-gray-400">{{ Auth::user()->name }}</span>
                     <form method="POST" action="{{ route('logout') }}">

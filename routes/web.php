@@ -9,7 +9,9 @@ use App\Http\Controllers\Admin\RaceCategoryController;
 use App\Http\Controllers\Admin\DiscountCodeController;
 use App\Http\Controllers\Admin\TrainingSignupController;
 use App\Http\Controllers\Admin\GrantApplicationController as AdminGrantApplicationController;
+use App\Http\Controllers\Admin\VolunteerApplicationController as AdminVolunteerApplicationController;
 use App\Http\Controllers\GrantApplicationController;
+use App\Http\Controllers\VolunteerApplicationController;
 use App\Http\Controllers\QuizLeadController;
 use App\Http\Controllers\TrainingProgramController;
 
@@ -25,6 +27,10 @@ Route::prefix('programs')->name('programs.')->group(function () {
     Route::get('/tgc100-grant', fn() => view('programs.tgc100-grant'))->name('tgc100-grant');
     Route::post('/tgc100-grant', [GrantApplicationController::class, 'store'])
         ->middleware('throttle:10,1')->name('tgc100-grant.store');
+
+    Route::get('/volunteer', fn() => view('programs.volunteer'))->name('volunteer');
+    Route::post('/volunteer', [VolunteerApplicationController::class, 'store'])
+        ->middleware('throttle:10,1')->name('volunteer.store');
 });
 
 Route::prefix('race-category')->name('race-category.')->group(function () {
@@ -107,6 +113,13 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
         Route::get('/', [AdminGrantApplicationController::class, 'index'])->name('index');
         Route::get('/export', [AdminGrantApplicationController::class, 'export'])->name('export');
         Route::get('/{grantApplication}', [AdminGrantApplicationController::class, 'show'])->name('show');
+    });
+
+    // Volunteer applications
+    Route::prefix('volunteer-applications')->name('volunteer-applications.')->group(function () {
+        Route::get('/', [AdminVolunteerApplicationController::class, 'index'])->name('index');
+        Route::get('/export', [AdminVolunteerApplicationController::class, 'export'])->name('export');
+        Route::get('/{volunteerApplication}', [AdminVolunteerApplicationController::class, 'show'])->name('show');
     });
 });
 

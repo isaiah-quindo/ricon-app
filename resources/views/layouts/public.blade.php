@@ -78,7 +78,7 @@
                             x-transition:leave-end="opacity-0 -translate-y-1"
                             class="absolute left-0 mt-3 w-64 rounded-lg border border-white/10 bg-[#111111] shadow-xl py-2"
                             style="display: none;">
-                            <span class="block px-4 py-2.5 text-sm text-gray-500 cursor-not-allowed">Become a RiCON Volunteer</span>
+                            <a href="{{ route('programs.volunteer') }}" class="block px-4 py-2.5 text-sm text-gray-300 hover:text-white hover:bg-white/5 transition-colors">Become a RiCON Volunteer</a>
                             <a href="{{ route('programs.tgc100-grant') }}" class="block px-4 py-2.5 text-sm text-gray-300 hover:text-white hover:bg-white/5 transition-colors">TGC Grant Application</a>
                         </div>
                     </div>
@@ -124,7 +124,7 @@
                         </svg>
                     </button>
                     <div x-show="programsOpen" x-transition class="pl-4 flex flex-col gap-1 pb-1">
-                        <span class="text-gray-500 text-sm py-2 cursor-not-allowed">Become a RiCON Volunteer</span>
+                        <a href="{{ route('programs.volunteer') }}" @click="open = false" class="text-gray-300 hover:text-white text-sm font-medium transition-colors py-2">Become a RiCON Volunteer</a>
                         <a href="{{ route('programs.tgc100-grant') }}" @click="open = false" class="text-gray-300 hover:text-white text-sm font-medium transition-colors py-2">TGC Grant Application</a>
                     </div>
                 </div>
