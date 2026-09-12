@@ -35,15 +35,15 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-3 border-t border-white/10 divide-y sm:divide-y-0 sm:divide-x divide-white/10">
             <div class="pt-6 sm:pr-8">
-                <p class="text-gray-500 text-xs uppercase tracking-wider font-semibold mb-1">Volunteer Roles</p>
+                <p class="text-gray-500 text-sm uppercase tracking-wider font-semibold mb-1">Volunteer Roles</p>
                 <p class="text-white font-black text-2xl">19+</p>
             </div>
             <div class="pt-6 sm:px-8">
-                <p class="text-gray-500 text-xs uppercase tracking-wider font-semibold mb-1">Min. Shift for Benefits</p>
+                <p class="text-gray-500 text-sm uppercase tracking-wider font-semibold mb-1">Min. Shift for Benefits</p>
                 <p class="text-white font-black text-2xl">3 Hrs</p>
             </div>
             <div class="pt-6 sm:pl-8">
-                <p class="text-gray-500 text-xs uppercase tracking-wider font-semibold mb-1">Group Bonus Threshold</p>
+                <p class="text-gray-500 text-sm uppercase tracking-wider font-semibold mb-1">Group Bonus Threshold</p>
                 <p class="text-white font-black text-2xl">90 Hrs</p>
             </div>
         </div>
@@ -150,7 +150,7 @@ $roles = [
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 <template x-for="role in filtered" :key="role.name">
                     <div @click="toggle(role.name)" class="bg-[#111111] border border-white/10 rounded-2xl p-5 cursor-pointer hover:border-white/20 transition-colors">
-                        <p class="text-orange-500 text-[10.5px] font-bold uppercase tracking-wider mb-2" x-text="categories[role.cat]"></p>
+                        <p class="text-orange-500 text-sm font-bold uppercase tracking-wider mb-2" x-text="categories[role.cat]"></p>
                         <div class="flex items-start justify-between gap-3">
                             <h4 class="text-white font-bold text-lg" x-text="role.name"></h4>
                             <svg class="w-4 h-4 text-orange-500 flex-none mt-1 transition-transform" :class="opened.includes(role.name) ? 'rotate-180' : ''"
@@ -158,7 +158,7 @@ $roles = [
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                             </svg>
                         </div>
-                        <p class="text-gray-400 text-sm leading-relaxed mt-2" x-show="opened.includes(role.name)" x-text="role.desc"></p>
+                        <p class="text-gray-400 text-base leading-relaxed mt-2" x-show="opened.includes(role.name)" x-text="role.desc"></p>
                     </div>
                 </template>
             </div>
@@ -200,7 +200,7 @@ $roles = [
                 </div>
                 <div>
                     <h4 class="text-white font-bold text-lg mb-1">{{ $card['title'] }}</h4>
-                    <p class="text-gray-400 text-sm leading-relaxed">{{ $card['desc'] }}</p>
+                    <p class="text-gray-400 text-base leading-relaxed">{{ $card['desc'] }}</p>
                 </div>
             </div>
             @endforeach
@@ -221,7 +221,7 @@ $roles = [
 
             <div id="volCheckpointBar" class="flex border-b border-white/10 overflow-x-auto">
                 @foreach(['Personal', 'Running', 'Experience', 'Skills', 'Preference'] as $i => $label)
-                <div class="vol-cp flex-1 min-w-[110px] px-4 py-4 border-r border-white/10 last:border-r-0 text-[11px] font-semibold uppercase tracking-wide {{ $i === 0 ? 'text-orange-500' : 'text-gray-500' }}" data-cp-index="{{ $i }}">
+                <div class="vol-cp flex-1 min-w-[110px] px-4 py-4 border-r border-white/10 last:border-r-0 text-sm font-semibold uppercase tracking-wide {{ $i === 0 ? 'text-orange-500' : 'text-gray-500' }}" data-cp-index="{{ $i }}">
                     <span class="vol-cp-num block font-black text-lg mb-1 {{ $i === 0 ? 'text-orange-500' : 'text-white' }}">{{ $i + 1 }}</span>{{ $label }}
                 </div>
                 @endforeach
@@ -231,7 +231,7 @@ $roles = [
 
                 {{-- Step 0: Personal Information --}}
                 <div class="vol-step" data-index="0">
-                    <p class="text-orange-500 text-xs font-bold uppercase tracking-wider border-b border-white/10 pb-2.5 mb-6">Personal Information</p>
+                    <p class="text-orange-500 text-sm font-bold uppercase tracking-wider border-b border-white/10 pb-2.5 mb-6">Personal Information</p>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
                         <div>
@@ -245,7 +245,7 @@ $roles = [
                             <p class="vol-error">Enter a valid email address.</p>
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
                         <div>
                             <label class="block text-lg font-semibold text-white mb-1.5">Mobile Number <span class="text-orange-500">*</span></label>
                             <input type="tel" name="mobile_number" required class="vol-input">
@@ -257,15 +257,51 @@ $roles = [
                             <p class="vol-error">Enter your city or province.</p>
                         </div>
                     </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
+                        <div>
+                            <label class="block text-lg font-semibold text-white mb-1.5">Shirt Size <span class="text-orange-500">*</span></label>
+                            <select name="shirt_size" required class="vol-input">
+                                <option value="">Select one</option>
+                                <option>XS</option>
+                                <option>S</option>
+                                <option>M</option>
+                                <option>L</option>
+                                <option>XL</option>
+                                <option>XXL</option>
+                            </select>
+                            <p class="vol-error">Select a shirt size.</p>
+                        </div>
+                        <div>
+                            <label class="block text-lg font-semibold text-white mb-1.5">Preferred Hours of Service <span class="text-orange-500">*</span></label>
+                            <select name="preferred_hours" required class="vol-input">
+                                <option value="">Select one</option>
+                                <option>3&ndash;6 Hours</option>
+                                <option>6&ndash;9 Hours</option>
+                                <option>9+ Hours</option>
+                                <option>Flexible / Whatever is needed</option>
+                            </select>
+                            <p class="vol-error">Select your preferred hours of service.</p>
+                        </div>
+                    </div>
+                    <div data-require-one data-field="available_dates">
+                        <label class="block text-lg font-semibold text-white mb-1.5">Date(s) Available <span class="text-orange-500">*</span></label>
+                        <p class="text-sm text-gray-500 mb-2">Select all that apply.</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            @foreach(['November 13, 2026', 'November 14, 2026', 'November 15, 2026'] as $date)
+                            <label class="vol-option"><input type="checkbox" value="{{ $date }}">{{ $date }}</label>
+                            @endforeach
+                        </div>
+                        <p class="vol-error">Select at least one available date.</p>
+                    </div>
                 </div>
 
                 {{-- Step 1: Running Background --}}
                 <div class="vol-step hidden" data-index="1">
-                    <p class="text-orange-500 text-xs font-bold uppercase tracking-wider border-b border-white/10 pb-2.5 mb-6">Running Background</p>
+                    <p class="text-orange-500 text-sm font-bold uppercase tracking-wider border-b border-white/10 pb-2.5 mb-6">Running Background</p>
 
                     <div class="mb-5" data-require-one data-field="running_experience">
                         <label class="block text-lg font-semibold text-white mb-1.5">Running Experience <span class="text-orange-500">*</span></label>
-                        <p class="text-xs text-gray-500 mb-2">Select all that apply.</p>
+                        <p class="text-sm text-gray-500 mb-2">Select all that apply.</p>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                             @foreach(['Recreational Runner', 'Road Runner', 'Trail Runner', 'Ultra Runner', 'Running Coach', 'Running Club / Community Member', 'Not a Runner'] as $opt)
                             <label class="vol-option"><input type="checkbox" value="{{ $opt }}">{{ $opt }}</label>
@@ -321,11 +357,11 @@ $roles = [
 
                 {{-- Step 2: Event & Volunteer Experience --}}
                 <div class="vol-step hidden" data-index="2">
-                    <p class="text-orange-500 text-xs font-bold uppercase tracking-wider border-b border-white/10 pb-2.5 mb-6">Event &amp; Volunteer Experience</p>
+                    <p class="text-orange-500 text-sm font-bold uppercase tracking-wider border-b border-white/10 pb-2.5 mb-6">Event &amp; Volunteer Experience</p>
 
                     <div class="mb-5" data-field="previous_event_experience">
                         <label class="block text-lg font-semibold text-white mb-1.5">Previous Race / Event Experience</label>
-                        <p class="text-xs text-gray-500 mb-2">Select all that apply.</p>
+                        <p class="text-sm text-gray-500 mb-2">Select all that apply.</p>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                             @foreach(['Trail Running Event', 'Road Running Event', 'Cycling Event', 'Outdoor / Adventure Event', 'Other Sports Event', 'Non-Sports Event', 'No Previous Event Experience'] as $opt)
                             <label class="vol-option"><input type="checkbox" value="{{ $opt }}">{{ $opt }}</label>
@@ -335,7 +371,7 @@ $roles = [
 
                     <div data-field="previous_volunteer_roles">
                         <label class="block text-lg font-semibold text-white mb-1.5">Previous Volunteer / Event Roles</label>
-                        <p class="text-xs text-gray-500 mb-2">Select all that apply.</p>
+                        <p class="text-sm text-gray-500 mb-2">Select all that apply.</p>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
                             @foreach(['Aid Station Crew', 'Course Marshal', 'Traffic & Parking Marshal', 'Registration / Check-in', 'Race Kit Distribution', 'Drop Bag Coordinator', 'Sweeper', 'Timing / Results', 'Medical / First Aid', 'Photography', 'Videography', 'Radio / Communications', 'Logistics', 'Team Leader / Coordinator'] as $opt)
                             <label class="vol-option"><input type="checkbox" value="{{ $opt }}">{{ $opt }}</label>
@@ -347,11 +383,11 @@ $roles = [
 
                 {{-- Step 3: Skills & Readiness --}}
                 <div class="vol-step hidden" data-index="3">
-                    <p class="text-orange-500 text-xs font-bold uppercase tracking-wider border-b border-white/10 pb-2.5 mb-6">Skills &amp; Readiness</p>
+                    <p class="text-orange-500 text-sm font-bold uppercase tracking-wider border-b border-white/10 pb-2.5 mb-6">Skills &amp; Readiness</p>
 
                     <div class="mb-5" data-field="skills_certifications">
                         <label class="block text-lg font-semibold text-white mb-1.5">Skills &amp; Certifications</label>
-                        <p class="text-xs text-gray-500 mb-2">Select all that apply.</p>
+                        <p class="text-sm text-gray-500 mb-2">Select all that apply.</p>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                             @foreach(['First Aid Certified', 'CPR Certified', 'Radio Communication', 'GPS / Navigation', 'Map Reading', 'Driving', 'Motorcycle Riding', 'Hiking / Mountaineering', 'Photography', 'Videography', 'Drone Operation', 'Crowd / Traffic Management', 'Event Logistics', 'None'] as $opt)
                             <label class="vol-option"><input type="checkbox" value="{{ $opt }}">{{ $opt }}</label>
@@ -361,7 +397,7 @@ $roles = [
 
                     <div data-field="physical_readiness">
                         <label class="block text-lg font-semibold text-white mb-1.5">Physical &amp; Outdoor Readiness</label>
-                        <p class="text-xs text-gray-500 mb-2">Select all that apply.</p>
+                        <p class="text-sm text-gray-500 mb-2">Select all that apply.</p>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                             @foreach(['Comfortable working outdoors', 'Comfortable in changing weather', 'Comfortable standing/walking long periods', 'Comfortable in remote/trail locations', 'Able to complete required shift', 'Willing to do physically demanding tasks'] as $opt)
                             <label class="vol-option"><input type="checkbox" value="{{ $opt }}">{{ $opt }}</label>
@@ -372,7 +408,7 @@ $roles = [
 
                 {{-- Step 4: Role Preference & Consent --}}
                 <div class="vol-step hidden" data-index="4">
-                    <p class="text-orange-500 text-xs font-bold uppercase tracking-wider border-b border-white/10 pb-2.5 mb-6">Role Preference &amp; Consent</p>
+                    <p class="text-orange-500 text-sm font-bold uppercase tracking-wider border-b border-white/10 pb-2.5 mb-6">Role Preference &amp; Consent</p>
 
                     <div class="mb-2">
                         <label class="block text-lg font-semibold text-white mb-1.5">Preferred Volunteer Role <span class="text-orange-500">*</span></label>
@@ -401,9 +437,13 @@ $roles = [
                         <input type="checkbox" name="consent_shift" required class="mt-1 accent-orange-500 w-4 h-4 flex-none">
                         <span>I can commit to the shift length required for my assigned role.</span>
                     </label>
-                    <label class="flex items-start gap-3 text-lg text-gray-400">
+                    <label class="flex items-start gap-3 text-lg text-gray-400 mb-4">
                         <input type="checkbox" name="consent_benefits" required class="mt-1 accent-orange-500 w-4 h-4 flex-none">
                         <span>I understand volunteer benefits are tied to hours served, as outlined on this page.</span>
+                    </label>
+                    <label class="flex items-start gap-3 text-lg text-gray-400">
+                        <input type="checkbox" name="consent_alt_role" class="mt-1 accent-orange-500 w-4 h-4 flex-none">
+                        <span>I am still willing to volunteer in a different role if my preferred role's slots are full.</span>
                     </label>
                 </div>
 
@@ -412,7 +452,7 @@ $roles = [
                         class="py-3 px-6 text-lg font-bold rounded-lg border border-white/20 text-white hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent transition-colors">
                         Back
                     </button>
-                    <span id="volStepStatus" class="hidden sm:inline text-[11px] font-semibold uppercase tracking-wide text-gray-500"></span>
+                    <span id="volStepStatus" class="hidden sm:inline text-sm font-semibold uppercase tracking-wide text-gray-500"></span>
                     <button type="button" id="volBtnNext"
                         class="py-3 px-6 text-lg font-bold rounded-lg bg-orange-600 text-white hover:bg-orange-700 transition-colors">
                         Next
@@ -425,7 +465,7 @@ $roles = [
                 <h3 class="text-white font-bold text-xl mb-2">Application Received</h3>
                 <p class="text-gray-400 max-w-md mx-auto mb-6 text-lg leading-relaxed">Thanks for stepping up. We've sent a confirmation to your email, and RiCON's volunteer coordination team will reach out with next steps.</p>
                 <dl id="volReviewSummary" class="text-left max-w-md mx-auto mb-6 rounded-lg border border-white/10 overflow-hidden divide-y divide-white/10"></dl>
-                <p class="text-xs text-gray-500 border border-dashed border-white/20 rounded-lg px-4 py-3 max-w-md mx-auto text-left">Keep an eye on your inbox, including your spam folder, for updates from RiCON.</p>
+                <p class="text-base text-gray-500 border border-dashed border-white/20 rounded-lg px-4 py-3 max-w-md mx-auto text-left">Keep an eye on your inbox, including your spam folder, for updates from RiCON.</p>
             </div>
             <p id="volSubmitError" class="hidden px-6 md:px-9 pb-6 text-lg text-orange-500"></p>
         </div>
@@ -441,39 +481,67 @@ $roles = [
         <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">We Give Back to the People Who Show Up</h2>
         <p class="text-gray-400 max-w-2xl mb-12 leading-relaxed">While you're volunteering your time, we want to show our appreciation with benefits and support throughout the event. Bring your friends and be part of it.</p>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-            <div class="bg-[#0d0d0d] border border-white/10 rounded-2xl p-6">
-                <p class="text-orange-500 font-black text-2xl mb-5">3&ndash;6 Hrs</p>
-                <ul class="space-y-2.5">
-                    @foreach(['RiCON Volunteer Shirt', 'Meal During the Event', 'Sponsor Discounts'] as $perk)
-                    <li class="flex gap-2 items-start text-gray-400 text-sm"><span class="text-green-400 font-bold flex-none">&check;</span>{{ $perk }}</li>
-                    @endforeach
-                </ul>
+        <div class="grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-7 items-start">
+            <div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="bg-[#0d0d0d] border border-white/10 rounded-2xl p-6">
+                        <p class="text-orange-500 font-black text-2xl mb-5">3&ndash;6 Hrs</p>
+                        <ul class="space-y-2.5">
+                            @foreach(['RiCON Volunteer Shirt', 'Meal During the Event', 'Sponsor Discounts and Vouchers'] as $perk)
+                            <li class="flex gap-2 items-start text-gray-400 text-base"><span class="text-green-400 font-bold flex-none">&check;</span>{{ $perk }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+
+                    <div class="bg-[#0d0d0d] border border-orange-600 rounded-2xl p-6 relative">
+                        <span class="absolute -top-3 right-5 bg-orange-600 text-white text-sm font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">Popular</span>
+                        <p class="text-orange-500 font-black text-2xl mb-5">6&ndash;9 Hrs</p>
+                        <ul class="space-y-2.5">
+                            @foreach(['RiCON Volunteer Shirt', 'Meal & Snack During the Event', 'Sponsor Discounts and Vouchers'] as $perk)
+                            <li class="flex gap-2 items-start text-gray-400 text-base"><span class="text-green-400 font-bold flex-none">&check;</span>{{ $perk }}</li>
+                            @endforeach
+                            <li class="flex gap-2 items-start text-white font-semibold text-base"><span class="text-green-400 font-bold flex-none">&check;</span>+ &#8369;1,500 Race Credit/Voucher toward a future RiCON event</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-[#0d0d0d] border border-white/10 rounded-2xl p-6 relative md:col-span-2">
+                        <span class="absolute -top-3 right-5 bg-orange-600 text-white text-sm font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">Best Value</span>
+                        <p class="text-orange-500 font-black text-2xl mb-5">9+ Hrs</p>
+                        <ul class="space-y-2.5">
+                            @foreach(['RiCON Volunteer Shirt', 'Meal & Snack During the Event', 'Sponsor Discounts and Vouchers'] as $perk)
+                            <li class="flex gap-2 items-start text-gray-400 text-base"><span class="text-green-400 font-bold flex-none">&check;</span>{{ $perk }}</li>
+                            @endforeach
+                            <li class="flex gap-2 items-start text-white font-semibold text-base"><span class="text-green-400 font-bold flex-none">&check;</span>+ Future Free Race Kit for a selected upcoming RiCON event</li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="text-gray-500 text-base mt-6">Note: Specific sponsor discounts, race credits, and free race kits may vary depending on the event and participating partners.</p>
             </div>
 
-            <div class="bg-[#0d0d0d] border border-orange-600 rounded-2xl p-6 relative">
-                <span class="absolute -top-3 right-5 bg-orange-600 text-white text-[10.5px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">Popular</span>
-                <p class="text-orange-500 font-black text-2xl mb-5">6&ndash;9 Hrs</p>
-                <ul class="space-y-2.5">
-                    @foreach(['RiCON Volunteer Shirt', 'Meal & Snack During the Event', 'Sponsor Discounts'] as $perk)
-                    <li class="flex gap-2 items-start text-gray-400 text-sm"><span class="text-green-400 font-bold flex-none">&check;</span>{{ $perk }}</li>
-                    @endforeach
-                    <li class="flex gap-2 items-start text-white font-semibold text-sm"><span class="text-green-400 font-bold flex-none">&check;</span>+ &#8369;1,500 Race Credit/Voucher toward a future RiCON event</li>
-                </ul>
-            </div>
-
-            <div class="bg-[#0d0d0d] border border-white/10 rounded-2xl p-6 relative">
-                <span class="absolute -top-3 right-5 bg-orange-600 text-white text-[10.5px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">Best Value</span>
-                <p class="text-orange-500 font-black text-2xl mb-5">9+ Hrs</p>
-                <ul class="space-y-2.5">
-                    @foreach(['RiCON Volunteer Shirt', 'Meal & Snack During the Event', 'Sponsor Discounts'] as $perk)
-                    <li class="flex gap-2 items-start text-gray-400 text-sm"><span class="text-green-400 font-bold flex-none">&check;</span>{{ $perk }}</li>
-                    @endforeach
-                    <li class="flex gap-2 items-start text-white font-semibold text-sm"><span class="text-green-400 font-bold flex-none">&check;</span>+ Future Free Race Kit for a selected upcoming RiCON event</li>
-                </ul>
+            <div class="bg-[#0d0d0d] border border-white/10 rounded-2xl p-5 lg:sticky lg:top-32"
+                x-data="{
+                    view: 'front',
+                    images: {
+                        front: '{{ asset('images/volunteer-shirt-front.png') }}',
+                        back: '{{ asset('images/volunteer-shirt-back.png') }}',
+                    },
+                }">
+                <div class="bg-[#C9C9C9] rounded-lg overflow-hidden aspect-square flex items-center justify-center">
+                    <img :src="images[view]" :alt="'RiCON Volunteer Crew Shirt, ' + view + ' view'" class="w-full h-full object-contain">
+                </div>
+                <div class="flex gap-1.5 mt-3.5 bg-[#1a1a1a] rounded-full p-1">
+                    <button type="button" @click="view = 'front'"
+                        class="flex-1 text-sm font-bold py-2 rounded-full transition-colors"
+                        :class="view === 'front' ? 'bg-orange-600 text-white' : 'text-gray-400'">Front</button>
+                    <button type="button" @click="view = 'back'"
+                        class="flex-1 text-sm font-bold py-2 rounded-full transition-colors"
+                        :class="view === 'back' ? 'bg-orange-600 text-white' : 'text-gray-400'">Back</button>
+                </div>
+                <p class="mt-3.5 text-sm text-gray-400 text-center leading-relaxed">
+                    <strong class="block text-white font-bold text-sm mb-1">RiCON Official Crew Shirt</strong>
+                </p>
             </div>
         </div>
-        <p class="text-gray-500 text-xs mt-6">Note: Specific sponsor discounts, race credits, and free race kits may vary depending on the event and participating partners.</p>
     </div>
 </section>
 
@@ -483,15 +551,15 @@ $roles = [
 <section id="groups" class="bg-[#0d0d0d] py-20">
     <div class="mx-auto px-8" style="max-width:1280px;">
         <p class="text-orange-500 text-lg font-semibold uppercase tracking-wider mb-2">Running Groups &amp; Communities</p>
-        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Volunteer Together, Earn Together</h2>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Serve Together, Run Together</h2>
         <p class="text-gray-400 max-w-2xl mb-12 leading-relaxed">Running groups, clubs, and communities are encouraged to volunteer together and be part of the RiCON experience.</p>
 
         <div class="bg-[#111111] border border-white/10 rounded-2xl p-6 md:p-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div>
                 <h3 class="text-white font-bold text-xl mb-3">90 Hours = 3 Complimentary Race Kits</h3>
-                <p class="text-gray-400 text-sm leading-relaxed mb-3">In addition to individual volunteer benefits, groups and communities that collectively complete a minimum of 90 volunteer hours may receive 3 complimentary race kits for TGC100 or a selected upcoming RiCON event. Kits may be assigned to any member of the participating group.</p>
-                <p class="text-gray-400 text-sm leading-relaxed mb-3">Volunteer hours must be completed and verified by the RiCON organizing team. Complimentary race kits are valid only for TGC100 and selected upcoming RiCON events, subject to event availability and other applicable terms.</p>
-                <p class="text-gray-400 text-sm leading-relaxed">Organizers provide space for team banners at the race base or aid stations. All collaborating running groups get their team logo featured on the RiCON website, social media, race briefing, and media launch.</p>
+                <p class="text-gray-400 text-base leading-relaxed mb-3">In addition to individual volunteer benefits, groups and communities that collectively complete a minimum of 90 volunteer hours may receive 3 complimentary race kits for TGC100 or a selected upcoming RiCON event. Kits may be assigned to any member of the participating group.</p>
+                <p class="text-gray-400 text-base leading-relaxed mb-3">Volunteer hours must be completed and verified by the RiCON organizing team. Complimentary race kits are valid only for TGC100 and selected upcoming RiCON events, subject to event availability and other applicable terms.</p>
+                <p class="text-gray-400 text-base leading-relaxed">Organizers provide space for team banners at the race base or aid stations. All collaborating running groups get their team logo featured on the RiCON website, social media, race briefing, and media launch.</p>
             </div>
 
             <div class="bg-[#1a1a1a] border border-white/10 rounded-lg p-6"
@@ -502,14 +570,14 @@ $roles = [
                     get pct() { return Math.min(100, (this.total / 90) * 100); },
                     get met() { return this.total >= 90; },
                 }">
-                <p class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-4">Group Hours Calculator</p>
+                <p class="text-sm font-bold uppercase tracking-wider text-gray-500 mb-4">Group Hours Calculator</p>
                 <div class="grid grid-cols-2 gap-4 mb-5">
                     <div>
-                        <label class="block text-[11px] uppercase tracking-wide text-gray-500 font-semibold mb-1.5">Volunteers</label>
+                        <label class="block text-sm uppercase tracking-wide text-gray-500 font-semibold mb-1.5">Volunteers</label>
                         <input type="number" min="1" x-model.number="people" class="vol-input tabular-nums">
                     </div>
                     <div>
-                        <label class="block text-[11px] uppercase tracking-wide text-gray-500 font-semibold mb-1.5">Hours Each</label>
+                        <label class="block text-sm uppercase tracking-wide text-gray-500 font-semibold mb-1.5">Hours Each</label>
                         <input type="number" min="1" x-model.number="hours" class="vol-input tabular-nums">
                     </div>
                 </div>
@@ -518,10 +586,10 @@ $roles = [
                 </div>
                 <div class="flex justify-between items-center border-t border-white/10 pt-4">
                     <div>
-                        <span class="block text-xs text-gray-500 mb-0.5">Total Hours</span>
+                        <span class="block text-sm text-gray-500 mb-0.5">Total Hours</span>
                         <span class="font-black text-2xl text-white tabular-nums" x-text="total"></span>
                     </div>
-                    <span class="text-xs font-bold px-3 py-1.5 rounded-full"
+                    <span class="text-sm font-bold px-3 py-1.5 rounded-full"
                         :class="met ? 'bg-green-500/15 text-green-400' : 'bg-orange-500/10 text-orange-500'"
                         x-text="met ? 'Threshold Met' : (90 - total) + ' Hrs to Go'"></span>
                 </div>
@@ -540,7 +608,7 @@ $roles = [
         background: #1a1a1a;
         color: #fff;
         padding: 0.75rem 1rem;
-        font-size: 0.875rem;
+        font-size: 1rem;
     }
     .vol-input:focus { outline: none; border-color: #f97316; }
     .vol-input::placeholder { color: #6b7280; }
@@ -548,11 +616,11 @@ $roles = [
         display: flex; align-items: center; gap: 0.625rem;
         background: #1a1a1a; border: 1px solid rgba(255,255,255,0.1);
         border-radius: 0.5rem; padding: 0.625rem 0.75rem;
-        font-size: 0.8125rem; color: #9ca3af; cursor: pointer;
+        font-size: 1rem; color: #9ca3af; cursor: pointer;
     }
     .vol-option input { accent-color: #f97316; flex: none; }
     .vol-option:has(input:checked) { border-color: #f97316; color: #fff; background: rgba(249,115,22,0.1); }
-    .vol-error { display: none; color: #f97316; font-size: 0.75rem; margin-top: 0.375rem; }
+    .vol-error { display: none; color: #f97316; font-size: 1rem; margin-top: 0.375rem; }
     .vol-field-invalid .vol-error { display: block; }
     .vol-field-invalid .vol-option { border-color: #f97316; }
 </style>

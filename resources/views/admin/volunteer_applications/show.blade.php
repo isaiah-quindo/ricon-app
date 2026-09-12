@@ -49,6 +49,18 @@ $badgeList = function (?array $items) {
                     <p class="text-xs text-gray-400 mb-0.5">City / Province</p>
                     <p class="text-sm font-medium text-gray-800">{{ $application->city_province }}</p>
                 </div>
+                <div>
+                    <p class="text-xs text-gray-400 mb-0.5">Shirt Size</p>
+                    <p class="text-sm font-medium text-gray-800">{{ $application->shirt_size }}</p>
+                </div>
+                <div>
+                    <p class="text-xs text-gray-400 mb-0.5">Preferred Hours</p>
+                    <p class="text-sm font-medium text-gray-800">{{ $application->preferred_hours }}</p>
+                </div>
+                <div>
+                    <p class="text-xs text-gray-400 mb-0.5">Date(s) Available</p>
+                    {!! $badgeList($application->available_dates) !!}
+                </div>
             </div>
         </div>
 
@@ -135,6 +147,14 @@ $badgeList = function (?array $items) {
                     <span class="text-xs text-gray-500">Understands benefits tied to hours</span>
                     @if($application->consent_benefits)
                     <span class="inline-flex items-center px-2 py-0.5 bg-green-50 border border-green-200 text-green-700 text-xs font-medium rounded-md">Agreed</span>
+                    @else
+                    <span class="inline-flex items-center px-2 py-0.5 bg-gray-50 border border-gray-200 text-gray-500 text-xs font-medium rounded-md">No</span>
+                    @endif
+                </div>
+                <div class="flex items-center justify-between gap-2">
+                    <span class="text-xs text-gray-500">Open to a different role</span>
+                    @if($application->consent_alt_role)
+                    <span class="inline-flex items-center px-2 py-0.5 bg-green-50 border border-green-200 text-green-700 text-xs font-medium rounded-md">Yes</span>
                     @else
                     <span class="inline-flex items-center px-2 py-0.5 bg-gray-50 border border-gray-200 text-gray-500 text-xs font-medium rounded-md">No</span>
                     @endif

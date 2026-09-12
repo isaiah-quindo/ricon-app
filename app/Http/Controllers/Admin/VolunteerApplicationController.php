@@ -48,11 +48,12 @@ class VolunteerApplicationController extends Controller
 
             fputcsv($handle, [
                 'id', 'full_name', 'email', 'mobile_number', 'city_province',
+                'shirt_size', 'preferred_hours', 'available_dates',
                 'running_experience', 'years_running', 'longest_trail_run', 'longest_distance',
                 'previous_event_experience', 'previous_volunteer_roles', 'previous_roles_other',
                 'skills_certifications', 'physical_readiness',
                 'preferred_role', 'preferred_role_other',
-                'consent_shift', 'consent_benefits', 'submitted_at',
+                'consent_shift', 'consent_benefits', 'consent_alt_role', 'submitted_at',
             ]);
 
             foreach ($applications as $application) {
@@ -62,6 +63,9 @@ class VolunteerApplicationController extends Controller
                     $application->email,
                     $application->mobile_number,
                     $application->city_province,
+                    $application->shirt_size,
+                    $application->preferred_hours,
+                    implode('; ', $application->available_dates ?? []),
                     implode('; ', $application->running_experience ?? []),
                     $application->years_running,
                     $application->longest_trail_run,
@@ -75,6 +79,7 @@ class VolunteerApplicationController extends Controller
                     $application->preferred_role_other,
                     $application->consent_shift ? 'yes' : 'no',
                     $application->consent_benefits ? 'yes' : 'no',
+                    $application->consent_alt_role ? 'yes' : 'no',
                     $application->created_at->toDateTimeString(),
                 ]);
             }

@@ -16,6 +16,10 @@ class VolunteerApplicationController extends Controller
             'email'                      => 'required|email|max:255',
             'mobile_number'              => 'required|string|max:50',
             'city_province'              => 'required|string|max:255',
+            'shirt_size'                 => 'required|string|max:10',
+            'preferred_hours'            => 'required|string|max:255',
+            'available_dates'            => 'required|array|min:1',
+            'available_dates.*'          => 'string|max:255',
             'running_experience'         => 'required|array|min:1',
             'running_experience.*'       => 'string|max:255',
             'years_running'              => 'required|string|max:255',
@@ -34,6 +38,7 @@ class VolunteerApplicationController extends Controller
             'preferred_role_other'       => 'nullable|string|max:255',
             'consent_shift'              => 'accepted',
             'consent_benefits'           => 'accepted',
+            'consent_alt_role'           => 'boolean',
         ]);
 
         $application = VolunteerApplication::create($validated);

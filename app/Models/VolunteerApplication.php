@@ -14,6 +14,9 @@ class VolunteerApplication extends Model
         'email',
         'mobile_number',
         'city_province',
+        'shirt_size',
+        'preferred_hours',
+        'available_dates',
         'running_experience',
         'years_running',
         'longest_trail_run',
@@ -27,9 +30,11 @@ class VolunteerApplication extends Model
         'preferred_role_other',
         'consent_shift',
         'consent_benefits',
+        'consent_alt_role',
     ];
 
     protected $casts = [
+        'available_dates'            => 'array',
         'running_experience'         => 'array',
         'previous_event_experience'  => 'array',
         'previous_volunteer_roles'   => 'array',
@@ -37,6 +42,7 @@ class VolunteerApplication extends Model
         'physical_readiness'         => 'array',
         'consent_shift'              => 'boolean',
         'consent_benefits'           => 'boolean',
+        'consent_alt_role'           => 'boolean',
     ];
 
     public function scopeSearch($query, string $term)
