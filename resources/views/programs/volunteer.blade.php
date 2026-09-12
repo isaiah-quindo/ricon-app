@@ -493,8 +493,7 @@ $roles = [
                         </ul>
                     </div>
 
-                    <div class="bg-[#0d0d0d] border border-orange-600 rounded-2xl p-6 relative">
-                        <span class="absolute -top-3 right-5 bg-orange-600 text-white text-sm font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">Popular</span>
+                    <div class="bg-[#0d0d0d] border border-orange-600 rounded-2xl p-6">
                         <p class="text-orange-500 font-black text-2xl mb-5">6&ndash;9 Hrs</p>
                         <ul class="space-y-2.5">
                             @foreach(['RiCON Volunteer Shirt', 'Meal & Snack During the Event', 'Sponsor Discounts and Vouchers'] as $perk)
@@ -504,8 +503,7 @@ $roles = [
                         </ul>
                     </div>
 
-                    <div class="bg-[#0d0d0d] border border-white/10 rounded-2xl p-6 relative md:col-span-2">
-                        <span class="absolute -top-3 right-5 bg-orange-600 text-white text-sm font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">Best Value</span>
+                    <div class="bg-[#0d0d0d] border border-white/10 rounded-2xl p-6 md:col-span-2">
                         <p class="text-orange-500 font-black text-2xl mb-5">9+ Hrs</p>
                         <ul class="space-y-2.5">
                             @foreach(['RiCON Volunteer Shirt', 'Meal & Snack During the Event', 'Sponsor Discounts and Vouchers'] as $perk)
