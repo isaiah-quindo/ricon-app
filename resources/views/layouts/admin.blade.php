@@ -45,10 +45,15 @@
                           {{ request()->routeIs('admin.discount-codes.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
                     Discount Codes
                 </a>
+                <a href="{{ route('admin.orders.index') }}"
+                    class="px-3 py-2 rounded-lg text-sm font-medium transition-colors
+                          {{ request()->routeIs('admin.orders.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
+                    Orders
+                </a>
                 <div class="relative" x-data="{ open: false }" @click.outside="open = false" @keydown.escape.window="open = false">
                     <button @click="open = !open" type="button"
                         class="px-3 py-2 rounded-lg text-sm font-medium transition-colors inline-flex items-center gap-1
-                              {{ request()->routeIs('admin.training-signups.*') || request()->routeIs('admin.grant-applications.*') || request()->routeIs('admin.volunteer-applications.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
+                              {{ request()->routeIs('admin.training-signups.*') || request()->routeIs('admin.grant-applications.*') || request()->routeIs('admin.volunteer-applications.*') || request()->routeIs('admin.shuttle-rsvps.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
                         Programs
                         <svg class="w-3.5 h-3.5 transition-transform duration-150" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -78,6 +83,10 @@
                         <a href="{{ route('admin.volunteer-applications.index') }}"
                             class="block px-4 py-2 text-sm transition-colors {{ request()->routeIs('admin.volunteer-applications.*') ? 'text-white bg-gray-800' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
                             Volunteer Applications
+                        </a>
+                        <a href="{{ route('admin.shuttle-rsvps.index') }}"
+                            class="block px-4 py-2 text-sm transition-colors {{ request()->routeIs('admin.shuttle-rsvps.*') ? 'text-white bg-gray-800' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
+                            Shuttle RSVPs
                         </a>
                     </div>
                 </div>
@@ -132,10 +141,15 @@
                           {{ request()->routeIs('admin.discount-codes.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
                     Discount Codes
                 </a>
-                <div x-data="{ programsOpen: {{ request()->routeIs('admin.training-signups.*') || request()->routeIs('admin.grant-applications.*') || request()->routeIs('admin.volunteer-applications.*') ? 'true' : 'false' }} }">
+                <a href="{{ route('admin.orders.index') }}"
+                    class="px-3 py-2 rounded-lg text-sm font-medium transition-colors
+                          {{ request()->routeIs('admin.orders.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
+                    Orders
+                </a>
+                <div x-data="{ programsOpen: {{ request()->routeIs('admin.training-signups.*') || request()->routeIs('admin.grant-applications.*') || request()->routeIs('admin.volunteer-applications.*') || request()->routeIs('admin.shuttle-rsvps.*') ? 'true' : 'false' }} }">
                     <button type="button" @click="programsOpen = !programsOpen"
                         class="w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm font-medium transition-colors
-                              {{ request()->routeIs('admin.training-signups.*') || request()->routeIs('admin.grant-applications.*') || request()->routeIs('admin.volunteer-applications.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
+                              {{ request()->routeIs('admin.training-signups.*') || request()->routeIs('admin.grant-applications.*') || request()->routeIs('admin.volunteer-applications.*') || request()->routeIs('admin.shuttle-rsvps.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
                         Programs
                         <svg class="w-3.5 h-3.5 transition-transform" :class="programsOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -161,6 +175,11 @@
                             class="px-3 py-2 rounded-lg text-sm font-medium transition-colors
                                   {{ request()->routeIs('admin.volunteer-applications.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
                             Volunteer Applications
+                        </a>
+                        <a href="{{ route('admin.shuttle-rsvps.index') }}"
+                            class="px-3 py-2 rounded-lg text-sm font-medium transition-colors
+                                  {{ request()->routeIs('admin.shuttle-rsvps.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
+                            Shuttle RSVPs
                         </a>
                     </div>
                 </div>
