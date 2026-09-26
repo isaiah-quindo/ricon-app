@@ -19,9 +19,15 @@ class ShuttleRsvp extends Model
 
     // Value => description shown under each pickup option
     public const PICKUP_POINTS = [
-        'NAIA'  => 'Ninoy Aquino International Airport',
-        'Pasay' => 'Pasay bus terminal area',
-        'Cubao' => 'Cubao bus terminal area',
+        'NAIA'           => 'Ninoy Aquino International Airport',
+        'Pasay'          => 'Pasay bus terminal area',
+        'Cubao'          => 'Cubao bus terminal area',
+        'Shell Ayala'    => 'Makati, EDSA',
+        'Greenfield'     => 'Mandaluyong, EDSA',
+        'Farmers Market' => 'Cubao, EDSA',
+        'Centris'        => 'Quezon Ave, EDSA',
+        'Festival Mall'  => 'Alabang, Muntinlupa',
+        'Nuvali / Paseo' => 'Santa Rosa, Laguna',
     ];
 
     public const MAX_SEATS = 10;

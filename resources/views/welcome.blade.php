@@ -31,12 +31,11 @@
     <div class="relative z-10 text-center px-8 w-full" style="max-width:1280px; margin:2rem auto;">
         {{-- Event logo placeholder --}}
         <div data-hero-logo class="mx-auto mb-20 w-44 h-[7.5rem] md:w-72 md:h-64 flex items-center justify-center text-gray-500 text-xs select-none">
-            <img src="/tgc-logo-white.png" alt="The Greact Cordillera 100" class="w-full h-full object-contain" />
+            <img src="/images/tgc100-tnf-logo.png" alt="The Great Cordillera 100 x The North Face" class="w-full h-full object-contain" />
         </div>
 
         <h1 class="max-w-[600px] mx-auto text-2xl md:text-4xl lg:text-4xl font-black leading-tight text-white mb-5">
-            <span class="block overflow-hidden"><span data-hero-line class="inline-block text-pretty">The Mountain Will Test You.</span></span>
-            <span class="block overflow-hidden"><span data-hero-line class="inline-block text-pretty">The Journey Will Change You.</span></span>
+            <span class="block overflow-hidden"><span data-hero-line class="inline-block text-pretty">The Trail is Your Story</span></span>
         </h1>
 
         <p data-hero-sub class="text-white text-lg/6 max-w-2xl mx-auto mb-8">

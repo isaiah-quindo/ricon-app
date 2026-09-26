@@ -20,7 +20,7 @@ $facts = [
 {{-- ======================================================== --}}
 {{-- HERO --}}
 {{-- ======================================================== --}}
-<section class="relative min-h-[40vh] flex items-end overflow-hidden pt-16">
+<section class="relative min-h-[40vh] flex items-end overflow-hidden pt-32">
     <div class="absolute inset-0 bg-gray-900"></div>
     <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-black/60 to-transparent"></div>
     <div class="relative z-10 w-full mx-auto px-8 pb-16" style="max-width:1280px;">
@@ -112,7 +112,7 @@ $facts = [
                 {{-- Pickup point --}}
                 <fieldset>
                     <legend class="text-white font-bold text-lg mb-4">Preferred pickup point <span class="text-orange-500">*</span></legend>
-                    <div class="space-y-2" role="radiogroup">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2" role="radiogroup">
                         @foreach(ShuttleRsvp::PICKUP_POINTS as $value => $sub)
                         <label class="flex items-start gap-3 bg-[#0a0a0a] border rounded-xl px-4 py-3 cursor-pointer transition-colors hover:border-orange-500/50"
                             :class="form.pickup_point === '{{ $value }}' ? 'border-orange-500' : 'border-white/10'">

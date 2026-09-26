@@ -230,7 +230,7 @@ $facts = [
 {{-- ======================================================== --}}
 {{-- HERO --}}
 {{-- ======================================================== --}}
-<section class="relative min-h-[40vh] flex items-end overflow-hidden pt-16">
+<section class="relative min-h-[40vh] flex items-end overflow-hidden pt-32">
     <div class="absolute inset-0 bg-gray-900"></div>
     <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-black/60 to-transparent"></div>
     <div class="relative z-10 w-full mx-auto px-8 pb-16" style="max-width:1280px;">
