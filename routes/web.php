@@ -141,6 +141,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::prefix('orders')->name('orders.')->group(function () {
         Route::get('/', [AdminOrderController::class, 'index'])->name('index');
         Route::get('/export', [AdminOrderController::class, 'export'])->name('export');
+        Route::get('/{order}', [AdminOrderController::class, 'show'])->name('show');
+        Route::patch('/{order}/status', [AdminOrderController::class, 'updateStatus'])->name('updateStatus');
     });
 
     // Shuttle service RSVPs

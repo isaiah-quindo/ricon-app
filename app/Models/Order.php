@@ -4,10 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Order extends Model
 {
     use HasUuids;
+
+    public const STATUSES = [
+        'pending'   => 'Pending',
+        'fulfilled' => 'Fulfilled',
+        'cancelled' => 'Cancelled',
+    ];
+
+    // Status is deliberately not fillable: only admins move it, through markStatus().
+    protected $attributes = [
+        'status' => 'pending',
+    ];
 
     protected $fillable = [
         'reference',
@@ -27,8 +39,28 @@ class Order extends Model
         'quantity'       => 'integer',
         'unit_price'     => 'decimal:2',
         'total'          => 'decimal:2',
-        'notify_consent' => 'boolean',
+        'notify_consent'    => 'boolean',
+        'status_changed_at' => 'datetime',
     ];
+
+    public function statusChangedBy(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'status_changed_by');
+    }
+
+    public function markStatus(string $status, User $admin): void
+    {
+        $this->forceFill([
+            'status'            => $status,
+            'status_changed_at' => now(),
+            'status_changed_by' => $admin->id,
+        ])->save();
+    }
+
+    public function getStatusLabelAttribute(): string
+    {
+        return self::STATUSES[$this->status] ?? ucfirst($this->status);
+    }
 
     protected static function booted(): void
     {

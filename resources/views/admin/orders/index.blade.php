@@ -26,7 +26,7 @@ return $currentDir === 'asc'
 </svg>';
 };
 $select = 'w-full rounded-lg border border-gray-200 bg-white text-sm text-gray-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent';
-$hasFilters = collect(request()->only(['search', 'product', 'size']))->filter()->isNotEmpty();
+$hasFilters = collect(request()->only(['search', 'product', 'size', 'status']))->filter()->isNotEmpty();
 $allSizes = collect($products)->pluck('sizes')->filter()->flatten()->unique()->values();
 @endphp
 
@@ -56,6 +56,16 @@ $allSizes = collect($products)->pluck('sizes')->filter()->flatten()->unique()->v
             <option value="">All sizes</option>
             @foreach($allSizes as $size)
             <option value="{{ $size }}" @selected(request('size') === $size)>{{ $size }}</option>
+            @endforeach
+        </select>
+    </div>
+
+    <div class="min-w-32">
+        <label class="block text-xs font-medium text-gray-500 mb-1.5">Status</label>
+        <select name="status" class="{{ $select }}">
+            <option value="">All statuses</option>
+            @foreach($statuses as $value => $label)
+            <option value="{{ $value }}" @selected(request('status') === $value)>{{ $label }}</option>
             @endforeach
         </select>
     </div>
@@ -97,17 +107,15 @@ $allSizes = collect($products)->pluck('sizes')->filter()->flatten()->unique()->v
                             Name {!! $sortIcon('full_name') !!}
                         </a>
                     </th>
-                    <th class="px-5 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Mobile</th>
                     <th class="px-5 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Item</th>
-                    <th class="px-5 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Size</th>
-                    <th class="px-5 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                        <a href="{{ $sortUrl('quantity') }}" class="inline-flex items-center hover:text-indigo-600 transition-colors">
-                            Qty {!! $sortIcon('quantity') !!}
-                        </a>
-                    </th>
                     <th class="px-5 py-3 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider">
                         <a href="{{ $sortUrl('total') }}" class="inline-flex items-center hover:text-indigo-600 transition-colors">
                             Total {!! $sortIcon('total') !!}
+                        </a>
+                    </th>
+                    <th class="px-5 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                        <a href="{{ $sortUrl('status') }}" class="inline-flex items-center hover:text-indigo-600 transition-colors">
+                            Status {!! $sortIcon('status') !!}
                         </a>
                     </th>
                     <th class="px-5 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
@@ -115,6 +123,7 @@ $allSizes = collect($products)->pluck('sizes')->filter()->flatten()->unique()->v
                             Submitted {!! $sortIcon('created_at') !!}
                         </a>
                     </th>
+                    <th class="px-5 py-3"></th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-100 bg-white">
@@ -125,20 +134,30 @@ $allSizes = collect($products)->pluck('sizes')->filter()->flatten()->unique()->v
                         <p class="text-sm font-semibold text-gray-900">{{ $order->full_name }}</p>
                         <p class="text-xs text-gray-400 mt-0.5">{{ $order->email }}</p>
                     </td>
-                    <td class="px-5 py-4 text-sm text-gray-500 whitespace-nowrap">{{ $order->mobile_number }}</td>
                     <td class="px-5 py-4">
                         <span class="inline-flex items-center px-2 py-1 bg-orange-50 border border-orange-200 text-orange-700 text-xs font-medium rounded-md whitespace-nowrap">
                             {{ $order->product_name }}
                         </span>
+                        <p class="text-xs text-gray-400 mt-1 whitespace-nowrap">{{ $order->size ?? 'One size' }} &middot; Qty {{ $order->quantity }}</p>
                     </td>
-                    <td class="px-5 py-4 text-sm text-gray-700">{{ $order->size ?? 'One size' }}</td>
-                    <td class="px-5 py-4 text-sm font-semibold text-gray-900">{{ $order->quantity }}</td>
                     <td class="px-5 py-4 text-sm font-semibold text-gray-900 text-right whitespace-nowrap">&#8369;{{ number_format($order->total) }}</td>
-                    <td class="px-5 py-4 text-sm text-gray-500 whitespace-nowrap">{{ $order->created_at->format('M j, Y g:i A') }}</td>
+                    <td class="px-5 py-4">
+                        @include('admin.orders._status_badge', ['status' => $order->status])
+                    </td>
+                    <td class="px-5 py-4 text-sm text-gray-500 whitespace-nowrap">{{ $order->created_at->format('M j, Y') }}</td>
+                    <td class="px-5 py-4 text-right">
+                        <a href="{{ route('admin.orders.show', $order) }}"
+                            class="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-medium text-indigo-600 bg-indigo-50 hover:bg-indigo-100 rounded-lg transition-colors">
+                            View
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    </td>
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="8" class="px-5 py-12 text-center">
+                    <td colspan="7" class="px-5 py-12 text-center">
                         <div class="flex flex-col items-center gap-2 text-gray-400">
                             <svg class="w-10 h-10 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />

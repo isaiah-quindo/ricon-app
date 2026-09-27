@@ -124,6 +124,62 @@ class ShopOrderTest extends TestCase
             ->assertDontSee('Juan Dela Cruz');
     }
 
+    public function test_new_orders_start_pending_and_admin_can_view_one(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $this->postJson('/shop/finisher-hoodie/order', $this->validPayload());
+        $order = Order::sole();
+
+        $this->assertSame('pending', $order->status);
+
+        $this->actingAs($admin)
+            ->get(route('admin.orders.show', $order))
+            ->assertOk()
+            ->assertSee($order->reference)
+            ->assertSee('09171234567')
+            ->assertSee('Mark as Fulfilled');
+    }
+
+    public function test_admin_can_fulfill_cancel_and_reopen_an_order(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $this->postJson('/shop/finisher-hoodie/order', $this->validPayload());
+        $order = Order::sole();
+
+        $this->actingAs($admin)
+            ->patch(route('admin.orders.updateStatus', $order), ['status' => 'fulfilled'])
+            ->assertRedirect()
+            ->assertSessionHas('success');
+
+        $order->refresh();
+        $this->assertSame('fulfilled', $order->status);
+        $this->assertTrue($order->statusChangedBy->is($admin));
+        $this->assertNotNull($order->status_changed_at);
+
+        $this->actingAs($admin)->patch(route('admin.orders.updateStatus', $order), ['status' => 'pending']);
+        $this->actingAs($admin)->patch(route('admin.orders.updateStatus', $order), ['status' => 'cancelled']);
+        $this->assertSame('cancelled', $order->fresh()->status);
+
+        $this->actingAs($admin)
+            ->patch(route('admin.orders.updateStatus', $order), ['status' => 'shipped'])
+            ->assertSessionHasErrors('status');
+        $this->assertSame('cancelled', $order->fresh()->status);
+    }
+
+    public function test_admin_filters_orders_by_status(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $this->postJson('/shop/finisher-hoodie/order', $this->validPayload());
+        $this->postJson('/shop/finisher-hoodie/order', $this->validPayload(['full_name' => 'Maria Santos']));
+        Order::where('full_name', 'Maria Santos')->sole()->markStatus('fulfilled', $admin);
+
+        $this->actingAs($admin)
+            ->get('/admin/orders?status=fulfilled')
+            ->assertOk()
+            ->assertSee('Maria Santos')
+            ->assertDontSee('Juan Dela Cruz');
+    }
+
     public function test_admin_export_downloads_csv(): void
     {
         $admin = User::factory()->create(['role' => 'admin']);
@@ -139,5 +195,10 @@ class ShopOrderTest extends TestCase
     public function test_non_admins_cannot_view_orders(): void
     {
         $this->get('/admin/orders')->assertRedirect('/login');
+
+        $this->postJson('/shop/trail-cap/order', array_diff_key($this->validPayload(), ['size' => 1]));
+        $this->patch(route('admin.orders.updateStatus', Order::sole()), ['status' => 'fulfilled'])
+            ->assertRedirect('/login');
+        $this->assertSame('pending', Order::sole()->status);
     }
 }
