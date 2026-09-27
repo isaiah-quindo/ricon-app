@@ -12,6 +12,8 @@ use App\Http\Controllers\Admin\GrantApplicationController as AdminGrantApplicati
 use App\Http\Controllers\Admin\VolunteerApplicationController as AdminVolunteerApplicationController;
 use App\Http\Controllers\GrantApplicationController;
 use App\Http\Controllers\VolunteerApplicationController;
+use App\Http\Controllers\VolunteerMembershipController;
+use App\Http\Controllers\Admin\VolunteerMembershipController as AdminVolunteerMembershipController;
 use App\Http\Controllers\QuizLeadController;
 use App\Http\Controllers\ShuttleRsvpController;
 use App\Http\Controllers\Admin\ShuttleRsvpController as AdminShuttleRsvpController;
@@ -46,6 +48,11 @@ Route::prefix('programs')->name('programs.')->group(function () {
     Route::get('/volunteer', fn() => view('programs.volunteer'))->name('volunteer');
     Route::post('/volunteer', [VolunteerApplicationController::class, 'store'])
         ->middleware('throttle:10,1')->name('volunteer.store');
+
+    // Shortlisted volunteers land here from their invite; intentionally not in the top nav
+    Route::get('/volunteer/membership', [VolunteerMembershipController::class, 'create'])->name('volunteer.membership');
+    Route::post('/volunteer/membership', [VolunteerMembershipController::class, 'store'])
+        ->middleware('throttle:10,1')->name('volunteer.membership.store');
 });
 
 Route::prefix('race-category')->name('race-category.')->group(function () {
@@ -135,6 +142,12 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
         Route::get('/', [AdminVolunteerApplicationController::class, 'index'])->name('index');
         Route::get('/export', [AdminVolunteerApplicationController::class, 'export'])->name('export');
         Route::get('/{volunteerApplication}', [AdminVolunteerApplicationController::class, 'show'])->name('show');
+    });
+
+    // Volunteer membership fee confirmations
+    Route::prefix('volunteer-memberships')->name('volunteer-memberships.')->group(function () {
+        Route::get('/', [AdminVolunteerMembershipController::class, 'index'])->name('index');
+        Route::get('/export', [AdminVolunteerMembershipController::class, 'export'])->name('export');
     });
 
     // Merch shop orders
