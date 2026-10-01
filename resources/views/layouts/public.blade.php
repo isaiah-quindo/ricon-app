@@ -59,6 +59,7 @@
 
                 <div class="hidden md:flex items-center gap-8">
                     <a href="/about" class="text-gray-300 hover:text-white text-sm font-medium transition-colors">About Us</a>
+                    <a href="{{ route('partners') }}" class="text-gray-300 hover:text-white text-sm font-medium transition-colors">Partners</a>
 
                     <div class="relative" x-data="{ open: false }" @click.outside="open = false" @keydown.escape.window="open = false">
                         <button @click="open = !open" type="button"
@@ -137,6 +138,7 @@
             class="md:hidden border-t border-white/10">
             <div class="mx-auto px-8 py-4 flex flex-col gap-4" style="max-width:1280px;">
                 <a href="/about" @click="open = false" class="text-gray-300 hover:text-white text-sm font-medium transition-colors py-2">About Us</a>
+                <a href="{{ route('partners') }}" @click="open = false" class="text-gray-300 hover:text-white text-sm font-medium transition-colors py-2">Partners</a>
 
                 <div x-data="{ raceInfoOpen: false }">
                     <button type="button" @click="raceInfoOpen = !raceInfoOpen" class="w-full flex items-center justify-between text-gray-300 hover:text-white text-sm font-medium transition-colors py-2">
@@ -223,6 +225,7 @@
                     <a href="{{ route('rules') }}" class="hover:text-white transition-colors">Rules & Guidelines</a>
                     <a href="{{ route('faqs') }}" class="hover:text-white transition-colors">FAQs</a>
                     <a href="/about" class="hover:text-white transition-colors">About</a>
+                    <a href="{{ route('partners') }}" class="hover:text-white transition-colors">Partners</a>
                 </div>
                 <p class="text-gray-500 text-sm">© {{ date('Y') }} RICON</p>
             </div>

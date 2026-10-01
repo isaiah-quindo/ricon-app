@@ -32,6 +32,7 @@ Route::get('/shuttle', [ShuttleRsvpController::class, 'create'])->name('shuttle'
 Route::post('/shuttle', [ShuttleRsvpController::class, 'store'])
     ->middleware('throttle:10,1')->name('shuttle.store');
 Route::get('/about', fn() => view('about'))->name('about');
+Route::get('/partners', fn() => view('partners'))->name('partners');
 
 Route::prefix('shop')->name('shop.')->group(function () {
     Route::get('/', [ShopController::class, 'index'])->name('index');
