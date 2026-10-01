@@ -99,10 +99,13 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
         Route::get('/', [AdminRegistrationController::class, 'index'])->name('index');
         Route::get('/export', [AdminRegistrationController::class, 'export'])->name('export');
         Route::get('/{registration}', [AdminRegistrationController::class, 'show'])->name('show');
+        Route::get('/{registration}/edit', [AdminRegistrationController::class, 'edit'])->name('edit');
+        Route::put('/{registration}', [AdminRegistrationController::class, 'update'])->name('update');
         Route::post('/{registration}/approve', [AdminRegistrationController::class, 'approve'])->name('approve');
         Route::post('/{registration}/reject', [AdminRegistrationController::class, 'reject'])->name('reject');
         Route::post('/{registration}/resend-email', [AdminRegistrationController::class, 'resendEmail'])->name('resendEmail');
         Route::patch('/{registration}/bib', [AdminRegistrationController::class, 'updateBib'])->name('updateBib');
+        Route::patch('/{registration}/category', [AdminRegistrationController::class, 'changeCategory'])->name('changeCategory');
     });
 
     // Group registrations, viewed as transactions

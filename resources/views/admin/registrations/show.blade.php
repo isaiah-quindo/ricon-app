@@ -29,6 +29,13 @@
                         @include('admin.registrations._status_badge', ['status' => $registration->status])
                     </div>
                     <p class="text-sm text-gray-500">{{ $registration->email }}</p>
+                    <a href="{{ route('admin.registrations.edit', $registration) }}"
+                        class="mt-3 inline-flex items-center gap-1.5 px-3 py-1.5 border border-gray-200 text-gray-700 text-xs font-medium rounded-lg hover:bg-gray-50 transition-colors">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                        </svg>
+                        Edit Details
+                    </a>
                 </div>
                 @if($registration->bib_number)
                 <div class="flex flex-col items-center">
@@ -151,7 +158,28 @@
                 </svg>
                 Admin Notes
             </h3>
-            <p class="text-sm text-amber-900">{{ $registration->admin_notes }}</p>
+            <div class="space-y-3">
+                @foreach($registration->adminNoteEntries() as $entry)
+                @if($entry['type'] === 'change')
+                <div class="bg-white rounded-lg border border-amber-200 p-3">
+                    <div class="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5 mb-2">
+                        <p class="text-xs font-semibold text-amber-900 uppercase tracking-wide">{{ $entry['title'] }}</p>
+                        <p class="text-xs text-amber-700">{{ $entry['meta'] }}</p>
+                    </div>
+                    <dl class="space-y-1">
+                        @foreach($entry['rows'] as $label => $value)
+                        <div class="flex gap-3">
+                            <dt class="w-20 flex-shrink-0 text-xs text-amber-700 pt-0.5">{{ $label }}</dt>
+                            <dd class="text-sm font-medium text-amber-900 break-words min-w-0">{{ $value }}</dd>
+                        </div>
+                        @endforeach
+                    </dl>
+                </div>
+                @else
+                <p class="text-sm text-amber-900 whitespace-pre-line">{{ $entry['text'] }}</p>
+                @endif
+                @endforeach
+            </div>
         </div>
         @endif
 
@@ -307,7 +335,7 @@
         @endif
 
         {{-- Update Bib Number --}}
-        <div x-data="{ open: false }" class="bg-white rounded-xl border border-gray-200 p-5">
+        <div x-data="{ open: {{ $errors->has('bib_number') ? 'true' : 'false' }} }" class="bg-white rounded-xl border border-gray-200 p-5">
             <h3 class="text-sm font-semibold text-gray-800 mb-1">Bib Number</h3>
             @if($registration->bib_number)
             <p class="text-2xl font-bold text-indigo-600 mb-3">{{ $registration->formatted_bib }}</p>
@@ -339,6 +367,93 @@
                 </form>
             </div>
         </div>
+
+        {{-- Change Category (upgrade / downgrade) --}}
+        @if($registration->status !== 'rejected' && $categories->isNotEmpty())
+        @php
+            $currentPrice = (float) ($registration->raceCategory?->price ?? 0);
+            $currentPaid  = (float) ($registration->price_paid ?? $currentPrice);
+            $changeErrors = $errors->hasAny(['race_category_id', 'amount_added', 'note']);
+        @endphp
+        <div x-data="{
+                open: {{ $changeErrors ? 'true' : 'false' }},
+                categoryId: @js(old('race_category_id', '')),
+                amount: @js(old('amount_added', '0')),
+                prices: @js($categories->mapWithKeys(fn ($c) => [$c->id => (float) $c->price])),
+                pick() {
+                    const price = this.prices[this.categoryId] ?? {{ $currentPrice }};
+                    this.amount = Math.max(0, price - {{ $currentPrice }}).toFixed(2);
+                },
+                peso(n) { return '₱' + Number(n).toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); },
+            }"
+            class="bg-white rounded-xl border border-gray-200 p-5">
+            <h3 class="text-sm font-semibold text-gray-800 mb-1">Change Category</h3>
+            <p class="text-xs text-gray-500 mb-3">
+                Upgrade or downgrade this runner.
+                @if($registration->bib_number)
+                    They'll get the next available bib in the new category.
+                @else
+                    A bib will be assigned in the new category on approval.
+                @endif
+            </p>
+            <button @click="open = !open" type="button"
+                class="w-full px-4 py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors">
+                Change Category
+            </button>
+            <div x-show="open" x-transition class="mt-4" @if(! $changeErrors) style="display: none;" @endif>
+                <form method="POST" action="{{ route('admin.registrations.changeCategory', $registration) }}" class="space-y-3"
+                    onsubmit="return confirm('Move this runner to the selected category? This changes their bib number.')">
+                    @csrf
+                    @method('PATCH')
+
+                    <div>
+                        <label for="race_category_id" class="block text-xs font-medium text-gray-600 mb-1.5">New category <span class="text-red-500">*</span></label>
+                        <select id="race_category_id" name="race_category_id" required x-model="categoryId" @change="pick()"
+                            class="w-full rounded-lg border border-gray-200 text-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                            <option value="" disabled>Select a category</option>
+                            @foreach($categories as $category)
+                            <option value="{{ $category->id }}">
+                                {{ $category->name }} · ₱{{ number_format($category->price, 2) }}{{ $category->is_active ? '' : ' (inactive)' }}
+                            </option>
+                            @endforeach
+                        </select>
+                        @error('race_category_id')
+                        <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label for="amount_added" class="block text-xs font-medium text-gray-600 mb-1.5">Amount added (₱) <span class="text-red-500">*</span></label>
+                        <input type="number" id="amount_added" name="amount_added" min="0" step="0.01" required x-model="amount"
+                            class="w-full rounded-lg border border-gray-200 text-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent" />
+                        <p class="text-xs text-gray-500 mt-1">
+                            Total paid: ₱{{ number_format($currentPaid, 2) }} →
+                            <span class="font-semibold text-gray-800" x-text="peso({{ $currentPaid }} + (parseFloat(amount) || 0))"></span>
+                        </p>
+                        <p class="text-xs text-gray-400 mt-0.5">No refunds on downgrade.</p>
+                        @error('amount_added')
+                        <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label for="note" class="block text-xs font-medium text-gray-600 mb-1.5">Note</label>
+                        <textarea id="note" name="note" rows="2" maxlength="500"
+                            class="w-full rounded-lg border border-gray-200 text-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none"
+                            placeholder="e.g. Upgrade paid via GCash ref 1234">{{ old('note') }}</textarea>
+                        @error('note')
+                        <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <button type="submit"
+                        class="w-full px-4 py-2.5 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors">
+                        Move Runner
+                    </button>
+                </form>
+            </div>
+        </div>
+        @endif
 
         {{-- Resend Confirmation Email --}}
         @if($registration->status === 'approved')

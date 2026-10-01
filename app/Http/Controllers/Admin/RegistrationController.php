@@ -5,16 +5,22 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Mail\RegistrationApproved;
 use App\Mail\RegistrationRejected;
+use App\Models\RaceCategory;
 use App\Models\Registration;
 use App\Models\RegistrationGroup;
 use App\Models\PaymentProof;
 use App\Services\GroupSummaryNotifier;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
 
 class RegistrationController extends Controller
 {
+    private const SHIRT_SIZES = ['XS', 'S', 'M', 'L', 'XL', '2XL'];
+
     // List all registrations
     public function index(Request $request)
     {
@@ -125,7 +131,47 @@ class RegistrationController extends Controller
             'group.registrations.raceCategory',
         ]);
 
-        return view('admin.registrations.show', compact('registration'));
+        $categories = RaceCategory::where('id', '!=', $registration->race_category_id)
+            ->orderBy('price')
+            ->get();
+
+        return view('admin.registrations.show', compact('registration', 'categories'));
+    }
+
+    // Edit participant details. Category and payment proof are deliberately not editable.
+    public function edit(Registration $registration)
+    {
+        $registration->load('raceCategory');
+
+        return view('admin.registrations.edit', [
+            'registration' => $registration,
+            'shirtSizes'   => self::SHIRT_SIZES,
+        ]);
+    }
+
+    public function update(Request $request, Registration $registration)
+    {
+        // Only these keys are written, so status, bib, pricing and category cannot be changed from here.
+        $validated = $request->validate([
+            'first_name'               => 'required|string|max:255',
+            'last_name'                => 'required|string|max:255',
+            'sex'                      => 'required|in:male,female',
+            'email'                    => 'required|email|max:255',
+            'mobile_number'            => 'required|string|max:20',
+            'birthdate'                => 'required|date|before:today',
+            'address'                  => 'required|string|max:255',
+            'nationality'              => 'required|string|max:100',
+            'affiliation'              => 'nullable|string|max:255',
+            'shirt_size'               => 'required|in:' . implode(',', self::SHIRT_SIZES),
+            'emergency_contact_name'   => 'required|string|max:255',
+            'emergency_contact_number' => 'required|string|max:20',
+        ]);
+
+        $registration->update($validated);
+
+        return redirect()
+            ->route('admin.registrations.show', $registration)
+            ->with('success', 'Participant details updated.');
     }
 
     // Approve registration and assign bib number
@@ -205,8 +251,85 @@ class RegistrationController extends Controller
             'bib_number' => 'required|integer|min:1',
         ]);
 
-        $registration->update(['bib_number' => $request->bib_number]);
+        DB::transaction(function () use ($request, $registration) {
+            // Same category lock as automatic assignment, so the check and the write can't be raced.
+            RaceCategory::whereKey($registration->race_category_id)->lockForUpdate()->first();
+
+            $holder = Registration::where('race_category_id', $registration->race_category_id)
+                ->where('bib_number', $request->bib_number)
+                ->whereKeyNot($registration->getKey())
+                ->first();
+
+            if ($holder) {
+                $bib = $registration->raceCategory->bib_start_number . '-' . str_pad($request->bib_number, 3, '0', STR_PAD_LEFT);
+
+                throw ValidationException::withMessages([
+                    'bib_number' => "Bib {$bib} is already taken by {$holder->first_name} {$holder->last_name}.",
+                ]);
+            }
+
+            $registration->update(['bib_number' => $request->bib_number]);
+        });
 
         return back()->with('success', 'Bib number updated.');
+    }
+
+    // Move a registration to another category (upgrade or downgrade). Approved runners get
+    // the next bib in the new category; the change is logged in admin notes. No refunds.
+    public function changeCategory(Request $request, Registration $registration)
+    {
+        if ($registration->status === 'rejected') {
+            return back()->with('error', 'Rejected registrations cannot change category.');
+        }
+
+        $validated = $request->validate([
+            'race_category_id' => ['required', 'exists:race_categories,id', Rule::notIn([$registration->race_category_id])],
+            'amount_added'     => 'required|numeric|min:0|max:100000',
+            'note'             => 'nullable|string|max:500',
+        ], [
+            'race_category_id.not_in' => 'Pick a category different from the current one.',
+        ]);
+
+        $registration->load('raceCategory');
+        $oldCategory = $registration->raceCategory;
+        $newCategory = RaceCategory::findOrFail($validated['race_category_id']);
+        $oldBib      = $registration->formatted_bib;
+        $oldPaid     = (float) ($registration->price_paid ?? $oldCategory->price);
+        $newPaid     = round($oldPaid + (float) $validated['amount_added'], 2);
+
+        DB::transaction(function () use ($registration, $newCategory, $newPaid) {
+            $registration->race_category_id = $newCategory->id;
+            $registration->price_paid = $newPaid;
+
+            // Only runners who already hold a bib get a new one; the rest are assigned one on approval.
+            if ($registration->bib_number) {
+                $registration->bib_number = Registration::nextBibNumberFor($newCategory->id);
+            }
+
+            $registration->save();
+        });
+
+        $registration->setRelation('raceCategory', $newCategory);
+        $newBib = $registration->formatted_bib;
+
+        // One block per change: a header line, then "Label: value" lines. Blocks are separated by
+        // a blank line so the show page can render each as its own entry.
+        $peso = fn (float $amount) => '₱' . number_format($amount, 2);
+        $entry = array_filter([
+            'Category change · ' . now()->format('M j, Y g:i A') . ' · ' . $request->user()->name,
+            "Category: {$oldCategory->name} → {$newCategory->name}",
+            $oldBib ? "Bib: {$oldBib} → {$newBib}" : null,
+            "Paid: {$peso($oldPaid)} → {$peso($newPaid)} (+{$peso((float) $validated['amount_added'])})",
+            filled($validated['note'] ?? null) ? 'Note: ' . str_replace(["\r\n", "\n"], ' ', $validated['note']) : null,
+        ]);
+
+        $registration->update([
+            'admin_notes' => trim(($registration->admin_notes ? $registration->admin_notes . "\n\n" : '') . implode("\n", $entry)),
+        ]);
+
+        return back()->with(
+            'success',
+            "Moved to {$newCategory->name}." . ($newBib ? " New bib {$newBib}." : '') . " Total paid {$peso($newPaid)}."
+        );
     }
 }

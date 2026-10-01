@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\DB;
 
 class Registration extends Model
 {
@@ -82,13 +83,99 @@ class Registration extends Model
     // Auto-assign next bib number when approved (stored as integer)
     public function assignBibNumber(): void
     {
-        $lastBib = Registration::where('race_category_id', $this->race_category_id)
+        DB::transaction(function () {
+            $this->bib_number = self::nextBibNumberFor($this->race_category_id);
+            $this->save();
+        });
+    }
+
+    /**
+     * Next free bib in a category: one above the highest taken, so it never collides.
+     * Must run inside a transaction. Locking the category row makes concurrent bib
+     * assignments for the same category wait their turn (Postgres disallows FOR UPDATE
+     * on MAX(), so the lock goes on the parent row instead).
+     */
+    public static function nextBibNumberFor(string $raceCategoryId): int
+    {
+        RaceCategory::whereKey($raceCategoryId)->lockForUpdate()->first();
+
+        $lastBib = Registration::where('race_category_id', $raceCategoryId)
             ->whereNotNull('bib_number')
             ->max('bib_number');
 
-        $this->bib_number = $lastBib ? $lastBib + 1 : 1;
+        return $lastBib ? $lastBib + 1 : 1;
+    }
 
-        $this->save();
+    /**
+     * Admin notes split into display entries. Category changes become
+     * ['type' => 'change', 'title', 'meta', 'rows' => [label => value]]; anything else is
+     * ['type' => 'text', 'text']. Reads both the block format written by changeCategory()
+     * and the earlier one-line "[date] Category changed …" format.
+     */
+    public function adminNoteEntries(): array
+    {
+        if (blank($this->admin_notes)) {
+            return [];
+        }
+
+        $entries = [];
+
+        foreach (preg_split('/\R\s*\R/', trim($this->admin_notes)) as $block) {
+            $lines = preg_split('/\R/', trim($block));
+
+            if (str_starts_with($lines[0], 'Category change · ')) {
+                $meta = explode(' · ', $lines[0]);
+                $rows = [];
+                foreach (array_slice($lines, 1) as $line) {
+                    [$label, $value] = array_pad(explode(': ', $line, 2), 2, '');
+                    $rows[$label] = $value;
+                }
+                $entries[] = ['type' => 'change', 'title' => $meta[0], 'meta' => implode(' · ', array_slice($meta, 1)), 'rows' => $rows];
+                continue;
+            }
+
+            // Older one-line entries may sit next to plain notes in the same block, so go line by line.
+            $text = [];
+            foreach ($lines as $line) {
+                if ($legacy = self::parseLegacyChangeLine($line)) {
+                    if ($text) {
+                        $entries[] = ['type' => 'text', 'text' => implode("\n", $text)];
+                        $text = [];
+                    }
+                    $entries[] = $legacy;
+                } else {
+                    $text[] = $line;
+                }
+            }
+            if ($text) {
+                $entries[] = ['type' => 'text', 'text' => implode("\n", $text)];
+            }
+        }
+
+        return $entries;
+    }
+
+    private static function parseLegacyChangeLine(string $line): ?array
+    {
+        $pattern = '/^\[(?<date>[^\]]+)\] Category changed (?<from>.+?) → (?<to>.+?)\.'
+            . '(?: Bib (?<bibFrom>\S+) → (?<bibTo>\S+)\.)?'
+            . ' Paid (?<paid>.+?) by (?<by>.+?)\.(?: Note: (?<note>.*))?$/u';
+
+        if (! preg_match($pattern, trim($line), $m)) {
+            return null;
+        }
+
+        return [
+            'type'  => 'change',
+            'title' => 'Category change',
+            'meta'  => $m['date'] . ' · ' . $m['by'],
+            'rows'  => array_filter([
+                'Category' => "{$m['from']} → {$m['to']}",
+                'Bib'      => ($m['bibFrom'] ?? '') !== '' ? "{$m['bibFrom']} → {$m['bibTo']}" : null,
+                'Paid'     => $m['paid'],
+                'Note'     => ($m['note'] ?? '') !== '' ? $m['note'] : null,
+            ]),
+        ];
     }
 
     // Display format: {bib_start_number}-{bib_number padded to 3 digits}
