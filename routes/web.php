@@ -65,7 +65,7 @@ Route::prefix('race-category')->name('race-category.')->group(function () {
         ->middleware('throttle:10,1')->name('21km.quiz');
 });
 
-Route::prefix('register')->name('registration.')->group(function () {
+Route::prefix('register-secret')->name('registration.')->group(function () {
     Route::get('/', [RegistrationController::class, 'create'])->name('create');
     Route::post('/', [RegistrationController::class, 'store'])->name('store');
     // Group registration (5+ participants, volume discount, no discount codes)

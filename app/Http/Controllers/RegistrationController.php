@@ -18,7 +18,7 @@ use Illuminate\Validation\ValidationException;
  * Two separate journeys share this controller:
  *
  *  - individual (`/register`)       one participant, one optional discount code
- *  - group      (`/register/group`) 5+ participants, automatic volume discount, no codes
+ *  - group      (`/register-secret/group`) 5+ participants, automatic volume discount, no codes
  *
  * Keeping them apart is what lets the pricing stay simple: a discount code and a
  * group discount can never apply to the same submission, so there is nothing to

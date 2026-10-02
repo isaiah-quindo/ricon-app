@@ -160,9 +160,9 @@
 <section class="bg-[#483E1C] py-24">
     <div class="mx-auto px-8" style="max-width:1280px;">
         <p class="text-orange-500 text-sm font-semibold uppercase tracking-wider mb-2">Registration Fee</p>
-        <h2 class="text-3xl font-bold text-white mb-6">Secure your slot</h2>
+        <h2 class="text-3xl font-bold text-white mb-6">Registration period has ended</h2>
         <p class="text-white leading-relaxed mb-6">
-            Lock in your place on the start line before it sells out.
+            Registration for this year's race is now closed. Thank you to everyone who signed up. See you on the trail.
         </p>
 
         {{-- Registration Fee --}}
@@ -193,19 +193,19 @@
                 <p class="text-gray-400 font-bold text-2xl mb-1 line-through">₱8,500</p>
                 <p class="text-gray-500 text-sm">Sep 1 - Sep 15</p>
             </div>
-            <div class="relative bg-[#1a1a1a] bg-opacity-50 rounded-xl p-5 border border-orange-500 text-center">
-                <p class="absolute top-3 right-3 text-orange-400 text-xs">⚠ Limited slots</p>
-                <p class="text-orange-500 text-xs font-semibold uppercase tracking-wider mb-1">Super Late</p>
-                <p class="text-white font-bold text-2xl mb-1">₱9,500</p>
+            <div class="relative bg-[#1a1a1a] bg-opacity-30 rounded-xl p-5 border border-white/5 text-center opacity-60">
+                <p class="absolute top-3 right-3 text-gray-400 text-xs bg-gray-700/60 px-2 py-0.5 rounded-full">Ended</p>
+                <p class="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-1">Super Late</p>
+                <p class="text-gray-400 font-bold text-2xl mb-1 line-through">₱9,500</p>
                 <p class="text-gray-500 text-sm">Sep 16 - Sep 30</p>
             </div>
         </div>
         <p class="text-gray-300 text-xs leading-relaxed mb-6">
             Registration fees are subject to change without notice.
         </p>
-        <a href="{{ route('registration.create') }}" class="py-3 px-8 inline-flex items-center gap-x-2 text-sm font-bold rounded-lg bg-orange-600 text-white hover:bg-orange-700 focus:outline-hidden disabled:opacity-50 disabled:pointer-events-none">
+        <x-register-link class="py-3 px-8 inline-flex items-center gap-x-2 text-sm font-bold rounded-lg bg-orange-600 text-white hover:bg-orange-700 focus:outline-hidden disabled:opacity-50 disabled:pointer-events-none">
             Register Now
-        </a>
+        </x-register-link>
     </div>
 </section>
 
@@ -300,9 +300,9 @@
         <p class="text-gray-400 mb-8 max-w-xl mx-auto">
             Secure your slot now. Registration slots are limited.
         </p>
-        <a href="{{ route('registration.create') }}" class="py-3 px-8 inline-flex items-center gap-x-2 text-sm font-bold rounded-lg bg-orange-600 text-white hover:bg-orange-700 focus:outline-hidden disabled:opacity-50 disabled:pointer-events-none">
+        <x-register-link class="py-3 px-8 inline-flex items-center gap-x-2 text-sm font-bold rounded-lg bg-orange-600 text-white hover:bg-orange-700 focus:outline-hidden disabled:opacity-50 disabled:pointer-events-none">
             Register Now
-        </a>
+        </x-register-link>
     </div>
 </section>
 

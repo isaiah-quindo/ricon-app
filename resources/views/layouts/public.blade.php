@@ -111,9 +111,9 @@
                     <a href="{{ route('shop.index') }}" class="text-gray-300 hover:text-white text-sm font-medium transition-colors">Shop</a>
                 </div>
 
-                <a href="{{ route('registration.create') }}" class="hidden md:inline-flex py-3 px-4 items-center gap-x-2 text-sm font-bold rounded-lg bg-orange-600 text-white hover:bg-orange-700 focus:outline-hidden disabled:opacity-50 disabled:pointer-events-none">
+                <x-register-link class="hidden md:inline-flex py-3 px-4 items-center gap-x-2 text-sm font-bold rounded-lg bg-orange-600 text-white hover:bg-orange-700 focus:outline-hidden disabled:opacity-50 disabled:pointer-events-none">
                     Register
-                </a>
+                </x-register-link>
 
                 {{-- Mobile hamburger --}}
                 <button @click="open = !open" class="md:hidden flex items-center justify-center w-10 h-10 text-gray-300 hover:text-white transition-colors" aria-label="Toggle menu">
@@ -170,9 +170,9 @@
 
                 <a href="/#race-categories" @click="open = false" class="text-gray-300 hover:text-white text-sm font-medium transition-colors py-2">Race Categories</a>
                 <a href="{{ route('shop.index') }}" @click="open = false" class="text-gray-300 hover:text-white text-sm font-medium transition-colors py-2">Shop</a>
-                <a href="{{ route('registration.create') }}" class="mt-2 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-bold rounded-lg bg-orange-600 text-white hover:bg-orange-700 focus:outline-hidden">
+                <x-register-link class="mt-2 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-bold rounded-lg bg-orange-600 text-white hover:bg-orange-700 focus:outline-hidden">
                     Register
-                </a>
+                </x-register-link>
             </div>
         </div>
     </nav>
