@@ -51,7 +51,7 @@
             </div>
             <div class="py-8 pr-6 pl-0 md:pl-6">
                 <p class="text-white text-xs uppercase tracking-wider mb-1">Gunstart</p>
-                <p class="text-white font-black text-2xl">5 AM</p>
+                <p class="text-white font-black text-2xl">4:30 AM</p>
             </div>
             <div class="py-8 px-6">
                 <p class="text-white text-xs uppercase tracking-wider mb-1">Start & Finish</p>
