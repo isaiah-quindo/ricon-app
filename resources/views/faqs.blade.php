@@ -115,7 +115,7 @@ $sections = [
             ],
             [
                 'q' => 'Will the altitude affect my race?',
-                'a' => '<p>The 100K course alone climbs to 6,124M of elevation gain. That\'s enough to notice if you\'re arriving straight from sea level, especially on the early ascents. If this is your first time racing at elevation, give yourself a day or two in Baguio before the gun goes off rather than flying in the night before.</p>',
+                'a' => '<p>The 100K course alone climbs about 6,200M of elevation gain. That\'s enough to notice if you\'re arriving straight from sea level, especially on the early ascents. If this is your first time racing at elevation, give yourself a day or two in Baguio before the gun goes off rather than flying in the night before.</p>',
             ],
         ],
     ],
@@ -223,7 +223,7 @@ $facts = [
     ['Race Weekend', 'Nov 13&ndash;15, 2026'],
     ['Venue', 'Camp John Hay'],
     ['Distances', '100 &middot; 60 &middot; 21 &middot; 10K'],
-    ['Top Elevation Gain', '6,124M D+'],
+    ['Top Elevation Gain', '6,200M D+'],
 ];
 @endphp
 

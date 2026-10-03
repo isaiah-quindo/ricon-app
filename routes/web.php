@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\ShuttleRsvpController as AdminShuttleRsvpControll
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\TrainingProgramController;
+use App\Http\Controllers\CourseRouteController;
 
 // ----------------------------------------------------------
 // Public Routes
@@ -61,6 +62,8 @@ Route::prefix('race-category')->name('race-category.')->group(function () {
     Route::get('/60km',  fn() => view('race-category.60km'))->name('60km');
     Route::get('/21km',  fn() => view('race-category.21km'))->name('21km');
     Route::get('/10km',  fn() => view('race-category.10km'))->name('10km');
+    Route::get('/{slug}/route', CourseRouteController::class)
+        ->whereIn('slug', ['100km', '60km', '21km', '10km'])->name('route');
     Route::post('/21km/quiz', [QuizLeadController::class, 'store'])
         ->middleware('throttle:10,1')->name('21km.quiz');
 });

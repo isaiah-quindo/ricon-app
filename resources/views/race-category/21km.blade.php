@@ -34,16 +34,17 @@
     <div class="mx-auto px-8" style="max-width:1280px;">
         <div class="grid grid-cols-2 md:grid-cols-6 md:divide-x divide-white/20">
             <div class="py-8 px-6 first:pl-0">
-                <p class="text-white text-xs uppercase tracking-wider mb-1">Distance</p>
-                <p class="text-white font-black text-2xl">21.78 KM</p>
+                <p class="text-white text-xs uppercase tracking-wider mb-1">Est. Distance</p>
+                <p class="text-white font-black text-2xl">22 KM</p>
             </div>
             <div class="py-8 px-6">
                 <p class="text-white text-xs uppercase tracking-wider mb-0">Est. Elevation Gain</p>
-                <p class="text-white font-black text-2xl">1,194M D+</p>
+                <p class="text-white font-black text-2xl">1,200M D+</p>
             </div>
             <div class="py-8 pr-6 pl-0 md:pl-6">
                 <p class="text-white text-xs uppercase tracking-wider mb-1">Cutoff Time</p>
                 <p class="text-white font-black text-2xl">8 hrs</p>
+                <p class="text-white/80 text-xs mt-1">6.5 hrs at 16 km</p>
             </div>
             <div class="py-8 px-6">
                 <p class="text-white text-xs uppercase tracking-wider mb-1">Race Date</p>
@@ -52,6 +53,7 @@
             <div class="py-8 pr-6 pl-0 md:pl-6">
                 <p class="text-white text-xs uppercase tracking-wider mb-1">Gunstart</p>
                 <p class="text-white font-black text-2xl">4:30 AM</p>
+                <p class="text-white/80 text-xs mt-1">Sunday · UTC+8</p>
             </div>
             <div class="py-8 px-6">
                 <p class="text-white text-xs uppercase tracking-wider mb-1">Start & Finish</p>
@@ -85,6 +87,30 @@
                 <img src="/images/race-photo.png" alt="Race Photo" class="w-full h-full object-cover" />
             </div>
         </div>
+    </div>
+</section>
+
+
+{{-- ========================================================
+         ROUTE MAP
+    ======================================================== --}}
+<section class="bg-[#0d0d0d] border-b border-white/5 py-24">
+    <div class="mx-auto px-8 text-center" style="max-width:1280px;">
+        <span class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-500/10 border border-green-500/30 text-green-400 mb-6">
+            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498 4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 0 0-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0Z" />
+            </svg>
+        </span>
+        <p class="text-green-400 text-sm font-semibold uppercase tracking-wider mb-3">Course Map</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Explore the TGC 21 course</h2>
+        <p class="text-gray-400 mb-8 max-w-xl mx-auto">
+            Fly over the route in 3D, follow the elevation profile, and see every aid station along the way.
+        </p>
+        <a href="{{ route('race-category.route', '21km') }}"
+            class="py-3 px-8 inline-flex items-center gap-x-2 text-sm font-bold rounded-lg bg-green-600 text-white hover:bg-green-700 focus:outline-hidden">
+            View Route Map
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+        </a>
     </div>
 </section>
 

@@ -32,11 +32,11 @@
             </div>
             <div>
                 <p class="text-gray-500 text-xs uppercase tracking-wider font-semibold mb-1">Distance</p>
-                <p class="text-white font-black text-2xl">100<span class="text-base text-gray-400 font-bold ml-1">KM</span></p>
+                <p class="text-white font-black text-2xl">104<span class="text-base text-gray-400 font-bold ml-1">KM</span></p>
             </div>
             <div>
                 <p class="text-gray-500 text-xs uppercase tracking-wider font-semibold mb-1">Elevation Gain</p>
-                <p class="text-white font-black text-2xl">7,000<span class="text-base text-gray-400 font-bold ml-1">M D+</span></p>
+                <p class="text-white font-black text-2xl">6,200<span class="text-base text-gray-400 font-bold ml-1">M D+</span></p>
             </div>
         </div>
 

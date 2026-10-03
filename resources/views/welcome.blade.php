@@ -148,9 +148,10 @@
         </p>
 
         {{-- 100 KM — Featured card --}}
-        <div data-race-card class="rounded-xl overflow-hidden mb-6 grid grid-cols-1 md:grid-cols-4">
+        {{-- Stats panel is a half/third of the card on tablets so its two columns don't get cramped --}}
+        <div data-race-card class="rounded-xl overflow-hidden mb-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {{-- Image --}}
-            <div class="relative w-full col-span-1 md:col-span-3 bg-gray-700 flex items-center justify-center text-gray-500 text-xs select-none flex-shrink-0 min-h-80">
+            <div class="relative w-full col-span-1 lg:col-span-2 xl:col-span-3 bg-gray-700 flex items-center justify-center text-gray-500 text-xs select-none flex-shrink-0 min-h-80">
                 <img src="/images/100km-bg.png" alt="100km Category" class="absolute inset-0 w-full h-full object-cover" />
                 {{-- Dark gradient overlay --}}
                 <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
@@ -170,12 +171,26 @@
             <div class="w-full col-span-1 md:col-span-1 bg-[#1a1a1a] p-8 flex flex-col justify-between">
                 <div class="grid grid-cols-2 gap-6 mb-6">
                     <div>
-                        <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Distance</p>
-                        <p class="text-white font-bold text-xl">102.48 KM</p>
+                        <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Est. Distance</p>
+                        <p class="text-white font-bold text-xl">104 KM</p>
                     </div>
                     <div>
-                        <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Elevation Gain</p>
-                        <p class="text-white font-bold text-xl">6124M D+</p>
+                        <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Est. Elev. Gain</p>
+                        <p class="text-white font-bold text-xl">6,200M D+</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Gunstart</p>
+                        <p class="text-white font-bold text-xl">11 PM</p>
+                        <p class="text-gray-400 text-xs mt-0.5">Friday, Nov 13 (UTC+8)</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Time Limit</p>
+                        <p class="text-white font-bold text-xl">32 hrs</p>
+                        <p class="text-gray-400 text-xs mt-0.5">7:00 AM Sunday</p>
+                    </div>
+                    <div class="col-span-2">
+                        <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Intermediate Cut-off</p>
+                        <p class="text-white font-bold text-xl">14 hrs <span class="text-gray-400 text-xs font-normal">at 55 km</span></p>
                     </div>
                 </div>
                 <a href="{{ route('race-category.100km') }}"
@@ -185,12 +200,13 @@
             </div>
         </div>
 
-        {{-- 60 / 21 / 10 KM --}}
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {{-- 60 / 21 / 10 KM: three equal cards, photo on top, stats below.
+             On tablets the 10 KM card spans the full row and sits side by side. --}}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
             {{-- 60 KM --}}
-            <div data-race-card class="rounded-xl overflow-hidden bg-[#1a1a1a] flex flex-1">
-                <div class="relative w-1/2 bg-gray-700 h-auto flex items-center justify-center text-gray-500 text-xs select-none">
+            <div data-race-card class="rounded-xl overflow-hidden bg-[#1a1a1a] flex flex-col">
+                <div class="relative w-full h-48 bg-gray-700 flex items-center justify-center text-gray-500 text-xs select-none">
                     {{-- Image --}}
                     <img src="/images/60km-bg.png" alt="60km Category" class="absolute inset-0 w-full h-full object-cover" />
                     {{-- Dark gradient overlay --}}
@@ -208,14 +224,28 @@
                     </div>
                 </div>
                 <div class="p-6 flex-1 flex flex-col justify-between">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
+                    <div class="grid grid-cols-2 gap-4 mb-5">
                         <div>
-                            <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Distance</p>
-                            <p class="text-white font-bold">61.34 KM</p>
+                            <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Est. Distance</p>
+                            <p class="text-white font-bold">63 KM</p>
                         </div>
                         <div>
-                            <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Elevation Gain</p>
-                            <p class="text-white font-bold">3584M D+</p>
+                            <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Est. Elev. Gain</p>
+                            <p class="text-white font-bold">3,500M D+</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Gunstart</p>
+                            <p class="text-white font-bold">3 AM</p>
+                            <p class="text-gray-400 text-xs mt-0.5">Saturday, Nov 14 (UTC+8)</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Time Limit</p>
+                            <p class="text-white font-bold">18 hrs</p>
+                            <p class="text-gray-400 text-xs mt-0.5">9:00 PM Saturday</p>
+                        </div>
+                        <div class="col-span-2">
+                            <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Intermediate Cut-off</p>
+                            <p class="text-white font-bold">8 hrs <span class="text-gray-400 text-xs font-normal">at 31 km</span></p>
                         </div>
                     </div>
                     <a href="{{ route('race-category.60km') }}"
@@ -225,84 +255,99 @@
                 </div>
             </div>
 
-            {{-- 21 KM + 10 KM stacked --}}
-            <div class="flex flex-col gap-6">
-
-                {{-- 21 KM --}}
-                <div data-race-card class="rounded-xl overflow-hidden bg-[#1a1a1a] flex flex-1">
-                    <div class="relative bg-gray-700 w-1/2 flex-shrink-0 flex items-center justify-center text-gray-500 text-xs select-none">
-                        {{-- Image --}}
-                        <img src="/images/21km-bg.png" alt="21km Category" class="absolute inset-0 w-full h-full object-cover" />
-                        {{-- Dark gradient overlay --}}
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
-                        <div class="absolute bottom-6 left-4 md:left-6 grid grid-cols-1 lg:grid-cols-2 gap-2">
-                            <div class="relative">
-                                <p class="text-white font-black text-2xl leading-none">
-                                    TGC <span class="text-green-400">21 KM</span>
-                                </p>
-                                <p class="text-gray-300 text-sm mt-0.5">November 15, 2026</p>
-                            </div>
-                            <div class="relative grid grid-cols-1">
-                                <span class="block p-1 flex align-center justify-self-start bg-white/50">
-                                    <a href="https://utmb.world/utmb-index" target="_blank">
-                                        <img src="images/index-20K.png" class="w-[100px] h-[30px]" alt="UTMB Index 20K"/>
-                                    </a>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-6 flex-1 flex flex-col justify-between">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
-                            <div>
-                                <p class="text-gray-500 text-xs uppercase tracking-wider mb-0.5">Distance</p>
-                                <p class="text-white font-bold text-sm">21.78 KM</p>
-                            </div>
-                            <div>
-                                <p class="text-gray-500 text-xs uppercase tracking-wider mb-0.5">Elevation Gain</p>
-                                <p class="text-white font-bold text-sm">1194M D+</p>
-                            </div>
-                        </div>
-                        <a href="{{ route('race-category.21km') }}"
-                            class="bg-green-500 hover:bg-green-600 text-white text-xs font-semibold px-3 py-2 rounded-lg text-center transition-colors block">
-                            Race Details
-                        </a>
-
+            {{-- 21 KM --}}
+            <div data-race-card class="rounded-xl overflow-hidden bg-[#1a1a1a] flex flex-col">
+                <div class="relative w-full h-48 bg-gray-700 flex items-center justify-center text-gray-500 text-xs select-none">
+                    {{-- Image --}}
+                    <img src="/images/21km-bg.png" alt="21km Category" class="absolute inset-0 w-full h-full object-cover" />
+                    {{-- Dark gradient overlay --}}
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
+                    <div class="absolute grid grid-cols-1 bottom-6 left-4 md:left-6">
+                        <p class="text-white font-black text-3xl leading-none">
+                            TGC <span class="text-green-400">21 KM</span>
+                        </p>
+                        <span class="block p-1 my-2 justify-self-start bg-white/50">
+                            <a href="https://utmb.world/utmb-index" target="_blank">
+                                <img src="images/index-20K.png" class="w-[100px] h-[30px]" alt="UTMB Index 20K"/>
+                            </a>
+                        </span>
+                        <p class="text-gray-300 text-sm mt-1">November 15, 2026</p>
                     </div>
                 </div>
-
-                {{-- 10 KM --}}
-                <div data-race-card class="rounded-xl overflow-hidden bg-[#1a1a1a] flex flex-1">
-                    <div class="relative bg-gray-700 w-1/2 flex-shrink-0 flex items-center justify-center text-gray-500 text-xs select-none">
-                        {{-- Image --}}
-                        <img src="/images/10km-bg.png" alt="10km Category" class="absolute inset-0 w-full h-full object-cover" />
-                        {{-- Dark gradient overlay --}}
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
-                        <div class="absolute bottom-6 left-4 md:left-6">
-                            <p class="text-white font-black text-2xl leading-none">
-                                TGC <span class="text-cyan-400">10 KM</span>
-                            </p>
-                            <p class="text-gray-300 text-sm mt-0.5">November 15, 2026</p>
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div class="grid grid-cols-2 gap-4 mb-5">
+                        <div>
+                            <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Est. Distance</p>
+                            <p class="text-white font-bold">22 KM</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Est. Elev. Gain</p>
+                            <p class="text-white font-bold">1,200M D+</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Gunstart</p>
+                            <p class="text-white font-bold">4:30 AM</p>
+                            <p class="text-gray-400 text-xs mt-0.5">Sunday, Nov 15 (UTC+8)</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Time Limit</p>
+                            <p class="text-white font-bold">8 hrs</p>
+                            <p class="text-gray-400 text-xs mt-0.5">12:30 PM Sunday</p>
+                        </div>
+                        <div class="col-span-2">
+                            <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Intermediate Cut-off</p>
+                            <p class="text-white font-bold">6.5 hrs <span class="text-gray-400 text-xs font-normal">at 16 km</span></p>
                         </div>
                     </div>
-                    <div class="p-6 flex-1 flex flex-col justify-between">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
-                            <div>
-                                <p class="text-gray-500 text-xs uppercase tracking-wider mb-0.5">Distance</p>
-                                <p class="text-white font-bold text-sm">10.32 KM</p>
-                            </div>
-                            <div>
-                                <p class="text-gray-500 text-xs uppercase tracking-wider mb-0.5">Elevation Gain</p>
-                                <p class="text-white font-bold text-sm">364M D+</p>
-                            </div>
-                        </div>
-                        <a href="{{ route('race-category.10km') }}"
-                            class="bg-cyan-500 hover:bg-cyan-600 text-white text-xs font-semibold px-3 py-2 rounded-lg text-center transition-colors block">
-                            Race Details
-                        </a>
-                    </div>
+                    <a href="{{ route('race-category.21km') }}"
+                        class="bg-green-500 hover:bg-green-600 text-white text-sm font-semibold px-4 py-2.5 rounded-lg text-center transition-colors block">
+                        Race Details
+                    </a>
                 </div>
-
             </div>
+
+            {{-- 10 KM --}}
+            <div data-race-card class="rounded-xl overflow-hidden bg-[#1a1a1a] flex flex-col md:flex-row lg:flex-col md:col-span-2 lg:col-span-1">
+                <div class="relative w-full h-48 md:h-auto md:w-1/2 lg:w-full lg:h-48 bg-gray-700 flex items-center justify-center text-gray-500 text-xs select-none">
+                    {{-- Image --}}
+                    <img src="/images/10km-bg.png" alt="10km Category" class="absolute inset-0 w-full h-full object-cover" />
+                    {{-- Dark gradient overlay --}}
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
+                    <div class="absolute bottom-6 left-4 md:left-6">
+                        <p class="text-white font-black text-3xl leading-none">
+                            TGC <span class="text-cyan-400">10 KM</span>
+                        </p>
+                        <p class="text-gray-300 text-sm mt-2">November 15, 2026</p>
+                    </div>
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div class="grid grid-cols-2 gap-4 mb-5">
+                        <div>
+                            <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Est. Distance</p>
+                            <p class="text-white font-bold">10 KM</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Est. Elev. Gain</p>
+                            <p class="text-white font-bold">400M D+</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Gunstart</p>
+                            <p class="text-white font-bold">6:30 AM</p>
+                            <p class="text-gray-400 text-xs mt-0.5">Sunday, Nov 15 (UTC+8)</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Time Limit</p>
+                            <p class="text-white font-bold">3 hrs</p>
+                            <p class="text-gray-400 text-xs mt-0.5">9:30 AM Sunday</p>
+                        </div>
+                    </div>
+                    <a href="{{ route('race-category.10km') }}"
+                        class="bg-cyan-500 hover:bg-cyan-600 text-white text-sm font-semibold px-4 py-2.5 rounded-lg text-center transition-colors block">
+                        Race Details
+                    </a>
+                </div>
+            </div>
+
         </div>
 
     </div>

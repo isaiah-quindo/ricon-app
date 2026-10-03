@@ -91,13 +91,13 @@
                     :class="plan === 'tgc100k' ? 'border-orange-500 bg-orange-500/10 text-white' : 'border-white/10 text-gray-400 hover:border-white/30'"
                     class="rounded-lg border px-4 py-3 text-left transition-colors">
                     <span class="block text-sm font-bold">100K</span>
-                    <span class="block text-xs opacity-60">7,000m vert</span>
+                    <span class="block text-xs opacity-60">6,200m vert</span>
                 </button>
                 <button type="button" @click="plan = 'tgc60k'"
                     :class="plan === 'tgc60k' ? 'border-orange-500 bg-orange-500/10 text-white' : 'border-white/10 text-gray-400 hover:border-white/30'"
                     class="rounded-lg border px-4 py-3 text-left transition-colors">
                     <span class="block text-sm font-bold">60K</span>
-                    <span class="block text-xs opacity-60">4,200m vert</span>
+                    <span class="block text-xs opacity-60">3,500m vert</span>
                 </button>
             </div>
             <p class="text-gray-600 text-xs mt-1.5">Choose carefully. Your program is locked to this distance.</p>
