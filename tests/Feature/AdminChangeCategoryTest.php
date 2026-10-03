@@ -281,6 +281,34 @@ class AdminChangeCategoryTest extends TestCase
         $this->assertSame(13, (int) $runner->fresh()->bib_number);
     }
 
+    public function test_bib_assigned_before_approval_is_kept_on_approval(): void
+    {
+        $this->runner($this->hundred, 100);
+        $runner = $this->runner($this->hundred, null);
+        PaymentProof::create(['registration_id' => $runner->id, 'image_path' => 'payment_proofs/x.png', 'status' => 'pending']);
+
+        $this->actingAs($this->admin())
+            ->patch(route('admin.registrations.updateBib', $runner), ['bib_number' => 50])
+            ->assertSessionHasNoErrors();
+
+        $this->actingAs($this->admin())->post(route('admin.registrations.approve', $runner));
+
+        $runner->refresh();
+        $this->assertSame('approved', $runner->status);
+        $this->assertSame('100-050', $runner->formatted_bib);
+    }
+
+    public function test_approval_without_a_preassigned_bib_takes_the_next_highest(): void
+    {
+        $this->runner($this->hundred, 100);
+        $runner = $this->runner($this->hundred, null);
+        PaymentProof::create(['registration_id' => $runner->id, 'image_path' => 'payment_proofs/x.png', 'status' => 'pending']);
+
+        $this->actingAs($this->admin())->post(route('admin.registrations.approve', $runner));
+
+        $this->assertSame('100-101', $runner->fresh()->formatted_bib);
+    }
+
     public function test_non_admins_cannot_change_category(): void
     {
         $runner = $this->runner($this->sixty, 4);

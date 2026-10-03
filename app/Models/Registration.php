@@ -80,11 +80,14 @@ class Registration extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    // Auto-assign next bib number when approved (stored as integer)
+    // Auto-assign next bib number when approved (stored as integer).
+    // A bib set manually before approval is kept as is.
     public function assignBibNumber(): void
     {
         DB::transaction(function () {
-            $this->bib_number = self::nextBibNumberFor($this->race_category_id);
+            if (! $this->bib_number) {
+                $this->bib_number = self::nextBibNumberFor($this->race_category_id);
+            }
             $this->save();
         });
     }
