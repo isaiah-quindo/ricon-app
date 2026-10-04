@@ -72,7 +72,7 @@
             <div>
                 <p class="text-red-500 text-sm font-semibold uppercase tracking-wider mb-3">About the Race</p>
                 <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">The TGC 60 KM</h2>
-                <p class="text-gray-400 leading-relaxed mb-4">60 kilometers of Cordillera terrain that tests pacing discipline, nutrition strategy, and the willingness to keep moving when the path becomes unclear. This is not a training run with a race bib.</p>
+                @include('race-category._route-description', ['slug' => '60km', 'title' => 'The TGC 60 KM', 'accent' => 'text-red-500'])
                 <!-- <ul class="mt-4 space-y-2">
                     @foreach(['Three major climbs', 'Night segment (early start)', 'Aid stations every 8–10 km', 'Open to 21 and above'] as $item)
                     <li class="flex items-center gap-2 text-sm text-gray-300">

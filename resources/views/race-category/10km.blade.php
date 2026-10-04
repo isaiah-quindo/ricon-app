@@ -66,7 +66,7 @@
             <div>
                 <p class="text-cyan-400 text-sm font-semibold uppercase tracking-wider mb-3">About the Race</p>
                 <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">The TGC 10 KM</h2>
-                <p class="text-gray-400 leading-relaxed mb-4">10 kilometers through the foothills of Benguet. Your first look at what trail running in the Cordillera feels like — accessible, scenic, and harder than it sounds. No ultra experience required, just the will to move.</p>
+                @include('race-category._route-description', ['slug' => '10km', 'title' => 'The TGC 10 KM', 'accent' => 'text-cyan-400'])
                 <!-- <ul class="mt-4 space-y-2">
                     @foreach(['500 M elevation gain', 'Scenic mountain foothills', 'Aid stations along the route', 'Open to 12 and above'] as $item)
                     <li class="flex items-center gap-2 text-sm text-gray-300">

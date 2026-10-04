@@ -72,8 +72,7 @@
             <div>
                 <p class="text-green-400 text-sm font-semibold uppercase tracking-wider mb-3">About the Race</p>
                 <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">The TGC 21 KM</h2>
-                <p class="text-gray-400 leading-relaxed mb-4">A half-marathon distance that refuses to behave like one. Two significant climbs, one river ford, and a final descent that will ask everything of your quads. Finish this and you will know whether 50 is in your future.
-                </p>
+                @include('race-category._route-description', ['slug' => '21km', 'title' => 'The TGC 21 KM', 'accent' => 'text-green-400'])
                 <!-- <ul class="mt-4 space-y-2">
                     @foreach(['1,300 M+ elevation gain', 'Pine forests and scenic ridgelines', 'Aid stations along the route', 'Open to 18 and above'] as $item)
                     <li class="flex items-center gap-2 text-sm text-gray-300">

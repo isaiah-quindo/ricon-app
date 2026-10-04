@@ -76,7 +76,7 @@
             <div>
                 <p class="text-orange-500 text-sm font-semibold uppercase tracking-wider mb-3">About the Race</p>
                 <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">The TGC 100 KM</h2>
-                <p class="text-gray-400 leading-relaxed mb-4">The Great Cordillera 100 is designed as a point-to-point and loop system routed through the highland barangays of Benguet Province. Courses share common trail sections at specific junctions, allowing all distance categories to experience the defining terrain features of the range, the exposed ridgelines, the pine forests, the community paths that have been walked for generations before we arrived.</p>
+                @include('race-category._route-description', ['slug' => '100km', 'title' => 'The TGC 100 KM', 'accent' => 'text-orange-500'])
                 <!-- <ul class="mt-4 space-y-2">
                     @foreach(['Five major climbs', 'Night segment (6 PM gunstart)', 'Aid stations every 10–12 km', 'Open to 20 and above'] as $item)
                     <li class="flex items-center gap-2 text-sm text-gray-300">
