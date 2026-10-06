@@ -44,7 +44,7 @@ On approval, `Registration::assignBibNumber()` auto-assigns the next sequential 
 - **User** — admin-only accounts. Role checked via `role === 'admin'` in `EnsureAdmin` middleware.
 
 ### Routes
-- **Public:** `/`, `/rules`, `/about`, `/race-category/{slug}`, `/register-secret` (GET/POST), `/register-secret/success`
+- **Public:** `/`, `/rules`, `/about`, `/race-category/{slug}`, `/register` (GET/POST), `/register/group`, `/register/success` (`/register-secret/*` redirects to `/register/*`)
 - **Admin** (`auth` + `EnsureAdmin` middleware, prefix `/admin`): dashboard, registrations index/show/approve/reject/bib/export, race-categories CRUD
 - **Auth** (`routes/auth.php`): login at `/login`, registration at `/user-register`
 

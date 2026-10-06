@@ -117,7 +117,7 @@
                 @forelse($byCategory as $category)
                 @php
                 $fillRate = $category->max_slots > 0
-                ? round(($category->approved_count / $category->max_slots) * 100)
+                ? round(($category->taken_slots / $category->max_slots) * 100)
                 : 0;
                 @endphp
                 <tr class="hover:bg-gray-50 transition-colors">
@@ -126,7 +126,7 @@
                     </td>
                     <td class="px-6 py-4 text-sm text-gray-600">{{ $category->distance_km }} km</td>
                     <td class="px-6 py-4 text-sm text-gray-600">{{ number_format($category->max_slots) }}</td>
-                    <td class="px-6 py-4 text-sm text-gray-900 font-medium">{{ number_format($category->registrations_count) }}</td>
+                    <td class="px-6 py-4 text-sm text-gray-900 font-medium">{{ number_format($category->taken_slots) }}</td>
                     <td class="px-6 py-4 text-sm text-green-700 font-medium">{{ number_format($category->approved_count) }}</td>
                     <td class="px-6 py-4 text-sm text-emerald-700 font-medium">₱{{ number_format($category->approved_revenue ?? 0, 2) }}</td>
                     <td class="px-6 py-4">

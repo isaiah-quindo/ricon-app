@@ -260,17 +260,23 @@
                 <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Race Category</h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     @foreach($categories as $cat)
-                    <label class="relative cursor-pointer">
+                    @php($full = $cat->isFull())
+                    <label class="relative {{ $full ? 'cursor-not-allowed' : 'cursor-pointer' }}">
                         <input type="radio" value="{{ $cat->id }}"
                             x-model="p.race_category_id"
                             :name="'participants[' + i + '][race_category_id]'"
+                            @disabled($full)
                             class="sr-only peer">
                         <div class="border-2 rounded-xl p-4 transition-all h-full
                                 peer-checked:border-orange-600 peer-checked:bg-orange-50
-                                border-gray-200 hover:border-gray-300">
+                                {{ $full ? 'border-gray-200 bg-gray-50 opacity-60' : 'border-gray-200 hover:border-gray-300' }}">
                             <div class="flex items-start justify-between gap-2 mb-2">
                                 <span class="text-base font-bold text-gray-900">{{ $cat->name }}</span>
+                                @if($full)
+                                <span class="text-xs font-semibold uppercase tracking-wider text-gray-600 bg-gray-200 rounded-full px-2 py-0.5 flex-shrink-0">Slots full</span>
+                                @else
                                 <span class="text-base font-bold text-orange-600 flex-shrink-0 pe-5">₱{{ number_format($cat->price, 0) }}</span>
+                                @endif
                             </div>
                             <div class="flex flex-wrap gap-2">
                                 <span class="inline-flex items-center gap-1 text-xs text-gray-500 bg-gray-100 rounded px-2 py-0.5">

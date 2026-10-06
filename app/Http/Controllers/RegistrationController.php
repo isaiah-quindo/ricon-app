@@ -18,7 +18,7 @@ use Illuminate\Validation\ValidationException;
  * Two separate journeys share this controller:
  *
  *  - individual (`/register`)       one participant, one optional discount code
- *  - group      (`/register-secret/group`) 5+ participants, automatic volume discount, no codes
+ *  - group      (`/register/group`) 5+ participants, automatic volume discount, no codes
  *
  * Keeping them apart is what lets the pricing stay simple: a discount code and a
  * group discount can never apply to the same submission, so there is nothing to
@@ -55,11 +55,16 @@ class RegistrationController extends Controller
         $submittedCode = $request->input('discount_code');
         $paymentMethod = $validated['payment_method'] ?? null;
 
+        // Cheap early exit so a submission for a full category never uploads a receipt.
+        $this->ensureSlotsAvailable($participants);
+
         // Upload before opening the transaction. A failed upload then leaves nothing
         // behind, whereas a failed transaction only orphans an unreferenced S3 object.
         $path = $request->file('proof_of_payment')->store('payment_proofs', 's3');
 
         DB::transaction(function () use ($participants, $submittedCode, $path, $paymentMethod) {
+            $this->ensureSlotsAvailable($participants, lock: true);
+
             $discountCode = $submittedCode ? $this->resolveCode($submittedCode, $participants[0]) : null;
             $pricing = GroupPricing::make($participants, $discountCode);
 
@@ -132,9 +137,13 @@ class RegistrationController extends Controller
         ?string $paymentMethod,
         array $organizer,
     ): RedirectResponse {
+        $this->ensureSlotsAvailable($participants);
+
         $path = $proof->store('payment_proofs', 's3');
 
         $group = DB::transaction(function () use ($participants, $path, $paymentMethod, $organizer) {
+            $this->ensureSlotsAvailable($participants, lock: true);
+
             $pricing = GroupPricing::make($participants);
 
             $group = RegistrationGroup::create([
@@ -197,6 +206,46 @@ class RegistrationController extends Controller
                 'payment_method'  => $paymentMethod,
                 'status'          => 'pending',
             ]);
+        }
+    }
+
+    /**
+     * Rejects the submission if any chosen category lacks room for everyone picking it.
+     *
+     * With $lock (inside the transaction) the category rows are locked first, so two
+     * submissions racing for the last slot are counted one after the other. The same
+     * row lock serialises bib assignment in Registration::nextBibNumberFor().
+     */
+    private function ensureSlotsAvailable(array $participants, bool $lock = false): void
+    {
+        $requested = collect($participants)->countBy('race_category_id');
+
+        $categories = RaceCategory::whereKey($requested->keys())
+            ->when($lock, fn ($q) => $q->lockForUpdate())
+            ->get();
+
+        $errors = [];
+
+        foreach ($categories as $category) {
+            $remaining = $category->remainingSlots();
+            $wanted    = $requested[$category->id];
+
+            if ($wanted <= $remaining) {
+                continue;
+            }
+
+            // Pin the message to the first runner in that category so it shows on their card.
+            $index = collect($participants)->search(fn ($p) => $p['race_category_id'] === $category->id);
+
+            $errors["participants.{$index}.race_category_id"] = match (true) {
+                $remaining === 0 => "{$category->name} slots are full. Please choose another category.",
+                default          => "{$category->name} only has {$remaining} " . str('slot')->plural($remaining)
+                    . " left, but {$wanted} runners in this submission chose it.",
+            };
+        }
+
+        if ($errors) {
+            throw ValidationException::withMessages($errors);
         }
     }
 
@@ -344,6 +393,7 @@ class RegistrationController extends Controller
     private function activeCategories()
     {
         return RaceCategory::where('is_active', true)
+            ->withTakenSlots()
             ->orderByRaw('CAST(distance_km AS INTEGER) DESC')
             ->get();
     }

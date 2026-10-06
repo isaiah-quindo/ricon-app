@@ -22,8 +22,9 @@ class DashboardController extends Controller
             'revenue'   => Registration::where('status', 'approved')->sum('price_paid'),
         ];
 
-        $byCategory = RaceCategory::withCount([
-            'registrations',
+        // taken_slots matches what the public form counts against max_slots,
+        // so Registered and Fill Rate agree with when a category shows its slots as full.
+        $byCategory = RaceCategory::withTakenSlots()->withCount([
             'registrations as approved_count' => fn($q) => $q->where('status', 'approved'),
         ])->withSum(
             ['registrations as approved_revenue' => fn($q) => $q->where('status', 'approved')],
