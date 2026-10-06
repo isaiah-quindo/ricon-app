@@ -23,7 +23,7 @@ class DashboardController extends Controller
         ];
 
         // taken_slots matches what the public form counts against max_slots,
-        // so Registered and Fill Rate agree with when a category shows its slots as full.
+        // so Fill Rate ((Pending + Approved) / max_slots) agrees with when a category shows its slots as full.
         $byCategory = RaceCategory::withTakenSlots()->withCount([
             'registrations as approved_count' => fn($q) => $q->where('status', 'approved'),
         ])->withSum(

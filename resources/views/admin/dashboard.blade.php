@@ -106,7 +106,7 @@
                     <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Category</th>
                     <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Distance</th>
                     <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Max Slots</th>
-                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Registered</th>
+                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Pending</th>
                     <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Approved</th>
                     <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Revenue</th>
                     <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Fill Rate</th>
@@ -126,7 +126,7 @@
                     </td>
                     <td class="px-6 py-4 text-sm text-gray-600">{{ $category->distance_km }} km</td>
                     <td class="px-6 py-4 text-sm text-gray-600">{{ number_format($category->max_slots) }}</td>
-                    <td class="px-6 py-4 text-sm text-gray-900 font-medium">{{ number_format($category->taken_slots) }}</td>
+                    <td class="px-6 py-4 text-sm text-gray-900 font-medium">{{ number_format($category->taken_slots - $category->approved_count) }}</td>
                     <td class="px-6 py-4 text-sm text-green-700 font-medium">{{ number_format($category->approved_count) }}</td>
                     <td class="px-6 py-4 text-sm text-emerald-700 font-medium">₱{{ number_format($category->approved_revenue ?? 0, 2) }}</td>
                     <td class="px-6 py-4">
