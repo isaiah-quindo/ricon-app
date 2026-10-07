@@ -15,6 +15,28 @@
             </p>
         </div>
 
+        {{-- Temporary: GoTyme InstaPay QR while the RCBC account below is hidden. --}}
+        <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 text-sm">
+            <p class="font-semibold text-gray-800 mb-3">Scan to Pay (InstaPay)</p>
+            <img src="{{ asset('images/payment/gotyme-qr.png') }}" alt="GoTyme Bank InstaPay QR code"
+                class="w-full max-w-xs mx-auto rounded-lg mb-4">
+            <dl class="space-y-2">
+                <div>
+                    <dt class="text-gray-500 text-xs">Bank</dt>
+                    <dd class="font-medium text-gray-800">GoTyme Bank</dd>
+                </div>
+                <div>
+                    <dt class="text-gray-500 text-xs">Account Name</dt>
+                    <dd class="font-medium text-gray-800">Don Antonio Marcelo T. Santillan</dd>
+                </div>
+                <div>
+                    <dt class="text-gray-500 text-xs">Account Number</dt>
+                    <dd class="font-medium text-gray-800 tracking-wider">0107 7375 4218</dd>
+                </div>
+            </dl>
+        </div>
+
+        {{-- RCBC details hidden for now. Restore by removing this Blade comment wrapper.
         <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 text-sm">
             <p class="font-semibold text-gray-800 mb-3">Bank Transfer</p>
             <dl class="space-y-2">
@@ -32,6 +54,7 @@
                 </div>
             </dl>
         </div>
+        --}}
 
         <div>
             <label for="payment_method" class="block text-sm font-medium text-gray-700 mb-1.5">
