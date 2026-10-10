@@ -211,16 +211,9 @@
                                         <p class="ml-auto text-xs text-gray-400 whitespace-nowrap">KM <span class="text-white font-semibold" x-text="s.km.toFixed(2)"></span></p>
                                     </div>
                                     <p class="text-white font-bold leading-snug mt-2" x-text="s.name"></p>
-                                    <template x-if="s.intermediate_cutoff">
-                                        <p class="inline-block mt-1.5 text-[11px] font-bold uppercase tracking-wider text-white bg-[color:var(--accent)] rounded px-2 py-0.5">Intermediate cutoff</p>
-                                    </template>
                                     <p class="text-xs text-gray-400 mt-0.5">
                                         <span x-text="s.ele.toLocaleString() + ' m'"></span>
-                                        <template x-if="s.cutoff"><span> · Cutoff <span class="text-white" x-text="s.cutoff"></span></span></template>
                                     </p>
-                                    <template x-if="s.food">
-                                        <p class="text-xs text-gray-300 mt-2" x-text="s.food"></p>
-                                    </template>
                                     <template x-if="s.services.length">
                                         <div class="flex flex-wrap gap-1 mt-2">
                                             <template x-for="svc in s.services" :key="svc">
@@ -368,7 +361,8 @@ document.addEventListener('alpine:init', () => {
                     ele: Math.round(pts[i][2]),
                     water: s.code.toUpperCase().startsWith('WS'),
                     num: s.code.replace(/\D/g, ''),
-                    services: s.services || [],
+                    // Only flag that food is served, not the menu itself.
+                    services: s.food ? [...new Set([...(s.services || []).slice(0, 1), 'Food', ...(s.services || []).slice(1)])] : (s.services || []),
                 };
             }).sort((a, b) => a.km - b.km);
 
@@ -481,10 +475,8 @@ document.addEventListener('alpine:init', () => {
                 html.append(
                     dot('text-[11px] font-bold uppercase tracking-wider ' + (s.water ? 'text-sky-400' : 'text-[color:var(--accent)]'), s.code),
                     dot('font-bold text-white', s.name),
-                    dot('text-xs text-gray-400 mt-0.5', `KM ${s.km.toFixed(1)} · ${s.ele.toLocaleString()} m` + (s.cutoff ? ` · Cutoff ${s.cutoff}` : '')),
+                    dot('text-xs text-gray-400 mt-0.5', `KM ${s.km.toFixed(1)} · ${s.ele.toLocaleString()} m`),
                 );
-                if (s.intermediate_cutoff) html.append(dot('text-[11px] font-bold uppercase tracking-wider text-[color:var(--accent)] mt-1', 'Intermediate cutoff'));
-                if (s.food) html.append(dot('text-xs text-gray-300 mt-1.5', s.food));
                 if (s.services.length) html.append(dot('text-xs text-gray-500 mt-1', s.services.join(' · ')));
 
                 return new maplibregl.Marker({
