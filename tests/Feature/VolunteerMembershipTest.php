@@ -17,7 +17,7 @@ class VolunteerMembershipTest extends TestCase
             'full_name'        => 'Juan Dela Cruz',
             'email'            => 'volunteer@example.com',
             'mobile_number'    => '09171234567',
-            'orientation_date' => '2026-10-10',
+            'orientation_date' => '2026-10-22',
             'gcash_reference'  => '1234 5678 9012',
             'consent'          => true,
         ], $overrides);
@@ -41,7 +41,7 @@ class VolunteerMembershipTest extends TestCase
 
         $membership = VolunteerMembership::sole();
         $this->assertSame('Juan Dela Cruz', $membership->full_name);
-        $this->assertSame('2026-10-10', $membership->orientation_date->toDateString());
+        $this->assertSame('2026-10-22', $membership->orientation_date->toDateString());
         $this->assertSame('1234 5678 9012', $membership->gcash_reference);
     }
 

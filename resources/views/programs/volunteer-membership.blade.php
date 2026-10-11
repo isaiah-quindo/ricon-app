@@ -66,7 +66,7 @@ $inclusions = [
                     <span x-show="form.orientation_date === '{{ $value }}'" class="w-2.5 h-2.5 rounded-full bg-orange-600"></span>
                 </span>
                 <span class="block text-xl font-bold text-white" style="font-family:'Kufam',sans-serif;">{{ $date->format('F j, Y') }}</span>
-                <span class="block text-gray-500 text-sm mt-1">{{ $date->format('l') }} &middot; {{ VolunteerMembership::ORIENTATION_TIME }}</span>
+                <span class="block text-gray-500 text-sm mt-1">{{ $date->format('l') }} &middot; {{ VolunteerMembership::ORIENTATION_TIMES[$value] }}</span>
             </label>
             @endforeach
         </div>
@@ -160,7 +160,7 @@ $inclusions = [
                         <select id="orientation_date" x-model="form.orientation_date" class="{{ $input }}" :class="errors.orientation_date && '!border-red-500'">
                             <option value="" disabled>Select a date</option>
                             @foreach(VolunteerMembership::ORIENTATION_DATES as $value => $dateLabel)
-                            <option value="{{ $value }}">{{ \Carbon\Carbon::parse($value)->format('F j, Y') }} &middot; {{ VolunteerMembership::ORIENTATION_TIME }}</option>
+                            <option value="{{ $value }}">{{ \Carbon\Carbon::parse($value)->format('F j, Y') }} &middot; {{ VolunteerMembership::ORIENTATION_TIMES[$value] }}</option>
                             @endforeach
                         </select>
                         <p x-show="errors.orientation_date" class="text-red-400 text-xs mt-1.5">Please choose an orientation date.</p>
@@ -213,7 +213,7 @@ $inclusions = [
 <script>
     function volunteerMembership() {
         const dateLabels = @json(\App\Models\VolunteerMembership::ORIENTATION_DATES);
-        // Invite links can preselect a date, e.g. ?orientation=2026-10-10
+        // Invite links can preselect a date, e.g. ?orientation=2026-10-22
         const preselected = new URLSearchParams(window.location.search).get('orientation');
 
         return {
