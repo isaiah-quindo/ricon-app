@@ -151,52 +151,11 @@
     ======================================================== --}}
 <section class="bg-[#1C3D20] py-24">
     <div class="mx-auto px-8" style="max-width:1280px;">
-        <p class="text-green-400 text-sm font-semibold uppercase tracking-wider mb-2">Registration Fee</p>
-        <h2 class="text-3xl font-bold text-white mb-6">Secure your slot</h2>
-        <p class="text-white leading-relaxed mb-6">
-            Lock in your place on the start line before the slots fill up.
+        <p class="text-green-400 text-sm font-semibold uppercase tracking-wider mb-2">Registration</p>
+        <h2 class="text-3xl font-bold text-white mb-4">Registration is closed</h2>
+        <p class="text-gray-300 leading-relaxed">
+            Thank you to everyone who signed up. See you on the trail.
         </p>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            <div class="relative bg-[#1a1a1a] bg-opacity-30 rounded-xl p-5 border border-white/5 text-center opacity-60">
-                <p class="absolute top-3 right-3 text-gray-400 text-xs bg-gray-700/60 px-2 py-0.5 rounded-full">Ended</p>
-                <p class="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-1">Super Early Bird</p>
-                <p class="text-gray-400 font-bold text-2xl mb-1 line-through">₱1,990</p>
-                <p class="text-gray-500 text-sm">April 15 - May 15</p>
-            </div>
-            <div class="relative bg-[#1a1a1a] bg-opacity-30 rounded-xl p-5 border border-white/5 text-center opacity-60">
-                <p class="absolute top-3 right-3 text-gray-400 text-xs bg-gray-700/60 px-2 py-0.5 rounded-full">Ended</p>
-                <p class="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-1">Early Bird</p>
-                <p class="text-gray-400 font-bold text-2xl mb-1 line-through">₱2,490</p>
-                <p class="text-gray-500 text-sm">May 16 - Jun 30</p>
-            </div>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-            <div class="relative bg-[#1a1a1a] bg-opacity-30 rounded-xl p-5 border border-white/5 text-center opacity-60">
-                <p class="absolute top-3 right-3 text-gray-400 text-xs bg-gray-700/60 px-2 py-0.5 rounded-full">Ended</p>
-                <p class="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-1">Regular</p>
-                <p class="text-gray-400 font-bold text-2xl mb-1 line-through">₱3,000</p>
-                <p class="text-gray-500 text-sm">Jul 1 - Aug 31</p>
-            </div>
-            <div class="relative bg-[#1a1a1a] bg-opacity-30 rounded-xl p-5 border border-white/5 text-center opacity-60">
-                <p class="absolute top-3 right-3 text-gray-400 text-xs bg-gray-700/60 px-2 py-0.5 rounded-full">Ended</p>
-                <p class="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-1">Late</p>
-                <p class="text-gray-400 font-bold text-2xl mb-1 line-through">₱3,500</p>
-                <p class="text-gray-500 text-sm">Sep 1 - Sep 15</p>
-            </div>
-            <div class="relative bg-[#1a1a1a] bg-opacity-50 rounded-xl p-5 border-green-500 border text-center">
-                <p class="absolute top-3 right-3 text-green-400 text-xs">⚠ Limited slots</p>
-                <p class="text-green-400 text-xs font-semibold uppercase tracking-wider mb-1">Super Late</p>
-                <p class="text-white font-bold text-2xl mb-1">₱4,000</p>
-                <p class="text-gray-500 text-sm">Until slots fill up</p>
-            </div>
-        </div>
-        <p class="text-gray-300 text-xs leading-relaxed mb-6">
-            Registration fees are subject to change without notice.
-        </p>
-        <x-register-link class="py-3 px-8 inline-flex items-center gap-x-2 text-sm font-bold rounded-lg bg-green-600 text-white hover:bg-green-700 focus:outline-hidden disabled:opacity-50 disabled:pointer-events-none">
-            Register Now
-        </x-register-link>
     </div>
 </section>
 
@@ -290,13 +249,6 @@
                             <div class="w-9 h-0.5 bg-green-500 mb-5"></div>
                             <p class="text-gray-400 leading-relaxed mb-8 max-w-lg whitespace-pre-line" x-text="results[result].body"></p>
                             <div class="flex flex-wrap items-center gap-5">
-                                <x-register-link
-                                    class="py-3 px-8 inline-flex items-center gap-x-2 text-sm font-bold rounded-lg bg-green-600 text-white hover:bg-green-700 focus:outline-hidden">
-                                    <span x-text="results[result].cta"></span>
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                                    </svg>
-                                </x-register-link>
                                 <a x-show="result === 'c'" x-cloak href="{{ route('race-category.10km') }}"
                                     class="text-sm text-green-400 hover:text-green-300 transition-colors font-medium">
                                     View the TGC 10K course
@@ -391,13 +343,18 @@
     ======================================================== --}}
 <section class="bg-[#0d0d0d] py-24">
     <div class="mx-auto px-8 text-center" style="max-width:1280px;">
-        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Ready to take on TGC 21?</h2>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">See you on the trail</h2>
         <p class="text-gray-400 mb-8 max-w-xl mx-auto">
-            Secure your slot now. Registration slots are limited.
+            Registered for TGC 21? Review the race rules and mandatory gear before race day. Missed registration? You can still be part of it as a volunteer.
         </p>
-        <x-register-link class="py-3 px-8 inline-flex items-center gap-x-2 text-sm font-bold rounded-lg bg-green-600 text-white hover:bg-green-700 focus:outline-hidden disabled:opacity-50 disabled:pointer-events-none">
-            Register Now
-        </x-register-link>
+        <div class="flex flex-wrap justify-center gap-4">
+            <a href="{{ route('rules') }}" class="py-3 px-8 inline-flex items-center gap-x-2 text-sm font-bold rounded-lg bg-green-600 text-white hover:bg-green-700 focus:outline-hidden">
+                Read the Race Rules
+            </a>
+            <a href="{{ route('programs.volunteer') }}" class="py-3 px-8 inline-flex items-center gap-x-2 text-sm font-bold rounded-lg border border-white/20 text-white hover:bg-white/5 focus:outline-hidden">
+                Become a Volunteer
+            </a>
+        </div>
     </div>
 </section>
 

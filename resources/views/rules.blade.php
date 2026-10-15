@@ -602,11 +602,11 @@
 {{-- ======================================================== --}}
 <section class="bg-[#0d0d0d] py-20">
     <div class="mx-auto px-8 text-center" style="max-width:1280px;">
-        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Ready to take on the TGC 100?</h2>
-        <p class="text-gray-400 mb-8 max-w-xl mx-auto">You've read the rules. Now it's time to commit. Secure your slot before they run out.</p>
-        <x-register-link class="py-3 px-8 inline-flex items-center gap-x-2 text-sm font-bold rounded-lg bg-orange-600 text-white hover:bg-orange-700 transition-colors">
-            Register Now
-        </x-register-link>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Want to be part of TGC 100?</h2>
+        <p class="text-gray-400 mb-8 max-w-xl mx-auto">Registration is closed, but you can still join us on the mountain as a volunteer.</p>
+        <a href="{{ route('programs.volunteer') }}" class="py-3 px-8 inline-flex items-center gap-x-2 text-sm font-bold rounded-lg bg-orange-600 text-white hover:bg-orange-700 transition-colors">
+            Become a Volunteer
+        </a>
     </div>
 </section>
 

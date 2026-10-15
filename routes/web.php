@@ -69,14 +69,7 @@ Route::prefix('race-category')->name('race-category.')->group(function () {
         ->middleware('throttle:10,1')->name('21km.quiz');
 });
 
-// Legacy pre-launch URL. 308 keeps the HTTP method so in-flight form POSTs still land.
-Route::any('/register-secret/{path?}', function (Request $request, ?string $path = null) {
-    $query = $request->getQueryString();
-
-    return redirect('/register' . ($path ? "/{$path}" : '') . ($query ? "?{$query}" : ''), 308);
-})->where('path', '.*');
-
-Route::prefix('register')->name('registration.')->group(function () {
+Route::prefix('register-admin')->name('registration.')->group(function () {
     Route::get('/', [RegistrationController::class, 'create'])->name('create');
     Route::post('/', [RegistrationController::class, 'store'])->name('store');
     // Group registration (5+ participants, volume discount, no discount codes)
