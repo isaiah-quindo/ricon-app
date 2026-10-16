@@ -48,10 +48,6 @@ Route::prefix('programs')->name('programs.')->group(function () {
     Route::post('/tgc100-grant', [GrantApplicationController::class, 'store'])
         ->middleware('throttle:10,1')->name('tgc100-grant.store');
 
-    Route::get('/volunteer', fn() => view('programs.volunteer'))->name('volunteer');
-    Route::post('/volunteer', [VolunteerApplicationController::class, 'store'])
-        ->middleware('throttle:10,1')->name('volunteer.store');
-
     // Shortlisted volunteers land here from their invite; intentionally not in the top nav
     Route::get('/volunteer/membership', [VolunteerMembershipController::class, 'create'])->name('volunteer.membership');
     Route::post('/volunteer/membership', [VolunteerMembershipController::class, 'store'])

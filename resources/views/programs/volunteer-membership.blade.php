@@ -38,9 +38,6 @@ $inclusions = [
         </span>
         <h1 class="text-4xl md:text-5xl font-black text-white mb-4">Congratulations!</h1>
         <p class="text-gray-400 text-lg max-w-xl mx-auto">You're one step closer to joining the crew behind The Great Cordillera 100. Pick your orientation date and settle your membership fee to lock in your spot.</p>
-        <a href="{{ route('programs.volunteer') }}" class="inline-block mt-5 text-orange-500 font-semibold text-sm border-b border-orange-500/40 pb-0.5 hover:text-orange-400 transition-colors">
-            About the Volunteer Program
-        </a>
     </div>
 </section>
 

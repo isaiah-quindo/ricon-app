@@ -282,14 +282,11 @@
     <div class="mx-auto px-8 text-center" style="max-width:1280px;">
         <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">See you on the trail</h2>
         <p class="text-gray-400 mb-8 max-w-xl mx-auto">
-            Registered for TGC 100? Review the race rules and mandatory gear before race day. Missed registration? You can still be part of it as a volunteer.
+            Registered for TGC 100? Review the race rules and mandatory gear before race day.
         </p>
         <div class="flex flex-wrap justify-center gap-4">
             <a href="{{ route('rules') }}" class="py-3 px-8 inline-flex items-center gap-x-2 text-sm font-bold rounded-lg bg-orange-600 text-white hover:bg-orange-700 focus:outline-hidden">
                 Read the Race Rules
-            </a>
-            <a href="{{ route('programs.volunteer') }}" class="py-3 px-8 inline-flex items-center gap-x-2 text-sm font-bold rounded-lg border border-white/20 text-white hover:bg-white/5 focus:outline-hidden">
-                Become a Volunteer
             </a>
         </div>
     </div>
