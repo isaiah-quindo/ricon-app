@@ -107,6 +107,10 @@
                 <p class="text-gray-500 text-[10px] md:text-sm uppercase tracking-wider mt-2">Seconds</p>
             </div>
         </div>
+
+        <div data-reveal class="mt-16 mx-auto max-w-4xl rounded-2xl overflow-hidden" style="aspect-ratio:16/9;">
+            <iframe class="w-full h-full" src="https://www.youtube.com/embed/T71ZwwS-vh4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
     </div>
 </section>
 
