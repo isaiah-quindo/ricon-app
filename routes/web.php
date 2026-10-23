@@ -16,7 +16,6 @@ use App\Http\Controllers\VolunteerApplicationController;
 use App\Http\Controllers\VolunteerMembershipController;
 use App\Http\Controllers\Admin\VolunteerMembershipController as AdminVolunteerMembershipController;
 use App\Http\Controllers\QuizLeadController;
-use App\Http\Controllers\ShuttleRsvpController;
 use App\Http\Controllers\Admin\ShuttleRsvpController as AdminShuttleRsvpController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
@@ -30,9 +29,6 @@ use App\Http\Controllers\CourseRouteController;
 Route::get('/', fn() => view('welcome'));
 Route::get('/rules', fn() => view('rules'))->name('rules');
 Route::get('/faqs', fn() => view('faqs'))->name('faqs');
-Route::get('/shuttle', [ShuttleRsvpController::class, 'create'])->name('shuttle');
-Route::post('/shuttle', [ShuttleRsvpController::class, 'store'])
-    ->middleware('throttle:10,1')->name('shuttle.store');
 Route::get('/about', fn() => view('about'))->name('about');
 Route::get('/partners', fn() => view('partners'))->name('partners');
 

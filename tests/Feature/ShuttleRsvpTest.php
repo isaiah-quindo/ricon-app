@@ -26,38 +26,10 @@ class ShuttleRsvpTest extends TestCase
         ], $overrides);
     }
 
-    public function test_shuttle_page_renders_the_form(): void
+    public function test_public_shuttle_page_is_removed(): void
     {
-        $this->get('/shuttle')
-            ->assertOk()
-            ->assertSee('Manila &rarr; Baguio shuttle', false)
-            ->assertSee('Friday, November 13, 2026');
-    }
-
-    public function test_submission_creates_an_rsvp(): void
-    {
-        $this->postJson('/shuttle', $this->validPayload())
-            ->assertOk()
-            ->assertJson(['status' => 'created']);
-
-        $rsvp = ShuttleRsvp::sole();
-        $this->assertSame('runner@example.com', $rsvp->email);
-        $this->assertSame(2, $rsvp->seats);
-        $this->assertSame('2026-11-13', $rsvp->shuttle_date->toDateString());
-        $this->assertTrue($rsvp->return_trip);
-        $this->assertSame('Cubao', $rsvp->pickup_point);
-    }
-
-    public function test_submission_rejects_unknown_options_and_seat_limits(): void
-    {
-        $this->postJson('/shuttle', $this->validPayload([
-            'pickup_point' => 'Makati',
-            'shuttle_date' => '2026-11-15',
-            'distance'     => '50KM',
-            'seats'        => ShuttleRsvp::MAX_SEATS + 1,
-        ]))
-            ->assertStatus(422)
-            ->assertJsonValidationErrors(['pickup_point', 'shuttle_date', 'distance', 'seats']);
+        $this->get('/shuttle')->assertNotFound();
+        $this->postJson('/shuttle', $this->validPayload())->assertNotFound();
 
         $this->assertSame(0, ShuttleRsvp::count());
     }

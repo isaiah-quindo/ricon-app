@@ -80,7 +80,6 @@
                             style="display: none;">
                             <a href="{{ route('rules') }}" class="block px-4 py-2.5 text-sm text-gray-300 hover:text-white hover:bg-white/5 transition-colors">Rules &amp; Guidelines</a>
                             <a href="{{ route('faqs') }}" class="block px-4 py-2.5 text-sm text-gray-300 hover:text-white hover:bg-white/5 transition-colors">FAQs</a>
-                            <a href="{{ route('shuttle') }}" class="block px-4 py-2.5 text-sm text-gray-300 hover:text-white hover:bg-white/5 transition-colors">Shuttle Service</a>
                         </div>
                     </div>
 
@@ -145,7 +144,6 @@
                     <div x-show="raceInfoOpen" x-transition class="pl-4 flex flex-col gap-1 pb-1">
                         <a href="{{ route('rules') }}" @click="open = false" class="text-gray-300 hover:text-white text-sm font-medium transition-colors py-2">Rules &amp; Guidelines</a>
                         <a href="{{ route('faqs') }}" @click="open = false" class="text-gray-300 hover:text-white text-sm font-medium transition-colors py-2">FAQs</a>
-                        <a href="{{ route('shuttle') }}" @click="open = false" class="text-gray-300 hover:text-white text-sm font-medium transition-colors py-2">Shuttle Service</a>
                     </div>
                 </div>
 

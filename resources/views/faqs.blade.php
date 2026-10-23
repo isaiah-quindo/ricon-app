@@ -40,12 +40,6 @@ $sections = [
                 ],
                 'tip' => ['Kennon Road note', 'Kennon Road closes for repairs and landslide clearing without much warning. Check its status the week of your trip and have Marcos Highway as your default.'],
             ],
-            [
-                'q' => 'Prefer to skip the buses and driving? RiCON is happy to offer a shuttle.',
-                'a' => '<p>RiCON runs a group shuttle van from Manila straight to Camp John Hay, so you can skip booking your own bus or driving up. Pick your terminal, we handle the rest.</p>'
-                    . '<p><a href="' . route('shuttle') . '" class="' . $btn . '">Reserve a shuttle seat &rarr;</a></p>'
-                    . '<p>Each shuttle date runs once a minimum number of seats is booked. If a date doesn\'t fill up, we\'ll cancel that run and email everyone booked in time to sort out another way up.</p>',
-            ],
         ],
     ],
     [
