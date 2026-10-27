@@ -1,5 +1,5 @@
-{{-- Scrolling "Race Partners" logo strip. Used on the Partners page and the front page. --}}
-@props(['showAllLink' => false])
+{{-- "Race Partners" logos. Scrolling strip on the front page; static grid on the Partners page (grid prop). --}}
+@props(['showAllLink' => false, 'grid' => false])
 
 @php
     $sponsors = [
@@ -13,6 +13,7 @@
         ['img' => 'electrolyte', 'h' => 52, 'label' => 'Official Electrolyte Partner'],
         ['img' => 'shoe-laundry', 'h' => 34, 'label' => 'Official Shoe Laundry Partner'],
         ['img' => 'watch', 'h' => 32, 'label' => 'Official Watch Partner'],
+        ['img' => 'ds-rush', 'h' => 64, 'label' => 'Community Partner'],
     ];
 @endphp
 
@@ -92,15 +93,27 @@
         @endif
     </div>
 
-    <div class="partners-marquee">
-        <div class="partners-marquee-track flex items-center">
-            @foreach (array_merge($sponsors, $sponsors) as $i => $sponsor)
-                <div class="flex-none flex flex-col items-center justify-end gap-3 px-11 h-[150px]" @if ($i >= count($sponsors)) aria-hidden="true" @endif>
+    @if ($grid)
+        <div class="mx-auto px-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-12" style="max-width:1280px;">
+            @foreach ($sponsors as $sponsor)
+                <div class="flex flex-col items-center justify-end gap-3 h-[130px]">
                     <img src="/images/partners/{{ $sponsor['img'] }}.png" alt="{{ $sponsor['label'] }}"
-                        class="block w-auto object-contain brightness-0 invert" style="height:{{ $sponsor['h'] }}px;" draggable="false" loading="lazy">
-                    <span class="text-[11.5px] font-semibold text-gray-500 uppercase tracking-wide whitespace-nowrap">{{ $sponsor['label'] }}</span>
+                        class="block w-auto max-w-full object-contain brightness-0 invert" style="height:{{ $sponsor['h'] }}px;" loading="lazy">
+                    <span class="text-[11.5px] font-semibold text-gray-500 uppercase tracking-wide text-center">{{ $sponsor['label'] }}</span>
                 </div>
             @endforeach
         </div>
-    </div>
+    @else
+        <div class="partners-marquee">
+            <div class="partners-marquee-track flex items-center">
+                @foreach (array_merge($sponsors, $sponsors) as $i => $sponsor)
+                    <div class="flex-none flex flex-col items-center justify-end gap-3 px-11 h-[150px]" @if ($i >= count($sponsors)) aria-hidden="true" @endif>
+                        <img src="/images/partners/{{ $sponsor['img'] }}.png" alt="{{ $sponsor['label'] }}"
+                            class="block w-auto object-contain brightness-0 invert" style="height:{{ $sponsor['h'] }}px;" draggable="false" loading="lazy">
+                        <span class="text-[11.5px] font-semibold text-gray-500 uppercase tracking-wide whitespace-nowrap">{{ $sponsor['label'] }}</span>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    @endif
 </section>

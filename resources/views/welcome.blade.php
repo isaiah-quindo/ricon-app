@@ -350,9 +350,33 @@
 
 
 {{-- ========================================================
+         RACE VILLAGE / START & FINISH MAP
+    ======================================================== --}}
+<section id="race-village" class="bg-[#111111] py-24">
+    <div class="mx-auto px-8" style="max-width:1280px;">
+        <div class="max-w-3xl mx-auto text-center mb-12">
+            <p class="text-orange-500 text-sm font-semibold mb-2 uppercase tracking-wider">Race Village</p>
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Start & Finish</h2>
+            <p class="text-gray-400 leading-relaxed">
+                Camp John Hay Forest Bathing Trail, Baguio City. All categories start and finish here.
+            </p>
+        </div>
+        <div class="w-full rounded-2xl overflow-hidden" style="aspect-ratio:16/9;">
+            <iframe class="w-full h-full" src="https://maps.google.com/maps?q=16.3988059,120.6148222&z=16&output=embed" title="Race Village location map" style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        </div>
+        <div class="text-center mt-6">
+            <a href="https://maps.app.goo.gl/6kY14yzemKW1xfD29" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-orange-500 hover:text-orange-400 font-semibold text-sm">
+                Open in Google Maps
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5h5v5M19 5l-9 9M5 7v12h12"/></svg>
+            </a>
+        </div>
+    </div>
+</section>
+
+{{-- ========================================================
          DTP TRAIL × TGC 100 INTERNATIONAL COLLABORATION
     ======================================================== --}}
-<section id="dtp-collab" class="bg-[#111111] py-24">
+<section id="dtp-collab" class="bg-[#0d0d0d] py-24">
     <div class="mx-auto px-8" style="max-width:1280px;">
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 items-center mb-12">
@@ -470,7 +494,7 @@
 {{-- ========================================================
          RACE PARTNERS (sponsor marquee)
     ======================================================== --}}
-<x-sponsors-marquee class="bg-[#0d0d0d]" show-all-link />
+<x-sponsors-marquee class="bg-[#111111]" show-all-link />
 
 {{-- ========================================================
          FOOTER

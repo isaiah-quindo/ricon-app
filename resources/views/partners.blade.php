@@ -31,9 +31,9 @@
 </section>
 
 {{-- ========================================================
-         RACE PARTNERS (marquee)
+         RACE PARTNERS (grid)
     ======================================================== --}}
-<x-sponsors-marquee class="bg-[#111111]" />
+<x-sponsors-marquee class="bg-[#111111]" grid />
 
 {{-- ========================================================
          COMMUNITIES & GOVERNMENT PARTNERS
