@@ -107,10 +107,6 @@
                 <p class="text-gray-500 text-[10px] md:text-sm uppercase tracking-wider mt-2">Seconds</p>
             </div>
         </div>
-
-        <div data-reveal class="mt-16 mx-auto max-w-4xl rounded-2xl overflow-hidden" style="aspect-ratio:16/9;">
-            <iframe class="w-full h-full" src="https://www.youtube.com/embed/T71ZwwS-vh4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        </div>
     </div>
 </section>
 
@@ -119,18 +115,16 @@
     ======================================================== --}}
 <section id="about" class="bg-[#111111] py-24">
     <div class="mx-auto px-8" style="max-width:1280px;">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            <div>
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">A stage for our land and our people</h2>
-                <p class="text-gray-400 mb-8 leading-relaxed">
-                    We didn't just need another race. We needed a stage to showcase the natural terrain,
-                    the beautiful trails, and the spirit this country has to offer. The Great Cordillera 100
-                    is that stage.
-                </p>
-            </div>
-            <div class="rounded-2xl h-72 flex items-center justify-center text-gray-500 text-sm select-none">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/RyBZFPklZp8?si=iJHiZaDKyz7VLR3H" title="YouTube video player" frameborder="0" allow="autoplay;" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
+        <div class="max-w-3xl mx-auto text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">A stage for our land and our people</h2>
+            <p class="text-gray-400 leading-relaxed">
+                We didn't just need another race. We needed a stage to showcase the natural terrain,
+                the beautiful trails, and the spirit this country has to offer. The Great Cordillera 100
+                is that stage.
+            </p>
+        </div>
+        <div class="w-full rounded-2xl overflow-hidden" style="aspect-ratio:16/9;">
+            <iframe class="w-full h-full" src="https://www.youtube.com/embed/T71ZwwS-vh4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
     </div>
 </section>
