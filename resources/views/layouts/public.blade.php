@@ -80,6 +80,7 @@
                             style="display: none;">
                             <a href="{{ route('rules') }}" class="block px-4 py-2.5 text-sm text-gray-300 hover:text-white hover:bg-white/5 transition-colors">Rules &amp; Guidelines</a>
                             <a href="{{ route('faqs') }}" class="block px-4 py-2.5 text-sm text-gray-300 hover:text-white hover:bg-white/5 transition-colors">FAQs</a>
+                            <a href="{{ route('runners-handbook') }}" class="block px-4 py-2.5 text-sm text-gray-300 hover:text-white hover:bg-white/5 transition-colors">TGC100 Runner's Handbook</a>
                         </div>
                     </div>
 
@@ -144,6 +145,7 @@
                     <div x-show="raceInfoOpen" x-transition class="pl-4 flex flex-col gap-1 pb-1">
                         <a href="{{ route('rules') }}" @click="open = false" class="text-gray-300 hover:text-white text-sm font-medium transition-colors py-2">Rules &amp; Guidelines</a>
                         <a href="{{ route('faqs') }}" @click="open = false" class="text-gray-300 hover:text-white text-sm font-medium transition-colors py-2">FAQs</a>
+                        <a href="{{ route('runners-handbook') }}" @click="open = false" class="text-gray-300 hover:text-white text-sm font-medium transition-colors py-2">TGC100 Runner's Handbook</a>
                     </div>
                 </div>
 
@@ -213,6 +215,7 @@
                     <a href="{{ route('training.landing') }}" class="hover:text-white transition-colors">Training</a>
                     <a href="{{ route('rules') }}" class="hover:text-white transition-colors">Rules & Guidelines</a>
                     <a href="{{ route('faqs') }}" class="hover:text-white transition-colors">FAQs</a>
+                    <a href="{{ route('runners-handbook') }}" class="hover:text-white transition-colors">Runner's Handbook</a>
                     <a href="/about" class="hover:text-white transition-colors">About</a>
                     <a href="{{ route('partners') }}" class="hover:text-white transition-colors">Partners</a>
                 </div>

@@ -29,6 +29,7 @@ use App\Http\Controllers\CourseRouteController;
 Route::get('/', fn() => view('welcome'));
 Route::get('/rules', fn() => view('rules'))->name('rules');
 Route::get('/faqs', fn() => view('faqs'))->name('faqs');
+Route::get('/runners-handbook', fn() => view('runners-handbook'))->name('runners-handbook');
 Route::get('/about', fn() => view('about'))->name('about');
 Route::get('/partners', fn() => view('partners'))->name('partners');
 
