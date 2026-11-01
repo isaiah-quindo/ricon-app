@@ -13,6 +13,9 @@
         ['img' => 'electrolyte', 'h' => 52, 'label' => 'Official Electrolyte Partner'],
         ['img' => 'shoe-laundry', 'h' => 34, 'label' => 'Official Shoe Laundry Partner'],
         ['img' => 'watch', 'h' => 32, 'label' => 'Official Watch Partner'],
+        ['img' => 'training', 'h' => 44, 'label' => 'Official Training Partner'],
+        ['img' => 'lights-sound', 'h' => 54, 'label' => 'Official Lights & Sound Partner'],
+        ['img' => 'logistics', 'h' => 66, 'label' => 'Official Logistics Partner'],
         ['img' => 'ds-rush', 'h' => 64, 'label' => 'Community Partner'],
     ];
 @endphp
