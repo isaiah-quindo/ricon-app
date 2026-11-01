@@ -40,8 +40,9 @@
     <div class="mx-auto px-8" style="max-width:1280px;">
 
         {{-- Desktop: inline viewer --}}
+        {{-- Height follows the A4 page ratio (842/595) of the container width so one full page shows at fit-width; +56px covers the viewer toolbar --}}
         <div class="hidden md:block rounded-2xl overflow-hidden border border-white/10 bg-[#111111]">
-            <iframe src="{{ $pdf }}#view=FitH" title="TGC100 Runner's Handbook" class="block w-full h-[85vh]" loading="lazy"></iframe>
+            <iframe src="{{ $pdf }}#view=FitH&pagemode=none" title="TGC100 Runner's Handbook" class="block w-full" style="height:calc((min(100vw, 1280px) - 64px) * 1.4146 + 56px);" loading="lazy"></iframe>
         </div>
 
         {{-- Mobile: browsers don't render embedded PDFs reliably, so open it natively instead --}}
