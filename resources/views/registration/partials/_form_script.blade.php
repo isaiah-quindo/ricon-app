@@ -42,6 +42,10 @@
         { min: 5, percentage: 5 },
     ];
 
+    // Same shape the browser applies to <input type="email">. The server's email rule
+    // stays authoritative; this just catches typos before the review step.
+    const EMAIL_PATTERN = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
+
     const REQUIRED_FIELDS = [
         'race_category_id', 'first_name', 'last_name', 'sex', 'birthdate', 'email',
         'mobile_number', 'nationality', 'address', 'shirt_size',
@@ -330,7 +334,8 @@
             },
 
             organizerError(field) {
-                if (this.clientErrors.organizer?.[field]) return 'This field is required.';
+                const client = this.clientErrors.organizer?.[field];
+                if (client) return typeof client === 'string' ? client : 'This field is required.';
                 return this.serverErrors['organizer.' + field]?.[0] || '';
             },
 
@@ -341,8 +346,25 @@
             },
 
             fieldError(i, field) {
-                if (this.clientErrors[i]?.[field]) return 'This field is required.';
+                const client = this.clientErrors[i]?.[field];
+                if (client) return typeof client === 'string' ? client : 'This field is required.';
                 return this.serverErrors['participants.' + i + '.' + field]?.[0] || '';
+            },
+
+            // Format checks mirror what the browser would enforce on type="email" and
+            // the date max. They have to run here, before the review step: the form
+            // has novalidate, because once the review panel is showing the inputs are
+            // display:none and the browser would refuse to submit without being able
+            // to show which field is wrong. That was the "button does nothing" bug.
+            formatError(field, value) {
+                if (!value) return null;
+                if (field === 'email' && !EMAIL_PATTERN.test(value.trim())) {
+                    return 'Please enter a valid email address.';
+                }
+                if (field === 'birthdate' && value > this.maxBirthdate) {
+                    return 'Birthdate cannot be in the future.';
+                }
+                return null;
             },
 
             validate() {
@@ -355,13 +377,20 @@
                         this.clientErrorMessage = 'Please say who is registering this group.';
                         return false;
                     }
+                    const emailError = this.formatError('email', this.organizer.email);
+                    if (emailError) {
+                        this.clientErrors.organizer = { email: emailError };
+                        this.clientErrorMessage = 'The organizer email address does not look right.';
+                        return false;
+                    }
                 }
 
                 this.participants.forEach((p, i) => {
                     REQUIRED_FIELDS.forEach(field => {
-                        if (!p[field]) {
+                        const error = !p[field] ? true : this.formatError(field, p[field]);
+                        if (error) {
                             this.clientErrors[i] = this.clientErrors[i] || {};
-                            this.clientErrors[i][field] = true;
+                            this.clientErrors[i][field] = error;
                         }
                     });
                 });
@@ -369,9 +398,11 @@
                 const firstBad = this.participants.findIndex((_, i) => this.clientErrors[i]);
                 if (firstBad !== -1) {
                     this.participants[firstBad]._open = true;
+                    const onlyFormat = Object.values(this.clientErrors[firstBad]).every(e => typeof e === 'string');
+                    const problem = onlyFormat ? 'Some details need a correction' : 'Some details are missing';
                     this.clientErrorMessage = this.participants.length === 1
-                        ? 'Some details are still missing. Fields needing attention are highlighted below.'
-                        : 'Some details are missing for ' + this.participantLabel(firstBad) + '. Fields needing attention are highlighted below.';
+                        ? problem + '. Fields needing attention are highlighted below.'
+                        : problem + ' for ' + this.participantLabel(firstBad) + '. Fields needing attention are highlighted below.';
                     return false;
                 }
 
@@ -492,6 +523,22 @@
             backToForm() {
                 this.reviewing = false;
                 window.scrollTo({ top: 0, behavior: 'smooth' });
+            },
+
+            // Final gate on "Confirm & Submit". Re-validates in case anything changed
+            // between review and submit, and guards against a double click.
+            onSubmit(event) {
+                if (this.submitting) {
+                    event.preventDefault();
+                    return;
+                }
+                if (!this.validate()) {
+                    event.preventDefault();
+                    this.showClientErrorBanner = true;
+                    this.backToForm();
+                    return;
+                }
+                this.submitting = true;
             },
         };
     }

@@ -29,12 +29,12 @@
     <div class="mx-auto px-8" style="max-width:1280px;">
         <div class="grid grid-cols-2 md:grid-cols-6 md:divide-x divide-white/20">
             <div class="py-8 px-6 first:pl-0">
-                <p class="text-white text-xs uppercase tracking-wider mb-1">Distance</p>
-                <p class="text-white font-black text-2xl">10.32 KM</p>
+                <p class="text-white text-xs uppercase tracking-wider mb-1">Est. Distance</p>
+                <p class="text-white font-black text-2xl">10 KM</p>
             </div>
             <div class="py-8 px-6">
                 <p class="text-white text-xs uppercase tracking-wider mb-0">Est. Elevation Gain</p>
-                <p class="text-white font-black text-2xl">364M D+</p>
+                <p class="text-white font-black text-2xl">400M D+</p>
             </div>
             <div class="py-8 pr-6 pl-0 md:pl-6">
                 <p class="text-white text-xs uppercase tracking-wider mb-1">Cutoff Time</p>
@@ -46,7 +46,8 @@
             </div>
             <div class="py-8 pr-6 pl-0 md:pl-6">
                 <p class="text-white text-xs uppercase tracking-wider mb-1">Gunstart</p>
-                <p class="text-white font-black text-2xl">6 AM</p>
+                <p class="text-white font-black text-2xl">6:30 AM</p>
+                <p class="text-white/80 text-xs mt-1">Sunday · UTC+8</p>
             </div>
             <div class="py-8 px-6">
                 <p class="text-white text-xs uppercase tracking-wider mb-1">Start & Finish</p>
@@ -65,7 +66,7 @@
             <div>
                 <p class="text-cyan-400 text-sm font-semibold uppercase tracking-wider mb-3">About the Race</p>
                 <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">The TGC 10 KM</h2>
-                <p class="text-gray-400 leading-relaxed mb-4">10 kilometers through the foothills of Benguet. Your first look at what trail running in the Cordillera feels like — accessible, scenic, and harder than it sounds. No ultra experience required, just the will to move.</p>
+                @include('race-category._route-description', ['slug' => '10km', 'title' => 'The TGC 10 KM', 'accent' => 'text-cyan-400'])
                 <!-- <ul class="mt-4 space-y-2">
                     @foreach(['500 M elevation gain', 'Scenic mountain foothills', 'Aid stations along the route', 'Open to 12 and above'] as $item)
                     <li class="flex items-center gap-2 text-sm text-gray-300">
@@ -79,6 +80,30 @@
                 <img src="/images/race-photo.png" alt="Race Photo" class="w-full h-full object-cover" />
             </div>
         </div>
+    </div>
+</section>
+
+
+{{-- ========================================================
+         ROUTE MAP
+    ======================================================== --}}
+<section class="bg-[#0d0d0d] border-b border-white/5 py-24">
+    <div class="mx-auto px-8 text-center" style="max-width:1280px;">
+        <span class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 mb-6">
+            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498 4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 0 0-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0Z" />
+            </svg>
+        </span>
+        <p class="text-cyan-400 text-sm font-semibold uppercase tracking-wider mb-3">Course Map</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Explore the TGC 10 course</h2>
+        <p class="text-gray-400 mb-8 max-w-xl mx-auto">
+            Fly over the route in 3D, follow the elevation profile, and see every aid station along the way.
+        </p>
+        <a href="{{ route('race-category.route', '10km') }}"
+            class="py-3 px-8 inline-flex items-center gap-x-2 text-sm font-bold rounded-lg bg-cyan-600 text-white hover:bg-cyan-700 focus:outline-hidden">
+            View Route Map
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+        </a>
     </div>
 </section>
 
@@ -120,10 +145,10 @@
     ======================================================== --}}
 <section class="bg-[#1C3540] py-24">
     <div class="mx-auto px-8" style="max-width:1280px;">
-        <p class="text-cyan-400 text-sm font-semibold uppercase tracking-wider mb-2">Registration Fee</p>
-        <h2 class="text-3xl font-bold text-white mb-6">Secure your slot</h2>
-        <p class="text-white leading-relaxed mb-6">
-            Lock in your place on the start line before it sells out.
+        <p class="text-cyan-400 text-sm font-semibold uppercase tracking-wider mb-2">Registration</p>
+        <h2 class="text-3xl font-bold text-white mb-4">Registration is closed</h2>
+        <p class="text-gray-300 leading-relaxed mb-8">
+            Thank you to everyone who signed up. See you on the trail.
         </p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -140,30 +165,26 @@
                 <p class="text-gray-500 text-sm">May 16 - Jun 30</p>
             </div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-            <div class="relative bg-[#1a1a1a] bg-opacity-50 rounded-xl p-5 border-cyan-500 border text-center">
-                <p class="absolute top-3 right-3 text-cyan-400 text-xs">⚠ Limited slots</p>
-                <p class="text-cyan-400 text-xs font-semibold uppercase tracking-wider mb-1">Regular</p>
-                <p class="text-white font-bold text-2xl mb-1">₱2,500</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="relative bg-[#1a1a1a] bg-opacity-30 rounded-xl p-5 border border-white/5 text-center opacity-60">
+                <p class="absolute top-3 right-3 text-gray-400 text-xs bg-gray-700/60 px-2 py-0.5 rounded-full">Ended</p>
+                <p class="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-1">Regular</p>
+                <p class="text-gray-400 font-bold text-2xl mb-1 line-through">₱2,500</p>
                 <p class="text-gray-500 text-sm">Jul 1 - Aug 31</p>
             </div>
-            <div class="bg-[#1a1a1a] bg-opacity-50 rounded-xl p-5 border border-white/5 text-center">
-                <p class="text-cyan-400 text-xs font-semibold uppercase tracking-wider mb-1">Late</p>
-                <p class="text-white font-bold text-2xl mb-1">₱3,000</p>
+            <div class="relative bg-[#1a1a1a] bg-opacity-30 rounded-xl p-5 border border-white/5 text-center opacity-60">
+                <p class="absolute top-3 right-3 text-gray-400 text-xs bg-gray-700/60 px-2 py-0.5 rounded-full">Ended</p>
+                <p class="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-1">Late</p>
+                <p class="text-gray-400 font-bold text-2xl mb-1 line-through">₱3,000</p>
                 <p class="text-gray-500 text-sm">Sep 1 - Sep 15</p>
             </div>
-            <div class="bg-[#1a1a1a] bg-opacity-50 rounded-xl p-5 border border-white/5 text-center">
-                <p class="text-cyan-400 text-xs font-semibold uppercase tracking-wider mb-1">Super Late</p>
-                <p class="text-white font-bold text-2xl mb-1">₱3,500</p>
-                <p class="text-gray-500 text-sm">Sep 16 - Sep 30</p>
+            <div class="relative bg-[#1a1a1a] bg-opacity-30 rounded-xl p-5 border border-white/5 text-center opacity-60">
+                <p class="absolute top-3 right-3 text-gray-400 text-xs bg-gray-700/60 px-2 py-0.5 rounded-full">Ended</p>
+                <p class="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-1">Super Late</p>
+                <p class="text-gray-400 font-bold text-2xl mb-1 line-through">₱3,500</p>
+                <p class="text-gray-500 text-sm">Until slots fill up</p>
             </div>
         </div>
-        <p class="text-gray-300 text-xs leading-relaxed mb-6">
-            Registration fees are subject to change without notice.
-        </p>
-        <a href="{{ route('registration.create') }}" class="py-3 px-8 inline-flex items-center gap-x-2 text-sm font-bold rounded-lg bg-cyan-600 text-white hover:bg-cyan-700 focus:outline-hidden disabled:opacity-50 disabled:pointer-events-none">
-            Register Now
-        </a>
     </div>
 </section>
 
@@ -247,13 +268,15 @@
     ======================================================== --}}
 <section class="bg-[#0d0d0d] py-24">
     <div class="mx-auto px-8 text-center" style="max-width:1280px;">
-        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Ready for your first trail?</h2>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">See you on the trail</h2>
         <p class="text-gray-400 mb-8 max-w-xl mx-auto">
-            Secure your slot now. Registration slots are limited.
+            Registered for TGC 10? Review the race rules and mandatory gear before race day.
         </p>
-        <a href="{{ route('registration.create') }}" class="py-3 px-8 inline-flex items-center gap-x-2 text-sm font-bold rounded-lg bg-cyan-600 text-white hover:bg-cyan-700 focus:outline-hidden disabled:opacity-50 disabled:pointer-events-none">
-            Register Now
-        </a>
+        <div class="flex flex-wrap justify-center gap-4">
+            <a href="{{ route('rules') }}" class="py-3 px-8 inline-flex items-center gap-x-2 text-sm font-bold rounded-lg bg-cyan-600 text-white hover:bg-cyan-700 focus:outline-hidden">
+                Read the Race Rules
+            </a>
+        </div>
     </div>
 </section>
 

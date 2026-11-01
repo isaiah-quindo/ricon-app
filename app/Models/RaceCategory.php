@@ -31,4 +31,31 @@ class RaceCategory extends Model
     {
         return $this->hasMany(Registration::class);
     }
+
+    /**
+     * Registrations that hold a slot. Anything not rejected counts, so a runner awaiting
+     * payment review keeps their place and a rejection frees it again.
+     */
+    public function slotHoldingRegistrations()
+    {
+        return $this->registrations()->where('status', '!=', 'rejected');
+    }
+
+    /** Adds `taken_slots` to the query so the form can render full categories without N+1s. */
+    public function scopeWithTakenSlots($query)
+    {
+        return $query->withCount(['slotHoldingRegistrations as taken_slots']);
+    }
+
+    public function remainingSlots(): int
+    {
+        $taken = $this->taken_slots ?? $this->slotHoldingRegistrations()->count();
+
+        return max(0, $this->max_slots - $taken);
+    }
+
+    public function isFull(): bool
+    {
+        return $this->remainingSlots() === 0;
+    }
 }

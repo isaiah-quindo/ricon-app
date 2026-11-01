@@ -8,10 +8,10 @@
 
 @section('content')
 
-<form method="POST" action="{{ route('registration.group.store') }}" enctype="multipart/form-data"
+<form method="POST" action="{{ route('registration.group.store') }}" enctype="multipart/form-data" novalidate
     x-data="registrationForm()"
     x-init="init()"
-    @submit="submitting = true"
+    @submit="onSubmit($event)"
     class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
     @csrf
 

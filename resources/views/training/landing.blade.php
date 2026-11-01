@@ -29,7 +29,7 @@
                     24 weeks.<br>One <span class="text-orange-500">mountain.</span>
                 </h1>
                 <p class="text-gray-300 text-lg max-w-xl mb-6">
-                    The structured week-by-week plan that takes you from flat-city runs to 7,000m of Cordillera vert. The program is live and on <strong class="text-white">Week {{ $currentWeek }} of 24</strong> right now. Jump in and follow along.
+                    The structured week-by-week plan that takes you from flat-city runs to 6,200m of Cordillera vert. The program is live and on <strong class="text-white">Week {{ $currentWeek }} of 24</strong> right now. Jump in and follow along.
                 </p>
                 <ul class="space-y-2 mb-8">
                     @foreach([

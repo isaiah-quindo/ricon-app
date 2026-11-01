@@ -8,39 +8,49 @@
          HERO Section
     ======================================================== --}}
 <section x-data="{ offset: 0 }" @scroll.window="offset = window.scrollY * 0.4" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-0">
-    {{-- Background image with parallax --}}
+    {{-- Loading screen --}}
+    <div data-loader class="fixed inset-0 z-[100] bg-[#0a0a0a] flex flex-col items-center justify-center select-none">
+        <img src="/ricon-logo.svg" alt="Ricon" class="w-28 mb-8 opacity-80" />
+        <p data-loader-percent class="text-white text-5xl md:text-6xl font-black tabular-nums">0%</p>
+        <div class="w-56 h-[2px] bg-white/10 mt-6 overflow-hidden rounded-full">
+            <div data-loader-bar class="h-full w-0 bg-orange-500"></div>
+        </div>
+    </div>
+
+    {{-- Background video with parallax --}}
     <div class="absolute left-0 right-0 bg-gray-800 select-none"
         style="top: -25%; height: 150%; will-change: transform;"
         :style="`transform: translateY(${offset}px)`">
-        <img src="/hero-bg.png" class="w-full h-lvh object-cover" />
+        <video class="w-full h-lvh object-cover" poster="/hero-bg.png" autoplay muted loop playsinline preload="auto">
+            <source src="/hero-bg.mp4" type="video/mp4">
+        </video>
     </div>
-    <!-- {{-- Dark overlay --}}
-        <div class="absolute inset-0 bg-black/55"></div> -->
+    {{-- Dark overlay --}}
+    <div data-hero-overlay class="absolute inset-0 bg-black/35"></div>
 
     <div class="relative z-10 text-center px-8 w-full" style="max-width:1280px; margin:2rem auto;">
         {{-- Event logo placeholder --}}
-        <div data-hero-item class="mx-auto mb-20 w-48 h-32 flex items-center justify-center text-gray-500 text-xs select-none">
-            <img src="/tgc100-logo.png" alt="The Greact Cordillera 100" />
+        <div data-hero-logo class="mx-auto mb-20 w-44 h-[7.5rem] md:w-72 md:h-64 flex items-center justify-center text-gray-500 text-xs select-none">
+            <img src="/images/tgc100-tnf-logo.png" alt="The Great Cordillera 100 x The North Face" class="w-full h-full object-contain" />
         </div>
 
-        <h1 data-hero-item class="max-w-[600px] mx-auto text-2xl md:text-4xl lg:text-4xl font-black leading-tight text-white mb-5">
-            The Mountain Will Test You.
-            The Journey Will Change You.
+        <h1 class="max-w-[600px] mx-auto text-2xl md:text-4xl lg:text-4xl font-black leading-tight text-white mb-5">
+            <span class="block overflow-hidden"><span data-hero-line class="inline-block text-pretty">The Trail is Your Story</span></span>
         </h1>
 
-        <p data-hero-item class="text-white text-lg/6 max-w-2xl mx-auto mb-8">
+        <p data-hero-sub class="text-white text-lg/6 max-w-2xl mx-auto mb-8">
             A 100KM ultra trail across the rugged beauty of Benguet and the untamed Cordillera mountains,
             where endurance meets breathtaking landscapes.
         </p>
 
-        <div data-hero-item class="m-auto max-w-[600px] mb-8 grid grid-cols-1 md:grid-cols-2 gap-4 flex place-items-center">
+        <div data-hero-badges class="m-auto max-w-[600px] mb-8 grid grid-cols-1 md:grid-cols-2 gap-4 flex place-items-center">
             <a href="https://utmb.world/utmb-index" target="_blank">
                 <img src="/images/utmb-index.png" class="w-[120px]" alt="UTMB Index" />
             </a>
             <img src="/images/itra-logo-dark.svg" class="w-20" alt="ITRA" />
         </div>
 
-        <a data-hero-item href="#race-categories" class="py-3 px-8 inline-flex items-center gap-x-2 text-sm font-bold rounded-lg bg-orange-600 text-primary-foreground hover:bg-orange-700 focus:outline-hidden focus:bg-primary-focus  disabled:opacity-50 disabled:pointer-events-none">
+        <a data-hero-cta href="#race-categories" class="py-3 px-8 inline-flex items-center gap-x-2 text-sm font-bold rounded-lg bg-orange-600 text-primary-foreground hover:bg-orange-700 focus:outline-hidden focus:bg-primary-focus  disabled:opacity-50 disabled:pointer-events-none">
             Choose your Adventure
         </a>
     </div>
@@ -59,11 +69,44 @@
             Traverse the scenic trails of Benguet and the wild Cordillera mountainscape, a journey through living heritage across Luzon's highland spine. Pine-canopied ridgelines, river crossings, and steep ascents connect Baguio City to the municipalities of Benguet, demanding both strength and respect.
         </p>
 
-        <p data-reveal class="text-gray-400 text-sm mb-2">Race day in</p>
+        <p data-reveal class="text-gray-400 text-sm mb-6">Race day in</p>
         @php
-        $daysLeft = max(0, (int) now()->diffInDays(\Carbon\Carbon::parse('2026-11-13'), false));
+        $raceDateIso = \Carbon\Carbon::parse('2026-11-13', 'Asia/Manila')->toIso8601String();
         @endphp
-        <p data-reveal class="text-6xl md:text-7xl font-black text-white">{{ $daysLeft }} days</p>
+        <div data-reveal
+            x-data="{
+                target: new Date('{{ $raceDateIso }}').getTime(),
+                days: 0, hours: 0, minutes: 0, seconds: 0,
+                tick() {
+                    const diff = Math.max(0, this.target - Date.now());
+                    this.days = Math.floor(diff / 86400000);
+                    this.hours = Math.floor((diff % 86400000) / 3600000);
+                    this.minutes = Math.floor((diff % 3600000) / 60000);
+                    this.seconds = Math.floor((diff % 60000) / 1000);
+                },
+            }"
+            x-init="tick(); setInterval(() => tick(), 1000)"
+            class="grid grid-cols-4 gap-3 md:flex md:flex-wrap md:items-center md:justify-center md:gap-12">
+            <div class="flex flex-col items-center">
+                <p class="text-3xl sm:text-4xl md:text-7xl font-black text-white tabular-nums" x-text="String(days).padStart(2, '0')"></p>
+                <p class="text-gray-500 text-[10px] md:text-sm uppercase tracking-wider mt-2">Days</p>
+            </div>
+            <p class="hidden md:block text-3xl md:text-5xl font-black text-white/20 -mt-6">:</p>
+            <div class="flex flex-col items-center">
+                <p class="text-3xl sm:text-4xl md:text-7xl font-black text-white tabular-nums" x-text="String(hours).padStart(2, '0')"></p>
+                <p class="text-gray-500 text-[10px] md:text-sm uppercase tracking-wider mt-2">Hours</p>
+            </div>
+            <p class="hidden md:block text-3xl md:text-5xl font-black text-white/20 -mt-6">:</p>
+            <div class="flex flex-col items-center">
+                <p class="text-3xl sm:text-4xl md:text-7xl font-black text-white tabular-nums" x-text="String(minutes).padStart(2, '0')"></p>
+                <p class="text-gray-500 text-[10px] md:text-sm uppercase tracking-wider mt-2">Minutes</p>
+            </div>
+            <p class="hidden md:block text-3xl md:text-5xl font-black text-white/20 -mt-6">:</p>
+            <div class="flex flex-col items-center">
+                <p class="text-3xl sm:text-4xl md:text-7xl font-black text-white tabular-nums" x-text="String(seconds).padStart(2, '0')"></p>
+                <p class="text-gray-500 text-[10px] md:text-sm uppercase tracking-wider mt-2">Seconds</p>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -72,21 +115,16 @@
     ======================================================== --}}
 <section id="about" class="bg-[#111111] py-24">
     <div class="mx-auto px-8" style="max-width:1280px;">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            <div>
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">A stage for our land and our people</h2>
-                <p class="text-gray-400 mb-8 leading-relaxed">
-                    We didn't just need another race. We needed a stage to showcase the natural terrain,
-                    the beautiful trails, and the spirit this country has to offer. The Great Cordillera 100
-                    is that stage.
-                </p>
-                <a href="{{ route('registration.create') }}" class="py-3 px-8 inline-flex items-center gap-x-2 text-sm font-bold rounded-lg bg-orange-600 text-primary-foreground hover:bg-orange-700 focus:outline-hidden focus:bg-primary-focus  disabled:opacity-50 disabled:pointer-events-none">
-                    Register
-                </a>
-            </div>
-            <div class="rounded-2xl h-72 flex items-center justify-center text-gray-500 text-sm select-none">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/RyBZFPklZp8?si=iJHiZaDKyz7VLR3H" title="YouTube video player" frameborder="0" allow="autoplay;" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
+        <div class="max-w-3xl mx-auto text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">A stage for our land and our people</h2>
+            <p class="text-gray-400 leading-relaxed">
+                We didn't just need another race. We needed a stage to showcase the natural terrain,
+                the beautiful trails, and the spirit this country has to offer. The Great Cordillera 100
+                is that stage.
+            </p>
+        </div>
+        <div class="w-full rounded-2xl overflow-hidden" style="aspect-ratio:16/9;">
+            <iframe class="w-full h-full" src="https://www.youtube.com/embed/T71ZwwS-vh4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
     </div>
 </section>
@@ -105,9 +143,10 @@
         </p>
 
         {{-- 100 KM — Featured card --}}
-        <div data-race-card class="rounded-xl overflow-hidden mb-6 grid grid-cols-1 md:grid-cols-4">
+        {{-- Stats panel is a half/third of the card on tablets so its two columns don't get cramped --}}
+        <div data-race-card class="rounded-xl overflow-hidden mb-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {{-- Image --}}
-            <div class="relative w-full col-span-1 md:col-span-3 bg-gray-700 flex items-center justify-center text-gray-500 text-xs select-none flex-shrink-0 min-h-80">
+            <div class="relative w-full col-span-1 lg:col-span-2 xl:col-span-3 bg-gray-700 flex items-center justify-center text-gray-500 text-xs select-none flex-shrink-0 min-h-80">
                 <img src="/images/100km-bg.png" alt="100km Category" class="absolute inset-0 w-full h-full object-cover" />
                 {{-- Dark gradient overlay --}}
                 <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
@@ -117,7 +156,7 @@
                     </p>
                     <span class="block p-1 my-2 justify-self-start bg-white/50">
                         <a href="https://utmb.world/utmb-index" target="_blank">
-                            <img src="images/index-100M.png" class="w-[100px]" alt="UTMB Index 100M"/>
+                            <img src="images/index-100K.png" class="w-[100px]" alt="UTMB Index 100K"/>
                         </a>
                     </span>
                     <p class="text-gray-300 text-sm mt-1">November 13, 2026</p>
@@ -127,12 +166,26 @@
             <div class="w-full col-span-1 md:col-span-1 bg-[#1a1a1a] p-8 flex flex-col justify-between">
                 <div class="grid grid-cols-2 gap-6 mb-6">
                     <div>
-                        <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Distance</p>
-                        <p class="text-white font-bold text-xl">102.48 KM</p>
+                        <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Est. Distance</p>
+                        <p class="text-white font-bold text-xl">104 KM</p>
                     </div>
                     <div>
-                        <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Elevation Gain</p>
-                        <p class="text-white font-bold text-xl">6124M D+</p>
+                        <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Est. Elev. Gain</p>
+                        <p class="text-white font-bold text-xl">6,200M D+</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Gunstart</p>
+                        <p class="text-white font-bold text-xl">11 PM</p>
+                        <p class="text-gray-400 text-xs mt-0.5">Friday, Nov 13 (UTC+8)</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Time Limit</p>
+                        <p class="text-white font-bold text-xl">32 hrs</p>
+                        <p class="text-gray-400 text-xs mt-0.5">7:00 AM Sunday</p>
+                    </div>
+                    <div class="col-span-2">
+                        <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Intermediate Cut-off</p>
+                        <p class="text-white font-bold text-xl">14 hrs <span class="text-gray-400 text-xs font-normal">at 55 km</span></p>
                     </div>
                 </div>
                 <a href="{{ route('race-category.100km') }}"
@@ -142,12 +195,13 @@
             </div>
         </div>
 
-        {{-- 60 / 21 / 10 KM --}}
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {{-- 60 / 21 / 10 KM: three equal cards, photo on top, stats below.
+             On tablets the 10 KM card spans the full row and sits side by side. --}}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
             {{-- 60 KM --}}
-            <div data-race-card class="rounded-xl overflow-hidden bg-[#1a1a1a] flex flex-1">
-                <div class="relative w-1/2 bg-gray-700 h-auto flex items-center justify-center text-gray-500 text-xs select-none">
+            <div data-race-card class="rounded-xl overflow-hidden bg-[#1a1a1a] flex flex-col">
+                <div class="relative w-full h-48 bg-gray-700 flex items-center justify-center text-gray-500 text-xs select-none">
                     {{-- Image --}}
                     <img src="/images/60km-bg.png" alt="60km Category" class="absolute inset-0 w-full h-full object-cover" />
                     {{-- Dark gradient overlay --}}
@@ -158,21 +212,35 @@
                         </p>
                         <span class="block p-1 my-2 justify-self-start bg-white/50">
                             <a href="https://utmb.world/utmb-index" target="_blank">
-                                <img src="images/index-100K.png" class="w-[100px] h-[30px]" alt="UTMB Index 100K"/>
+                                <img src="images/index-50k.avif" class="w-[100px] h-[30px]" alt="UTMB Index 50K"/>
                             </a>
                         </span>
                         <p class="text-gray-300 text-sm mt-1">November 14, 2026</p>
                     </div>
                 </div>
                 <div class="p-6 flex-1 flex flex-col justify-between">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
+                    <div class="grid grid-cols-2 gap-4 mb-5">
                         <div>
-                            <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Distance</p>
-                            <p class="text-white font-bold">61.34 KM</p>
+                            <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Est. Distance</p>
+                            <p class="text-white font-bold">63 KM</p>
                         </div>
                         <div>
-                            <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Elevation Gain</p>
-                            <p class="text-white font-bold">3584M D+</p>
+                            <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Est. Elev. Gain</p>
+                            <p class="text-white font-bold">3,500M D+</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Gunstart</p>
+                            <p class="text-white font-bold">3 AM</p>
+                            <p class="text-gray-400 text-xs mt-0.5">Saturday, Nov 14 (UTC+8)</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Time Limit</p>
+                            <p class="text-white font-bold">18 hrs</p>
+                            <p class="text-gray-400 text-xs mt-0.5">9:00 PM Saturday</p>
+                        </div>
+                        <div class="col-span-2">
+                            <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Intermediate Cut-off</p>
+                            <p class="text-white font-bold">8 hrs <span class="text-gray-400 text-xs font-normal">at 31 km</span></p>
                         </div>
                     </div>
                     <a href="{{ route('race-category.60km') }}"
@@ -182,84 +250,99 @@
                 </div>
             </div>
 
-            {{-- 21 KM + 10 KM stacked --}}
-            <div class="flex flex-col gap-6">
-
-                {{-- 21 KM --}}
-                <div data-race-card class="rounded-xl overflow-hidden bg-[#1a1a1a] flex flex-1">
-                    <div class="relative bg-gray-700 w-1/2 flex-shrink-0 flex items-center justify-center text-gray-500 text-xs select-none">
-                        {{-- Image --}}
-                        <img src="/images/21km-bg.png" alt="21km Category" class="absolute inset-0 w-full h-full object-cover" />
-                        {{-- Dark gradient overlay --}}
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
-                        <div class="absolute bottom-6 left-4 md:left-6 grid grid-cols-1 lg:grid-cols-2 gap-2">
-                            <div class="relative">
-                                <p class="text-white font-black text-2xl leading-none">
-                                    TGC <span class="text-green-400">21 KM</span>
-                                </p>
-                                <p class="text-gray-300 text-sm mt-0.5">November 15, 2026</p>
-                            </div>
-                            <div class="relative grid grid-cols-1">
-                                <span class="block p-1 flex align-center justify-self-start bg-white/50">
-                                    <a href="https://utmb.world/utmb-index" target="_blank">
-                                        <img src="images/index-20K.png" class="w-[100px] h-[30px]" alt="UTMB Index 20K"/>
-                                    </a>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-6 flex-1 flex flex-col justify-between">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
-                            <div>
-                                <p class="text-gray-500 text-xs uppercase tracking-wider mb-0.5">Distance</p>
-                                <p class="text-white font-bold text-sm">21.78 KM</p>
-                            </div>
-                            <div>
-                                <p class="text-gray-500 text-xs uppercase tracking-wider mb-0.5">Elevation Gain</p>
-                                <p class="text-white font-bold text-sm">1194M D+</p>
-                            </div>
-                        </div>
-                        <a href="{{ route('race-category.21km') }}"
-                            class="bg-green-500 hover:bg-green-600 text-white text-xs font-semibold px-3 py-2 rounded-lg text-center transition-colors block">
-                            Race Details
-                        </a>
-
+            {{-- 21 KM --}}
+            <div data-race-card class="rounded-xl overflow-hidden bg-[#1a1a1a] flex flex-col">
+                <div class="relative w-full h-48 bg-gray-700 flex items-center justify-center text-gray-500 text-xs select-none">
+                    {{-- Image --}}
+                    <img src="/images/21km-bg.png" alt="21km Category" class="absolute inset-0 w-full h-full object-cover" />
+                    {{-- Dark gradient overlay --}}
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
+                    <div class="absolute grid grid-cols-1 bottom-6 left-4 md:left-6">
+                        <p class="text-white font-black text-3xl leading-none">
+                            TGC <span class="text-green-400">21 KM</span>
+                        </p>
+                        <span class="block p-1 my-2 justify-self-start bg-white/50">
+                            <a href="https://utmb.world/utmb-index" target="_blank">
+                                <img src="images/index-20K.png" class="w-[100px] h-[30px]" alt="UTMB Index 20K"/>
+                            </a>
+                        </span>
+                        <p class="text-gray-300 text-sm mt-1">November 15, 2026</p>
                     </div>
                 </div>
-
-                {{-- 10 KM --}}
-                <div data-race-card class="rounded-xl overflow-hidden bg-[#1a1a1a] flex flex-1">
-                    <div class="relative bg-gray-700 w-1/2 flex-shrink-0 flex items-center justify-center text-gray-500 text-xs select-none">
-                        {{-- Image --}}
-                        <img src="/images/10km-bg.png" alt="10km Category" class="absolute inset-0 w-full h-full object-cover" />
-                        {{-- Dark gradient overlay --}}
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
-                        <div class="absolute bottom-6 left-4 md:left-6">
-                            <p class="text-white font-black text-2xl leading-none">
-                                TGC <span class="text-cyan-400">10 KM</span>
-                            </p>
-                            <p class="text-gray-300 text-sm mt-0.5">November 15, 2026</p>
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div class="grid grid-cols-2 gap-4 mb-5">
+                        <div>
+                            <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Est. Distance</p>
+                            <p class="text-white font-bold">22 KM</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Est. Elev. Gain</p>
+                            <p class="text-white font-bold">1,200M D+</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Gunstart</p>
+                            <p class="text-white font-bold">4:30 AM</p>
+                            <p class="text-gray-400 text-xs mt-0.5">Sunday, Nov 15 (UTC+8)</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Time Limit</p>
+                            <p class="text-white font-bold">8 hrs</p>
+                            <p class="text-gray-400 text-xs mt-0.5">12:30 PM Sunday</p>
+                        </div>
+                        <div class="col-span-2">
+                            <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Intermediate Cut-off</p>
+                            <p class="text-white font-bold">6.5 hrs <span class="text-gray-400 text-xs font-normal">at 16 km</span></p>
                         </div>
                     </div>
-                    <div class="p-6 flex-1 flex flex-col justify-between">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
-                            <div>
-                                <p class="text-gray-500 text-xs uppercase tracking-wider mb-0.5">Distance</p>
-                                <p class="text-white font-bold text-sm">10.32 KM</p>
-                            </div>
-                            <div>
-                                <p class="text-gray-500 text-xs uppercase tracking-wider mb-0.5">Elevation Gain</p>
-                                <p class="text-white font-bold text-sm">364M D+</p>
-                            </div>
-                        </div>
-                        <a href="{{ route('race-category.10km') }}"
-                            class="bg-cyan-500 hover:bg-cyan-600 text-white text-xs font-semibold px-3 py-2 rounded-lg text-center transition-colors block">
-                            Race Details
-                        </a>
-                    </div>
+                    <a href="{{ route('race-category.21km') }}"
+                        class="bg-green-500 hover:bg-green-600 text-white text-sm font-semibold px-4 py-2.5 rounded-lg text-center transition-colors block">
+                        Race Details
+                    </a>
                 </div>
-
             </div>
+
+            {{-- 10 KM --}}
+            <div data-race-card class="rounded-xl overflow-hidden bg-[#1a1a1a] flex flex-col md:flex-row lg:flex-col md:col-span-2 lg:col-span-1">
+                <div class="relative w-full h-48 md:h-auto md:w-1/2 lg:w-full lg:h-48 bg-gray-700 flex items-center justify-center text-gray-500 text-xs select-none">
+                    {{-- Image --}}
+                    <img src="/images/10km-bg.png" alt="10km Category" class="absolute inset-0 w-full h-full object-cover" />
+                    {{-- Dark gradient overlay --}}
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
+                    <div class="absolute bottom-6 left-4 md:left-6">
+                        <p class="text-white font-black text-3xl leading-none">
+                            TGC <span class="text-cyan-400">10 KM</span>
+                        </p>
+                        <p class="text-gray-300 text-sm mt-2">November 15, 2026</p>
+                    </div>
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div class="grid grid-cols-2 gap-4 mb-5">
+                        <div>
+                            <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Est. Distance</p>
+                            <p class="text-white font-bold">10 KM</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Est. Elev. Gain</p>
+                            <p class="text-white font-bold">400M D+</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Gunstart</p>
+                            <p class="text-white font-bold">6:30 AM</p>
+                            <p class="text-gray-400 text-xs mt-0.5">Sunday, Nov 15 (UTC+8)</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Time Limit</p>
+                            <p class="text-white font-bold">3 hrs</p>
+                            <p class="text-gray-400 text-xs mt-0.5">9:30 AM Sunday</p>
+                        </div>
+                    </div>
+                    <a href="{{ route('race-category.10km') }}"
+                        class="bg-cyan-500 hover:bg-cyan-600 text-white text-sm font-semibold px-4 py-2.5 rounded-lg text-center transition-colors block">
+                        Race Details
+                    </a>
+                </div>
+            </div>
+
         </div>
 
     </div>
@@ -267,9 +350,33 @@
 
 
 {{-- ========================================================
+         RACE VILLAGE / START & FINISH MAP
+    ======================================================== --}}
+<section id="race-village" class="bg-[#111111] py-24">
+    <div class="mx-auto px-8" style="max-width:1280px;">
+        <div class="max-w-3xl mx-auto text-center mb-12">
+            <p class="text-orange-500 text-sm font-semibold mb-2 uppercase tracking-wider">Race Village</p>
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Start & Finish</h2>
+            <p class="text-gray-400 leading-relaxed">
+                Camp John Hay Forest Bathing Trail, Baguio City. All categories start and finish here.
+            </p>
+        </div>
+        <div class="w-full rounded-2xl overflow-hidden" style="aspect-ratio:16/9;">
+            <iframe class="w-full h-full" src="https://maps.google.com/maps?q=16.3988059,120.6148222&z=16&output=embed" title="Race Village location map" style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        </div>
+        <div class="text-center mt-6">
+            <a href="https://maps.app.goo.gl/6kY14yzemKW1xfD29" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-orange-500 hover:text-orange-400 font-semibold text-sm">
+                Open in Google Maps
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5h5v5M19 5l-9 9M5 7v12h12"/></svg>
+            </a>
+        </div>
+    </div>
+</section>
+
+{{-- ========================================================
          DTP TRAIL × TGC 100 INTERNATIONAL COLLABORATION
     ======================================================== --}}
-<section id="dtp-collab" class="bg-[#111111] py-24">
+<section id="dtp-collab" class="bg-[#0d0d0d] py-24">
     <div class="mx-auto px-8" style="max-width:1280px;">
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 items-center mb-12">
@@ -384,6 +491,10 @@
     </div>
 </section>
 
+{{-- ========================================================
+         RACE PARTNERS (sponsor marquee)
+    ======================================================== --}}
+<x-sponsors-marquee class="bg-[#111111]" show-all-link />
 
 {{-- ========================================================
          FOOTER
@@ -397,19 +508,53 @@
         if (!window.gsap) return;
 
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (prefersReducedMotion) return;
+        const loaderEl = document.querySelector('[data-loader]');
+
+        if (prefersReducedMotion) {
+            if (loaderEl) loaderEl.style.display = 'none';
+            return;
+        }
 
         const { gsap, ScrollTrigger } = window;
 
-        // Hero: staggered fade-up on load
-        gsap.from('[data-hero-item]', {
-            y: 24,
-            opacity: 0,
-            duration: 0.9,
-            ease: 'power3.out',
-            stagger: 0.12,
-            delay: 0.1,
-        });
+        document.body.style.overflow = 'hidden';
+
+        const percentEl = document.querySelector('[data-loader-percent]');
+        const barEl = document.querySelector('[data-loader-bar]');
+        const counter = { val: 0 };
+
+        // Loading screen (0-100%) that opens up to reveal the hero
+        const master = gsap.timeline({ defaults: { ease: 'power3.out' }, delay: 0.1 });
+
+        master
+            .set('[data-hero-overlay]', { opacity: 0 })
+            .set('[data-hero-logo], [data-hero-sub], [data-hero-badges], [data-hero-cta]', { opacity: 0, y: 24 })
+            .set('[data-hero-line]', { yPercent: 110 })
+            .to(counter, {
+                val: 100,
+                duration: 2,
+                ease: 'power2.inOut',
+                onUpdate: () => {
+                    const v = Math.round(counter.val);
+                    if (percentEl) percentEl.textContent = v + '%';
+                    if (barEl) barEl.style.width = v + '%';
+                },
+            })
+            .to(loaderEl, {
+                yPercent: -100,
+                duration: 1,
+                ease: 'power4.inOut',
+                onComplete: () => {
+                    document.body.style.overflow = '';
+                    if (loaderEl) loaderEl.style.display = 'none';
+                },
+            }, '+=0.2')
+            .to('[data-hero-overlay]', { opacity: 1, duration: 1.6, ease: 'power1.out' }, '<')
+            .to('[data-hero-logo]', { opacity: 1, y: 0, duration: 1 }, '<+0.2')
+            .to('[data-hero-line]', { yPercent: 0, duration: 1.1, stagger: 0.18 }, '-=0.6')
+            .to('[data-hero-sub]', { opacity: 1, y: 0, duration: 0.9 }, '-=0.5')
+            .to('[data-hero-badges]', { opacity: 1, y: 0, duration: 0.9 }, '-=0.6')
+            .to('[data-hero-cta]', { opacity: 1, y: 0, duration: 0.8 }, '-=0.55');
 
         // Generic reveal on scroll
         gsap.utils.toArray('[data-reveal]').forEach((el) => {

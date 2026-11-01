@@ -7,33 +7,66 @@ use App\Http\Controllers\Admin\RaceCategoryController;
 use App\Http\Controllers\Admin\RegistrationController as AdminRegistrationController;
 use App\Http\Controllers\Admin\RegistrationGroupController;
 use App\Http\Controllers\Admin\TrainingSignupController;
+use App\Http\Controllers\Admin\GrantApplicationController as AdminGrantApplicationController;
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
+use App\Http\Controllers\Admin\ShuttleRsvpController as AdminShuttleRsvpController;
+use App\Http\Controllers\Admin\VolunteerApplicationController as AdminVolunteerApplicationController;
+use App\Http\Controllers\Admin\VolunteerMembershipController as AdminVolunteerMembershipController;
+use App\Http\Controllers\CourseRouteController;
+use App\Http\Controllers\GrantApplicationController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\QuizLeadController;
 use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\ShopController;
 use App\Http\Controllers\TrainingProgramController;
+use App\Http\Controllers\VolunteerApplicationController;
+use App\Http\Controllers\VolunteerMembershipController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 // ----------------------------------------------------------
 // Public Routes
 // ----------------------------------------------------------
 
-Route::get('/', fn () => view('welcome'));
-Route::get('/rules', fn () => view('rules'))->name('rules');
-Route::get('/about', fn () => view('about'))->name('about');
+Route::get('/', fn() => view('welcome'));
+Route::get('/rules', fn() => view('rules'))->name('rules');
+Route::get('/faqs', fn() => view('faqs'))->name('faqs');
+Route::get('/about', fn() => view('about'))->name('about');
+Route::get('/partners', fn() => view('partners'))->name('partners');
 
 Route::get('/news', [NewsController::class, 'index'])->name('news.index');
 Route::get('/news/{newsPost}', [NewsController::class, 'show'])->name('news.show'); // binds by slug
 
+Route::prefix('shop')->name('shop.')->group(function () {
+    Route::get('/', [ShopController::class, 'index'])->name('index');
+    Route::get('/{product}', [ShopController::class, 'show'])->name('show');
+    Route::post('/{product}/order', [ShopController::class, 'store'])
+        ->middleware('throttle:10,1')->name('order');
+});
+
+Route::prefix('programs')->name('programs.')->group(function () {
+    Route::get('/tgc100-grant', fn() => view('programs.tgc100-grant'))->name('tgc100-grant');
+    Route::post('/tgc100-grant', [GrantApplicationController::class, 'store'])
+        ->middleware('throttle:10,1')->name('tgc100-grant.store');
+
+    // Shortlisted volunteers land here from their invite; intentionally not in the top nav
+    Route::get('/volunteer/membership', [VolunteerMembershipController::class, 'create'])->name('volunteer.membership');
+    Route::post('/volunteer/membership', [VolunteerMembershipController::class, 'store'])
+        ->middleware('throttle:10,1')->name('volunteer.membership.store');
+});
+
 Route::prefix('race-category')->name('race-category.')->group(function () {
-    Route::get('/100km', fn () => view('race-category.100km'))->name('100km');
-    Route::get('/60km', fn () => view('race-category.60km'))->name('60km');
-    Route::get('/21km', fn () => view('race-category.21km'))->name('21km');
-    Route::get('/10km', fn () => view('race-category.10km'))->name('10km');
+    Route::get('/100km', fn() => view('race-category.100km'))->name('100km');
+    Route::get('/60km',  fn() => view('race-category.60km'))->name('60km');
+    Route::get('/21km',  fn() => view('race-category.21km'))->name('21km');
+    Route::get('/10km',  fn() => view('race-category.10km'))->name('10km');
+    Route::get('/{slug}/route', CourseRouteController::class)
+        ->whereIn('slug', ['100km', '60km', '21km', '10km'])->name('route');
     Route::post('/21km/quiz', [QuizLeadController::class, 'store'])
         ->middleware('throttle:10,1')->name('21km.quiz');
 });
 
-Route::prefix('register')->name('registration.')->group(function () {
+Route::prefix('register-admin')->name('registration.')->group(function () {
     Route::get('/', [RegistrationController::class, 'create'])->name('create');
     Route::post('/', [RegistrationController::class, 'store'])->name('store');
     // Group registration (5+ participants, volume discount, no discount codes)
@@ -67,10 +100,13 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
         Route::get('/', [AdminRegistrationController::class, 'index'])->name('index');
         Route::get('/export', [AdminRegistrationController::class, 'export'])->name('export');
         Route::get('/{registration}', [AdminRegistrationController::class, 'show'])->name('show');
+        Route::get('/{registration}/edit', [AdminRegistrationController::class, 'edit'])->name('edit');
+        Route::put('/{registration}', [AdminRegistrationController::class, 'update'])->name('update');
         Route::post('/{registration}/approve', [AdminRegistrationController::class, 'approve'])->name('approve');
         Route::post('/{registration}/reject', [AdminRegistrationController::class, 'reject'])->name('reject');
         Route::post('/{registration}/resend-email', [AdminRegistrationController::class, 'resendEmail'])->name('resendEmail');
         Route::patch('/{registration}/bib', [AdminRegistrationController::class, 'updateBib'])->name('updateBib');
+        Route::patch('/{registration}/category', [AdminRegistrationController::class, 'changeCategory'])->name('changeCategory');
     });
 
     // Group registrations, viewed as transactions
@@ -102,6 +138,40 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     // News posts (upload route must precede the resource so it isn't captured by {news})
     Route::post('news/upload-image', [NewsPostController::class, 'uploadImage'])->name('news.uploadImage');
     Route::resource('news', NewsPostController::class)->except(['show'])->names('news');
+
+    // TGC100 Grant applications
+    Route::prefix('grant-applications')->name('grant-applications.')->group(function () {
+        Route::get('/', [AdminGrantApplicationController::class, 'index'])->name('index');
+        Route::get('/export', [AdminGrantApplicationController::class, 'export'])->name('export');
+        Route::get('/{grantApplication}', [AdminGrantApplicationController::class, 'show'])->name('show');
+    });
+
+    // Volunteer applications
+    Route::prefix('volunteer-applications')->name('volunteer-applications.')->group(function () {
+        Route::get('/', [AdminVolunteerApplicationController::class, 'index'])->name('index');
+        Route::get('/export', [AdminVolunteerApplicationController::class, 'export'])->name('export');
+        Route::get('/{volunteerApplication}', [AdminVolunteerApplicationController::class, 'show'])->name('show');
+    });
+
+    // Volunteer membership fee confirmations
+    Route::prefix('volunteer-memberships')->name('volunteer-memberships.')->group(function () {
+        Route::get('/', [AdminVolunteerMembershipController::class, 'index'])->name('index');
+        Route::get('/export', [AdminVolunteerMembershipController::class, 'export'])->name('export');
+    });
+
+    // Merch shop orders
+    Route::prefix('orders')->name('orders.')->group(function () {
+        Route::get('/', [AdminOrderController::class, 'index'])->name('index');
+        Route::get('/export', [AdminOrderController::class, 'export'])->name('export');
+        Route::get('/{order}', [AdminOrderController::class, 'show'])->name('show');
+        Route::patch('/{order}/status', [AdminOrderController::class, 'updateStatus'])->name('updateStatus');
+    });
+
+    // Shuttle service RSVPs
+    Route::prefix('shuttle-rsvp')->name('shuttle-rsvps.')->group(function () {
+        Route::get('/', [AdminShuttleRsvpController::class, 'index'])->name('index');
+        Route::get('/export', [AdminShuttleRsvpController::class, 'export'])->name('export');
+    });
 });
 
 // ----------------------------------------------------------
