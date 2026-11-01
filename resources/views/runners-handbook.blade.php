@@ -4,7 +4,7 @@
 @section('og_description', "The official TGC100 Runner's Handbook. Read it online or download the PDF before race week.")
 
 @php
-    $pdf = asset('docs/tgc100-runners-handbook.pdf');
+    $pdf = asset('docs/tgc100-runners-handbook.pdf').'?v='.filemtime(public_path('docs/tgc100-runners-handbook.pdf'));
 @endphp
 
 @section('content')
@@ -28,7 +28,7 @@
                 </svg>
                 Download Handbook
             </a>
-            <span class="text-gray-500 text-sm">PDF &middot; 48 pages &middot; 1.7 MB</span>
+            <span class="text-gray-500 text-sm">PDF &middot; 49 pages &middot; 5.0 MB</span>
         </div>
     </div>
 </section>
