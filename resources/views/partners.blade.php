@@ -8,6 +8,8 @@
         ['img' => 'dot-car', 'label' => 'Department of Tourism - CAR'],
         ['img' => 'city-of-baguio', 'label' => 'City of Baguio'],
         ['img' => 'itogon', 'label' => 'Municipality of Itogon'],
+        ['img' => 'ds-rush', 'label' => 'Don\'t Stop Running Community'],
+        ['img' => 'north-pace', 'label' => 'North Pace Runners'],
     ];
 @endphp
 

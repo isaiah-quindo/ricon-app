@@ -16,8 +16,9 @@
         ['img' => 'training', 'h' => 44, 'label' => 'Official Training Partner'],
         ['img' => 'lights-sound', 'h' => 54, 'label' => 'Official Lights & Sound Partner'],
         ['img' => 'logistics', 'h' => 66, 'label' => 'Official Logistics Partner'],
-        ['img' => 'ds-rush', 'h' => 64, 'label' => 'Community Partner'],
-        ['img' => 'north-pace', 'h' => 64, 'label' => 'Community Partner'],
+        // Community partners: marquee only; the Partners page lists them under Communities & Government Partners
+        ['img' => 'ds-rush', 'h' => 64, 'label' => 'Community Partner', 'community' => true],
+        ['img' => 'north-pace', 'h' => 64, 'label' => 'Community Partner', 'community' => true],
     ];
 @endphp
 
@@ -99,7 +100,7 @@
 
     @if ($grid)
         <div class="mx-auto px-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-12" style="max-width:1280px;">
-            @foreach ($sponsors as $sponsor)
+            @foreach (array_filter($sponsors, fn ($s) => empty($s['community'])) as $sponsor)
                 <div class="flex flex-col items-center justify-end gap-3 h-[130px]">
                     <img src="/images/partners/{{ $sponsor['img'] }}.png" alt="{{ $sponsor['label'] }}"
                         class="block w-auto max-w-full object-contain brightness-0 invert" style="height:{{ $sponsor['h'] }}px;" loading="lazy">
