@@ -17,6 +17,7 @@
         ['img' => 'lights-sound', 'h' => 54, 'label' => 'Official Lights & Sound Partner'],
         ['img' => 'logistics', 'h' => 66, 'label' => 'Official Logistics Partner'],
         ['img' => 'ds-rush', 'h' => 64, 'label' => 'Community Partner'],
+        ['img' => 'north-pace', 'h' => 64, 'label' => 'Community Partner'],
     ];
 @endphp
 
