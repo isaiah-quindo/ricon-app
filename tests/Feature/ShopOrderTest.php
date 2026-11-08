@@ -11,6 +11,14 @@ class ShopOrderTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        // Public shop routes are disabled; restore them in routes/web.php to re-enable these tests
+        $this->markTestSkipped('Shop is disabled.');
+    }
+
     private function validPayload(array $overrides = []): array
     {
         return array_merge([

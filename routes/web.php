@@ -17,7 +17,6 @@ use App\Http\Controllers\VolunteerMembershipController;
 use App\Http\Controllers\Admin\VolunteerMembershipController as AdminVolunteerMembershipController;
 use App\Http\Controllers\QuizLeadController;
 use App\Http\Controllers\Admin\ShuttleRsvpController as AdminShuttleRsvpController;
-use App\Http\Controllers\ShopController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\TrainingProgramController;
 use App\Http\Controllers\CourseRouteController;
@@ -32,13 +31,6 @@ Route::get('/faqs', fn() => view('faqs'))->name('faqs');
 Route::get('/runners-handbook', fn() => view('runners-handbook'))->name('runners-handbook');
 Route::get('/about', fn() => view('about'))->name('about');
 Route::get('/partners', fn() => view('partners'))->name('partners');
-
-Route::prefix('shop')->name('shop.')->group(function () {
-    Route::get('/', [ShopController::class, 'index'])->name('index');
-    Route::get('/{product}', [ShopController::class, 'show'])->name('show');
-    Route::post('/{product}/order', [ShopController::class, 'store'])
-        ->middleware('throttle:10,1')->name('order');
-});
 
 Route::prefix('programs')->name('programs.')->group(function () {
     Route::get('/tgc100-grant', fn() => view('programs.tgc100-grant'))->name('tgc100-grant');
