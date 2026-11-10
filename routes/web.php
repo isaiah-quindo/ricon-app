@@ -2,6 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Session\Middleware\StartSession;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\RegistrationController as AdminRegistrationController;
@@ -20,6 +23,8 @@ use App\Http\Controllers\Admin\ShuttleRsvpController as AdminShuttleRsvpControll
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\TrainingProgramController;
 use App\Http\Controllers\CourseRouteController;
+use App\Http\Controllers\LiveTrackingController;
+use App\Http\Controllers\Admin\LiveTrackingController as AdminLiveTrackingController;
 
 // ----------------------------------------------------------
 // Public Routes
@@ -56,6 +61,24 @@ Route::prefix('race-category')->name('race-category.')->group(function () {
         ->whereIn('slug', ['100km', '60km', '21km', '10km'])->name('route');
     Route::post('/21km/quiz', [QuizLeadController::class, 'store'])
         ->middleware('throttle:10,1')->name('21km.quiz');
+});
+
+// Live checkpoint tracking for spectators and crews. Only the 100K and 60K pass a timed checkpoint.
+Route::prefix('live')->name('live.')->group(function () {
+    Route::redirect('/', '/live/100km')->name('index');
+    Route::get('/{slug}', [LiveTrackingController::class, 'show'])
+        ->whereIn('slug', ['100km', '60km'])->name('show');
+    Route::get('/{slug}/runners/{bib}', [LiveTrackingController::class, 'runner'])
+        ->whereIn('slug', ['100km', '60km'])->where('bib', '[0-9]+-[0-9]+')->name('runner');
+
+    // Polled by open pages every 20 to 30 seconds. Read-only, so they need no session or CSRF
+    // cookie, and skipping them saves a session read and write per request on race day.
+    Route::withoutMiddleware([StartSession::class, ShareErrorsFromSession::class, PreventRequestForgery::class])->group(function () {
+        Route::get('/{slug}/updates', [LiveTrackingController::class, 'centreUpdates'])
+            ->whereIn('slug', ['100km', '60km'])->name('updates');
+        Route::get('/{slug}/runners/{bib}/updates', [LiveTrackingController::class, 'runnerUpdates'])
+            ->whereIn('slug', ['100km', '60km'])->where('bib', '[0-9]+-[0-9]+')->name('runner.updates');
+    });
 });
 
 Route::prefix('register-admin')->name('registration.')->group(function () {
@@ -159,6 +182,30 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::prefix('shuttle-rsvp')->name('shuttle-rsvps.')->group(function () {
         Route::get('/', [AdminShuttleRsvpController::class, 'index'])->name('index');
         Route::get('/export', [AdminShuttleRsvpController::class, 'export'])->name('export');
+    });
+
+    // Live tracking: race-day overview, timing console, time corrections and DNFs
+    Route::prefix('live')->name('live.')->group(function () {
+        Route::get('/{slug?}', [AdminLiveTrackingController::class, 'index'])
+            ->whereIn('slug', ['100km', '60km'])->name('index');
+        Route::get('/{slug}/timing', [AdminLiveTrackingController::class, 'timing'])
+            ->whereIn('slug', ['100km', '60km'])->name('timing');
+        Route::put('/{slug}/gun', [AdminLiveTrackingController::class, 'setGun'])
+            ->whereIn('slug', ['100km', '60km'])->name('gun');
+        Route::delete('/{slug}/race', [AdminLiveTrackingController::class, 'resetRace'])
+            ->whereIn('slug', ['100km', '60km'])->name('reset');
+        Route::post('/{slug}/passes', [AdminLiveTrackingController::class, 'recordPass'])
+            ->whereIn('slug', ['100km', '60km'])->name('passes.store');
+        Route::delete('/{slug}/passes/{pass}', [AdminLiveTrackingController::class, 'undoPass'])
+            ->whereIn('slug', ['100km', '60km'])->name('passes.destroy');
+        Route::get('/{slug}/runners/{bib}', [AdminLiveTrackingController::class, 'runner'])
+            ->whereIn('slug', ['100km', '60km'])->where('bib', '[0-9]+-[0-9]+')->name('runner');
+        Route::put('/{slug}/runners/{bib}', [AdminLiveTrackingController::class, 'update'])
+            ->whereIn('slug', ['100km', '60km'])->where('bib', '[0-9]+-[0-9]+')->name('runner.update');
+        Route::post('/{slug}/runners/{bib}/dnf', [AdminLiveTrackingController::class, 'markDnf'])
+            ->whereIn('slug', ['100km', '60km'])->where('bib', '[0-9]+-[0-9]+')->name('runner.dnf');
+        Route::delete('/{slug}/runners/{bib}/dnf', [AdminLiveTrackingController::class, 'clearDnf'])
+            ->whereIn('slug', ['100km', '60km'])->where('bib', '[0-9]+-[0-9]+')->name('runner.dnf.clear');
     });
 });
 

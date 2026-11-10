@@ -34,6 +34,9 @@ class Registration extends Model
         'discount_code_id',
         'discount_amount',
         'registration_group_id',
+        'dnf_checkpoint',
+        'dnf_reason',
+        'dnf_at',
     ];
 
     protected $casts = [
@@ -42,6 +45,7 @@ class Registration extends Model
         'terms_agreed'    => 'boolean',
         'price_paid'      => 'decimal:2',
         'discount_amount' => 'decimal:2',
+        'dnf_at'          => 'immutable_datetime',
     ];
 
     public function raceCategory()
@@ -52,6 +56,12 @@ class Registration extends Model
     public function discountCode()
     {
         return $this->belongsTo(DiscountCode::class);
+    }
+
+    /** Race-day checkpoint times (live tracking). */
+    public function checkpointPasses()
+    {
+        return $this->hasMany(CheckpointPass::class);
     }
 
     public function paymentProof()

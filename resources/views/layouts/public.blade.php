@@ -211,6 +211,7 @@
                 </a>
                 <div class="flex flex-wrap items-center gap-6 text-sm text-gray-400">
                     <a href="/#race-categories" class="hover:text-white transition-colors">Race Categories</a>
+                    <a href="{{ route('live.index') }}" class="hover:text-white transition-colors">Live Tracking</a>
                     <a href="{{ route('training.landing') }}" class="hover:text-white transition-colors">Training</a>
                     <a href="{{ route('rules') }}" class="hover:text-white transition-colors">Rules & Guidelines</a>
                     <a href="{{ route('faqs') }}" class="hover:text-white transition-colors">FAQs</a>

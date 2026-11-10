@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700&display=swap" rel="stylesheet" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @stack('head')
 </head>
 
 <body class="font-sans antialiased bg-gray-50">
@@ -49,6 +50,11 @@
                     class="px-3 py-2 rounded-lg text-sm font-medium transition-colors
                           {{ request()->routeIs('admin.orders.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
                     Orders
+                </a>
+                <a href="{{ route('admin.live.index') }}"
+                    class="px-3 py-2 rounded-lg text-sm font-medium transition-colors
+                          {{ request()->routeIs('admin.live.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
+                    Live Tracking
                 </a>
                 <div class="relative" x-data="{ open: false }" @click.outside="open = false" @keydown.escape.window="open = false">
                     <button @click="open = !open" type="button"
@@ -149,6 +155,11 @@
                     class="px-3 py-2 rounded-lg text-sm font-medium transition-colors
                           {{ request()->routeIs('admin.orders.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
                     Orders
+                </a>
+                <a href="{{ route('admin.live.index') }}"
+                    class="px-3 py-2 rounded-lg text-sm font-medium transition-colors
+                          {{ request()->routeIs('admin.live.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
+                    Live Tracking
                 </a>
                 <div x-data="{ programsOpen: {{ request()->routeIs('admin.training-signups.*') || request()->routeIs('admin.grant-applications.*') || request()->routeIs('admin.volunteer-applications.*') || request()->routeIs('admin.volunteer-memberships.*') || request()->routeIs('admin.shuttle-rsvps.*') ? 'true' : 'false' }} }">
                     <button type="button" @click="programsOpen = !programsOpen"

@@ -20,11 +20,13 @@ class RaceCategory extends Model
         'max_slots',
         'bib_start_number',
         'is_active',
+        'gun_start_at',
     ];
 
     protected $casts = [
-        'is_active' => 'boolean',
-        'price'     => 'decimal:2',
+        'is_active'    => 'boolean',
+        'price'        => 'decimal:2',
+        'gun_start_at' => 'immutable_datetime',
     ];
 
     public function registrations()

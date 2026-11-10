@@ -1,6 +1,9 @@
 @props([
     'action',
     'method'       => 'POST',
+    // Set trigger to null and give the modal a name to open it from elsewhere, e.g. a menu:
+    // $dispatch('open-modal', 'reset-race'). Same event as the Breeze x-modal component.
+    'name'         => null,
     'trigger'      => 'Confirm',
     'triggerClass' => 'w-full px-4 py-2.5 bg-green-600 text-white text-sm font-medium rounded-lg hover:bg-green-700 transition-colors',
     'title'        => 'Are you sure?',
@@ -17,15 +20,21 @@
     [$confirmClasses, $iconClasses] = $tones[$tone] ?? $tones['green'];
 @endphp
 
-<div x-data="{ open: false }">
-    <button type="button" @click="open = true" class="{{ $triggerClass }}">
-        {{ $trigger }}
-    </button>
+@php $titleId = 'confirm-title-' . Str::random(6); @endphp
+{{-- Focus starts on Cancel: the safe choice when the action can't be undone. --}}
+<div x-data="{ open: false }"
+    x-init="$watch('open', value => value && $nextTick(() => $refs.cancel.focus()))"
+    @if ($name) x-on:open-modal.window="$event.detail === @js($name) && (open = true)" @endif>
+    @if ($trigger)
+        <button type="button" @click="open = true" class="{{ $triggerClass }}">
+            {{ $trigger }}
+        </button>
+    @endif
 
     <div x-show="open" x-cloak
         class="fixed inset-0 z-50 flex items-center justify-center p-4"
         @keydown.escape.window="open = false"
-        role="dialog" aria-modal="true">
+        role="dialog" aria-modal="true" aria-labelledby="{{ $titleId }}">
 
         <div class="absolute inset-0 bg-gray-900/60 backdrop-blur-sm"
             @click="open = false"
@@ -56,7 +65,7 @@
                         </svg>
                     </span>
                     <div class="min-w-0">
-                        <h3 class="text-base font-bold text-gray-900">{{ $title }}</h3>
+                        <h3 id="{{ $titleId }}" class="text-base font-bold text-gray-900">{{ $title }}</h3>
                         @if($message)
                         <p class="text-sm text-gray-500 mt-1.5">{{ $message }}</p>
                         @endif
@@ -67,7 +76,7 @@
             </div>
 
             <div class="px-6 py-4 bg-gray-50 border-t border-gray-100 rounded-b-2xl flex items-center justify-end gap-3">
-                <button type="button" @click="open = false"
+                <button type="button" @click="open = false" x-ref="cancel"
                     class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 hover:bg-gray-100 rounded-lg transition-colors">
                     Cancel
                 </button>

@@ -14,6 +14,8 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                // Race times on the live tracking pages. Loaded only on those pages.
+                mono: ['"JetBrains Mono"', ...defaultTheme.fontFamily.mono],
             },
         },
     },
