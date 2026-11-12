@@ -4,25 +4,48 @@
     $gun = $race->course['gun'];
     $scheduled = $race->course['scheduled_gun'];
     $gunSet = $race->course['gun_set'];
+    // Seconds since the gun by the server's clock, negative while it's still ahead. The page
+    // counts on from here, so a viewer's device clock being off doesn't matter.
+    $sinceGun = $gunSet ? (int) floor($gun->diffInSeconds($race->now)) : null;
 @endphp
 
-{{-- Race clock: real time, counted from the gun start set here (⋮ menu). No gun start means not started. --}}
-<div class="bg-white rounded-xl border border-gray-200 p-5">
+{{-- Race clock: real time, counted from the gun start set here (⋮ menu). No gun start means not started.
+     Ticks every second, and flips from "Starts in …" to Running when a gun set ahead comes round. --}}
+<div class="bg-white rounded-xl border border-gray-200 p-5" x-data="{
+        sinceGun: @js($sinceGun),
+        loadedAt: Date.now(),
+        elapsed: @js($sinceGun),
+        init() {
+            if (this.sinceGun === null) return;
+            setInterval(() => this.elapsed = this.sinceGun + Math.floor((Date.now() - this.loadedAt) / 1000), 1000);
+        },
+        get started() { return this.elapsed !== null && this.elapsed >= 0 },
+        get clock() {
+            const s = Math.max(0, this.elapsed ?? 0);
+            return `${Math.floor(s / 3600)}:${String(Math.floor(s % 3600 / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
+        },
+        {{-- Same wording as Format::until(): in 5 min, in 23 h 5 min, in 24 h --}}
+        get until() {
+            const m = Math.ceil(-this.elapsed / 60), h = Math.floor(m / 60);
+            return 'in ' + [h ? `${h} h` : '', m % 60 || !h ? `${m % 60} min` : ''].filter(Boolean).join(' ');
+        },
+    }">
     <div class="flex items-center justify-between gap-2">
         <h2 class="font-semibold text-gray-900">Race clock</h2>
         <div class="flex items-center gap-1">
-            @if ($gunSet && ! $race->started())
+            @if ($gunSet)
                 {{-- A gun start in the future: easy to save by mistake, since the dialog starts on the scheduled date. --}}
-                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border bg-amber-50 border-amber-200 text-amber-700">
-                    <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> Starts {{ Format::until($gun, $race->now) }}
+                <span x-show="!started" @if ($race->started()) style="display: none" @endif
+                    class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border bg-amber-50 border-amber-200 text-amber-700">
+                    <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> Starts <span x-text="until">{{ Format::until($gun, $race->now) }}</span>
                 </span>
-            @elseif (! $race->started())
-                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border bg-gray-100 border-gray-200 text-gray-600">
-                    <span class="w-1.5 h-1.5 rounded-full bg-gray-400"></span> Not started
+                <span x-show="started" @unless ($race->started()) style="display: none" @endunless
+                    class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border bg-green-50 border-green-200 text-green-700">
+                    <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> Running
                 </span>
             @else
-                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border bg-green-50 border-green-200 text-green-700">
-                    <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> Running
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border bg-gray-100 border-gray-200 text-gray-600">
+                    <span class="w-1.5 h-1.5 rounded-full bg-gray-400"></span> Not started
                 </span>
             @endif
 
@@ -61,7 +84,7 @@
         </div>
         <div class="flex justify-between gap-4">
             <dt class="text-gray-500">Race time</dt>
-            <dd class="font-mono text-2xl font-bold text-gray-900">{{ Format::duration($raceSeconds, true) }}</dd>
+            <dd class="font-mono text-2xl font-bold text-gray-900 tabular-nums" x-text="clock">{{ Format::duration($raceSeconds, true) }}</dd>
         </div>
         <div class="flex justify-between gap-4">
             <dt class="text-gray-500">Runners</dt>

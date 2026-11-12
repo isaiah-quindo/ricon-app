@@ -389,12 +389,13 @@ class LiveTrackingTest extends TestCase
             ->put('/admin/live/100km/gun', ['gun_start' => '2026-11-13T15:57'])
             ->assertSessionHas('success', 'TGC 100 KM gun start set to 3:57 PM Fri. That\'s in 24 h, so the race shows as not started until then. If the gun already went off, check the date.');
 
-        $this->get('/admin/live/100km')->assertSee('Starts in 24 h')->assertDontSee('Not started');
+        // The page counts down from the server's clock: 23 h 59 min 30 s to go.
+        $this->get('/admin/live/100km')->assertSeeText('Starts in 24 h')->assertSee('sinceGun: -86370', false)->assertDontSee('Not started');
 
         // The right date: no warning, and the race is running.
         $this->put('/admin/live/100km/gun', ['gun_start' => '2026-11-12T15:57'])
             ->assertSessionHas('success', 'TGC 100 KM gun start set to 3:57 PM Thu.');
-        $this->get('/admin/live/100km')->assertSee('Running');
+        $this->get('/admin/live/100km')->assertSee('sinceGun: 30', false)->assertSee('0:00:30');
     }
 
     public function test_the_gun_start_set_in_admin_is_the_source_of_truth(): void
