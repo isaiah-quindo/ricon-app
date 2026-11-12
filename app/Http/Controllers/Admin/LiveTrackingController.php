@@ -151,7 +151,15 @@ class LiveTrackingController extends Controller
         RaceCategory::whereKey($race->course['race_category_id'])->update(['gun_start_at' => $this->forStorage($gun)]);
         LiveRace::forget($slug);
 
-        return back()->with('success', "{$race->course['title']} gun start set to " . Format::timeWithDay($gun) . '.');
+        $message = "{$race->course['title']} gun start set to " . Format::timeWithDay($gun) . '.';
+        // The dialog is prefilled with the scheduled date, so a time typed on another day can
+        // easily land in the future. Say so, or the race just stays "not started".
+        if ($gun->greaterThan($race->now)) {
+            $message .= ' That\'s ' . Format::until($gun, $race->now) . ', so the race shows as not started until then.'
+                . ' If the gun already went off, check the date.';
+        }
+
+        return back()->with('success', $message);
     }
 
     /**

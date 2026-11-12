@@ -42,6 +42,15 @@ class Format
         };
     }
 
+    /** "in 5 min", "in 23 h 5 min", "in 24 h" */
+    public static function until(CarbonImmutable $time, CarbonImmutable $now): string
+    {
+        $minutes = (int) ceil($now->diffInMinutes($time));
+        [$h, $m] = [intdiv($minutes, 60), $minutes % 60];
+
+        return 'in ' . trim(($h ? "{$h} h " : '') . ($m || ! $h ? "{$m} min" : ''));
+    }
+
     /** "3:40–4:25 PM", or "11:50 PM–12:30 AM" when the window crosses noon or midnight. */
     public static function window(array $eta): string
     {

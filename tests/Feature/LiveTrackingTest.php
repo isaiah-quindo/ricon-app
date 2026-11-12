@@ -380,6 +380,23 @@ class LiveTrackingTest extends TestCase
         $this->assertTrue($this->hundred->refresh()->gun_start_at->equalTo(CarbonImmutable::parse('2026-11-13 23:04', 'Asia/Manila')));
     }
 
+    public function test_a_gun_start_still_ahead_is_flagged(): void
+    {
+        // Thursday afternoon, testing: the time is typed but the date is left on the scheduled Friday.
+        $this->travelTo(CarbonImmutable::parse('2026-11-12 15:57:30', 'Asia/Manila'));
+
+        $this->actingAs($this->admin())
+            ->put('/admin/live/100km/gun', ['gun_start' => '2026-11-13T15:57'])
+            ->assertSessionHas('success', 'TGC 100 KM gun start set to 3:57 PM Fri. That\'s in 24 h, so the race shows as not started until then. If the gun already went off, check the date.');
+
+        $this->get('/admin/live/100km')->assertSee('Starts in 24 h')->assertDontSee('Not started');
+
+        // The right date: no warning, and the race is running.
+        $this->put('/admin/live/100km/gun', ['gun_start' => '2026-11-12T15:57'])
+            ->assertSessionHas('success', 'TGC 100 KM gun start set to 3:57 PM Thu.');
+        $this->get('/admin/live/100km')->assertSee('Running');
+    }
+
     public function test_the_gun_start_set_in_admin_is_the_source_of_truth(): void
     {
         $this->runner(1);

@@ -11,7 +11,12 @@
     <div class="flex items-center justify-between gap-2">
         <h2 class="font-semibold text-gray-900">Race clock</h2>
         <div class="flex items-center gap-1">
-            @if (! $race->started())
+            @if ($gunSet && ! $race->started())
+                {{-- A gun start in the future: easy to save by mistake, since the dialog starts on the scheduled date. --}}
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border bg-amber-50 border-amber-200 text-amber-700">
+                    <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> Starts {{ Format::until($gun, $race->now) }}
+                </span>
+            @elseif (! $race->started())
                 <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border bg-gray-100 border-gray-200 text-gray-600">
                     <span class="w-1.5 h-1.5 rounded-full bg-gray-400"></span> Not started
                 </span>
