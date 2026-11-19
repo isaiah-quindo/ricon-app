@@ -15,11 +15,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // Local admin for /admin. Safe to re-run: updates the existing row.
+        User::updateOrCreate(
+            ['email' => 'admin@ricon.test'],
+            [
+                'name' => 'Ricon Admin',
+                'password' => 'password',
+                'role' => 'admin',
+            ],
+        );
     }
 }

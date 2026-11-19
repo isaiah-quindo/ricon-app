@@ -109,7 +109,7 @@ return [
             'charset'         => 'utf8',
             'prefix'          => '',
             'schema'          => 'public',
-            'sslmode'         => 'require',
+            'sslmode'         => env('DB_SSLMODE', 'require'),
             'connect_timeout' => 10,
             'options'         => [
                 PDO::ATTR_TIMEOUT => 10,
