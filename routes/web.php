@@ -20,7 +20,9 @@ use App\Http\Controllers\VolunteerMembershipController;
 use App\Http\Controllers\Admin\VolunteerMembershipController as AdminVolunteerMembershipController;
 use App\Http\Controllers\QuizLeadController;
 use App\Http\Controllers\Admin\ShuttleRsvpController as AdminShuttleRsvpController;
+use App\Http\Controllers\ShopController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\TrainingProgramController;
 use App\Http\Controllers\CourseRouteController;
 use App\Http\Controllers\LiveTrackingController;
@@ -36,6 +38,14 @@ Route::get('/faqs', fn() => view('faqs'))->name('faqs');
 Route::get('/runners-handbook', fn() => view('runners-handbook'))->name('runners-handbook');
 Route::get('/about', fn() => view('about'))->name('about');
 Route::get('/partners', fn() => view('partners'))->name('partners');
+
+Route::prefix('shop')->name('shop.')->group(function () {
+    Route::get('/', [ShopController::class, 'index'])->name('index');
+    Route::get('/checkout', [ShopController::class, 'checkout'])->name('checkout');
+    Route::post('/checkout', [ShopController::class, 'store'])
+        ->middleware('throttle:10,1')->name('store');
+    Route::get('/order-received', [ShopController::class, 'success'])->name('success');
+});
 
 Route::prefix('programs')->name('programs.')->group(function () {
     Route::get('/tgc100-grant', fn() => view('programs.tgc100-grant'))->name('tgc100-grant');
@@ -176,7 +186,18 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
         Route::get('/export', [AdminOrderController::class, 'export'])->name('export');
         Route::get('/{order}', [AdminOrderController::class, 'show'])->name('show');
         Route::patch('/{order}/status', [AdminOrderController::class, 'updateStatus'])->name('updateStatus');
+        Route::post('/{order}/confirm', [AdminOrderController::class, 'confirm'])->name('confirm');
+        Route::post('/{order}/reject', [AdminOrderController::class, 'reject'])->name('reject');
+        Route::post('/{order}/ship', [AdminOrderController::class, 'ship'])->name('ship');
+        Route::post('/{order}/resend-confirmation', [AdminOrderController::class, 'resendConfirmation'])->name('resendConfirmation');
+        Route::patch('/{order}/notes', [AdminOrderController::class, 'updateNotes'])->name('updateNotes');
     });
+
+    // Merch products and stock (no destroy: retire a product by hiding it)
+    Route::resource('products', AdminProductController::class)
+        ->except(['show', 'destroy'])
+        ->names('products');
+    Route::patch('/products/{product}/stock', [AdminProductController::class, 'updateStock'])->name('products.updateStock');
 
     // Shuttle service RSVPs
     Route::prefix('shuttle-rsvp')->name('shuttle-rsvps.')->group(function () {

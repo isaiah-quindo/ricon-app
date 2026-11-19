@@ -108,6 +108,7 @@
                     </div>
 
                     <a href="/#race-categories" class="text-gray-300 hover:text-white text-sm font-medium transition-colors">Race Categories</a>
+                    <a href="{{ route('shop.index') }}" class="text-gray-300 hover:text-white text-sm font-medium transition-colors">Shop</a>
                 </div>
 
                 {{-- Mobile hamburger --}}
@@ -164,6 +165,7 @@
                 </div>
 
                 <a href="/#race-categories" @click="open = false" class="text-gray-300 hover:text-white text-sm font-medium transition-colors py-2">Race Categories</a>
+                <a href="{{ route('shop.index') }}" @click="open = false" class="text-gray-300 hover:text-white text-sm font-medium transition-colors py-2">Shop</a>
             </div>
         </div>
     </nav>
@@ -211,6 +213,7 @@
                 </a>
                 <div class="flex flex-wrap items-center gap-6 text-sm text-gray-400">
                     <a href="/#race-categories" class="hover:text-white transition-colors">Race Categories</a>
+                    <a href="{{ route('shop.index') }}" class="hover:text-white transition-colors">Shop</a>
                     <a href="{{ route('live.index') }}" class="hover:text-white transition-colors">Live Tracking</a>
                     <a href="{{ route('training.landing') }}" class="hover:text-white transition-colors">Training</a>
                     <a href="{{ route('rules') }}" class="hover:text-white transition-colors">Rules & Guidelines</a>

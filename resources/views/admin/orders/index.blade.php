@@ -26,9 +26,23 @@ return $currentDir === 'asc'
 </svg>';
 };
 $select = 'w-full rounded-lg border border-gray-200 bg-white text-sm text-gray-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent';
-$hasFilters = collect(request()->only(['search', 'product', 'size', 'status']))->filter()->isNotEmpty();
-$allSizes = collect($products)->pluck('sizes')->filter()->flatten()->unique()->values();
+$hasFilters = collect(request()->only(['search', 'product', 'shipping_area', 'status']))->filter()->isNotEmpty();
+$needsAction = ['payment_submitted' => 'to review', 'confirmed' => 'to ship'];
 @endphp
+
+{{-- Work queue --}}
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
+    @foreach(['payment_submitted', 'confirmed', 'shipped', 'completed'] as $s)
+    <a href="{{ route('admin.orders.index', ['status' => $s]) }}"
+        class="bg-white rounded-xl border p-4 transition-colors {{ request('status') === $s ? 'border-indigo-400 ring-1 ring-indigo-400' : 'border-gray-200 hover:border-gray-300' }}">
+        <p class="text-xs font-medium text-gray-500">{{ $statuses[$s] }}</p>
+        <p class="text-2xl font-bold text-gray-900 mt-1">{{ $statusCounts[$s] ?? 0 }}</p>
+        @isset($needsAction[$s])
+        <p class="text-xs text-gray-400 mt-0.5">{{ $needsAction[$s] }}</p>
+        @endisset
+    </a>
+    @endforeach
+</div>
 
 {{-- Filters --}}
 <form method="GET" action="{{ route('admin.orders.index') }}"
@@ -36,7 +50,7 @@ $allSizes = collect($products)->pluck('sizes')->filter()->flatten()->unique()->v
 
     <div class="flex-1 min-w-40">
         <label class="block text-xs font-medium text-gray-500 mb-1.5">Search</label>
-        <input type="text" name="search" value="{{ request('search') }}" placeholder="Name, email, mobile, or reference"
+        <input type="text" name="search" value="{{ request('search') }}" placeholder="Name, email, mobile, reference, tracking"
             class="{{ $select }}">
     </div>
 
@@ -44,18 +58,18 @@ $allSizes = collect($products)->pluck('sizes')->filter()->flatten()->unique()->v
         <label class="block text-xs font-medium text-gray-500 mb-1.5">Item</label>
         <select name="product" class="{{ $select }}">
             <option value="">All items</option>
-            @foreach($products as $slug => $product)
-            <option value="{{ $slug }}" @selected(request('product') === $slug)>{{ $product['short_name'] }}</option>
+            @foreach($products as $name)
+            <option value="{{ $name }}" @selected(request('product') === $name)>{{ $name }}</option>
             @endforeach
         </select>
     </div>
 
-    <div class="min-w-28">
-        <label class="block text-xs font-medium text-gray-500 mb-1.5">Size</label>
-        <select name="size" class="{{ $select }}">
-            <option value="">All sizes</option>
-            @foreach($allSizes as $size)
-            <option value="{{ $size }}" @selected(request('size') === $size)>{{ $size }}</option>
+    <div class="min-w-36">
+        <label class="block text-xs font-medium text-gray-500 mb-1.5">Shipping</label>
+        <select name="shipping_area" class="{{ $select }}">
+            <option value="">All areas</option>
+            @foreach($shippingAreas as $key => $area)
+            <option value="{{ $key }}" @selected(request('shipping_area') === $key)>{{ $area['label'] }}</option>
             @endforeach
         </select>
     </div>
@@ -107,7 +121,8 @@ $allSizes = collect($products)->pluck('sizes')->filter()->flatten()->unique()->v
                             Name {!! $sortIcon('full_name') !!}
                         </a>
                     </th>
-                    <th class="px-5 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Item</th>
+                    <th class="px-5 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Items</th>
+                    <th class="px-5 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Shipping</th>
                     <th class="px-5 py-3 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider">
                         <a href="{{ $sortUrl('total') }}" class="inline-flex items-center hover:text-indigo-600 transition-colors">
                             Total {!! $sortIcon('total') !!}
@@ -135,10 +150,18 @@ $allSizes = collect($products)->pluck('sizes')->filter()->flatten()->unique()->v
                         <p class="text-xs text-gray-400 mt-0.5">{{ $order->email }}</p>
                     </td>
                     <td class="px-5 py-4">
-                        <span class="inline-flex items-center px-2 py-1 bg-orange-50 border border-orange-200 text-orange-700 text-xs font-medium rounded-md whitespace-nowrap">
-                            {{ $order->product_name }}
-                        </span>
-                        <p class="text-xs text-gray-400 mt-1 whitespace-nowrap">{{ $order->size ?? 'One size' }} &middot; Qty {{ $order->quantity }}</p>
+                        @foreach($order->items as $item)
+                        <p class="text-xs text-gray-700 whitespace-nowrap">
+                            <span class="font-semibold">{{ $item->quantity }}&times;</span> {{ $item->product_name }}
+                            <span class="text-gray-400">&middot; {{ $item->options_label }}</span>
+                        </p>
+                        @endforeach
+                    </td>
+                    <td class="px-5 py-4 text-xs text-gray-600 whitespace-nowrap">
+                        {{ $order->shipping_area_label ?? 'n/a' }}
+                        @if($order->tracking_number)
+                        <p class="font-mono text-gray-400 mt-0.5">{{ $order->tracking_number }}</p>
+                        @endif
                     </td>
                     <td class="px-5 py-4 text-sm font-semibold text-gray-900 text-right whitespace-nowrap">&#8369;{{ number_format($order->total) }}</td>
                     <td class="px-5 py-4">
@@ -157,7 +180,7 @@ $allSizes = collect($products)->pluck('sizes')->filter()->flatten()->unique()->v
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="7" class="px-5 py-12 text-center">
+                    <td colspan="8" class="px-5 py-12 text-center">
                         <div class="flex flex-col items-center gap-2 text-gray-400">
                             <svg class="w-10 h-10 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
