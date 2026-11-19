@@ -46,11 +46,34 @@
                           {{ request()->routeIs('admin.discount-codes.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
                     Discount Codes
                 </a>
-                <a href="{{ route('admin.orders.index') }}"
-                    class="px-3 py-2 rounded-lg text-sm font-medium transition-colors
-                          {{ request()->routeIs('admin.orders.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
-                    Orders
-                </a>
+                <div class="relative" x-data="{ open: false }" @click.outside="open = false" @keydown.escape.window="open = false">
+                    <button @click="open = !open" type="button"
+                        class="px-3 py-2 rounded-lg text-sm font-medium transition-colors inline-flex items-center gap-1
+                              {{ request()->routeIs('admin.orders.*', 'admin.products.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
+                        Shop
+                        <svg class="w-3.5 h-3.5 transition-transform duration-150" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div x-show="open"
+                        x-transition:enter="transition ease-out duration-150"
+                        x-transition:enter-start="opacity-0 -translate-y-1"
+                        x-transition:enter-end="opacity-100 translate-y-0"
+                        x-transition:leave="transition ease-in duration-100"
+                        x-transition:leave-start="opacity-100 translate-y-0"
+                        x-transition:leave-end="opacity-0 -translate-y-1"
+                        class="absolute left-0 mt-2 w-48 rounded-lg border border-gray-800 bg-gray-900 shadow-xl py-1.5 z-50"
+                        style="display: none;">
+                        <a href="{{ route('admin.orders.index') }}"
+                            class="block px-4 py-2 text-sm transition-colors {{ request()->routeIs('admin.orders.*') ? 'text-white bg-gray-800' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
+                            Orders
+                        </a>
+                        <a href="{{ route('admin.products.index') }}"
+                            class="block px-4 py-2 text-sm transition-colors {{ request()->routeIs('admin.products.*') ? 'text-white bg-gray-800' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
+                            Inventory
+                        </a>
+                    </div>
+                </div>
                 <a href="{{ route('admin.live.index') }}"
                     class="px-3 py-2 rounded-lg text-sm font-medium transition-colors
                           {{ request()->routeIs('admin.live.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
@@ -151,11 +174,28 @@
                           {{ request()->routeIs('admin.discount-codes.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
                     Discount Codes
                 </a>
-                <a href="{{ route('admin.orders.index') }}"
-                    class="px-3 py-2 rounded-lg text-sm font-medium transition-colors
-                          {{ request()->routeIs('admin.orders.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
-                    Orders
-                </a>
+                <div x-data="{ shopOpen: {{ request()->routeIs('admin.orders.*', 'admin.products.*') ? 'true' : 'false' }} }">
+                    <button type="button" @click="shopOpen = !shopOpen"
+                        class="w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm font-medium transition-colors
+                              {{ request()->routeIs('admin.orders.*', 'admin.products.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
+                        Shop
+                        <svg class="w-3.5 h-3.5 transition-transform" :class="shopOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div x-show="shopOpen" x-transition class="pl-3 flex flex-col gap-1 mt-1">
+                        <a href="{{ route('admin.orders.index') }}"
+                            class="px-3 py-2 rounded-lg text-sm font-medium transition-colors
+                                  {{ request()->routeIs('admin.orders.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
+                            Orders
+                        </a>
+                        <a href="{{ route('admin.products.index') }}"
+                            class="px-3 py-2 rounded-lg text-sm font-medium transition-colors
+                                  {{ request()->routeIs('admin.products.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
+                            Inventory
+                        </a>
+                    </div>
+                </div>
                 <a href="{{ route('admin.live.index') }}"
                     class="px-3 py-2 rounded-lg text-sm font-medium transition-colors
                           {{ request()->routeIs('admin.live.*') ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800' }}">
@@ -219,10 +259,16 @@
 
     <!-- Flash messages -->
     @if(session('success') || session('error'))
-    <div class="max-w-[1280px] mx-auto px-6 pt-4">
+    <div class="fixed top-4 right-4 left-4 sm:left-auto sm:w-full sm:max-w-sm z-[60] flex flex-col gap-3 pointer-events-none" role="status" aria-live="polite">
         @if(session('success'))
-        <div x-data="{ show: true }" x-show="show" x-transition
-            class="flex items-start gap-3 p-4 bg-green-50 border border-green-200 rounded-xl text-sm text-green-800">
+        <div x-data="{ show: false }" x-init="$nextTick(() => show = true); setTimeout(() => show = false, 6000)" x-show="show"
+            x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="opacity-0 translate-x-4"
+            x-transition:enter-end="opacity-100 translate-x-0"
+            x-transition:leave="transition ease-in duration-150"
+            x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0"
+            class="pointer-events-auto flex items-start gap-3 p-4 bg-green-50 border border-green-200 rounded-xl text-sm text-green-800 shadow-lg">
             <svg class="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
             </svg>
@@ -235,8 +281,14 @@
         </div>
         @endif
         @if(session('error'))
-        <div x-data="{ show: true }" x-show="show" x-transition
-            class="flex items-start gap-3 p-4 bg-red-50 border border-red-200 rounded-xl text-sm text-red-800">
+        <div x-data="{ show: false }" x-init="$nextTick(() => show = true)" x-show="show"
+            x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="opacity-0 translate-x-4"
+            x-transition:enter-end="opacity-100 translate-x-0"
+            x-transition:leave="transition ease-in duration-150"
+            x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0"
+            class="pointer-events-auto flex items-start gap-3 p-4 bg-red-50 border border-red-200 rounded-xl text-sm text-red-800 shadow-lg">
             <svg class="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
             </svg>
